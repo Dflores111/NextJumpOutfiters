@@ -59,36 +59,6 @@
   animation: shopChromePass .85s cubic-bezier(.2,.7,.3,1) both;
 }
 
-/* Real destination cards share the chrome pass, confined to their existing surface. */
-.service-tab-links a {
-  isolation: isolate;
-  overflow: hidden;
-}
-.service-tab-links a::before {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 -55%;
-  width: 50%;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(105deg,transparent 10%,#cadbe74d 35%,#fff 48%,#eafaff80 55%,transparent 80%);
-  opacity: 0;
-}
-.service-tab-links a::after {
-  content: '';
-  position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 6px;
-  height: 7px;
-  pointer-events: none;
-  background: repeating-linear-gradient(125deg,transparent 0 7px,#36533b 7px 12px,transparent 12px 21px);
-  opacity: 0;
-  transition: opacity .2s;
-}
-.service-tab-links a:is(:hover,:focus-visible)::before { animation: shopChromePass .85s cubic-bezier(.2,.7,.3,1) both; }
-.service-tab-links a:is(:hover,:focus-visible)::after { opacity: .38; }
-
 @keyframes shopTrackReveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
 @keyframes shopTreadRoll { from { background-position: 0 0; } to { background-position: 36px 0; } }
 @keyframes shopChromePass {

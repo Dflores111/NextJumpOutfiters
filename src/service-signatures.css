@@ -1,0 +1,130 @@
+/* Service-specific hover/focus cues. The destination and card geometry stay fixed. */
+.service-tab-links a[data-service] {
+  --service-accent: #b34c1b;
+  --service-badge: #ff9854;
+  --service-surface: #fff0df;
+  --service-wash: #ff9c5040;
+  isolation: isolate;
+  overflow: hidden;
+}
+.service-tab-links a[data-service]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 10% 5%,var(--service-wash),transparent 68%);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.service-tab-links a[data-service]:is(:hover,:focus-visible,:active) {
+  background: var(--service-surface);
+  border-color: var(--service-accent);
+  box-shadow: inset 0 2px 0 #fff9,0 9px 24px #48301417;
+}
+.service-tab-links a[data-service]:is(:hover,:focus-visible,:active)::before { opacity: 1; }
+.service-tab-links a[data-service]:focus-visible { outline-color: var(--service-accent); }
+.service-tab-links a[data-service] .service-icon {
+  position: relative;
+  box-shadow: inset 0 1px 0 #ffffff45;
+  transition: background .3s,box-shadow .3s;
+}
+.service-tab-links a[data-service]:is(:hover,:focus-visible,:active) .service-icon {
+  background: var(--service-badge);
+  box-shadow: inset 0 1px 0 #fff9,0 0 0 5px var(--service-wash);
+}
+.service-tab-links a[data-service]:is(:hover,:focus-visible,:active) .service-link-arrow { color: var(--service-accent); }
+.service-signature { width: 36px; height: 36px; overflow: visible; pointer-events: none; }
+.service-signature :is(g,path,circle) {
+  transform-box: view-box;
+  transform-origin: 24px 24px;
+  transition: transform .55s cubic-bezier(.22,.8,.3,1),opacity .3s,fill .3s,stroke .3s;
+}
+.service-signature .service-reveal { opacity: 0; }
+.service-tab-links a:is(:hover,:focus-visible,:active) .service-reveal { opacity: 1; }
+
+/* Suspension: the chassis rises while the wheels stay planted. */
+.service-signature .signature-lift-spring { transform-origin: 24px 35px; }
+.service-tab-links a[data-service=suspension]:is(:hover,:focus-visible,:active) .signature-lift-body { transform: translateY(-6px); }
+.service-tab-links a[data-service=suspension]:is(:hover,:focus-visible,:active) .signature-lift-spring { transform: scaleY(1.7); }
+.signature-ground { opacity: .35; }
+
+/* Protection: the guard closes around the shield and a confirmation appears. */
+.service-tab-links a[data-service=bumpers-racks] { --service-badge:#f5ac73;--service-wash:#d9956540;--service-surface:#fcefe5; }
+.signature-clamp-left { transform: translateX(-3px); opacity: .35; }
+.signature-clamp-right { transform: translateX(3px); opacity: .35; }
+.service-tab-links a[data-service=bumpers-racks]:is(:hover,:focus-visible,:active) :is(.signature-clamp-left,.signature-clamp-right) { transform: translateX(0); opacity: 1; }
+.service-tab-links a[data-service=bumpers-racks]:is(:hover,:focus-visible,:active) .signature-guard { fill: #fff5; }
+
+/* Wheels: visible spokes rotate, with a tread cue along the card's lower edge. */
+.service-tab-links a[data-service=wheels-tires] { --service-accent:#46614c;--service-badge:#b7c99c;--service-wash:#8499693b;--service-surface:#edf1e6; }
+.signature-tread { stroke-dasharray: 2 7.4; opacity: .6; }
+.service-tab-links a[data-service=wheels-tires]:is(:hover,:focus-visible,:active) .signature-wheel { transform: rotate(105deg); transition-duration: .7s; }
+.service-tab-links a[data-service=wheels-tires]::after {
+  content: '';position: absolute;left: 20px;right: 20px;bottom: 6px;height: 7px;
+  pointer-events: none;opacity: 0;
+  background: repeating-linear-gradient(125deg,transparent 0 7px,#46614c 7px 12px,transparent 12px 21px);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path .65s cubic-bezier(.22,.8,.3,1),opacity .25s;
+}
+.service-tab-links a[data-service=wheels-tires]:is(:hover,:focus-visible,:active)::after { clip-path: inset(0);opacity: .35; }
+
+/* Electrical: current reaches the bolt, without a flashing or looping strobe. */
+.service-tab-links a[data-service=power] { --service-accent:#3b694c;--service-badge:#c0dc83;--service-wash:#b2cc6b47;--service-surface:#f0f5df; }
+.signature-current { transform: scaleX(.65); }
+.service-tab-links a[data-service=power]:is(:hover,:focus-visible,:active) .signature-current { transform: scaleX(1); }
+.service-tab-links a[data-service=power]:is(:hover,:focus-visible,:active) .signature-bolt { fill: #fff9;stroke: #294f32; }
+
+/* Lighting: an illuminated bulb, five expanding beams and a warm amber wash. */
+.service-tab-links a[data-service=lighting] { --service-accent:#a45b13;--service-badge:#ffd067;--service-wash:#ffc45773;--service-surface:#fff4d8; }
+.signature-rays { transform: scale(.75); }
+.service-tab-links a[data-service=lighting]:is(:hover,:focus-visible,:active) .signature-rays { transform: scale(1); }
+.service-tab-links a[data-service=lighting]:is(:hover,:focus-visible,:active) .signature-bulb { fill: #fff3ae;stroke: #754314; }
+.service-tab-links a[data-service=lighting]:is(:hover,:focus-visible,:active) .service-icon { box-shadow: inset 0 1px 0 #fff9,0 0 0 5px #ffc45745,0 0 24px #ffbd4b80; }
+
+/* Camping: the tent opens up; the camper settles onto its stationary truck. */
+.service-tab-links a[data-service=rooftop-tent] { --service-accent:#a64f29;--service-badge:#faac79;--service-wash:#eb985040;--service-surface:#ffefdf; }
+.signature-tent { transform-origin: 24px 40px !important;transform: scaleY(.55); }
+.service-tab-links a[data-service=rooftop-tent]:is(:hover,:focus-visible,:active) .signature-tent { transform: scaleY(1); }
+.service-tab-links a[data-service=camper] { --service-accent:#55613e;--service-badge:#c6cda6;--service-wash:#8f9d683b;--service-surface:#edf0e4; }
+.service-tab-links a[data-service=camper]:is(:hover,:focus-visible,:active) .signature-camper { transform: translateY(4px); }
+.signature-mount { transition-delay: .2s !important; }
+
+/* Care: one wipe and a sparkle; the boat gets a polished hull and passing water. */
+.service-tab-links a[data-service=detailing] { --service-accent:#256478;--service-badge:#a2d5da;--service-wash:#6bafbd38;--service-surface:#e9f4f3; }
+.signature-wipe { opacity: 0; }
+.signature-sparkle { transform: scale(.45); }
+.service-tab-links a[data-service=detailing]:is(:hover,:focus-visible,:active) .signature-wipe { animation: serviceCleanWipe .65s ease-out both; }
+.service-tab-links a[data-service=detailing]:is(:hover,:focus-visible,:active) .signature-sparkle { transform: scale(1);transition-delay: .15s; }
+.service-tab-links a[data-service=detailing]:is(:hover,:focus-visible,:active) .signature-droplet { fill: #ffffff65; }
+.service-tab-links a[data-service=boat-detail] { --service-accent:#325f7b;--service-badge:#abcfdc;--service-wash:#75aaca40;--service-surface:#e8f1f5; }
+.signature-boat-sparkle { transform: scale(.45); }
+.service-tab-links a[data-service=boat-detail]:is(:hover,:focus-visible,:active) .signature-hull { fill: #fff8; }
+.service-tab-links a[data-service=boat-detail]:is(:hover,:focus-visible,:active) .signature-water { transform: translateX(3px); }
+.service-tab-links a[data-service=boat-detail]:is(:hover,:focus-visible,:active) .signature-boat-sparkle { transform: scale(1); }
+
+/* Marine: the anchor drops into water. Trailer: the rig rolls toward its hitch. */
+.service-tab-links a[data-service=marine] { --service-accent:#2d6666;--service-badge:#9bc7c2;--service-wash:#549c983b;--service-surface:#e9f2ef; }
+.service-tab-links a[data-service=marine]:is(:hover,:focus-visible,:active) .signature-anchor { transform: translateY(4px); }
+.service-tab-links a[data-service=marine]:is(:hover,:focus-visible,:active) .signature-marine-water { transform: translateX(2px); }
+.service-tab-links a[data-service=trailer] { --service-accent:#96502e;--service-badge:#e9b18b;--service-wash:#c882523d;--service-surface:#f9ede2; }
+.service-tab-links a[data-service=trailer]:is(:hover,:focus-visible,:active) .signature-trailer { transform: translateX(3px); }
+.service-signature .signature-trailer-wheel { transform-origin: 18px 32px; }
+.service-tab-links a[data-service=trailer]:is(:hover,:focus-visible,:active) .signature-trailer-wheel { transform: rotate(70deg); }
+
+@keyframes serviceCleanWipe {
+  0% { transform: translate(-9px,8px);opacity: 0; }
+  25% { opacity: .8; }
+  80% { opacity: .8; }
+  100% { transform: translate(8px,-8px);opacity: 0; }
+}
+
+/* Motion preferences retain the colors, illuminated fills and focus outline. */
+html[data-motion=off] .service-signature :is(g,path,circle) { animation: none !important;transition: none !important;transform: none !important; }
+html[data-motion=off] .service-signature .signature-wipe { display: none; }
+html[data-motion=off] .service-tab-links .service-link-arrow { transform: none; }
+@media(prefers-reduced-motion:reduce) {
+  .service-signature :is(g,path,circle) { animation: none !important;transition: none !important;transform: none !important; }
+  .service-signature .signature-wipe { display: none; }
+  .service-tab-links .service-link-arrow { transform: none; }
+}

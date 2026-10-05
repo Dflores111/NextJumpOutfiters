@@ -1,0 +1,722 @@
+{
+  "date": "2026-10-05",
+  "environment": "Local development preview in Codex in-app Chromium",
+  "focusChecks": [
+    {
+      "active": "suspension",
+      "background": "rgb(255, 240, 223)",
+      "badge": "rgb(255, 152, 84)",
+      "focus": true,
+      "gradient": "1",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/lift-suspension-installation",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-ground",
+          "opacity": "0.35",
+          "transform": "none"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-lift-spring",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1.7, 0, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-lift-body",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, -6)"
+        }
+      ],
+      "service": "suspension",
+      "width": 374.6640625
+    },
+    {
+      "active": "bumpers-racks",
+      "background": "rgb(252, 239, 229)",
+      "badge": "rgb(245, 172, 115)",
+      "focus": true,
+      "gradient": "1",
+      "height": 190,
+      "hover": true,
+      "href": "/pages/bumpers-racks-installation-tacoma-wa",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "rgba(255, 255, 255, 0.333)",
+          "name": "signature-guard",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-clamp-left",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-clamp-right",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-check",
+          "opacity": "1",
+          "transform": "none"
+        }
+      ],
+      "service": "bumpers-racks",
+      "width": 374.6640625
+    },
+    {
+      "active": "wheels-tires",
+      "background": "rgb(238, 241, 230)",
+      "badge": "rgb(195, 187, 137)",
+      "focus": true,
+      "gradient": "0.831602",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/wheels-tires-off-road-and-overland",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-wheel",
+          "opacity": "1",
+          "transform": "matrix(0.342627, 0.939472, -0.939472, 0.342627, 0, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-tread",
+          "opacity": "0.6",
+          "transform": "none"
+        }
+      ],
+      "service": "wheels-tires",
+      "width": 374.6640625
+    },
+    {
+      "active": "power",
+      "background": "rgb(241, 245, 225)",
+      "badge": "rgb(213, 186, 102)",
+      "focus": true,
+      "gradient": "0.664511",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/custom-power-solutions-off-road-marine",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-current",
+          "opacity": "0.664511",
+          "transform": "matrix(0.872334, 0, 0, 1, 0, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "rgba(255, 255, 255, 0.6)",
+          "name": "signature-bolt",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-current",
+          "opacity": "0.664511",
+          "transform": "matrix(0.872334, 0, 0, 1, 0, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-current",
+          "opacity": "0.664511",
+          "transform": "matrix(0.872334, 0, 0, 1, 0, 0)"
+        }
+      ],
+      "service": "power",
+      "width": 374.6640625
+    },
+    {
+      "active": "lighting",
+      "background": "rgb(254, 244, 220)",
+      "badge": "rgb(255, 175, 81)",
+      "focus": true,
+      "gradient": "0.619333",
+      "height": 190,
+      "hover": true,
+      "href": "/pages/custom-lighting-for-off-road-overland",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "rgb(255, 243, 174)",
+          "name": "signature-bulb",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-rays",
+          "opacity": "0.619333",
+          "transform": "matrix(0.900601, 0, 0, 0.900601, 0, 0)"
+        }
+      ],
+      "service": "lighting",
+      "width": 374.6640625
+    },
+    {
+      "active": "rooftop-tent",
+      "background": "rgb(255, 239, 223)",
+      "badge": "rgb(250, 167, 114)",
+      "focus": true,
+      "gradient": "0.907025",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-tent",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 0.922134, 0, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-tent-support",
+          "opacity": "0.907025",
+          "transform": "none"
+        }
+      ],
+      "service": "rooftop-tent",
+      "width": 374.6640625
+    },
+    {
+      "active": "camper",
+      "background": "rgb(237, 240, 228)",
+      "badge": "rgb(205, 194, 150)",
+      "focus": true,
+      "gradient": "0.870703",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/authorized-alaskan-campers-installer",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-camper",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 3.18231)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-mount",
+          "opacity": "0",
+          "transform": "none"
+        }
+      ],
+      "service": "camper",
+      "width": 374.6640625
+    },
+    {
+      "active": "detailing",
+      "background": "rgb(238, 244, 241)",
+      "badge": "rgb(211, 164, 125)",
+      "focus": true,
+      "gradient": "0.467752",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/wash-me",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "rgba(255, 255, 255, 0.396)",
+          "name": "signature-droplet",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "animation": "serviceCleanWipe",
+          "fill": "none",
+          "name": "signature-wipe",
+          "opacity": "0.558282",
+          "transform": "matrix(1, 0, 0, 1, -5.54492, 4.74816)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-sparkle",
+          "opacity": "0",
+          "transform": "matrix(0.45, 0, 0, 0.45, 0, 0)"
+        }
+      ],
+      "service": "detailing",
+      "width": 374.6640625
+    },
+    {
+      "active": "boat-detail",
+      "background": "rgb(239, 243, 242)",
+      "badge": "rgb(221, 155, 115)",
+      "focus": true,
+      "gradient": "0.40312",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/boat-wash",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "rgba(255, 255, 255, 0.533)",
+          "name": "signature-hull",
+          "opacity": "1",
+          "transform": "none"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-water",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 1.35302, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-boat-sparkle",
+          "opacity": "0.40312",
+          "transform": "matrix(0.698054, 0, 0, 0.698054, 0, 0)"
+        }
+      ],
+      "service": "boat-detail",
+      "width": 374.6640625
+    },
+    {
+      "active": "marine",
+      "background": "rgb(233, 242, 239)",
+      "badge": "rgb(166, 190, 178)",
+      "focus": true,
+      "gradient": "0.891909",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/marine-services",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-anchor",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 0, 3.25474)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-marine-water",
+          "opacity": "0.891909",
+          "transform": "matrix(1, 0, 0, 1, 1.62737, 0)"
+        }
+      ],
+      "service": "marine",
+      "width": 374.6640625
+    },
+    {
+      "active": "trailer",
+      "background": "rgb(249, 240, 231)",
+      "badge": "rgb(246, 142, 81)",
+      "focus": true,
+      "gradient": "0.394665",
+      "height": 190,
+      "hover": false,
+      "href": "/pages/trailer",
+      "parts": [
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-trailer",
+          "opacity": "1",
+          "transform": "matrix(1, 0, 0, 1, 1.33538, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "signature-trailer-wheel",
+          "opacity": "1",
+          "transform": "matrix(0.855736, 0.517413, -0.517413, 0.855736, 0, 0)"
+        },
+        {
+          "animation": "none",
+          "fill": "none",
+          "name": "service-reveal signature-trailer-track",
+          "opacity": "0.394665",
+          "transform": "none"
+        }
+      ],
+      "service": "trailer",
+      "width": 374.6640625
+    }
+  ],
+  "layoutChecks": [
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "suspension",
+          "width": 342
+        },
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "bumpers-racks",
+          "width": 342
+        },
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "wheels-tires",
+          "width": 342
+        },
+        {
+          "contentFits": true,
+          "height": 161.59375,
+          "insideViewport": true,
+          "service": "power",
+          "width": 342
+        },
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "lighting",
+          "width": 342
+        }
+      ],
+      "group": "Off-road & performance",
+      "pageWidth": 390,
+      "width": 390
+    },
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "rooftop-tent",
+          "width": 342
+        },
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "camper",
+          "width": 342
+        }
+      ],
+      "group": "Camping & overland",
+      "pageWidth": 390,
+      "width": 390
+    },
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "detailing",
+          "width": 342
+        },
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "boat-detail",
+          "width": 342
+        },
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "marine",
+          "width": 342
+        },
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "trailer",
+          "width": 342
+        }
+      ],
+      "group": "Care & other projects",
+      "pageWidth": 390,
+      "width": 390
+    },
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 189.1875,
+          "insideViewport": true,
+          "service": "suspension",
+          "width": 272
+        },
+        {
+          "contentFits": true,
+          "height": 189.1875,
+          "insideViewport": true,
+          "service": "bumpers-racks",
+          "width": 272
+        },
+        {
+          "contentFits": true,
+          "height": 189.1875,
+          "insideViewport": true,
+          "service": "wheels-tires",
+          "width": 272
+        },
+        {
+          "contentFits": true,
+          "height": 237.1875,
+          "insideViewport": true,
+          "service": "power",
+          "width": 272
+        },
+        {
+          "contentFits": true,
+          "height": 154,
+          "insideViewport": true,
+          "service": "lighting",
+          "width": 272
+        }
+      ],
+      "group": "Off-road & performance",
+      "pageWidth": 320,
+      "width": 320
+    },
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 189.1875,
+          "insideViewport": true,
+          "service": "rooftop-tent",
+          "width": 272
+        },
+        {
+          "contentFits": true,
+          "height": 189.1875,
+          "insideViewport": true,
+          "service": "camper",
+          "width": 272
+        }
+      ],
+      "group": "Camping & overland",
+      "pageWidth": 320,
+      "width": 320
+    },
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 165.1875,
+          "insideViewport": true,
+          "service": "detailing",
+          "width": 272
+        },
+        {
+          "contentFits": true,
+          "height": 189.1875,
+          "insideViewport": true,
+          "service": "boat-detail",
+          "width": 272
+        },
+        {
+          "contentFits": true,
+          "height": 189.1875,
+          "insideViewport": true,
+          "service": "marine",
+          "width": 272
+        },
+        {
+          "contentFits": true,
+          "height": 189.1875,
+          "insideViewport": true,
+          "service": "trailer",
+          "width": 272
+        }
+      ],
+      "group": "Care & other projects",
+      "pageWidth": 320,
+      "width": 320
+    },
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "suspension",
+          "width": 374.6640625
+        },
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "bumpers-racks",
+          "width": 374.6640625
+        },
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "wheels-tires",
+          "width": 374.6640625
+        },
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "power",
+          "width": 374.6640625
+        },
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "lighting",
+          "width": 374.6640625
+        }
+      ],
+      "group": "Off-road & performance",
+      "pageWidth": 1280,
+      "width": 1280
+    },
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "rooftop-tent",
+          "width": 374.6640625
+        },
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "camper",
+          "width": 374.6640625
+        }
+      ],
+      "group": "Camping & overland",
+      "pageWidth": 1280,
+      "width": 1280
+    },
+    {
+      "cards": [
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "detailing",
+          "width": 374.6640625
+        },
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "boat-detail",
+          "width": 374.6640625
+        },
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "marine",
+          "width": 374.6640625
+        },
+        {
+          "contentFits": true,
+          "height": 190,
+          "insideViewport": true,
+          "service": "trailer",
+          "width": 374.6640625
+        }
+      ],
+      "group": "Care & other projects",
+      "pageWidth": 1280,
+      "width": 1280
+    }
+  ],
+  "manualPause": {
+    "focus": "lighting",
+    "lighting": {
+      "background": "rgb(255, 244, 216)",
+      "badge": "rgb(255, 208, 103)",
+      "gradient": "none",
+      "rays": "1",
+      "wipe": "none"
+    },
+    "motion": "off",
+    "movingParts": []
+  },
+  "pointerHover": "Lighting: hover true, focus false, amber surface and badge, revealed beams; stationary 374.664 by 190 card",
+  "osReducedMotion": "CSS shares the same transform and animation reset; OS preference was not toggled in this run",
+  "consoleErrors": [],
+  "settledDetailing": {
+    "active": "detailing",
+    "background": "rgb(233, 244, 243)",
+    "badge": "rgb(162, 213, 218)",
+    "focus": true,
+    "gradient": "1",
+    "height": 190,
+    "hover": false,
+    "href": "/pages/wash-me",
+    "parts": [
+      {
+        "animation": "none",
+        "fill": "rgba(255, 255, 255, 0.396)",
+        "name": "signature-droplet",
+        "opacity": "1",
+        "transform": "none"
+      },
+      {
+        "animation": "serviceCleanWipe",
+        "fill": "none",
+        "name": "signature-wipe",
+        "opacity": "0",
+        "transform": "matrix(1, 0, 0, 1, 8, -8)"
+      },
+      {
+        "animation": "none",
+        "fill": "none",
+        "name": "service-reveal signature-sparkle",
+        "opacity": "1",
+        "transform": "matrix(1, 0, 0, 1, 0, 0)"
+      }
+    ],
+    "service": "detailing",
+    "width": 374.6640625
+  },
+  "lightingNavigation": {
+    "path": "/pages/custom-lighting-for-off-road-overland",
+    "h1": "Lighting for the trail. And camp.",
+    "inquiryService": "lighting",
+    "quoteQuery": "context=service&service=lighting"
+  }
+}

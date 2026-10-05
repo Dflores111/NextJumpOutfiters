@@ -1,9 +1,10 @@
 import React, {useId, useState, useRef} from 'react';
-import {ArrowUpRight, ArrowDown, Check, ChevronDown, Quote, Plus, MoveVertical, Shield, CircleDot, Zap, Lightbulb, Tent, Truck, Droplets, Waves, Anchor, Caravan} from 'lucide-react';
+import {ArrowUpRight, ArrowDown, Check, ChevronDown, Quote, Plus} from 'lucide-react';
 import {P, inquiry, services, serviceImages, serviceKeys} from './routes.js';
 import {Inquiry} from './Inquiry.jsx';
 import {reviews, proofByContext, googleReviews} from './customerProof.js';
 import {actionMotionProps} from './actionMotion.js';
+import {ServiceSignature} from './ServiceSignature.jsx';
 
 export function JourneyImage({file, alt, eager=false, sizes='100vw', ...props}) {
   const stem=file.replace(/\.[^.]+$/, '');
@@ -47,7 +48,7 @@ export function CustomerProof({to=inquiry(),context='home'}) {
   </section>;
 }
 
-const serviceDetails={P16:[MoveVertical,'Lifts & suspension','Get the stance and ride your setup needs.'],P17:[Shield,'Bumpers & racks','Add protection and room for your gear.'],P18:[CircleDot,'Wheels & tires','Match the rubber to the road ahead.'],P19:[Zap,'Power & electrical','Keep the essentials powered away from campgrounds.'],P20:[Lightbulb,'Lighting','See the trail. Light up camp.'],P21:[Tent,'Rooftop tents','Give your next campsite a better setup.'],P22:[Truck,'Camper installation','Bring the truck and camper together.'],P23:[Droplets,'Vehicle detailing','Get the road trip off your rig.'],P24:[Waves,'Boat detailing','Get your boat ready for its next outing.'],P25:[Anchor,'Marine outfitting','Plan equipment around life on the water.'],P26:[Caravan,'Trailer projects','Build more room into your adventures.']};
+const serviceDetails={P16:['Lifts & suspension','Get the stance and ride your setup needs.'],P17:['Bumpers & racks','Add protection and room for your gear.'],P18:['Wheels & tires','Match the rubber to the road ahead.'],P19:['Power & electrical','Keep the essentials powered away from campgrounds.'],P20:['Lighting','See the trail. Light up camp.'],P21:['Rooftop tents','Give your next campsite a better setup.'],P22:['Camper installation','Bring the truck and camper together.'],P23:['Vehicle detailing','Get the road trip off your rig.'],P24:['Boat detailing','Get your boat ready for its next outing.'],P25:['Marine outfitting','Plan equipment around life on the water.'],P26:['Trailer projects','Build more room into your adventures.']};
 
 const serviceGroups=[
   {name:'Off-road & performance',file:'services-hero.jpg',alt:'Toyota 4Runner equipped for overland travel',title:'Make the upgrades work together.',text:'Suspension, tires, racks, lighting and power should fit the vehicle—and how you use it.',ids:['P16','P17','P18','P19','P20']},
@@ -61,7 +62,7 @@ export function ServiceExplorer(){
   return <section className="service-explorer container" aria-labelledby={`${uid}-heading`}>
     <div className="journey-section-head" data-reveal><div><span className="eyebrow">PICK THE JOB. SEE THE POSSIBILITIES.</span><h2 id={`${uid}-heading`}><span className="trail-mark">Upgrade your rig.</span></h2></div><p>One upgrade or a complete setup. Start with the problem you want to solve.</p></div>
     <div className="journey-tabs" role="tablist" aria-label="Installation categories">{serviceGroups.map((g,i)=><button key={g.name} type="button" role="tab" id={`${uid}-tab-${i}`} aria-controls={`${uid}-panel-${i}`} aria-selected={active===i} tabIndex={active===i?0:-1} ref={el=>refs.current[i]=el} onClick={()=>setActive(i)} onKeyDown={e=>moveTab(e,i,serviceGroups.length,setActive,refs)}>{g.name}</button>)}</div>
-    {serviceGroups.map((g,i)=><div key={g.name} className="service-tab-panel" id={`${uid}-panel-${i}`} role="tabpanel" aria-labelledby={`${uid}-tab-${i}`} hidden={active!==i} tabIndex={0}><div className="service-tab-media"><JourneyImage file={g.file} alt={g.alt}/><div><h3>{g.title}</h3><p>{g.text}</p></div></div><div className="service-tab-links">{g.ids.map(id=>{const s=services.find(x=>x.id===id);const [Icon,title,description]=serviceDetails[id];return <a key={id} href={s.path}><span className="service-icon"><Icon size={28} strokeWidth={1.6} aria-hidden="true"/></span><span className="service-link-copy"><strong>{title}</strong><span>{description}</span></span><ArrowUpRight className="service-link-arrow" size={23} aria-hidden="true"/></a>})}</div><JourneyAction to={inquiry('service')}>Request an installation quote</JourneyAction></div>)}
+    {serviceGroups.map((g,i)=><div key={g.name} className="service-tab-panel" id={`${uid}-panel-${i}`} role="tabpanel" aria-labelledby={`${uid}-tab-${i}`} hidden={active!==i} tabIndex={0}><div className="service-tab-media"><JourneyImage file={g.file} alt={g.alt}/><div><h3>{g.title}</h3><p>{g.text}</p></div></div><div className="service-tab-links">{g.ids.map(id=>{const s=services.find(x=>x.id===id);const [title,description]=serviceDetails[id];return <a key={id} href={s.path} data-service={serviceKeys[id]}><ServiceSignature service={serviceKeys[id]}/><span className="service-link-copy"><strong>{title}</strong><span>{description}</span></span><ArrowUpRight className="service-link-arrow" size={23} aria-hidden="true"/></a>})}</div><JourneyAction to={inquiry('service')}>Request an installation quote</JourneyAction></div>)}
   </section>;
 }
 

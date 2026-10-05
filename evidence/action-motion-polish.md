@@ -2,6 +2,8 @@
 
 October 5, 2026. Applied to the published Site checkout.
 
+The shared service-card pass described here is the earlier treatment. It has been replaced by the individual effects in [service signatures](service-signatures.md). Quote button effects remain as described below.
+
 The earlier tread sweep lasted 0.68 seconds, peaked at 22% opacity and ended completely invisible. The new twin tire lines reveal from left to right, reach 56% opacity and remain visible with a small rolling movement while the action is hovered or keyboard focused. The button's outer position and hit area stay fixed; labels remain between the tire lines.
 
 Quote actions share a metallic glint and a light machined rim. The glint repeats every 7.2 seconds with a quiet interval. Initial visible quote actions use the existing intersection observer to pause the effect offscreen. The mobile and desktop builder's quote handoffs use the same emphasis. Service destination cards receive the same metallic pass on hover/focus and a small tread strip beneath their content.

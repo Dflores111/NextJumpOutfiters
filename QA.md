@@ -2,9 +2,13 @@
 
 Updated October 5, 2026. Original Node preview: `http://127.0.0.1:4173`. Hosted Worker preview: `http://127.0.0.1:4174`.
 
+## Service-specific card refinement
+
+All eleven installation services now have individual hover/focus signatures, with stationary cards and clear color feedback when motion is paused. Chromium checks exercised every service through the keyboard, actual Lighting pointer hover, the detailing wipe completion, pause/resume, all three categories at 320, 390 and 1280 CSS pixels, and the Lighting destination with its retained inquiry context. Every checked layout fit without horizontal overflow. The existing 27 tests passed; the final publication workflow also runs them before building. Full mapping and evidence: [service signatures](evidence/service-signatures.md).
+
 ## Tire-track and chrome refinement
 
-The latest action treatment uses brighter twin tire lines that remain visible during hover/focus, recurring chrome emphasis on quote actions, and a matching hover/focus pass on service destination cards. The 27 existing tests passed. Chromium checks exercised actual pointer hover, keyboard focus, fixed button geometry, manual pause/resume, offscreen idle state, a 390-pixel layout and the hero-to-inquiry action. Decorative layers do not intercept input. Details and component provenance: [action motion polish](evidence/action-motion-polish.md).
+The earlier October 5 action treatment uses brighter twin tire lines that remain visible during hover/focus and recurring chrome emphasis on quote actions. Its shared service-card pass is superseded by the individual signatures above. The 27 existing tests passed. Chromium checks exercised actual pointer hover, keyboard focus, fixed button geometry, manual pause/resume, offscreen idle state, a 390-pixel layout and the hero-to-inquiry action. Decorative layers do not intercept input. Details and component provenance: [action motion polish](evidence/action-motion-polish.md).
 
 ## GitHub and ChatGPT Site publication candidate
 
