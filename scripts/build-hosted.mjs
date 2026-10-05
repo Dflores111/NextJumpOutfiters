@@ -5,7 +5,7 @@ const template=await readFile('dist/client/index.html','utf8');
 await build({
  plugins:[{name:'next-jump-html',resolveId(id){if(id==='virtual:next-jump-template')return '\0'+id},load(id){if(id==='\0virtual:next-jump-template')return 'export default '+JSON.stringify(template)}}],
  ssr:{noExternal:true,target:'webworker'},
- build:{ssr:true,outDir:'dist/server',emptyOutDir:true,rollupOptions:{input:{index:'src/hosted-worker.js','entry-server':'src/entry-server.jsx'},output:{entryFileNames:'[name].js'}}},
+ build:{ssr:true,outDir:'dist/server',emptyOutDir:true,copyPublicDir:false,rollupOptions:{input:{index:'src/hosted-worker.js','entry-server':'src/entry-server.jsx'},output:{entryFileNames:'[name].js'}}},
 });
 await mkdir('dist/.openai',{recursive:true});
 await writeFile('dist/.openai/hosting.json',await readFile('.openai/hosting.json'));
