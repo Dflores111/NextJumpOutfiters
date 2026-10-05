@@ -1,0 +1,552 @@
+{
+  "schemaVersion": 1,
+  "status": "local-preview-verified; optional-existing-native-HubSpot-embed-implemented; no-live-submission-test",
+  "sources": [
+    "src/Inquiry.jsx",
+    "src/inquiry-contract.js",
+    "src/builder/domain.js",
+    "server.mjs",
+    "tests/server.test.mjs"
+  ],
+  "page": "/pages/book-install-services-or-get-a-quote",
+  "confirmationPage": "/pages/build-request-received",
+  "submitLabel": "Save preview request",
+  "delivery": {
+    "mode": "preview",
+    "sentToShop": false,
+    "contactStored": false,
+    "crmDelivery": false,
+    "emailDelivery": false,
+    "subscriptionsCreated": false,
+    "liveTracking": false,
+    "liveAlternative": {
+      "component": "src/NativeInquiry.jsx",
+      "activation": "Explicit Open the live shop form button; preview remains default",
+      "provider": "HubSpot native legacy v2 embed",
+      "portalId": "24102432",
+      "discovery": "evidence/hubspot-form-discovery.json",
+      "fieldDefinitionEvidence": "evidence/hubspot-field-discovery.json",
+      "personalData": "Entered in native HubSpot form only; no second custom API submission",
+      "success": "Instance-specific onFormSubmitted callback; no confirmation on submit click",
+      "context": "Allowlisted project/build summary in existing description field, with visible copy fallback",
+      "testStatus": "No live submission or recipient notification sent by agent"
+    }
+  },
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/preview-requests",
+      "purpose": "Validate submitted form and persist non-personal configuration receipt only.",
+      "headers": {
+        "Content-Type": "application/json",
+        "Origin": "exact local preview origin",
+        "Idempotency-Key": "32\u201396 character opaque [A-Za-z0-9_-] token; UI generates 48 random hex characters"
+      },
+      "limits": {
+        "bodyBytes": 16384,
+        "requestsPerMinutePerAddress": 30,
+        "maximumReceiptFiles": 500
+      },
+      "success": {
+        "created": 201,
+        "idempotentReplay": 200
+      },
+      "failures": [
+        400,
+        403,
+        405,
+        409,
+        413,
+        415,
+        422,
+        429,
+        503
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/preview-requests/status",
+      "purpose": "Check an existing preview receipt before confirmation or timeout retry.",
+      "headers": {
+        "Authorization": "Bearer <same opaque request token>"
+      },
+      "success": 200,
+      "failures": [
+        401,
+        403,
+        404,
+        405,
+        429,
+        503
+      ]
+    }
+  ],
+  "families": [
+    {
+      "context": "flatbed",
+      "required": [
+        "firstName",
+        "preferredContact",
+        "selected contact channel",
+        "recognized saved truck OR vehicleDetails OR needVehicleHelp",
+        "intendedUse"
+      ],
+      "optional": [
+        "build",
+        "message",
+        "marketingOptIn",
+        "project"
+      ],
+      "supportsConfiguredBuild": true
+    },
+    {
+      "context": "camper",
+      "required": [
+        "firstName",
+        "preferredContact",
+        "selected contact channel",
+        "recognized saved truck OR vehicleDetails OR needVehicleHelp",
+        "camperType"
+      ],
+      "optional": [
+        "build",
+        "message",
+        "marketingOptIn",
+        "project"
+      ]
+    },
+    {
+      "context": "work",
+      "required": [
+        "firstName",
+        "preferredContact",
+        "selected contact channel",
+        "recognized saved truck OR vehicleDetails OR needVehicleHelp",
+        "workGoal",
+        "vehicleCount"
+      ],
+      "optional": [
+        "build",
+        "company",
+        "message",
+        "marketingOptIn",
+        "project"
+      ]
+    },
+    {
+      "context": "service",
+      "required": [
+        "firstName",
+        "preferredContact",
+        "selected contact channel",
+        "service",
+        "vehicleDetails OR needVehicleHelp",
+        "message"
+      ],
+      "optional": [
+        "marketingOptIn",
+        "project"
+      ],
+      "savedBuildLoaded": false,
+      "vesselServiceIds": [
+        "marine",
+        "boat-detail"
+      ],
+      "trailerServiceIds": [
+        "trailer"
+      ]
+    },
+    {
+      "context": "general",
+      "required": [
+        "firstName",
+        "preferredContact",
+        "selected contact channel",
+        "topic",
+        "message"
+      ],
+      "optional": [
+        "marketingOptIn",
+        "project"
+      ],
+      "vehicleRequired": false,
+      "savedBuildLoaded": false
+    }
+  ],
+  "serviceIds": [
+    "flatbed",
+    "suspension",
+    "bumpers-racks",
+    "wheels-tires",
+    "power",
+    "lighting",
+    "rooftop-tent",
+    "camper",
+    "detailing",
+    "boat-detail",
+    "marine",
+    "trailer"
+  ],
+  "fields": [
+    {
+      "key": "context",
+      "label": "Inquiry path",
+      "inputType": "route_context",
+      "requiredWhen": "always",
+      "validation": "Allowlist: flatbed, camper, work, service, general. Invalid query context defaults to flatbed; invalid POST is rejected.",
+      "reason": "Select the appropriate intake questions.",
+      "prefill": "context query parameter; default flatbed",
+      "previewDestination": "summary.context",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "service",
+      "label": "What can we help with?",
+      "inputType": "select",
+      "requiredWhen": "context == service",
+      "validation": "One of the service IDs in this manifest.",
+      "reason": "Route the requested service.",
+      "prefill": "service query parameter; recognized ID or exact label",
+      "previewDestination": "summary.service for service only",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "project",
+      "label": "Inspired by the Super Ute build",
+      "inputType": "route_context",
+      "requiredWhen": "optional",
+      "validation": "Allowlisted: super-ute, dillon-f250, alaskan-camper.",
+      "reason": "Preserve the project that inspired the inquiry.",
+      "prefill": "Recognized project query parameter only",
+      "previewDestination": "summary.project",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "Included in native description summary; separate CRM property not created",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "topic",
+      "label": "What is your question about?",
+      "inputType": "select",
+      "requiredWhen": "context == general",
+      "validation": "One of Flatbed question, Installation or service, Parts or order support, Visiting the shop, Something else.",
+      "reason": "Route general inquiries without requiring a truck.",
+      "prefill": "none",
+      "previewDestination": "summary.topic for general only",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "firstName",
+      "label": "First name",
+      "inputType": "text",
+      "requiredWhen": "always",
+      "validation": "Nonempty after trimming. UI maximum 80 characters; server scalar maximum 180.",
+      "reason": "Demonstrate contact validation; not used for delivery in this preview.",
+      "prefill": "browser given-name autofill only",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "preferredContact",
+      "label": "Preferred contact method",
+      "inputType": "radio",
+      "requiredWhen": "always",
+      "validation": "email or phone. Defaults to email.",
+      "reason": "Require one usable channel rather than both.",
+      "prefill": "default email",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "email",
+      "label": "Email address",
+      "inputType": "email",
+      "requiredWhen": "preferredContact == email",
+      "validation": "Basic non-whitespace local@domain.suffix check; maximum 254 characters.",
+      "reason": "Demonstrate email contact validation.",
+      "prefill": "browser email autofill only",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "phone",
+      "label": "Phone number",
+      "inputType": "tel",
+      "requiredWhen": "preferredContact == phone",
+      "validation": "At least 7 digits; permits a leading plus, digits, spaces, parentheses, hyphens and dots. UI maximum 32 characters; validation examines up to 32.",
+      "reason": "Demonstrate phone-only contact validation.",
+      "prefill": "browser tel autofill only",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "vehicleDetails",
+      "label": "Truck or vehicle details / Vessel details / Trailer details",
+      "inputType": "text",
+      "requiredWhen": "flatbed, camper or work without a recognized saved truck, OR service; waived by needVehicleHelp",
+      "validation": "Nonempty unless help is selected. Maximum 180 characters. No mandatory truck bed field for marine, boat-detail, trailer or general paths.",
+      "reason": "Describe the relevant vehicle or vessel when no build supplies it.",
+      "prefill": "none; omitted from view when a recognized saved truck is shown",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "needVehicleHelp",
+      "label": "I need help identifying my vehicle / my vessel",
+      "inputType": "checkbox",
+      "requiredWhen": "optional alternative to vehicleDetails",
+      "validation": "Boolean. Defaults false.",
+      "reason": "Allow visitors to proceed without identifying technical details.",
+      "prefill": "default false",
+      "previewDestination": "summary.needsVehicleHelp",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "intendedUse",
+      "label": "What do you have in mind?",
+      "inputType": "select",
+      "requiredWhen": "context == flatbed",
+      "validation": "Overland, Camper, Work / business, General use, or Not sure.",
+      "reason": "Understand the flatbed use.",
+      "prefill": "mapped from saved build.use when present",
+      "previewDestination": "summary.intendedUse for flatbed only",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "camperType",
+      "label": "What kind of camper?",
+      "inputType": "select",
+      "requiredWhen": "context == camper",
+      "validation": "Not decided, Topper, Slide-in, or Flatbed camper.",
+      "reason": "Prepare a relevant camper discussion without assuming ownership.",
+      "prefill": "mapped from saved build.camperType when present",
+      "previewDestination": "summary.camperType for camper only",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "workGoal",
+      "label": "What does your truck need to carry or do?",
+      "inputType": "textarea",
+      "requiredWhen": "context == work",
+      "validation": "Nonempty. UI maximum 1000 characters; server scalar maximum 1500.",
+      "reason": "Understand the work and equipment.",
+      "prefill": "none",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "vehicleCount",
+      "label": "How many vehicles?",
+      "inputType": "select",
+      "requiredWhen": "context == work",
+      "validation": "1, 2\u20135, 6+, or Not sure.",
+      "reason": "Distinguish single-vehicle and fleet planning.",
+      "prefill": "none",
+      "previewDestination": "summary.vehicleCount for work only",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "company",
+      "label": "Company",
+      "inputType": "text",
+      "requiredWhen": "optional; displayed for work",
+      "validation": "UI maximum 120 characters; server scalar maximum 180.",
+      "reason": "Allow a business identity without requiring one from sole proprietors.",
+      "prefill": "browser organization autofill only",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "message",
+      "label": "How can we help? / What would you like help with? / Anything else we should know?",
+      "inputType": "textarea",
+      "requiredWhen": "general or service; optional otherwise",
+      "validation": "Nonempty for required paths; maximum 1500 characters.",
+      "reason": "Collect the question or service goal.",
+      "prefill": "none",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "marketingOptIn",
+      "label": "Keep me informed about Next Jump news",
+      "inputType": "checkbox",
+      "requiredWhen": "optional",
+      "validation": "Boolean; unchecked by default. UI explicitly says no subscription is created.",
+      "reason": "Demonstrate separate optional marketing preference; does not establish production consent.",
+      "prefill": "default false",
+      "previewDestination": "discarded",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Discarded after in-memory validation; not logged or persisted."
+    },
+    {
+      "key": "build",
+      "label": "Your saved configuration",
+      "inputType": "structured_saved_build",
+      "requiredWhen": "optional; if included must pass domain validation",
+      "validation": "Version 1, validated vehicle/use/camper/selected IDs and dependencies. No client prices accepted. Unknown truck labels reduced to Other / not sure; no free-text notes retained.",
+      "reason": "Preserve an anonymous configuration instead of restarting.",
+      "prefill": "nj-build-v1 localStorage for flatbed/camper/work only",
+      "previewDestination": "summary.build with allowlisted fields only",
+      "hubspotProperty": null,
+      "hubspotMappingStatus": "pending verified form/property inspection",
+      "privacy": "Allowlisted non-personal value only; retained in private local receipt."
+    },
+    {
+      "key": "feature",
+      "label": "Feature of interest",
+      "inputType": "context",
+      "requiredWhen": "never",
+      "validation": "Allowlisted: platform, storage, tailgate, camp.",
+      "reason": "Preserve the feature chosen in the product explorer.",
+      "prefill": "Recognized feature query parameter only",
+      "previewDestination": "summary.feature",
+      "hubspotProperty": "0-5/content",
+      "hubspotMappingStatus": "Included in native description summary; customer may edit before sending",
+      "privacy": "Non-personal allowlisted value only"
+    }
+  ],
+  "receipt": {
+    "location": ".preview-data/ unless PREVIEW_DATA_DIR points to another private directory",
+    "filename": "SHA-256 of opaque request token; token itself is not stored in file contents",
+    "storedKeys": [
+      "version",
+      "receiptId",
+      "receivedAt",
+      "context",
+      "fingerprint of non-personal summary",
+      "summary"
+    ],
+    "summaryKeys": [
+      "context",
+      "project",
+      "topic",
+      "service",
+      "intendedUse",
+      "camperType",
+      "vehicleCount",
+      "needsVehicleHelp",
+      "build"
+    ],
+    "buildKeys": [
+      "version",
+      "truck.year",
+      "truck.make",
+      "truck.model",
+      "truck.bed",
+      "use",
+      "camperType",
+      "selected"
+    ],
+    "excluded": [
+      "names",
+      "email",
+      "phone",
+      "company",
+      "vehicleDetails free text",
+      "workGoal",
+      "message",
+      "build notes",
+      "marketing preference or consent",
+      "uploads",
+      "VINs",
+      "client totals",
+      "IP addresses"
+    ],
+    "retention": "Local files remain until manually cleared; no production retention policy or automatic expiration implemented. Maximum 500 receipts.",
+    "browserStorage": {
+      "localStorage": "nj-build-v1 anonymous build only",
+      "sessionStorage": "nj-preview-receipt-v1 opaque receipt token only",
+      "contactData": "React component memory and one local POST only; never browser storage or URL"
+    }
+  },
+  "behavior": {
+    "duplicateSubmit": "Same token and same non-personal summary returns same receipt; mismatched summary returns 409.",
+    "timeout": "POST aborts after 10 seconds; UI checks status with the same token before allowing an idempotent retry; status timeout 6 seconds.",
+    "confirmation": "Session token plus successful server status is required. Direct URL without token shows no submitted request.",
+    "storageFailure": "503 without success; entries remain in the form.",
+    "fallback": "Direct phone link 253-301-0028 and Contact & Visit route.",
+    "javascriptDisabled": "No preview save; noscript contact guidance is visible.",
+    "serverLogPolicy": "No request body or contact logging."
+  },
+  "tests": {
+    "file": "tests/server.test.mjs",
+    "lastScopedResult": "10 passed with local loopback permission",
+    "coverage": [
+      "email-or-phone",
+      "context requirements",
+      "dependencies and fabricated totals",
+      "private durable receipt",
+      "authorized status",
+      "duplicate and ambiguous retry",
+      "distinct repeat inquiry",
+      "CSRF and payload limits",
+      "storage failure and capacity",
+      "rate limits",
+      "private file and host protection"
+    ]
+  },
+  "productionRequirements": [
+    {
+      "owner": "Andrew",
+      "need": "Existing published native forms/editor and completed-submission callback are verified and implemented. Finalize the production intake design, staging presentation and default activation."
+    },
+    {
+      "owner": "Diego",
+      "need": "Portal and native field definitions inspected. Finalize dedicated context property mappings, protected build snapshots and production attribution/consent tracking without duplicate submissions."
+    },
+    {
+      "owner": "Nick",
+      "need": "Confirm pricing, sales routing and contact/ticket/deal conventions; obtain qualified technical fitment validation. An inquiry is not a qualified opportunity."
+    },
+    {
+      "owner": "Tally",
+      "need": "Approve privacy/retention/commercial/consultation terms and required consent records before storing customer information."
+    },
+    {
+      "owner": "Andrew and Diego",
+      "need": "Authorize a controlled live delivery test recipient and verify actual contact/ticket receipt, routing and deduplicated tracking. Existing native forms require both email and phone; short preview accepts either."
+    }
+  ],
+  "notImplemented": [
+    "Email saved-build delivery",
+    "Paid consultation booking/payment",
+    "Custom upload endpoint (existing native HubSpot forms retain their own file upload)",
+    "Custom production lead storage (native HubSpot delivery exists but was not submitted by the agent)",
+    "Public share links or private quote authentication",
+    "Custom CRM ticket/deal creation (existing native form automations are unchanged)",
+    "Marketing subscription changes",
+    "Campaign attribution or analytics delivery",
+    "Custom Forms API delivery, automated live submission test, response-routing verification, production default activation"
+  ]
+}

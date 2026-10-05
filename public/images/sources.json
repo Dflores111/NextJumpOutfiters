@@ -1,0 +1,85 @@
+{
+  "base": {
+    "source": "https://www.nextjumpoutfitters.com/products/mid-size-regular-flatbed-truck-body-with-short-headache-rack.js",
+    "title": "Mid-Size Regular Aluminum Flatbed Truck Body ONLY -  Dimensions: 60\"L x 74.4\"W x 3\"H",
+    "images": [
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/MSR-5ft-Flatbed.jpg?v=1781287709",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/5_0f525044-9294-4311-b9d7-db4b66874af1.png?v=1738196959",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/6_6cf244b0-0893-4489-ac89-1deff727bc9d.png?v=1738196959",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/Flatbed_12cb0697-a7d5-48d0-9d36-cd055efa22b7.png?v=1738196959",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/3_62f77b22-e818-4edd-9590-4d4face24cb0.png?v=1688253120",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/4_57143808-4582-458a-93b8-dd4745e7846b.png?v=1688253120"
+    ],
+    "price": 948500
+  },
+  "headache": {
+    "source": "https://www.nextjumpoutfitters.com/products/mid-size-aluminum-headache-rack.js",
+    "title": "Mid-Size Aluminum Headache Rack",
+    "images": [
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/MSR-Headache-Rack.webp?v=1781642854",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/5_a7526d2f-2028-4bde-beeb-63a8ec84e41d.png?v=1774994250",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/Flatbed_ea647fda-b9ee-4c64-9ece-0e3aad07749c.png?v=1781216817"
+    ],
+    "price": 70800
+  },
+  "sides": {
+    "source": "https://www.nextjumpoutfitters.com/products/drop-sides-for-the-mid-size-regular-aluminum-flatbeds-right-left-rear.js",
+    "title": "Drop Sides for the Mid-Size Regular Aluminum Flatbeds (Right, Left & Rear)",
+    "images": [
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/MSR-Dropside-Open.webp?v=1781642757",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/4_592df242-c938-481e-839b-c584dc0918af.png?v=1688172786",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/6_fb7342b6-231c-41a7-b901-c14972a170a2.png?v=1738197437"
+    ],
+    "price": 99400
+  },
+  "boxes": {
+    "source": "https://www.nextjumpoutfitters.com/products/tool-box-for-mid-size-regular-flatbeds-with-dropsides-copy.js",
+    "title": "Tool Box Mid-Size Regular Flatbeds - Set of 2",
+    "images": [
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/MSRBTB-Closed_d389ffaa-4b51-4a56-b6d9-f17f60a55f2c.png?v=1719519945",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/MSRBTB-Open_8f2e0fbe-ed56-48e1-89a2-a085f2703571.png?v=1719519942",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/TB-Handle-Closed_a8edaa29-ab1d-4b15-98e4-2c42c2a1d8b4.png?v=1719520009",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/TB-Handle-Open_88fe3d52-3224-4aa3-b1c6-9c692db32b3d.png?v=1719520009",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/TB-Seal-Doors-Open_1654e053-5fc2-4310-8ee0-f4f1dd33d5c8.png?v=1719520009",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/TB-Doors-Open_b111c7ea-dcca-4bed-a253-226663bb2f99.png?v=1719520009",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/FSRB-Rackbed-Closed1_557d671e-350d-4250-89ab-9e5aa6e0b689.png?v=1719520009",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/FSRB-Rackbed-Closed_f13235d0-5ecb-4941-89db-bb5b4d974a07.png?v=1719520009",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/products/MSRB-Dropsides.png?v=1719520009",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/products/FSLBTB-Closed-Dropsides-Set_efcafe12-016a-4d64-a1f2-fa0783604595.png?v=1719520009",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/products/MSRB-Dropsides_8b09a5fa-8a02-4735-aac2-dcfd28f8c96d.png?v=1719520009"
+    ],
+    "price": 301800
+  },
+  "tailgate": {
+    "source": "https://www.nextjumpoutfitters.com/products/mid-size-tailgate-upgrade-use-with-camper-shell-1.js",
+    "title": "Mid-Size Flatbed Tailgate Upgrade",
+    "images": [
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/MSL-Tailgate-Open-Angle_f82a1afd-3305-4173-b5ac-3ff17a27193b.jpg?v=1781645209",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/MSL-Tailgate-Upgrade-Open.jpg?v=1781645309"
+    ],
+    "price": 82800
+  },
+  "kitchen": {
+    "source": "https://www.nextjumpoutfitters.com/products/camp-kitchen-insert-for-mid-size-regular-bed-tool-boxes.js",
+    "title": "Mid-Size Regular Camp Kitchen Insert",
+    "images": [
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/FSCKI-open_127ac0a6-dfba-4b87-a249-63094dba526e.png?v=1706041012",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/FSCKI-stove-open_58f792f3-e19f-4d43-b987-db38258eee35.png?v=1706041013",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/FSCKI-closed_507da201-12c4-4bb3-862e-a5c5f91d950c.png?v=1706041013",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/FSCKI-sink_920fa6e0-4d1f-4fb5-8843-cf6a513d939c.png?v=1706041013",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/FSCKI-stove_e9aa7172-bb53-4184-b158-dd9e21538848.png?v=1706041013"
+    ],
+    "price": 282400
+  },
+  "underbody": {
+    "source": "https://www.nextjumpoutfitters.com/products/mid-size-regular-underbody-box-rear-left.js",
+    "title": "Mid-Size Regular Underbody Box - Rear Pair",
+    "images": [
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/Photo_Jul_26_2024_11_38_56_AM.jpg?v=1722553094",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/Photo_Jul_26_2024_11_53_49_AM.jpg?v=1722553096",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/Photo_Jul_26_2024_11_40_06_AM.jpg?v=1722553095",
+      "//cdn.shopify.com/s/files/1/0552/5497/4649/files/MSRRearRightUnderbodyBox_8d317d42-00e7-4343-92d6-24ce15322842.png?v=1730328823"
+    ],
+    "price": 101800
+  }
+}

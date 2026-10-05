@@ -1,0 +1,950 @@
+NEXT JUMP OUTFITTERS
+Page Copy & Visual Briefs
+Short public copy, section-by-section visual direction, and handoff notes for every page family.
+VERSION 2.0  /  OCTOBER 3, 2026
+
+Observed live-site colors. Typography and layout recommendations in this handoff are proposed.
+This is a build-ready specification, not an approved commercial catalog. Product facts, package recipes, policy changes, and deployment still require the named owners’ approval.
+
+How to use this copy book
+These 30 briefs include existing pages, new destinations, and reusable templates. They are not 30 new pages. Four new primary destinations are proposed: Work & Business, Packages, Our Work, and the Buyer’s Guide.
+Customer headlines, paragraphs, cards and action labels are the copy draft. VISUAL and BUILD NOTE text is internal. Resolve {tokens} from approved records. All pages: Andrew builds and supplies visuals; Diego owns copy/SEO; Nick approves technical and commercial facts. Default mobile treatment: image above copy, readable comparisons, and no overlapping sticky bars. Exact CTA targets and per-section behavior are in the linked labels, HTML handbook and JSON.
+
+P01  Home  ·  Improve existing
+P02  Explore Flatbeds  ·  Improve existing
+P03  Flatbeds for Campers  ·  Improve existing
+P04  Flatbeds for Work & Business  ·  New primary destination
+P05  Flatbed Packages  ·  New primary destination
+P06  Package Detail Template  ·  Template, optional expansion
+P07  Vehicle Selector  ·  Improve existing
+P08  Vehicle Page & Builder  ·  Improve shared template
+P09  Get a Quote  ·  Improve existing
+P10  Quote Confirmation  ·  Utility
+P11  Paid Build & Design Consultation  ·  Improve existing
+P12  Our Work  ·  New primary destination
+P13  Super Ute Case Study  ·  Improve existing
+P14  Flatbed Buyer’s Guide  ·  New primary destination
+P15  Installation Services  ·  Improve existing
+P16  Lifts & Suspension  ·  Improve existing
+P17  Bumpers & Racks  ·  Improve existing
+P18  Wheels & Tires  ·  Improve existing
+P19  Custom Power  ·  Improve existing
+P20  Custom Lighting  ·  Improve existing
+P21  Roof Top Tent Installation  ·  Improve existing
+P22  Alaskan Camper Installation  ·  Improve existing
+P23  Vehicle Wash & Detail  ·  Improve supporting page
+P24  Boat Wash & Detail  ·  Improve supporting page
+P25  Marine Outfitting  ·  Improve supporting page
+P26  Trailers  ·  Improve supporting page
+P27  Our Story  ·  Improve existing
+P28  Contact & Visit  ·  Improve existing
+P29  Retail Collection Template  ·  Improve supporting template
+P30  Retail / Flatbed Component Product Template  ·  Improve shared template
+P01  Home
+Improve existing  |  225 customer-copy words  |  /
+PAGE JOB  Inspiration, category discovery, and a fast route for ready buyers
+Build the flatbed you’ve been picturing.
+Make room for the gear, the camper, or the work ahead. Configure an aluminum flatbed around your truck, with installation at our Tacoma shop.
+Actions: Build & Price   |   Explore Flatbeds
+P01-01  /  What would you do with more room?
+For your camper  Start with the camper you have, or the one you’re planning for.
+For getting away  Give the gear a place, without making every trip a packing puzzle.
+For the workday  Build around what you carry and how you need to reach it.
+For your business  Talk through the vehicles, equipment, and installation plan.
+Actions: Camper setups   |   Overland setups   |   Work trucks   |   Business inquiries
+VISUAL  Four real trucks or genuine applications. Show a camper mounted, an overland storage setup, an open work bed, and a team using a work truck. No invented fleet photography.
+BUILD NOTE  All four uses are navigation choices, not mutually exclusive personas. Work and business share one page, with an anchor for procurement needs.
+P01-02  /  A different starting point for your truck.
+A flatbed replaces your factory pickup bed. Ours gives you a platform to configure with storage, sides, and other compatible equipment.
+Actions: Explore the flatbed
+VISUAL  Before/after of the SAME truck, matching camera angle. Label the factory bed and replacement platform. Add a short text alternative to the slider.
+BUILD NOTE  No before/after asset is supplied. Commission or locate a real pair; never fabricate the before image.
+P01-03  /  Start with a setup. Make it yours.
+Choose a starting configuration, then adjust it for your truck. You’ll see what’s included and how each change affects the estimate.
+Actions: Explore packages
+VISUAL  Approved configuration cards photographed consistently. Base platform and optional equipment must be distinguishable.
+BUILD NOTE  Hide this entire module until package bills of materials, fitment, pricing, and photography are approved.
+P01-04  /  See the trucks. Understand the choices.
+Look through completed builds and the details that made each one work for its owner.
+Actions: See our work
+VISUAL  Three real build cards with vehicle, intended use, installed equipment, and original source. Start with Super Ute, add only verified projects.
+P01-05  /  The rest of the build belongs in the conversation.
+Suspension, power, lighting, and storage all have a job to do. Bring us one upgrade or a wider build.
+Actions: Explore installation services
+VISUAL  An actual technician working on a vehicle, with adjacent links to active service categories.
+P01-06  /  You don’t need a parts list to start.
+Tell us about your truck and what you want to change. We’ll help you work out the next step.
+Actions: Talk through my build
+VISUAL  Friendly photograph of the real team beside a customer truck. Keep the vehicle visible.
+Title: Aluminum Flatbeds & Truck Builds | Next Jump Outfitters
+Description: Explore modular aluminum flatbeds for camping, overlanding, and work. Build a configuration and plan installation with Next Jump Outfitters in Tacoma.
+Schema: WebPage  |  index,follow  |  Sources: S01, S02
+APPROVAL  Nick approves offer language. Andrew supplies rights-cleared photos. J approves the flatbed-first positioning, not each implementation task.
+P02  Explore Flatbeds
+Improve existing  |  284 customer-copy words  |  /pages/overland-aluminum-flatbed-truck-bodies
+PAGE JOB  Understand the system, compare applications, and move into a suitable configuration
+An aluminum flatbed for your kind of truck.
+Replace the factory bed with a platform you can configure for camping, work, or both. Start with your truck. Add what earns its place.
+Actions: Build & Price   |   Get help choosing
+P02-01  /  What changes when the factory bed comes off?
+You start with a flat platform instead of a fixed pickup-bed layout. The configuration determines how you carry gear, add storage, and use the space.
+VISUAL  Side-by-side factory bed and NJO platform on the same truck. Use simple labels, not an engineering claim about payload.
+P02-02  /  Built around what you need to carry.
+Camper setups  Work through the truck, camper, storage, and installation together.
+Work and business  Plan access and storage around the equipment you use.
+Actions: Explore camper setups   |   Explore work setups
+VISUAL  Camper and work examples with real installed equipment.
+overlanding  /  Less digging. More getting out.
+Give the trip essentials a place. Explore side storage, underbody boxes, and compatible camp accessories without committing to every upgrade at once.
+Actions: Build an overland setup
+VISUAL  Show a person opening actual storage, reaching gear, and setting up camp. A finished-truck wide shot should accompany the detail.
+BUILD NOTE  URL use parameter is a preference, not fitment evidence. Do not add paid options automatically.
+P02-04  /  See what each part does.
+Choose an option to see where it goes, what it does, and what else it needs.
+Dropsides  Removable side panels for a different way to use the bed.
+Bed boxes  Storage along the sides of a compatible configuration.
+Tailgate  A rear opening for configurations with the required boxes.
+Underbody storage  Additional storage below the platform, where the fit allows.
+VISUAL  Annotated real platform photo. Each hotspot also appears in an ordinary accessible list.
+BUILD NOTE  Nick owns technical confirmation. Publish dependency rules from the approved parts data, not card copy.
+P02-05  /  Start with your truck, not a size chart.
+Choose your vehicle and factory bed configuration. We’ll use those details to identify the next step.
+Actions: Find my truck
+VISUAL  Vehicle selector preview with a real measuring diagram and “I’m not sure” help.
+P02-06  /  Know what the price covers.
+Compare the base configuration and optional equipment separately. Each estimate identifies its installation scope and any items that still need review.
+Actions: See pricing guidance
+VISUAL  An itemized estimate card generated from approved pricing data. Never a decorative made-up total.
+BUILD NOTE  Place the live starting price here only after one price basis is approved. Keep important exclusions adjacent to it, not behind an accordion.
+P02-07  /  See it on a finished truck.
+Explore an actual build, then use it as a starting point for your own.
+Actions: Explore our work
+VISUAL  Relevant project gallery. Label equipment not included in the base price.
+P02-08  /  From your idea to installation.
+Choose a starting setup. Review the configuration with our team. Once the final scope is agreed, we’ll work through payment and installation arrangements.
+Actions: Get help with my build
+VISUAL  Four compact process panels with real consultation, fitment check, installation, and handover photos.
+Title: Modular Aluminum Flatbeds | Next Jump Outfitters
+Description: Explore aluminum flatbeds, storage options, and camper configurations. Find a starting setup for your truck and plan installation in Tacoma, Washington.
+Schema: WebPage  |  index,follow  |  Sources: S02, S03
+APPROVAL  Resolve price, component inclusion, and technical claims before publish. No blanket claims of increased vehicle payload, improved stability, or universal fitment.
+P03  Flatbeds for Campers
+Improve existing  |  235 customer-copy words  |  /pages/flatbeds-for-overland-and-off-road-campers
+PAGE JOB  Match camper type to the right questions without implying universal compatibility
+Bring the camper plans. We’ll work through the setup.
+A topper, a slide-in, and a flatbed camper need different configurations. Start with your truck and camper details, then build around them.
+Actions: Discuss My Camper Setup   |   Find My Truck
+P03-01  /  Which camper are you building around?
+Topper camper  Uses the bed area below the camper. The supporting box, rail, and tailgate arrangement needs review.
+Slide-in camper  Has a lower body designed to sit inside a pickup bed. Dimensions, support, and tie-down requirements matter.
+Flatbed camper  Is designed for a flat platform. Check the camper’s exact mounting and support requirements.
+VISUAL  Three clear real examples, all labeled. Do not rely on manufacturer logos to explain the difference.
+BUILD NOTE  These explanations are orientation, not installation instructions. Nick approves wording and the supporting technical evidence.
+P03-02  /  Keep the things you use within reach.
+Plan storage around how you camp. Show us what needs to stay accessible with the camper installed, not just what fits when it’s off the truck.
+VISUAL  An actual camper-on-truck photo with storage open. Captions identify which compartments remain accessible.
+P03-03  /  The camper is one part of the build.
+We’ll discuss the equipment around it, including storage, power, and the vehicle upgrades the project may need.
+Actions: Explore installation services
+VISUAL  Actual power installation and completed camper rig. No visual suggestion that a suspension upgrade raises rated payload.
+P03-04  /  Confirm the fit before choosing the parts.
+Share the camper make and model, truck details, and any existing modifications. Photos help. You can still start the conversation while you’re comparing campers.
+Actions: Discuss my camper setup
+VISUAL  A simple truck-and-camper checklist, with examples of useful photos and a clear upload option.
+P03-05  /  See a setup close to yours.
+Look at real projects and the decisions behind them. A similar build is inspiration, not a guarantee that every component fits your truck.
+VISUAL  Verified camper project cards with model/year/camper and installation captions.
+P03-06  /  Coming to Tacoma for the build?
+Talk with us about the installation plan before making travel arrangements. We’ll explain what needs to be confirmed for your visit.
+Actions: Plan my visit
+VISUAL  Shop exterior, loading entrance, and clear location information.
+BUILD NOTE  Do not promise complimentary lodging or a fixed turnaround until current availability and eligibility are approved.
+Title: Flatbeds for Truck Campers | Next Jump Outfitters
+Description: Explore aluminum flatbed configurations for toppers, slide-ins, and flatbed campers. Discuss your truck, storage, and installation with our Tacoma team.
+Schema: WebPage  |  index,follow  |  Sources: S04
+APPROVAL  Replace stale specifications and prices. Each compatibility claim needs a verified truck-plus-camper combination. No logos presented as partner endorsements without permission.
+P04  Flatbeds for Work & Business
+New primary destination  |  165 customer-copy words  |  /pages/flatbeds-for-work-and-business
+PAGE JOB  Owner-operators and businesses evaluate usable layouts, equipment access, and installation planning
+A truck bed built around the job.
+Plan the platform and storage around what you carry every day. Bring us your truck, equipment list, and the jobs it needs to handle.
+Actions: Plan My Work Truck   |   Explore Flatbeds
+P04-01  /  Start with a normal workday.
+What goes on the truck first? What needs to be reached often? Show us the equipment and loading routine so the layout reflects the job.
+VISUAL  Real work truck during loading. Use an actual operator’s sequence, not staged claims of time saved.
+P04-02  /  Open space or organized storage?
+Compare an open platform with storage-focused configurations. The right starting point depends on the load, access, and truck.
+Actions: Explore starting configurations
+VISUAL  Matching-angle open platform and box-equipped truck. Label candidate layouts, not universal best choices.
+business  /  One truck or a broader project.
+For business inquiries, include the vehicle count, models, equipment needs, and preferred timing. We’ll discuss scope and scheduling before you commit.
+Actions: Discuss a business build
+VISUAL  Actual shop and verified work build. Do not display a fictional fleet or imply volume capacity.
+BUILD NOTE  Optional company name and vehicle count. Nick confirms capacity, volume pricing, purchase orders, and any staged rollout; none is promised here.
+P04-04  /  Know what needs to be confirmed.
+The final plan needs the vehicle details, equipment loads, installation scope, and agreed pricing. Online selections are a starting point, not a load certification.
+VISUAL  Short review checklist in plain language. Technical checks expanded below it.
+P04-05  /  Let’s look at the truck you’re using.
+Send a few photos and a description of the work. We’ll help you decide where to start.
+Actions: Start my work-truck inquiry
+VISUAL  A real loaded vehicle and optional photo-upload prompt.
+Title: Work Truck Flatbeds & Storage | Next Jump Outfitters
+Description: Plan an aluminum flatbed around your work truck, tools, and equipment. Discuss storage layouts and installation with Next Jump Outfitters in Tacoma.
+Schema: WebPage  |  index,follow  |  Sources: S02
+APPROVAL  No invented commercial case studies, fleet discounts, downtime guarantees, certifications, or volume capacity. Nick approves actual work applications before launch.
+P05  Flatbed Packages
+New primary destination  |  185 customer-copy words  |  /pages/flatbed-packages
+PAGE JOB  Reduce configuration work with clearly bounded, approved starting setups
+A starting setup, not a blank page.
+Choose a configuration that’s close to what you need. Check what’s included, make it your own, and see the estimate for your truck.
+Actions: Find Packages for My Truck   |   Help Me Choose
+P05-01  /  Choose the job your flatbed needs to do.
+Base Flatbed  Start with the platform and required installation components. Add compatible options when you need them.
+Work & Storage  A storage-focused starting point for tools and equipment. Review the layout around your normal load.
+Overland Storage  A starting layout for trip gear, with room to explore compatible camp accessories.
+Topper Setup  Start the conversation around a topper-compatible layout. The exact truck and camper still need review.
+Actions: Choose my truck
+VISUAL  Four approved finished setups, same angle and background where possible. Each photo’s equipment must match its listed configuration.
+BUILD NOTE  All four names and recipes are proposals. Approved BOM, technical rules, photos and pricing are launch gates. Do not publish a package just because the copy exists.
+P05-02  /  Compare what’s actually included.
+Open the comparison to see the platform, included equipment, installation basis, and optional additions. No mystery extras hidden behind the package name.
+VISUAL  An HTML comparison table with checks, descriptive text, and no color-only meaning. Use approved product IDs.
+P05-03  /  Keep the starting point. Change the details.
+A package doesn’t lock you into every option. Make compatible changes in the builder and review the updated estimate before sending it.
+Actions: Build & Price
+VISUAL  Builder with selected package and one edited option. Label the resulting price change.
+P05-04  /  Already have a camper in mind?
+Send us the camper details before choosing a package. A slide-in or flatbed camper may need a different starting configuration.
+Actions: Get camper fitment help
+VISUAL  Camper comparison thumbnails beside a help action.
+Title: Flatbed Packages & Configurations | Next Jump Outfitters
+Description: Compare starting flatbed configurations for open-bed use, storage, overlanding, and toppers. Customize an approved setup for your truck in our builder.
+Schema: WebPage  |  index,follow  |  Sources: S02, S04
+APPROVAL  Packages are not yet approved products. “Starting configurations” does not mean in stock, prebuilt, bundled discount, or universal compatibility. Hide until approved.
+P06  Package Detail Template
+Template, optional expansion  |  112 customer-copy words  |  /pages/flatbed-package-{approved-slug}
+PAGE JOB  Show the exact configuration behind a package and allow changes
+{Approved package name}
+{One sentence stating the intended use and the principal configuration benefit, drawn from the approved package record.}
+P06-01  /  Here’s what you’re starting with.
+Review the platform and equipment included in this configuration. Items shown in the photos but not included are identified below.
+VISUAL  Package photography tied to exact BOM. Labels for optional illustrated accessories.
+BUILD NOTE  Render inclusions from the package record. Never have a writer independently recreate a parts list.
+P06-02  /  See the setup in use.
+Look at the layout from the side, rear, and working positions. Open a detail to see how the equipment is accessed.
+VISUAL  Approved matching-angle gallery and short captioned walkaround.
+P06-03  /  Make it fit the way you use your truck.
+Choose your vehicle and explore compatible changes. The estimate updates as you adjust the build.
+Actions: Customize this package [/pages/flatbed-build-price-by-vehicle?package={approved-id}]
+VISUAL  Context-preserving link into the builder with package ID.
+P06-04  /  Review before you commit.
+We’ll confirm the final configuration and installation scope before an order is placed.
+Actions: Request a package quote [/pages/book-install-services-or-get-a-quote?package={approved-id}]
+VISUAL  Itemized live-data summary with visible inclusions and open questions.
+Title: {Package Name} Flatbed Package | Next Jump Outfitters
+Description: Review the included equipment, fitment details, and pricing basis for this flatbed configuration. Customize it for your truck and request a reviewed quote.
+Schema: WebPage; Product only for a real, specifically defined package  |  index,follow  |  Sources: S02
+APPROVAL  Create a detail URL only for an approved, meaningfully distinct package with real evidence. Do not create four thin pages merely to target keywords.
+P07  Vehicle Selector
+Improve existing  |  101 customer-copy words  |  /pages/flatbed-build-price-by-vehicle
+PAGE JOB  Reach a compatible configuration without requiring the visitor to understand platform sizing
+Start with your truck.
+Choose your vehicle details so we can show the right starting options. Not sure about something? You can ask for help without guessing.
+Actions: Continue to Setups [builder:continue]
+P07-01  /  Which truck are you building?
+Select the make, model, and year. We’ll ask for the details needed for that vehicle.
+VISUAL  Recognizable make labels, searchable model choices, then year and bed-size options with diagrams. Logos are optional aids, never the only label.
+BUILD NOTE  Four-step overall builder: Truck, Setup, Options, Review. Within Truck, dynamically ask year/cab/bed/fuel/dually or other fields only when fitment rules need them.
+P07-02  /  Not sure about the bed length?
+Measure the inside of the closed bed from the front wall to the tailgate. Share the measurement and your vehicle details when asking for help.
+Actions: Get fitment help
+VISUAL  Real annotated measurement image with both end points. Distinguish factory nominal length from replacement-platform dimensions.
+BUILD NOTE  Measurement is a starting check, not fitment approval. Technician must approve final guide and manufacturer-specific exceptions.
+P07-03  /  Not seeing your vehicle?
+Don’t choose a different truck to make the builder work. Send us the details and we’ll review the options.
+Actions: Send my vehicle details
+VISUAL  Inline empty-state panel, no dead-end error or forced nearest match.
+Title: Flatbed Build & Price by Vehicle | Next Jump Outfitters
+Description: Choose your truck and factory bed configuration, explore compatible flatbed options, and build an estimate for review by our Tacoma installation team.
+Schema: WebPage  |  index,follow  |  Sources: S03
+APPROVAL  Correct the Tacoma/Colorado links first. Only approved combinations receive a validated configuration state. An approximate bed size is not enough.
+P08  Vehicle Page & Builder
+Improve shared template  |  125 customer-copy words  |  /pages/aluminum-flatbed-truck-body-{vehicle-slug}
+PAGE JOB  Vehicle-specific search entry plus a fast, guided, reversible configuration process
+Build your {vehicle model} flatbed.
+Choose a starting setup, adjust the options, and see the estimate. Your truck stays at the center of the build.
+P08-01  /  Your truck
+Confirm the vehicle details before choosing equipment.
+VISUAL  Selected vehicle summary with year, make, model, bed and edit control. Use an actual matching build photo or clearly labeled platform image.
+BUILD NOTE  Known model/bed from URL may prefill, but model year and fitment-critical fields still need confirmation.
+P08-02  /  Choose a starting setup.
+Start with the base flatbed or an approved configuration. You can change the options next.
+VISUAL  Compatible package cards with baseline equipment visible. Base is selectable without pressure to upgrade.
+P08-03  /  Make room for what you use.
+Explore compatible storage and accessories. Open any option to see what it does and what it requires.
+VISUAL  Real option image, plain benefit, exact price delta, and “Why choose this?” disclosure.
+BUILD NOTE  Required base visible; no optional upsells preselected. Dependencies require explicit approval with price change before adding.
+P08-04  /  Your build, so far
+Review the selected equipment and the estimate before sending it. Anything that needs a fitment or pricing check is called out here.
+VISUAL  Sticky desktop summary; mobile compact expandable drawer. Only one persistent action bar.
+BUILD NOTE  Price comes from server-side validated records. Never show an incomplete subtotal as an installed total.
+P08-05  /  Ready for a closer look?
+Send your build to the team for review. This doesn’t place an order or reserve an installation date.
+Actions: Request My Quote [builder:submit-quote]   |   Save This Build [builder:save]
+VISUAL  Short contact step after the visible summary. Preserve choices; no required account.
+Title: {Vehicle & Bed} Aluminum Flatbed | Next Jump Outfitters
+Description: Explore a modular aluminum flatbed configuration for your truck. Choose storage and compatible options, review the estimate, and plan a Tacoma installation.
+Schema: WebPage  |  index,follow  |  Sources: S03, S05
+APPROVAL  The 19 existing vehicle URL records in the implementation pack require technical fitment review. Do not infer universal fit from the slug.
+P09  Get a Quote
+Improve existing  |  118 customer-copy words  |  /pages/book-install-services-or-get-a-quote
+PAGE JOB  Capture an inquiry with enough context, without making a novice assemble a technical specification
+Tell us about the truck you want to build.
+You don’t need every detail figured out. Share your vehicle, what you want to change, and the best way to reach you.
+Actions: Send My Request [form:submit-inquiry]
+P09-01  /  What are you planning?
+Choose the closest description. We’ll keep the questions relevant to your project.
+VISUAL  Flatbed, installation, work/business, and other inquiry choices with clear text labels.
+BUILD NOTE  Carry over an existing use/vehicle/configuration. Never ask the customer to retype it.
+P09-02  /  How should we reach you?
+Choose your preferred contact method and add any details that would help us understand the project.
+VISUAL  Name, email or preferred phone channel, optional notes and attachment. Progressive technical fields only.
+BUILD NOTE  Contact details are required only for inquiry, not exploration. Keep optional marketing consent unchecked and separate from service contact.
+P09-03  /  What happens next
+Our team will review the request and contact you about the next step. If the project needs a paid design consultation, we’ll explain the scope and fee before you book.
+VISUAL  Photo of the person/team that handles inquiries and a compact process.
+BUILD NOTE  Do not invent a response-time promise. Nick must approve an achievable SLA before it is displayed.
+P09-04  /  Prefer to talk?
+Call (253) 301-0028. Our Tacoma shop is open Monday through Friday, 8am to 5pm.
+Actions: Call the Shop
+VISUAL  Tap-to-call and text address; directions do not rely solely on an embedded map.
+Title: Request a Build or Installation Quote | Next Jump Outfitters
+Description: Tell Next Jump Outfitters about your vehicle, flatbed plans, or installation project. Share a saved build or start with a question for our Tacoma team.
+Schema: WebPage  |  index,follow  |  Sources: S04, S06, S07
+APPROVAL  Andrew builds forms; Diego owns CRM mapping, consent, deduplication, source capture and routing; Nick owns response handling.
+P10  Quote Confirmation
+Utility  |  68 customer-copy words  |  /pages/build-request-received
+PAGE JOB  Reassure on successful receipt, show the submitted build, and avoid false booking expectations
+Your request is in.
+Thanks for sharing the build. Our team will review the details and contact you about the next step.
+P10-01  /  Here’s what you sent.
+Review your vehicle and selected equipment below.
+VISUAL  Read-only submitted summary retrieved with proper access control. No personal data in page URL or analytics.
+P10-02  /  Need to add something?
+Have your request reference ready when you call or email the shop. A photo or camper model can help us prepare.
+Actions: Contact the shop
+VISUAL  Reference generated after successful server persistence; no fake sample confirmation.
+P10-03  /  Still gathering ideas?
+Explore another build while we review yours.
+Actions: See more builds
+VISUAL  Relevant verified project, not another forced lead form.
+Title: Build Request Received | Next Jump Outfitters
+Description: Your build request has been received. Review your submitted configuration and contact Next Jump Outfitters with any changes.
+Schema: WebPage  |  noindex,follow  |  Sources: S06, S07
+APPROVAL  Show only after successful server receipt. CRM delivery can retry independently. No order, payment, production slot or install booking is implied.
+P11  Paid Build & Design Consultation
+Improve existing  |  125 customer-copy words  |  /pages/book-a-build-consultation
+PAGE JOB  Explain when detailed paid design is useful and exactly what the fee means
+Work through the details with a technician.
+Book a dedicated one-hour build and design consultation to review the configuration, recommendations, and installation estimate.
+Actions: Book a Design Consultation [booking:approved-consultation]
+P11-01  /  A working session for your build.
+We’ll use your vehicle details and project goals to prepare for the conversation. Together, we’ll review the proposed equipment and what needs to happen next.
+VISUAL  Technician and customer reviewing a real build plan.
+P11-02  /  Consultation fee
+The consultation is $165. It’s applied to your first hour of installation labor with Next Jump Outfitters.
+VISUAL  Clear price and credit explanation beside booking action; linked approved booking terms.
+BUILD NOTE  Current website wording verified October 3, 2026. Store fee and credit rule centrally. Nick and Tally reconfirm cancellation/refund rules before publishing. Never label this no-risk or refundable without policy support.
+P11-03  /  Bring the useful details.
+Share the truck information, equipment you already own, and a few photos. Tell us what matters most, including a budget or timing preference you’re working around.
+VISUAL  Compact preparation list and optional upload.
+P11-04  /  Not ready for a design appointment?
+Start with an inquiry. We’ll help you decide whether a consultation is the right next step.
+Actions: Ask a build question
+VISUAL  Plain link back to a low-commitment inquiry.
+Title: Build & Design Consultation | Next Jump Outfitters
+Description: Book a one-hour build and design consultation with Next Jump Outfitters. Review your configuration, recommendations, and installation estimate together.
+Schema: WebPage  |  index,follow  |  Sources: S06
+APPROVAL  Do not promise price matching until eligibility and scope are approved. Booking requires clear fee, credit, cancellation and payment consent.
+P12  Our Work
+New primary destination  |  98 customer-copy words  |  /pages/our-work
+PAGE JOB  Make the purchase tangible and route inspiration into a configuration or inquiry
+See what the build can become.
+Real trucks, real configurations, and the choices behind them. Find a project close to what you have in mind.
+Actions: Explore the Builds
+projects  /  Find a build that speaks to yours.
+Browse by use or truck. You can clear the filters at any time.
+VISUAL  Photo-first grid. Filters are optional and visible as text: camper, overland, work, other installations.
+BUILD NOTE  Only show filters with real inventory. No fabricated project counts or empty fleet showcase.
+P12-02  /  The Super Ute
+A 2017 Ford F-250 collaboration build with Adventure Built, Flated, and TRUKD. See how the flatbed, storage, and topper came together.
+Actions: See the Super Ute
+VISUAL  Existing Super Ute original images and video, clearly labeled collaboration.
+P12-03  /  Start with the part you like.
+A layout, a storage idea, or a finished look can be enough to start the conversation. Tell us which build caught your eye.
+Actions: Talk through a similar build
+VISUAL  Project inquiry action carries project ID and source page into the form.
+Title: Flatbed & Overland Truck Builds | Next Jump Outfitters
+Description: Explore completed truck and flatbed builds from Next Jump Outfitters. See the installed equipment, the owner’s goals, and ideas for your own configuration.
+Schema: WebPage  |  index,follow  |  Sources: S08
+APPROVAL  Actual photo rights, customer permission, installed components, technical facts and sponsorship disclosures must be recorded. No unsupported review aggregates.
+P13  Super Ute Case Study
+Improve existing  |  119 customer-copy words  |  /pages/the-super-ute-collaboration-build
+PAGE JOB  Translate an existing collaboration into credible product education and a specific inquiry
+The Super Ute.
+A 2017 Ford F-250 Lariat FX4 collaboration with Adventure Built, Flated, and TRUKD, featuring a Next Jump aluminum flatbed and tailgate.
+Actions: Watch the Walkaround [media:super-ute-video]   |   Plan a Similar Build
+P13-01  /  See the whole truck first.
+Watch the walkaround, then take a closer look at the configuration.
+VISUAL  Actual finished vehicle hero; click-to-play video with captions and a useful transcript.
+P13-02  /  The layout behind the look.
+The build combines a flatbed, a pair of side boxes, and a tailgate, with a Flated topper and TRUKD rack.
+VISUAL  Existing equipment shown in annotated detail shots. Show only verified installed components.
+BUILD NOTE  Do not use the video’s $29,000 title as a current package price. Date historical values and state what they included if discussed.
+P13-03  /  Why the tailgate matters here.
+The tailgate works with the box arrangement to create the rear opening for this topper setup.
+VISUAL  Actual tailgate open/closed sequence on this truck.
+BUILD NOTE  This is a description of this build, not a universal topper fit claim.
+P13-04  /  Build something like this, around your truck.
+Like the layout but need a different camper or storage setup? Send the details. We’ll use the Super Ute as a starting point for your conversation.
+Actions: Plan a Similar Build
+VISUAL  Final finished rig image with a single clear inquiry button.
+Title: Super Ute F-250 Flatbed Build | Next Jump Outfitters
+Description: See the Super Ute F-250 collaboration build with Adventure Built, Flated, and TRUKD. Explore the flatbed, storage, topper layout, and ideas for your truck.
+Schema: WebPage; VideoObject only with verified video fields  |  index,follow  |  Sources: S08
+APPROVAL  Use existing exact vehicle/project evidence. Remove old placeholder section and generic parts-only handoff. Document collaboration/compensation disclosures.
+P14  Flatbed Buyer’s Guide
+New primary destination  |  612 customer-copy words  |  /pages/flatbed-buyers-guide
+PAGE JOB  Educate without forcing technical detail into every sales page
+A clearer starting point for your flatbed build.
+Understand the choices, compare quotes on the same basis, and know what to ask before changing your truck.
+P14-01  /  Start with the truck and its job.
+Think about what it carries, how you load it, and what you want to do differently. That gives the configuration a purpose before the options enter the picture.
+VISUAL  Actual stock/converted truck diagram and intended-use examples.
+pricing  /  Questions worth answering before you buy.
+What is a replacement flatbed?  It replaces the original pickup bed with a platform that can be configured for the intended use. Storage, sides, racks, and camper equipment depend on the selected system. It is not the same thing as a bed rack placed inside the factory pickup bed.
+How do I know which one fits?  Start with the vehicle make, model, year, and factory bed configuration. Other details may matter, including cab, wheelbase, fuel system, and existing modifications. A similar bed length is not confirmation of fit. Send the details rather than choosing a different truck in the builder.
+What affects the price?  The platform, selected equipment, installation scope, and any vehicle-specific work affect the quote. Compare configurations on the same basis. An installed starting price and a hardware-only price describe different things. Your final quote should identify what is included and what remains separate.
+Does a flatbed increase my truck’s payload rating?  A replacement bed does not by itself increase the truck’s rated payload, axle ratings, or gross vehicle weight rating. The completed configuration adds and removes weight. Review the finished vehicle and its load against the applicable vehicle limits with a qualified professional.
+Can I use my existing camper?  Possibly, but the exact combination needs review. Share the camper make and model, truck details, and manufacturer’s mounting requirements. Similar dimensions or a brand logo on a website do not establish compatibility.
+Do I have to choose every option now?  No. You can begin with a starting configuration and discuss future plans. Some upgrades need supporting components, so ask which later additions are practical for your specific build. Modular does not mean every option fits every setup.
+What does the online estimate mean?  It is a planning estimate for the selected configuration. It is not an order or installation reservation. Review the listed installation basis and open items, then request a final quote for the actual vehicle and scope.
+Can I buy the bed without installation?  Ask our team about the current purchase and fulfillment options for the configuration you want. Do not assume that a retail product’s shipping policy also applies to a complete flatbed. Confirm the arrangement before planning pickup, transport, or installation elsewhere.
+How long will the installation take?  Timing depends on the agreed scope, required equipment, vehicle condition, and shop schedule. Confirm the planned dates with the team before making travel arrangements. Product availability and an available installation appointment are separate things.
+What warranty applies?  Review the written terms for the goods and the installation, as well as any separate manufacturer coverage. Ask which coverage applies to your exact order and how a claim is handled. Do not assume a product warranty and an installation-workmanship warranty are the same.
+VISUAL  Short answers in accessible accordion or grouped headings. The pricing answer is linkable directly.
+BUILD NOTE  Answers are proposed public education, not a legal or engineering certification. Nick approves technical statements. FAQs remain valuable content; Google FAQ rich results were discontinued in 2026.
+P14-03  /  A few terms you’ll see.
+Dropsides  Side and rear panels used with a compatible platform. Check which panels are included in the selected configuration.
+Headache rack  An upright structure behind the cab. Its form, clearance, and purpose vary by design; it is not a universal camper support.
+L-track  A mounting-track system used with compatible fittings. Approved fittings, load direction, and the complete mounting arrangement determine how it may be used.
+VISUAL  Detail photos alongside each defined term; no vague stock icons.
+P14-04  /  Turn the questions into a starting build.
+Explore the options for your truck, or send a question to the team.
+Actions: Find My Truck   |   Ask a Question
+VISUAL  Simple split choice, equal clarity but one dominant primary action.
+Title: Flatbed Buyer’s Guide: Fit, Cost & Options | Next Jump
+Description: Learn what to check before buying a truck flatbed, from fitment and camper compatibility to pricing, installation, storage, and warranty questions.
+Schema: WebPage  |  index,follow  |  Sources: S02, S04, S09, S15
+APPROVAL  Technical review required. Warranty duration stays in a linked, approved policy summary; no invented offer terms.
+P15  Installation Services
+Improve existing  |  176 customer-copy words  |  /pages/overland-off-road-installation-services-tacoma-wa
+PAGE JOB  Direct route for service-aware local buyers without forcing them into a flatbed journey
+Make the next upgrade work with the whole truck.
+From a single installation to a wider build, our Tacoma team helps you work through the equipment and the plan.
+Actions: Request an Installation Quote
+P15-01  /  What are you working on?
+Choose a service to see the details, or tell us about a project that crosses several categories.
+Lifts & suspension  Review the setup around your vehicle and its intended use.
+Bumpers & racks  Work through fitment and the equipment around the installation.
+Wheels & tires  Discuss the combination, clearances, and intended use.
+Custom power  Start with the equipment you need to run.
+Lighting  Plan the light where you need it and the controls around it.
+Camper & tent installation  Review the exact camper or tent and vehicle combination.
+VISUAL  Actual service photos, not a text-only directory. Each card links directly to its service page.
+P15-02  /  Bring the goal. We’ll discuss the parts.
+Already have equipment in mind? Share it. We’ll review the project before confirming what we can install.
+VISUAL  Real review/inspection photo and optional image-upload cue.
+BUILD NOTE  Do not promise all customer-supplied parts are accepted. Parts sourcing and condition policy needs Nick approval.
+P15-03  /  See the work before you book.
+Explore actual installations and the details behind them.
+Actions: See our work
+VISUAL  Service-specific evidence with dates and named equipment where approved.
+P15-04  /  Let’s look at your project.
+Share your vehicle and the work you have in mind. We’ll explain the next step.
+Actions: Request an Installation Quote
+VISUAL  Shop photo and concise inquiry panel.
+Title: Off-Road Installation Services in Tacoma | Next Jump
+Description: Explore suspension, bumpers, racks, power, lighting, and other vehicle installation services at Next Jump Outfitters in Tacoma. Tell us about your project.
+Schema: WebPage  |  index,follow  |  Sources: S01, S07
+APPROVAL  Keep service demand paths independent from flatbed configuration. Show only active, supported services.
+P16  Lifts & Suspension
+Improve existing  |  117 customer-copy words  |  /pages/lift-suspension-installation
+PAGE JOB  Local, service-aware search and practical installation evaluation
+Suspension for the way you use your truck.
+Tell us about the load, terrain, and driving you’re planning for. We’ll discuss a suspension setup and installation scope around the vehicle.
+Actions: Discuss My Installation
+P16-01  /  Start with how the truck is used.
+Daily driving, a camper, and backcountry travel put different demands on a setup. Bring the vehicle details and any equipment already fitted.
+VISUAL  Real project photo that shows the relevant equipment and the vehicle together.
+P16-02  /  Look beyond the lift height.
+The wider configuration matters. We’ll discuss the related equipment and fitment checks the proposed installation needs.
+VISUAL  Actual close-up of the installation detail described, with a short caption.
+P16-03  /  See a relevant installation.
+Explore completed work and the equipment used.
+Actions: See our work
+VISUAL  Only a verified project in this service category. Hide the section if none is ready.
+P16-04  /  Tell us about your project.
+Send the vehicle details, equipment you have in mind, and a few photos. We’ll help you work out the next step.
+Actions: Request an Installation Quote
+VISUAL  Concise inquiry with selected service carried over.
+Title: Lift & Suspension Installation in Tacoma | Next Jump
+Description: Plan a lift or suspension installation around your vehicle, load, and intended use. Discuss your setup with Next Jump Outfitters in Tacoma, Washington.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  Do not claim a suspension change raises payload or tow ratings. Source engineering guidance for any performance claims.
+P17  Bumpers & Racks
+Improve existing  |  105 customer-copy words  |  /pages/bumpers-racks-installation-tacoma-wa
+PAGE JOB  Local, service-aware search and practical installation evaluation
+Put the equipment where it belongs.
+Plan a bumper or rack installation around your vehicle and the equipment it needs to carry.
+Actions: Discuss My Installation
+P17-01  /  What needs to mount to it?
+Share the equipment you want to carry or attach. That helps define the fitment and installation conversation.
+VISUAL  Real project photo that shows the relevant equipment and the vehicle together.
+P17-02  /  Check the surrounding details.
+Sensors, cameras, lights, and other existing equipment may affect the plan. We’ll review the scope before confirming the installation.
+VISUAL  Actual close-up of the installation detail described, with a short caption.
+P17-03  /  See a relevant installation.
+Explore completed work and the equipment used.
+Actions: See our work
+VISUAL  Only a verified project in this service category. Hide the section if none is ready.
+P17-04  /  Tell us about your project.
+Send the vehicle details, equipment you have in mind, and a few photos. We’ll help you work out the next step.
+Actions: Request an Installation Quote
+VISUAL  Concise inquiry with selected service carried over.
+Title: Bumper & Rack Installation in Tacoma | Next Jump
+Description: Discuss bumper and rack installation for your truck or off-road vehicle. Review fitment and project details with Next Jump Outfitters in Tacoma.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  No blanket crashworthiness, recovery rating, sensor compatibility or universal part acceptance.
+P18  Wheels & Tires
+Improve existing  |  104 customer-copy words  |  /pages/wheels-tires-off-road-and-overland
+PAGE JOB  Local, service-aware search and practical installation evaluation
+Choose the setup for the driving ahead.
+Discuss wheels and tires around your truck, intended use, and existing modifications.
+Actions: Discuss My Installation
+P18-01  /  Where does the truck spend its time?
+Tell us about road use, terrain, regular loads, and what you’d like to change about the current setup.
+VISUAL  Real project photo that shows the relevant equipment and the vehicle together.
+P18-02  /  Fit is more than diameter.
+Share the current wheel and tire details and any suspension changes. The final combination needs a vehicle-specific review.
+VISUAL  Actual close-up of the installation detail described, with a short caption.
+P18-03  /  See a relevant installation.
+Explore completed work and the equipment used.
+Actions: See our work
+VISUAL  Only a verified project in this service category. Hide the section if none is ready.
+P18-04  /  Tell us about your project.
+Send the vehicle details, equipment you have in mind, and a few photos. We’ll help you work out the next step.
+Actions: Request an Installation Quote
+VISUAL  Concise inquiry with selected service carried over.
+Title: Wheels & Tires for Off-Road Trucks | Tacoma | Next Jump
+Description: Plan wheels and tires around your vehicle and intended use. Discuss fitment, existing modifications, and installation with Next Jump Outfitters in Tacoma.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  Do not publish tire fit guarantees or performance/safety outcomes without approved technical evidence.
+P19  Custom Power
+Improve existing  |  117 customer-copy words  |  /pages/custom-power-solutions-off-road-marine
+PAGE JOB  Local, service-aware search and practical installation evaluation
+Power for what you actually use.
+Start with the equipment you need to run. We’ll discuss a system and installation plan around the vehicle and how you travel.
+Actions: Discuss My Installation
+P19-01  /  Make a list of what needs power.
+A fridge, lighting, communication equipment, and other devices have different needs. Share the equipment and how long you plan to use it.
+VISUAL  Real project photo that shows the relevant equipment and the vehicle together.
+P19-02  /  Plan charging and storage together.
+The way you drive and camp affects the conversation. We’ll review the intended use before recommending the scope.
+VISUAL  Actual close-up of the installation detail described, with a short caption.
+P19-03  /  See a relevant installation.
+Explore completed work and the equipment used.
+Actions: See our work
+VISUAL  Only a verified project in this service category. Hide the section if none is ready.
+P19-04  /  Tell us about your project.
+Send the vehicle details, equipment you have in mind, and a few photos. We’ll help you work out the next step.
+Actions: Request an Installation Quote
+VISUAL  Concise inquiry with selected service carried over.
+Title: Custom Vehicle Power Systems in Tacoma | Next Jump
+Description: Discuss custom vehicle power, charging, and electrical installations for your travel setup. Start with your equipment needs and Next Jump’s Tacoma team.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  No battery capacity, runtime, solar yield or electrical compliance claims without a designed and approved system. Marine work remains a separate scope review.
+P20  Custom Lighting
+Improve existing  |  113 customer-copy words  |  /pages/custom-lighting-for-off-road-overland
+PAGE JOB  Local, service-aware search and practical installation evaluation
+Light for the task in front of you.
+Plan vehicle and camp lighting around where you need it, how you’ll use it, and how it will be controlled.
+Actions: Discuss My Installation
+P20-01  /  Where do you need to see?
+Describe the intended task and where the light will be used. Include any equipment already on the vehicle.
+VISUAL  Real project photo that shows the relevant equipment and the vehicle together.
+P20-02  /  Make the controls part of the plan.
+Placement is only one decision. We’ll discuss mounting, wiring, and switching as part of the installation scope.
+VISUAL  Actual close-up of the installation detail described, with a short caption.
+P20-03  /  See a relevant installation.
+Explore completed work and the equipment used.
+Actions: See our work
+VISUAL  Only a verified project in this service category. Hide the section if none is ready.
+P20-04  /  Tell us about your project.
+Send the vehicle details, equipment you have in mind, and a few photos. We’ll help you work out the next step.
+Actions: Request an Installation Quote
+VISUAL  Concise inquiry with selected service carried over.
+Title: Off-Road Lighting Installation in Tacoma | Next Jump
+Description: Discuss vehicle and camp lighting installation with Next Jump Outfitters in Tacoma. Plan placement, controls, and wiring around your truck and intended use.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  Do not imply off-road lights are legal for on-road use. Technician reviews use restrictions and electrical scope.
+P21  Roof Top Tent Installation
+Improve existing  |  108 customer-copy words  |  /pages/james-baroud-roof-top-tent-installation-tacoma-wa
+PAGE JOB  Local, service-aware search and practical installation evaluation
+A tent setup that starts with the vehicle.
+Talk through your rooftop tent, rack, and installation needs before choosing the final configuration.
+Actions: Discuss My Installation
+P21-01  /  Start with the exact tent and rack.
+Send the model details or tell us what you’re considering. We’ll review the combination before confirming an installation.
+VISUAL  Real project photo that shows the relevant equipment and the vehicle together.
+P21-02  /  Picture it packed and in use.
+The setup needs to work for travel and camp. Look at access, opening clearance, and the surrounding equipment.
+VISUAL  Actual close-up of the installation detail described, with a short caption.
+P21-03  /  See a relevant installation.
+Explore completed work and the equipment used.
+Actions: See our work
+VISUAL  Only a verified project in this service category. Hide the section if none is ready.
+P21-04  /  Tell us about your project.
+Send the vehicle details, equipment you have in mind, and a few photos. We’ll help you work out the next step.
+Actions: Request an Installation Quote
+VISUAL  Concise inquiry with selected service carried over.
+Title: Roof Top Tent Installation in Tacoma | Next Jump
+Description: Discuss rooftop tent and rack installation with Next Jump Outfitters in Tacoma. Review the exact tent, vehicle, mounting requirements, and project scope.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  James Baroud dealer/installer relationship must be reconfirmed before retaining authorized/dealer badges. No load ratings or installation method inferred from photos.
+P22  Alaskan Camper Installation
+Improve existing  |  111 customer-copy words  |  /pages/authorized-alaskan-campers-installer
+PAGE JOB  Local, service-aware search and practical installation evaluation
+Plan the truck and camper together.
+Share your Alaskan camper details and the truck it needs to work with. We’ll discuss the installation and supporting equipment.
+Actions: Discuss My Installation
+P22-01  /  Which camper are you building around?
+Include the model, year, and any existing mounting equipment. A planned purchase is enough to begin the conversation.
+VISUAL  Real project photo that shows the relevant equipment and the vehicle together.
+P22-02  /  Work through the surrounding build.
+Storage, power, and the vehicle configuration belong in the same discussion. We’ll review the scope before confirming the project.
+VISUAL  Actual close-up of the installation detail described, with a short caption.
+P22-03  /  See a relevant installation.
+Explore completed work and the equipment used.
+Actions: See our work
+VISUAL  Only a verified project in this service category. Hide the section if none is ready.
+P22-04  /  Tell us about your project.
+Send the vehicle details, equipment you have in mind, and a few photos. We’ll help you work out the next step.
+Actions: Request an Installation Quote
+VISUAL  Concise inquiry with selected service carried over.
+Title: Alaskan Camper Installation Planning | Next Jump
+Description: Discuss your Alaskan camper and truck configuration with Next Jump Outfitters in Tacoma. Review installation needs, supporting equipment, and next steps.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  Reconfirm current authorization with the manufacturer before using the existing authorized claim, logos, or naming this a certified service.
+P23  Vehicle Wash & Detail
+Improve supporting page  |  91 customer-copy words  |  /pages/wash-me
+PAGE JOB  Existing service interest; preserve a clear route without diluting flatbed-first positioning
+Give the vehicle a proper reset.
+Tell us what you drive and the condition it’s in. We’ll discuss the right cleaning or detailing scope.
+Actions: Ask About This Service
+P23-01  /  What needs attention?
+Share the vehicle type and the areas you want addressed. Photos help us understand the condition before discussing the service.
+VISUAL  Actual vehicle, boat or trailer relevant to the service. No fabricated customer or result.
+P23-02  /  Set the scope before the appointment.
+We’ll confirm the work and pricing before you book. Existing damage or specialist treatment may need a separate review.
+VISUAL  Real process detail with a caption explaining the scope.
+P23-03  /  Tell us what you have in mind.
+Send the details and your preferred timing. We’ll explain the next step.
+Actions: Discuss My Project
+VISUAL  Short inquiry with service preselected.
+Title: Vehicle Wash & Detailing in Tacoma | Next Jump
+Description: Ask about vehicle washing and detailing at Next Jump Outfitters in Tacoma. Share your vehicle and its condition to discuss the right service and scope.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  No stain-removal, coating durability or restoration guarantees. Confirm active menu and price basis.
+P24  Boat Wash & Detail
+Improve supporting page  |  83 customer-copy words  |  /pages/boat-wash
+PAGE JOB  Existing service interest; preserve a clear route without diluting flatbed-first positioning
+Get the boat ready for its next outing.
+Share the boat, location, and work you have in mind. We’ll discuss service availability and the cleaning scope.
+Actions: Ask About This Service
+P24-01  /  Start with the boat and location.
+Include its size, current condition, and access details. Photos can help us prepare the right questions.
+VISUAL  Actual vehicle, boat or trailer relevant to the service. No fabricated customer or result.
+P24-02  /  Confirm the plan before booking.
+We’ll discuss the scope, availability, and pricing before arranging the service.
+VISUAL  Real process detail with a caption explaining the scope.
+P24-03  /  Tell us what you have in mind.
+Send the details and your preferred timing. We’ll explain the next step.
+Actions: Discuss My Project
+VISUAL  Short inquiry with service preselected.
+Title: Boat Washing & Detailing | Next Jump Outfitters
+Description: Ask Next Jump Outfitters about boat washing and detailing. Share your boat size, location, condition, and preferred timing to discuss service availability.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  Verify mobile service area, access requirements, wastewater procedures and actual scope. No assumed marina permission.
+P25  Marine Outfitting
+Improve supporting page  |  85 customer-copy words  |  /pages/marine-services
+PAGE JOB  Existing service interest; preserve a clear route without diluting flatbed-first positioning
+Let’s talk through the work your boat needs.
+Share the vessel, equipment, and project details so we can confirm whether the scope is a fit for our team.
+Actions: Ask About This Service
+P25-01  /  What are you trying to change?
+Describe the intended use and the equipment involved. Include any existing system information you have.
+VISUAL  Actual vehicle, boat or trailer relevant to the service. No fabricated customer or result.
+P25-02  /  Agree on the scope first.
+Our team will review the request before confirming services, scheduling, or pricing.
+VISUAL  Real process detail with a caption explaining the scope.
+P25-03  /  Tell us what you have in mind.
+Send the details and your preferred timing. We’ll explain the next step.
+Actions: Discuss My Project
+VISUAL  Short inquiry with service preselected.
+Title: Marine Outfitting Inquiries | Next Jump Outfitters
+Description: Discuss a marine outfitting project with Next Jump Outfitters. Share your vessel and equipment needs so the team can review scope and availability.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  Lower-priority offer. Publish only after Nick confirms current capabilities. No unverified repair, licensed trade, safety certification or boat-management promises.
+P26  Trailers
+Improve supporting page  |  87 customer-copy words  |  /pages/trailer
+PAGE JOB  Existing service interest; preserve a clear route without diluting flatbed-first positioning
+Bring the setup behind you.
+Explore a trailer-based build and discuss the equipment you want it to carry.
+Actions: Ask About This Service
+P26-01  /  Start with what it needs to carry.
+Camping gear, storage, and other equipment shape the layout. Tell us what you already own and what you’re planning to add.
+VISUAL  Actual vehicle, boat or trailer relevant to the service. No fabricated customer or result.
+P26-02  /  Include the tow vehicle in the conversation.
+Share the vehicle and trailer details so the project can be reviewed as a whole.
+VISUAL  Real process detail with a caption explaining the scope.
+P26-03  /  Tell us what you have in mind.
+Send the details and your preferred timing. We’ll explain the next step.
+Actions: Discuss My Project
+VISUAL  Short inquiry with service preselected.
+Title: Overland Trailer Builds | Next Jump Outfitters
+Description: Explore trailer-based overland build ideas with Next Jump Outfitters. Discuss the trailer, tow vehicle, equipment, and project scope before planning a build.
+Schema: WebPage + Service  |  index,follow  |  Sources: S01, S07
+APPROVAL  No inventory, towing rating, delivery or roadworthiness claims without approved product records. Supporting offer, not equal homepage priority.
+P27  Our Story
+Improve existing  |  108 customer-copy words  |  /pages/about-us
+PAGE JOB  Establish who is behind the work without unsupported superiority claims
+The people behind the next build.
+Next Jump Outfitters is a veteran-owned shop in Tacoma, Washington. We work with customers on aluminum flatbeds and vehicle upgrades for the way they want to use their rigs.
+Actions: See Our Work
+P27-01  /  Start with what you want the truck to do.
+A build should have a purpose beyond its parts list. Tell us where the current setup falls short and what you’re looking forward to doing with it.
+VISUAL  Actual customer conversation beside their truck.
+P27-02  /  Meet the team.
+Get to know the people who help plan and carry out the work.
+VISUAL  Real staff portraits with approved name, role, and a specific useful background detail.
+BUILD NOTE  No invented tenure, certifications, biographies or manufacturing origin. Nick obtains technical credentials; Andrew collects consented photos.
+P27-03  /  See the work, not just the introduction.
+Explore completed projects and visit the shop when you’re ready to talk through yours.
+Actions: See Our Work   |   Visit the Shop
+VISUAL  Real workshop and project imagery.
+Title: Our Tacoma Shop & Team | Next Jump Outfitters
+Description: Meet the people behind Next Jump Outfitters, a veteran-owned Tacoma shop for aluminum flatbeds, overland builds, and vehicle installation projects.
+Schema: WebPage  |  index,follow  |  Sources: S01, S07
+APPROVAL  Ownership is website-stated, not independent certification. Do not imply US manufacturing of all components. J approves brand story; Andrew handles implementation.
+P28  Contact & Visit
+Improve existing  |  88 customer-copy words  |  /pages/contact-us
+PAGE JOB  Reach the team, understand location/hours, and plan an appointment
+Come talk trucks with us.
+Find Next Jump Outfitters in Tacoma. Call the shop or send the project details before planning your visit.
+Actions: Start a Build Inquiry
+P28-01  /  Find the shop.
+3721 S Lawrence St
+Tacoma, WA 98409
+Monday–Friday, 8am–5pm. Closed weekends.
+Actions: Get Directions
+VISUAL  Exterior photo showing recognizable entrance, plus ordinary text directions link. Map is optional click-to-load.
+P28-02  /  Choose the easiest way to reach us.
+Call (253) 301-0028 or email theteam@nextjumpoutfitters.com. For a build inquiry, send the vehicle and project details through our form.
+Actions: Send a Build Inquiry   |   Call the Shop
+VISUAL  Tap-to-call and email links, visible contact text.
+P28-03  /  Traveling for an installation?
+Confirm the project scope and appointment arrangements with our team before booking travel or bringing the vehicle.
+VISUAL  Simple arrival guidance after operational approval.
+BUILD NOTE  Do not promise lodging, loaners, pickup, storage or a same-day handover. Tally coordinates approved operational details.
+Title: Contact & Visit Next Jump Outfitters | Tacoma, WA
+Description: Contact Next Jump Outfitters at (253) 301-0028 or visit our Tacoma shop. Find the address, weekday hours, and the right way to start a build inquiry.
+Schema: ContactPage + LocalBusiness  |  index,follow  |  Sources: S07
+APPROVAL  Reconfirm location/hours before deployment. Keep same business details in page text, footer, structured data and profile.
+P29  Retail Collection Template
+Improve supporting template  |  52 customer-copy words  |  /collections/{existing-handle}
+PAGE JOB  Browse genuine retail inventory without confusing retail checkout with flatbed quoting
+{Approved collection name}
+Explore the equipment in this collection. Open a product for its specifications, availability, and purchase options.
+P29-01  /  Find the right item.
+Filter by the details that matter for this collection.
+VISUAL  Consistent product grid with truthful current price and stock, accessible filters and clear active-filter reset.
+BUILD NOTE  Do not put quote-only flatbed configurations through a retail checkout because they appear in a product collection.
+P29-02  /  Buying for an installation?
+Talk with the team about the overall project before purchasing parts you expect us to install.
+Actions: Discuss an Installation
+VISUAL  Small help panel, not a competing full-page lead capture.
+Title: {Collection Name} | Next Jump Outfitters
+Description: Explore {approved collection name} at Next Jump Outfitters. Review product specifications, current availability, and the purchase options for each item.
+Schema: CollectionPage + ItemList  |  index,follow  |  Sources: S01, S09
+APPROVAL  Preserve existing collections after content/traffic review; do not create empty categories. Retail stock and shipping must be actual data.
+P30  Retail / Flatbed Component Product Template
+Improve shared template  |  86 customer-copy words  |  /products/{existing-handle}
+PAGE JOB  Explain a single real product, its fit requirements, exact price basis and correct transaction action
+{Approved product name}
+{A short, verified explanation of what this part does and which configurations it is for.}
+P30-01  /  See the part in context.
+Review the product photos and how it appears in an approved configuration.
+VISUAL  Product-only and installed-context photos. Label other equipment not included.
+P30-02  /  What’s included
+Check the included components and quantities before comparing this item with another offer.
+VISUAL  HTML list drawn directly from the approved product record.
+P30-03  /  Fit and requirements
+Confirm the supported configuration and any required companion parts. Ask the team when the fit is unclear.
+Actions: Ask About Fit [/pages/book-install-services-or-get-a-quote?product={id}]
+VISUAL  Technical diagram and compatibility table, with reviewed dimensions and units.
+P30-04  /  Price and next step
+The displayed price identifies whether installation is included, estimated, or quoted separately.
+VISUAL  Exact product variant and price, fulfillment notes and a single correct action.
+BUILD NOTE  Retail item: Add to Cart if genuinely purchasable. Flatbed component/configuration requiring review: Add to Build or Request Quote. Never call both actions the same thing.
+Title: {Product Name} | Next Jump Outfitters
+Description: Review {approved product name}, including specifications, fit requirements, included components, and purchase or quotation options from Next Jump Outfitters.
+Schema: Product; Offer only when supported by a genuine public price/offer  |  index,follow  |  Sources: S05, S09, S13
+APPROVAL  True product records only. Never export “quote required” as $0. No invented product reviews or ratings.
+Vehicle instances and metadata
+Use P08 for these 19 existing destinations. Route preservation does not certify fitment or model-year coverage. Exact paths, canonical rules and approval status also travel in the machine-readable manifest.
+Toyota Tacoma 5ft Short Bed
+Title: Tacoma 5ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Tacoma 5ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Toyota Tacoma 6.1ft Long Bed
+Title: Tacoma 6.1ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Tacoma 6.1ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Toyota Tundra 6.5ft Standard Bed
+Title: Tundra 6.5ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Tundra 6.5ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Toyota Tundra 8ft Long Bed
+Title: Tundra 8ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Tundra 8ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Ford Ranger 5ft Short Bed
+Title: Ranger 5ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Ranger 5ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Ford Ranger 6ft Long Bed
+Title: Ranger 6ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Ranger 6ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Ford Super Duty 8ft Long Bed
+Title: Super Duty 8ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Super Duty 8ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Chevrolet Colorado 5.2ft Short Bed
+Title: Colorado 5.2ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Colorado 5.2ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Chevrolet Colorado 6.2ft Long Bed
+Title: Colorado 6.2ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Colorado 6.2ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Chevrolet Silverado 6.6ft Standard Bed
+Title: Silverado 6.6ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Silverado 6.6ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Chevrolet Silverado 8.1ft Long Bed
+Title: Silverado 8.1ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Silverado 8.1ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Jeep Gladiator JT 5ft Standard Bed
+Title: Gladiator 5ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Gladiator 5ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Ram 6.4ft Standard Bed
+Title: Ram 6.4ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Ram 6.4ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Ram 8ft Long Bed
+Title: Ram 8ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Ram 8ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Ram Heavy Duty 6.75ft Short Bed
+Title: Ram HD 6.75ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Ram HD 6.75ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Ram Heavy Duty 8ft Long Bed
+Title: Ram HD 8ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Ram HD 8ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Nissan Frontier 5ft Short Bed
+Title: Frontier 5ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Frontier 5ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Nissan Frontier 6.1ft Long Bed
+Title: Frontier 6.1ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Frontier 6.1ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+Nissan Titan 6.5ft Standard Bed
+Title: Titan 6.5ft Aluminum Flatbed | Next Jump Outfitters
+Description: Explore an aluminum flatbed configuration for your Titan 6.5ft. Choose compatible options and request a reviewed quote for installation in Tacoma.
+Existing destination
+System and utility copy
+404
+That page isn’t here.  The link may have changed. Start with flatbeds, look for your truck, or contact the shop for help.
+Actions: Explore Flatbeds   |   Find My Truck
+Search Empty
+No matches yet.  Try a truck model, product name, or service. You can also ask our team about an unlisted setup.
+Actions: Get Help
+Form Failure
+Your request hasn’t been sent.  Your entries are still here. Please try again or call (253) 301-0028.
+Actions: Try Again [form:retry]
+Quote Received Sync Pending
+Your request is in.  We’ve received your details. Our team will review them and contact you about the next step.
+Vehicle Changed
+Check the options for your new truck.  Some selections may not fit this vehicle. Review the changes before continuing.
+Dependency
+This option needs another component.  Review the required part and price change before adding both items.
+Actions: Add Both [builder:accept-dependency]   |   Keep My Build [builder:cancel-dependency]
+Price Stale
+A price has changed since you saved this build.  Review the updated estimate below. Your selections have been kept where they remain available.
+Unknown Fit
+This setup needs a fitment review.  Send your truck details to the team. We won’t label the configuration as confirmed until it has been checked.
+Unknown Price
+One item still needs pricing.  The displayed subtotal covers the priced items only. Request a reviewed quote for the complete configuration.
+No Photo
+A matching truck photo isn’t available yet.  This image shows the platform, not a finished build on your exact vehicle.
+Saved Build
+Your build is saved.  Use the private link to return to this configuration. Saving does not reserve equipment, pricing, or an installation date.
+Promotion Expired
+This offer has ended.  Explore current flatbed configurations or ask our team about availability.
+Actions: Explore Flatbeds
+Support
+Need help with an existing build?  Contact the shop with your order reference and a description of the issue. Include photos when they help explain what’s happening.
+Actions: Call the Shop   |   Email the Team
+Sources and implementation context
+The complete dated source register, evidence limits, and publication controls are in the Website Build Guide and sources.json. The links below identify each referenced source; proposed copy is not a claim of measured conversion performance.
+S01  Next Jump homepage
+S02  Next Jump flatbed hub
+S03  Next Jump vehicle selector
+S04  Next Jump camper page and form
+S05  Next Jump Tacoma 5ft builder
+S06  Next Jump paid consultation
+S07  Next Jump contact
+S08  Super Ute collaboration
+S09  Next Jump terms
+S10  Live theme branding evidence
+S11  Google title links
+S12  Google snippets
+S13  Google Product snippets
+S14  Google LocalBusiness
+S15  Google documentation updates
+S16  WCAG contrast minimum
+S17  WCAG target size minimum
+S18  Google AI features and websites
+S19  Google AI optimization guide
+S20  Next Jump agent and crawler surfaces
+S21  OpenAI crawler documentation
+S22  Web Vitals
+S23  Bowen Camper Bed
+S24  Google canonical consolidation

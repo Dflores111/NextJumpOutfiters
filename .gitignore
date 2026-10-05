@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.preview-data/
+.env
+*.log
+.sites-runtime/
+.wrangler/
+.sites-checkout/
+.sites-artifacts/
+.env.*
+!.env.example

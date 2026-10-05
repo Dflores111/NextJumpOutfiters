@@ -1,0 +1,83 @@
+{
+  "checkedAt": "2026-10-04",
+  "portalId": 24102432,
+  "portalName": "Next Jump Outfitters",
+  "registryCount": 87,
+  "registryHasMore": false,
+  "mode": "read-only; no contacts, tickets, notifications or form settings changed",
+  "selectedForms": [
+    {
+      "guid": "405a62cd-cfac-41a6-b8d3-b74a859e9ef1",
+      "name": "Flatbed For Campers Landing Leads",
+      "portalId": 24102432,
+      "isPublished": true,
+      "editorIntegration": "legacy v2 native embed",
+      "verifiedFrom": [
+        "HubSpot connected registry",
+        "public hosted embed form definition"
+      ]
+    },
+    {
+      "guid": "62895413-4437-4f87-a4aa-b12ccb6a89d6",
+      "name": "Install Intake Form - Flatbed and General",
+      "portalId": 24102432,
+      "isPublished": true,
+      "editorIntegration": "legacy v2 native embed",
+      "verifiedFrom": [
+        "HubSpot connected registry",
+        "public hosted embed form definition"
+      ]
+    },
+    {
+      "guid": "b690f934-a789-43e4-aa17-665a6722d661",
+      "name": "Flatbed Landing Leads",
+      "portalId": 24102432,
+      "isPublished": true,
+      "editorIntegration": "legacy v2 native embed",
+      "verifiedFrom": [
+        "HubSpot connected registry",
+        "public hosted embed form definition"
+      ]
+    },
+    {
+      "guid": "c086baf4-e59a-43ac-9c1f-3367969528c8",
+      "name": "Boat Detail Form",
+      "portalId": 24102432,
+      "isPublished": true,
+      "editorIntegration": "legacy v2 native embed",
+      "verifiedFrom": [
+        "HubSpot connected registry",
+        "public hosted embed form definition"
+      ]
+    },
+    {
+      "guid": "d1b51e71-d018-48de-a38f-78dbb08846b6",
+      "name": "Marine Services Lead Form",
+      "portalId": 24102432,
+      "isPublished": true,
+      "editorIntegration": "legacy v2 native embed",
+      "verifiedFrom": [
+        "HubSpot connected registry",
+        "public hosted embed form definition"
+      ]
+    },
+    {
+      "guid": "8c5e34be-4e8f-4cca-a825-1dc0bb64fa8e",
+      "name": "Vehicle Wash & Detail Form",
+      "portalId": 24102432,
+      "isPublished": true,
+      "editorIntegration": "legacy v2 native embed",
+      "verifiedFrom": [
+        "HubSpot connected registry",
+        "public hosted embed form definition"
+      ]
+    }
+  ],
+  "notes": [
+    "Existing native forms require both email and mobile phone, plus budget and vehicle details.",
+    "Native file upload remains managed by HubSpot.",
+    "Native consent fields are loaded unchanged; never prechecked.",
+    "No live request was submitted during this implementation.",
+    "Portal connector reported onboarding incomplete; onboarding was not changed."
+  ]
+}

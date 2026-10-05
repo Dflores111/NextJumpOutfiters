@@ -1,0 +1,47 @@
+{
+  "checked": "2026-10-04",
+  "assets": [
+    {
+      "key": "flagship-dillon-f250",
+      "path": "/images/flagship-dillon-f250.webp",
+      "source": "https://www.nextjumpoutfitters.com/cdn/shop/files/collins-lift.webp?v=1761170658&width=1308",
+      "sourcePage": "https://www.nextjumpoutfitters.com/pages/lift-suspension-installation",
+      "description": "Photo explicitly paired with Dillon Collins 1993 F250 lift review on current live suspension page. No kit height/brand/time/cost inferred."
+    },
+    {
+      "key": "flagship-camper-slide-in",
+      "path": "/images/flagship-camper-slide-in.jpg",
+      "source": "https://www.nextjumpoutfitters.com/cdn/shop/files/BBB09221.jpg?v=1758313467&width=2048",
+      "sourcePage": "https://www.nextjumpoutfitters.com/pages/flatbeds-for-overland-and-off-road-campers",
+      "description": "Alaskan camper on Next Jump branded Ford with side storage. Published setup example, not attributed to a customer."
+    },
+    {
+      "key": "flagship-shop-suspension",
+      "path": "/images/flagship-shop-suspension.webp",
+      "source": "https://www.nextjumpoutfitters.com/cdn/shop/files/offroad-lifts-suspension.webp?v=1787763478&width=3657",
+      "sourcePage": "https://www.nextjumpoutfitters.com/pages/lift-suspension-installation",
+      "description": "Blue Toyota truck hero published on actual suspension service page."
+    },
+    {
+      "key": "flagship-camper-topper",
+      "path": "/images/flagship-camper-topper.jpg",
+      "source": "https://www.nextjumpoutfitters.com/cdn/shop/files/DSC03798_sm.jpg?v=1758311266&width=2400",
+      "sourcePage": "https://www.nextjumpoutfitters.com/pages/flatbeds-for-overland-and-off-road-campers",
+      "description": "Published topper setup image; not a named customer story."
+    },
+    {
+      "key": "flagship-ranger-flatbed",
+      "path": "/images/flagship-ranger-flatbed.jpg",
+      "source": "https://www.nextjumpoutfitters.com/cdn/shop/files/Mid-size-regular-flatbed-dropsides.jpg?v=1730842274&width=1800",
+      "sourcePage": "https://www.nextjumpoutfitters.com/collections/aluminum-flatbeds-truck-beds",
+      "description": "Live image explicitly labeled Ford Ranger with Next Jump Mid-Size 5ft Flatbed; photo inspected. Published setup example. No owner, year, installation date or customer outcome invented."
+    }
+  ],
+  "storyLimits": [
+    "Super Ute is a collaboration, not an independent customer build.",
+    "Dillon is a verified customer project with exact matching photo.",
+    "Alaskan camper remains a published setup example without invented owner, year, build scope or outcome.",
+    "No synthesized truck media, invented before/after, 3D models or fabricated customer results.",
+    "Ford Ranger is a real photographed setup. No fabricated customer story or quote was needed."
+  ]
+}

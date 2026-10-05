@@ -1,0 +1,747 @@
+NEXT JUMP OUTFITTERS
+Website Build Guide
+The buyer story, navigation, visual system, guided builder, SEO, and release requirements.
+VERSION 2.0  /  OCTOBER 3, 2026
+
+Observed live-site colors. Typography and layout recommendations in this handoff are proposed.
+This is a build-ready specification, not an approved commercial catalog. Product facts, package recipes, policy changes, and deployment still require the named owners’ approval.
+
+Contents
+G01  Start here
+G02  What changed since the earlier audit
+G03  Positioning and the buyer’s story
+G04  Awareness stages and routes
+G04B  What to carry over from Bowen
+G05  Navigation and sitemap
+G06  Copy architecture and length
+G07  Brand system: observed and proposed
+G08  Visual storytelling and asset production
+G09  Builder: four clear steps
+G10  Configuration rules, pricing, and saved state
+G11  Packages without invented offers
+G12  Forms and the sales handoff
+G13  Page templates and content management
+G14  SEO: intent, metadata, and internal links
+G15  Schema markup and AI-readable facts
+G16  Technical SEO and migration
+G17  Accessibility and performance
+G18  Measurement and experiment design
+G19  Owners, release phases, and approval gates
+G20  Acceptance tests and handoff to a human or AI
+Source register
+G01  Start here
+A flatbed-first website that lets the buyer picture the finished truck, understand the choices, and reach a credible quote.
+This version supersedes the earlier Website Blueprint for architecture, copy, and implementation guidance. It is a proposed build specification, not permission to publish or a verified product catalog. The live website was rechecked on October 3, 2026. A published claim is recorded as an observation, not automatically treated as an approved operational fact.
+Use the existing Shopify site as the first implementation option. A redesign does not require a new platform. The same content and interaction contracts can support a rebuild elsewhere, but migration must preserve URLs, commerce rules, CRM capture, and maintainability. Do not start a replatforming project merely to obtain better-looking pages.
+Deliverable
+How to use it
+Build Guide
+The requirements, architecture, design system, builder rules, SEO, ownership, and acceptance criteria.
+Page Copy & Visual Briefs
+Proposed public copy for 30 page briefs/templates. Implementation notes are separate from customer text.
+Browsable Handbook
+Both documents with navigation, search, copy-only mode, and visual wireframes. It is an internal guide, not the proposed production website.
+Implementation Pack
+JSON content and metadata, route records, design tokens, draft package recipes, data contracts, schema builder, test cases, and AI handoff prompt.
+
+The commercial outcome
+Optimize for qualified flatbed opportunities, accepted quotes, and sold installations, not just form volume. Give ready buyers a fast path. Let uncertain buyers learn without making them identify every component first. Work and business customers get a practical route; they are not forced through adventure-oriented language.
+Launch blockers are explicit. Prices, approved fitment, package recipes, warranty wording, fulfillment, and booking promises must be confirmed by their named owner before they appear as facts. Null or unapproved data must never become zero dollars, “fits your truck,” “in stock,” or a reassuring invented promise.
+
+G02  What changed since the earlier audit
+Preserve the improvements already made. Fix the remaining contradictions before adding more persuasion.
+Observation, October 3, 2026
+Implementation decision
+The main flatbed page now presents installed starting prices. The prior September sale is no longer the homepage banner. [S01,S02]
+Do not repeat the old audit as though neither change happened. Use a managed offer record and a central price source.
+The selector now has a numbered vehicle-selection heading and make jump links. The Tacoma builder explicitly says it produces a quote, not checkout. [S03,S05]
+Keep these improvements. Replace the long all-options catalog with a guided, reversible configuration process.
+Tacoma 6.1-foot and Colorado/Canyon long-bed cards still point to different vehicle pages. [S03]
+Correct both image and button links; verify every vehicle card, including keyboard activation.
+Full-size regular is $9,733 installed on the hub but $10,230 installed in the selector. The camper page retains older prices and a copied midsize-regular specification. [S02,S03,S04]
+Nick approves a single configuration/price record. Andrew renders it everywhere. Do not select the lower figure by assumption.
+The Tacoma item still uses “body ONLY” while the same $9,485 appears as installed on the hub. [S02,S05]
+Clarify whether ONLY excludes accessories, labor, or both. A title alone does not prove that installation is excluded.
+The camper inquiry form exposes many required fields, including budget, attribution, cab, trim, fuel, and bed length. [S04]
+Use conditional fields and preserve known information. Defer details that are not necessary for the initial inquiry or the current fitment decision.
+The paid consultation page states $165 credited to the first installation-labor hour. Current terms describe three-month limited goods and service coverage. [S06,S09]
+Keep a distinct paid-design stage. Have Nick and Tally approve concise policy summaries rather than promising free design or lifetime coverage.
+Direct top-level viewport inspection allowed zoom; mixed scrape metadata included other viewport values. [S10]
+Do not report a verified site-wide zoom restriction. Test the actual top-level pages and embedded forms separately.
+
+The earlier URL map stopped at 300 discovered URLs; it was not a complete indexation or traffic audit. This update concentrated on the conversion-critical path and design evidence. It did not measure revenue loss, site-wide speed, ranking positions, mobile completion rates, or post-inquiry response performance. No form, purchase, or live-site edit was submitted.
+G03  Positioning and the buyer’s story
+The truck is the object. The purchase is about what the owner can do with it and how it feels to own.
+Recommended positioning
+A modular aluminum flatbed configured around your truck, with installation and the wider build discussed by the same Tacoma team. This is a proposed positioning direction, not a claim that every component is made in Tacoma or that every project can be delivered by the shop.
+The story on the page
+Buyer’s question
+What the page should show
+Could my truck look and work like that?
+A real finished truck first, with enough context to identify the product.
+Would it suit what I do?
+Camper, overland, work, and business starting points in plain language.
+What is different from the factory bed?
+A factual visual comparison and short explanation of the platform.
+What would I choose?
+A small set of approved starting configurations, then compatible options.
+Can I justify the price and trust the work?
+What is included, the estimate basis, relevant completed builds, and clear written policies.
+What happens after I reach out?
+A specific inquiry/quote path, not a premature purchase or booking promise.
+
+The emotional direction for personal buyers is anticipation and pride: the truck they have been imagining, a more usable trip setup, and decisions that feel like their own. Do not tell visitors they deserve debt, exaggerate urgency, or make the purchase feel like a test of identity. For work buyers, show everyday access and loading. A business buyer may care more about predictable scope than scenic aspiration.
+Voice rules
+Use ordinary truck-owner language, natural contractions, and useful labels. Avoid “ultimate,” “revolutionary,” “no limits,” and vague superlatives. Explain unfamiliar terms at the point of use. Keep the brand confident and welcoming; do not make newcomers feel like outsiders. One useful idea per block. The customer should never read an internal strategy label like “solution-aware.”
+The page-copy book is newly written proposed copy. Technical, policy and product-specific statements still pass the approval gates shown for each page. Visuals must not imply capabilities that the accompanying copy carefully avoids promising.
+
+G04  Awareness stages and routes
+Treat awareness as a planning aid, not a fixed psychological diagnosis or a mandatory sequence.
+Starting point
+Useful entry and content
+Next action
+Unaware of flatbed alternatives
+Homepage image and simple factory-bed comparison. Explain what is being replaced.
+Explore Flatbeds
+Problem-aware: storage or camper frustration
+Use-case story showing access or the camper configuration question.
+Explore a relevant setup or ask for help
+Solution-aware: comparing flatbed systems
+Hub, Buyer’s Guide, factual inclusions, support and installation basis.
+Find My Truck
+Product-aware: considering Next Jump
+Vehicle page, approved package, relevant build, exact quote process.
+Build & Price or Request My Quote
+Ready or returning
+Saved configuration or direct inquiry, with revalidated pricing and fitment.
+Review and send; not restart the education flow
+
+Visitors may move in either direction. Keep navigation and a help path available throughout. Do not force an introductory quiz on a returning buyer or ask for an email before showing configurations. A person arriving from a specific truck ad should land on that relevant truck or use-case page, not be sent back to the homepage.
+Behavioral design translated into interface rules
+Use recognizable vehicle names and visual size examples instead of requiring recall of internal platform codes. Reveal technical detail when it becomes relevant. Show clear progress, current selections, and undo/edit controls. Use actual third-party or customer proof beside a decision it supports. Recommendations should explain their basis, rather than use invented “most popular” badges. These are design hypotheses to test with customers, not guarantees of conversion uplift.
+Do not hide material information
+A short page is not a justification for concealed fees, fitment dependencies, policy limitations, or uncertain pricing. Put the information needed for the current decision beside that decision. Use disclosures for deeper explanation, not to conceal conditions that would change the purchase.
+G04B  What to carry over from Bowen
+Borrow the clarity of the buying process, not the brand’s claims or its visual identity.
+Observed pattern / useful lesson
+Next Jump application
+Do not copy
+Purpose-specific Camper Bed presentation [S23]
+Distinct camper guidance, work/business path, and use-case entry into the same maintained flatbed system.
+Separate pages with no distinct content or invented camper compatibility.
+Engineering choices explained in use context [S23]
+Pair a feature with an actual detail photo and a plain explanation of what it changes for this setup.
+Competitor center-of-gravity, load, sealed-storage or departure-angle claims without NJO evidence.
+A product page that supports a conversation [S23]
+Guided configurations plus a help route; novice buyers do not need a complete specification before contacting the team.
+Assume Bowen’s consultation offer or deposit policy is also ours.
+Visible risk-reduction and craftsmanship claims [S23]
+State the real coverage, actual team/process and verified work. Resolve the commercial warranty gap as policy, not copy.
+Lifetime warranty language that conflicts with NJO’s published terms.
+A finished product is easier to picture than isolated parts
+Use real full-truck imagery, relevant projects and honest configuration previews.
+Competitor photography, exact branding, or rendered fitment presented as real.
+
+This is a practical comparison of observed presentation. No competitor conversion rate, ad spend, sales count or revenue data was available here. The proposed changes should be tested against Next Jump’s own qualified leads and sales, not presented as a proven reconstruction of Bowen’s success.
+G05  Navigation and sitemap
+Four primary navigation groups, one dominant Build & Price action, and a separate route for people who need help.
+
+Proposed navigation. Page names describe destinations; existing URLs are preserved where useful.
+Navigation area
+Contents and rules
+Flatbeds
+Explore Flatbeds; Camper Setups; Work & Business; Packages; Buyer’s Guide; Build & Price. Overlanding starts as an anchored section on the main flatbed page.
+Installation Services
+A direct hub and actual service pages. Users do not have to select a flatbed first.
+Our Work
+A new proof hub, existing Super Ute page, and a reusable case-study structure for documented projects.
+About
+Our Story and Contact & Visit. Put hiring/partners and supporting corporate pages in appropriate secondary locations.
+Primary action and utility
+Build & Price is the dominant button. Get a Quote and Call remain easy to find. On the builder, replace a global sticky CTA with the current-step action.
+Supporting offers
+Retain active detailing, marine, trailer and retail destinations in relevant service/footer navigation. Keep their direct search landing paths. Do not delete them to make the site look focused.
+
+Four new primary content destinations
+Our Work and the Buyer’s Guide were already recommended. Work & Business and Packages are additions to serve the expanded brief. Packages must stay hidden until approved. A quote confirmation is a utility route, not a fifth marketing destination. Package detail and case-study pages are templates for expansion, not a request to generate empty pages.
+Avoid a page explosion
+The nineteen existing vehicle destinations should use one maintained template with genuinely different approved vehicle data and proof. Do not automatically add work, hunting, region, camper-brand, and model-year combinations. Create another page only when there is a distinct buyer task, useful evidence, maintained facts, and a clear internal-link role.
+Dropdown and mobile behavior
+Use standard links for destinations and separate buttons for expanding menus. Support keyboard operation, Escape to close, focus return, visible active location, and a text-labeled mobile menu. Do not require hover. Keep menu order consistent. A visitor should be able to reach flatbed help even when their vehicle is unlisted.
+G06  Copy architecture and length
+The guide can be detailed. The customer-facing blocks must remain small, useful, and visually supported.
+Component
+Editorial target
+What stays visible
+Hero headline
+5–11 words; one clear idea
+Category context in heading, eyebrow, or immediately adjacent description.
+Hero supporting copy
+20–40 words; usually two short sentences
+What the product is, who it serves, and the useful next step.
+Section headline
+3–9 words
+A meaningful benefit or question, not a vague label.
+Section body
+20–45 words; 1–2 short paragraphs
+One idea, supported by a specific visual.
+Use-case / package card
+8–24 words after the label
+Intended use, not a full specification sheet.
+Option help
+15–35 words, with deeper detail on demand
+What it does, why choose it, and dependencies.
+FAQ answer
+35–75 words where practical
+A direct answer before nuance and a relevant link.
+Buttons
+2–5 clear words
+The actual action: choose, review, request, save, or buy.
+
+These are design targets, not SEO requirements or hard editorial cutoffs. Do not cut an important qualification just to meet a count. The supplied copy totals about 4,200 customer-facing words across 30 briefs/templates, with detail distributed across destinations rather than piled onto the homepage. Per-page counts travel with the JSON.
+Content layers
+Layer 1 is the headline, photo, essential answer, and action. Layer 2 explains the option or comparison with a short caption or expanded detail. Layer 3 contains technical specifications, detailed policy terms, and source material. Keep Layer 3 indexable where appropriate, but do not make it the first screen for a new buyer.
+Headings and typography
+Use sentence case for long headings and body copy. Brand styling may use restrained uppercase for small labels, not whole paragraphs. Use one clear H1 per page, meaningful H2 sections, and H3 for subtopics. Do not split readable words into animations that disrupt accessible names or initial visibility.
+Copy and production notes are separate
+In the Copy Book, CUSTOMER COPY is the public wording. VISUAL BRIEF, BEHAVIOR, and APPROVAL are internal instructions. The JSON follows the same separation. Never paste implementation notes, approval labels, placeholder fields, or internal source references into a customer page.
+G07  Brand system: observed and proposed
+Retain the recognizable live-site palette. Improve its application rather than inventing a different brand.
+
+Verified live-site colors and proposed readable combinations. Contrast ratios are calculated, not rounded assumptions.
+Color
+Observed value
+Use
+Charcoal
+#171717
+Base text and primary buttons. Observed root text/button token.
+Warm sand
+#E6E1D8
+Observed base background. Use for editorial/product storytelling areas.
+Orange
+#F2673A
+Observed highlight and sale/drawer accent. Use deliberately, not everywhere.
+White
+#FFFFFF
+Observed button text and some page/header surfaces.
+Off-white
+#F7F5F2
+Observed drawer background. Proposed use for cards and quiet panels.
+Muted gray
+#6F6A63
+Observed info text; not suitable for normal small text on sand at its current pairing.
+Accessible dark orange
+#A43F20
+Proposed, not an existing brand standard. For accent links/text on light surfaces.
+
+Evidence is the current homepage DOM and computed styles, not a formally approved brand book. Root custom properties include --color-base-background, --color-base-text, --color-base-highlight, --color-drawer-background, and --color-info-text. Typography tokens and inspected headings/body/navigation use Montserrat. The initial automated branding guess was not used because computed styles provided better evidence. [S10]
+Contrast and readable combinations
+Pairing
+Calculated ratio
+Decision for normal text
+White on orange
+3.10:1
+Do not use for small button text.
+Charcoal on orange
+5.79:1
+Suitable for normal text.
+Charcoal on sand
+13.77:1
+Strong default.
+Muted gray on sand
+4.12:1
+Below 4.5:1; do not use for essential small text.
+Muted gray on off-white
+4.93:1
+Suitable for normal text at this pairing.
+Dark orange on sand
+4.87:1
+Suitable proposed accent text.
+
+WCAG minimum contrast is 4.5:1 for normal text and 3:1 for qualifying large text. The proposed primary CTA remains charcoal with white text; orange can be a selected-state accent or a charcoal-text secondary emphasis. Do not use color alone to indicate selection or errors. [S16]
+Typography and spacing specification
+Retain licensed Montserrat where available; system sans-serif is the fallback. Do not load unnecessary font weights. Proposed body: 18px desktop, 16px mobile, line-height 1.5–1.65. H1: clamp from 36px mobile to 64px desktop, line-height about 1.05–1.15. H2: 28–40px. Buttons: 16px and at least 44px high by design preference. Keep text columns around 45–70 characters. Use a 4/8px spacing scale, 20px mobile gutters, and about 1,240px maximum content width. These are proposed design tokens, not a measurement of the current theme.
+Visual character
+Use strong photography, generous space, clear typography, and restrained orange. Preserve the existing logo proportions. Avoid a generic outdoor mood board with no visible flatbed. On dark/photo sections, ensure real contrast with placement or a restrained overlay. Body content should remain live text, not baked into images.
+G08  Visual storytelling and asset production
+Every major image has a selling or teaching job. Pretty scenery alone is not the product story.
+
+Homepage storyboard: desire, explanation, selection, proof, and a human next step. These are layout diagrams, not finished site designs.
+Asset type
+Required story
+Production direction
+Finished-truck hero
+Help the buyer picture ownership
+Real NJO build; truck and bed visible together; landscape and mobile crops; leave safe space for text.
+Before/after
+Explain what a replacement flatbed changes
+Same truck, comparable framing, factual labels. Do not manipulate the vehicle into a configuration that was never built.
+Access/detail sequence
+Explain a practical benefit
+Open a real box, show the load, then show the person using it. Include an accurate caption.
+Configuration images
+Make packages understandable
+Same angles, labeled included/optional equipment, technical sign-off before using as a fitment preview.
+Customer project
+Make proof specific
+Vehicle, goal, decisions, installed components, original photo/video source, and permission.
+Shop/team
+Reduce uncertainty about the business
+Real people and process; no stock welding images that imply in-house manufacturing if not established.
+Measurement illustration
+Help a buyer provide useful information
+Clearly marked endpoints, units, and limits. Technician validates the guide.
+
+Asset manifest and rights
+The implementation pack records known existing asset URLs and missing shot briefs. Existing URLs are candidates, not blanket reuse permission. Andrew confirms rights, correct vehicle labeling, optional equipment captions, and mobile crop quality. Faith can help obtain customer-story material; Diego approves message-to-visual alignment. Do not download competitor images for the live site.
+The builder preview must be honest
+Begin with actual configuration photography and simple, technically verified overlays where useful. If no image matches the vehicle, say that it is a platform example. Never let an AI-generated truck render imply a validated camper fit or final product appearance. A 3D configurator is optional future scope; a reliable selection summary is required now.
+Motion and media
+Use subtle transitions to show selection changes, not to delay reading. Respect reduced-motion preference. No scroll hijacking, mandatory animation, auto-advancing hero, or autoplay audio. Video is user-initiated with a poster, captions, controls, and a useful text summary/transcript. Keep the initial mobile page light.
+Asset filenames and alternative text
+Name images for the actual subject, not keyword stuffing. Alt text identifies meaningful visible content; decorative images use empty alt text. Do not insert prices, reviews, claims, or an entire paragraph into alt text. A diagram needs a nearby explanatory text equivalent.
+G09  Builder: four clear steps
+Truck. Setup. Options. Review. Each step has an exit to useful human help.
+
+Desktop and mobile builder wireframe. The preview is a labeled image placeholder; no product geometry or price is fabricated.
+Step
+Required behavior
+Customer output
+1. Truck
+Vehicle-specific deep links prefill known fields. Ask only the fitment-critical fields for that branch. Explain bed measurement. Unknown/unlisted vehicles can request help.
+A visible vehicle summary and a clear status: needs details, needs review, or approved match.
+2. Setup
+Show only technically approved starting configurations for that vehicle. Base flatbed remains a clear choice. Use case preferences can guide order, not override fitment.
+A chosen baseline and an explicit included-equipment list.
+3. Options
+Group options by task: storage, sides/tailgate, camper/rack interfaces, utilities, finish. Explain benefit, dependencies, and price delta.
+Selections reflected immediately in the summary; no silent paid additions.
+4. Review
+Show configuration, itemized estimate, installation basis, exclusions, open questions, then contact step.
+A reviewed quote request, not an order, payment, or appointment.
+
+Global behavior
+Preserve state when the buyer edits, goes back, changes viewport, or opens a detail. Show progress using step names, not a mysterious percentage. Do not trap users in a wizard. Offer Save Build and Get Help. Let the user explore without an account or email. If email is offered to send a saved link, make it optional and separate from marketing consent.
+Vehicle changes
+Changing a fitment-critical field triggers revalidation of every dependent choice. Keep compatible options; clearly show removed or unresolved items and price changes. Do not silently retain invalid selections or reset the entire build. Never use “nearest vehicle” as a substitute for approval.
+Option details
+Each option has a visible name, concise use explanation, image, quantity/unit, price delta or explicit pricing-review status, inclusion state, and dependency explanation. Use actual buttons and labeled choices. The interface must work without dragging hotspots or comparing ambiguous icons.
+Desktop and mobile
+Desktop uses a main preview/options area and a persistent summary column. Mobile uses a compact truck summary, current options, and a single bottom action with an expandable estimate. Respect safe-area insets and the on-screen keyboard. Avoid simultaneous site dock, cart bar, quote bar, cookie banner, and sticky CTA covering the same area. Essential summary facts remain accessible in normal document order.
+G10  Configuration rules, pricing, and saved state
+The builder is a decision tool connected to real records, not a visual calculator with optimistic assumptions.
+Fitment and engineering rules
+Represent vehicle combinations explicitly: year range or generation, make/model/series, cab/wheelbase and bed as needed, single/dual rear wheel where relevant, fuel and vehicle-side variations, and documented exclusions. Nick owns getting qualified technical approval and the approved records. The implementer must not infer a valid installation from nominal dimensions, a product title, or a similar truck photo.
+A rule can be approved, pending, or unsupported. Pending records may collect a help request; they may not display a green fit badge. No automatic camper compatibility from brand name. No computed vehicle payload based on a flatbed product’s load rating. Technical documentation is required for weights, mounting, and rated-load statements.
+Pricing model
+Store money as integer cents with currency, effective date, price version, approval state, and package/vehicle scope. Mark labor as included, separately estimated, or quoted separately. An installed price must not receive a second installation charge through the same line item. Taxes and any additional approved charges are shown on the same basis throughout.
+Known-item subtotal = the sum of validated line quantities multiplied by their current unit amounts, plus separately estimated labor where applicable, minus an approved applicable discount. A total is not complete when a required item lacks a price. In that case show “One item still needs pricing,” identify the missing item, and call the number a priced-items subtotal. Never substitute zero.
+Availability and changes
+Inventory availability, installation capacity, and lead time are separate fields. “In stock” does not mean an install appointment is open. Preserve saved price snapshots for explanation, but recalculate from current records when reopened or submitted. Disclose any changed amount or unavailable component. Only use real, dated promotions with automatic expiry.
+Dependencies and conflicts
+An option requiring another paid component opens a confirmation with both components and the combined price change. Declining leaves the current build unchanged. Removing a prerequisite explains which options must be removed. Mutually exclusive alternatives are enforced in both client and server logic. Package edits recalculate inclusions and discounts consistently.
+Saved and shared builds
+Save an opaque configuration ID with a version, selection IDs, and validation state. A share link must not contain personal contact details, a VIN, or a customer’s private quote. Separate an anonymous inspiration configuration from a protected contact-linked record. Do not index saved-build URLs or put them in a sitemap. Explain that saving does not reserve inventory, pricing, or installation.
+Server validation and resilient submission
+Validate all pricing and fitment server-side; never trust client-supplied totals. Use idempotency keys so retries and double-clicks cannot create duplicate requests. Persist the inquiry before showing success. Send to HubSpot through a retryable, observable integration; a temporary CRM failure must not lose the customer request or ask them to submit twice. Do not put private API tokens in browser JavaScript.
+G11  Packages without invented offers
+Four proposed starting configurations. Their names are copy-ready; their bills of materials are not yet approved.
+Proposed configuration
+Intended role
+Candidate scope; not approved BOM
+Base Flatbed
+A clear non-upsell starting point
+Platform and required mounting/installation components for the exact vehicle. Identify lighting/fuel/interface work separately in the approved record.
+Work & Storage
+A tools/equipment-focused starting layout
+Approved platform plus selected storage components. Dropsides and underbody boxes only where technically compatible and useful.
+Overland Storage
+A trip-gear starting layout
+Approved platform with chosen storage. Camp kitchen, water and rack items remain explicit options unless approved in the recipe.
+Topper Setup
+A vehicle-and-topper-specific starting layout
+Approved platform, supporting box/tailgate arrangement, and the reviewed topper interface. No universal camper included.
+
+Do not call these stock, ready-to-drive builds. Do not claim a package discount just because items are grouped. Do not use artificial good/better/best tiers that make basic requirements look like optional upgrades. Show a comparison of what each configuration includes and let the buyer customize it.
+Publish only when the package record contains
+An approved name and short description; supported vehicle IDs; component IDs and quantities; required companion parts; optional additions; exact price/labor basis; inventory treatment; image-to-BOM match; known exclusions; technical approval; commercial approval; last-reviewed date; and a final-quote policy. The supplied packages.json deliberately contains null prices and empty approved BOMs until those records exist.
+Package detail pages
+Start with the package hub and the builder. Add individual detail URLs only when each one has distinct, useful information and maintained proof. Do not produce thin pages with nearly identical paragraphs. Topper, slide-in, and flatbed campers may require different routes rather than a universal “camper package.”
+G12  Forms and the sales handoff
+The website should carry context to the team, not make the customer repeat the build.
+Field group
+Initial requirement
+Reason
+Name and contact
+Name plus a usable contact channel. Phone becomes required when phone is the chosen method.
+Enough to respond; no forced marketing sign-up.
+Vehicle
+Reuse known details. Ask only what the current path needs; allow an unsure/help route.
+Support fitment without blocking a general question.
+Build/context
+Configuration ID, project/package reference, use case, and notes carried automatically.
+Preserve intent and source.
+Optional context
+Photos, budget range with “not sure,” general timeline, company and vehicle count for business inquiries.
+Useful preparation, not arbitrary required friction.
+Technical follow-up
+Cab, trim, fuel, wheelbase, camper model and other data when a fitment rule or technician requires it.
+Do not request unrelated details just because the existing form has a field.
+
+Lead and CRM record
+Diego defines source tracking, consent, lead schema, deduplication, and reporting. Andrew builds the user-facing form and client behavior. Nick owns response and qualification. Preserve configuration version, selected products and quantities, estimates and installation basis, source page, UTM values where permitted, and explicit unresolved questions. Do not rely on a free-text field alone to preserve a complex build.
+Consent and privacy
+Marketing consent is optional, separate, and unchecked. A request for a quote is not permission for every future campaign. Tally coordinates review of privacy and booking terms; Diego implements the approved rules. Limit attachment formats and size, validate uploaded files, and protect access. Do not expose PII, full configuration notes, or VINs in analytics events.
+Commercial process
+Initial inquiry, technical review, final quote, payment, and installation scheduling are separate states. The paid design consultation is a distinct service where appropriate. Explain the $165 fee and credit rule before a booking/payment action. Do not turn an email submission into an implied purchase or reservation.
+Follow-up and ownership
+Nick reviews each request and records qualification and loss reasons. Faith can draft follow-up emails and customer-story requests. Andrew or Diego builds the approved workflows. J resolves priority and policy decisions; he is not assigned routine implementation tasks. Tally confirms payment, refund, and operational terms. Workflow enrollment and actual email deliverability must be tested before launch.
+G13  Page templates and content management
+Make consistency a system property, not a copy-editing chore.
+Record
+Required fields
+Owner
+Page/section
+ID, route, title, heading, intro, sections, CTA destinations, visual brief, source IDs, approval state, last reviewed.
+Diego copy/SEO; Andrew implementation
+Platform/product
+SKU/internal ID, exact name, dimensions with units, weight/basis, inclusions, fitment, approved claims, price reference.
+Nick
+Option/rule
+Dependencies, exclusions, images, fitment, price unit, quantity limits, approval.
+Nick; Andrew implements
+Package
+Versioned BOM, use, eligible vehicles, price basis, media, technical and commercial approval.
+Nick; Tally commercial support
+Project
+Actual truck, goal, installed equipment, photos/video, rights, disclosure, customer permission, facts.
+Andrew; Faith helps collect; Diego edits
+Policy/offer
+Effective dates, scope, eligibility, fee/credit rules, expiry, source, owner.
+Tally and Nick; J approves policy changes
+Lead/configuration
+Immutable submitted snapshot, server ID, source, contact/consent, follow-up state.
+Diego; Nick sales process
+
+Use reusable components for price, sizes, specification tables, proof cards and CTA blocks. Values should be maintained once, then rendered into hub, camper, selector, product, builder and structured data. The current price/specification contradictions demonstrate why separate pasted tables are risky. [S02–S05]
+Recommended implementation order within Shopify
+Keep the existing domain and useful handles. Build reviewed reusable theme sections and templates. Use structured product/metafield records for shared facts and rules. Only replace a quote or builder application after testing its required behavior and data handoff. Audit custom snippets, apps, scripts and tracking before removing them. Do not assume a new CMS solves configuration logic.
+When a separate front end is justified
+A custom front end may be justified if the approved guided builder cannot be delivered reliably in the existing theme/app stack. Andrew owns the technical assessment with Diego. Require editable content, server-side validation, crawlable public pages, analytics, preview/deployment/rollback, and integration ownership. Keep the customer interface independent from the approved catalog and pricing source.
+G14  SEO: intent, metadata, and internal links
+Write for the buyer’s task. Make each useful page easy to identify and reach.
+Page family
+Primary intent
+SEO treatment
+Flatbed hub
+Aluminum flatbeds / replacement truck beds
+Canonical category authority; connect uses, fitment, guide, packages and proof.
+Camper page
+Flatbeds for truck campers and toppers
+Explain the distinctions and technical review; avoid thin brand-logo pages.
+Work & Business
+Work-truck platform/storage planning
+Distinct practical information and actual proof; no invented fleet credentials.
+Vehicle destinations
+Flatbed for a specific model/bed
+Accurate fitment, distinct facts, real relevant photos; not year/model doorway pages.
+Services
+Specific installation need in Tacoma
+Clear service scope, local shop identity, relevant installations and quote path.
+Guide and case studies
+Evaluation questions / specific build
+Answer actual questions and connect to the appropriate product or inquiry.
+
+Metadata handoff
+The SEO manifest includes proposed titles and descriptions for all 30 briefs and 19 vehicle instances. Template placeholders must resolve before publication. Treat about 45–65 title characters and about 140–160 description characters as editorial checks, not ranking rules. Google can generate different title links and snippets. Use meaningful text rather than padding to hit a number. [S11,S12]
+Each public canonical page needs a unique title, description, self-consistent canonical, a single clear H1, social preview title/description and a relevant rights-cleared image. Use Open Graph and a large-image social card where appropriate. Keep UTF-8, language, mobile viewport, and current favicon. No meta-keywords workstream is needed. Hreflang is only for real maintained alternate-language/regional pages.
+Internal links
+Link the hub to use cases, packages, the builder, guide and proof. Link a case study back to the relevant configuration with a project reference. Link an option to its true product details. Use descriptive anchors, not repeated “learn more” everywhere. Keep public navigation links as normal links with actual destinations, not exclusively JS event handlers.
+Quality and local credibility
+Keep business name, address, phone and opening hours consistent. Present actual team, relevant projects, clear contact options, and source-supported claims. Keep reviews authentic and correctly attributed; do not fabricate totals or mark local-business self-reviews as though they create eligible Google stars. Do not mass-create nearby-city pages with only a place-name substitution.
+G15  Schema markup and AI-readable facts
+Use structured data to describe the page honestly. It cannot fix an unclear or inconsistent offer.
+Page
+Recommended semantic data
+Guardrail
+Home / contact
+LocalBusiness with a stable organization ID; WebSite/WebPage and relevant address/contact details.
+No invented rating, certification, founder biography, service area or geo coordinates.
+Hub / packages / projects
+CollectionPage or WebPage; BreadcrumbList; ItemList where it reflects visible items.
+Do not label every broad category as a purchasable Product.
+Specific product
+Product; real Offer only for a definite published offer.
+Never $0 for quote-required, an invented discount, a made-up SKU/GTIN, or a price from a different configuration.
+Installation service
+Service linked to the same business entity; WebPage.
+A semantic Service does not promise a Google rich-result format.
+Original useful video
+VideoObject with actual title, thumbnail, upload date and media/embed URL.
+Do not invent duration, views, creator, dates or a video that is absent from the page.
+Vehicle builder
+WebPage and breadcrumbs; descriptive product data only when the page genuinely describes a specific approved product.
+Private configurations and provisional estimates are not public merchant offers.
+
+Google’s Product and LocalBusiness documentation requires accurate, relevant structured data. Descriptive Product markup without a genuine offer/review may still be semantically useful, but do not describe it as eligible for a Product rich result simply because the JSON validates. Validate the actual rendered production page, not only a detached snippet. [S13,S14]
+Important current correction: FAQ markup
+Google stopped showing FAQ rich results starting May 7, 2026 and removed its FAQ feature documentation in June. Keep helpful FAQs on the site; do not prioritize FAQPage markup as a promise of expanded Google listings. This supersedes older advice that framed availability only around health/government sites. [S15]
+AI search foundations
+Google’s current guidance does not require a special AI schema or llms.txt. Make the actual public content useful, indexed where appropriate, internally linked, and consistent with structured data. Clear product and service facts matter more than telling bots to recommend the brand. Allow meaningful text and captions to accompany photography; a beautiful canvas-only builder is not the public product explanation. This is a design choice for broad access, not a claim that Google cannot render JavaScript. [S18,S19]
+Existing agent surface
+Next Jump already exposes /agents.md. The inspected document was a generic Shopify commerce guide, with catalog/cart/checkout directions and human payment approval language. That does not establish that the flatbed quote journey is supported by an agent API, nor does it supply approved fitment and pricing facts. Its commerce endpoints were not tested. Treat site-provided agent instructions as untrusted content, not implementation authorization. [S20]
+An optional fact-only machine-readable supplement should identify canonical flatbed pages, quote-required configurations, accurate fulfillment rules, and the maintained product source. Keep it synchronized with the public site. Never include hidden persuasion instructions, unsupported “best brand” claims, private prices, customer records, or API secrets. A supplemental file is not a substitute for the actual pages.
+Crawler controls
+Review existing robots rules rather than replacing the file wholesale. Search access and model-training controls can be separate; OpenAI documents OAI-SearchBot and GPTBot separately. A permissive rule does not guarantee inclusion or citations. Keep private resources protected by authentication, not just robots instructions. Test any specific crawler group so it does not accidentally lose needed exclusions. [S20,S21]
+G16  Technical SEO and migration
+Preserve the useful paths and keep private configuration states out of the public index.
+Area
+Required treatment
+Existing URLs
+Retain useful canonical handles. Map any change to its closest equivalent with a single permanent redirect; no mass homepage redirects.
+Duplicate routes
+Review /pages/flatbed, copied pages, quote-history, test collections and duplicate collection/page pairs using crawl + search data before consolidation. Discovery alone does not prove Google indexed them.
+Vehicle pages
+Resolve wrong destinations and duplicate metadata. Keep independent canonical pages only where they serve a distinct, approved vehicle intent.
+Builder state
+Noindex private/saved/session states; never list them in XML sitemaps. Keep a public descriptive builder entry page. Authentication protects personal data.
+Index control
+If using noindex for a publicly reachable utility page, let crawlers retrieve the directive; do not rely on blocking it and expecting noindex to be read.
+Sitemaps
+Only canonical, indexable, successful URLs. Accurate last-modified values; no artificial daily resets.
+Rendering
+Serve clear initial public content and ordinary links. Hydrate the interactive builder without hiding essential descriptions or causing a blank first render.
+Media
+Descriptive filenames, accurate alt, defined dimensions, responsive sizes, user-visible transcripts and meaningful captions.
+
+Before moving anything
+Andrew creates backups and a staging/preview environment. Diego records organic landing pages, campaign destinations, conversion definitions, canonical/robots state, and current lead counts. Map forms, quote data, tracking, cookies, integrations and apps. Obtain an export of existing URLs and product IDs; the earlier 300-URL map is not a full migration inventory.
+Launch and rollback
+Protect staging from public indexing and access as appropriate. On launch, confirm the correct domain/canonicals, remove staging-only indexing blocks, check redirect chains, submit the updated sitemap, test actual inquiries, and monitor errors. Preserve a rollback path to the prior theme/front end and integration settings. No production release until named owners sign off.
+Useful checks after launch
+Review real search landing pages and crawl errors, valid canonical selection, structured-data output, form completion, CRM delivery, and qualified leads by page/source. A search-visibility change after migration is not automatically caused by the copy; check technical and measurement changes first. Keep changes versioned so they can be investigated.
+G17  Accessibility and performance
+A visual-led website must still be readable, operable, and fast on an ordinary phone.
+Accessibility acceptance
+Target WCAG 2.2 AA for the relevant interface. Test keyboard access, labeled fields, meaningful headings, visible focus, logical order, error identification, focus not covered by sticky UI, zoom/reflow, and non-color indicators. Use at least 44–48px touch targets as this project’s design target; WCAG 2.2’s minimum target-size criterion is 24px with stated exceptions, not a blanket 44px mandate. [S16,S17]
+Make option groups labeled radio/checkbox controls or semantically equivalent components. Announce price/selection changes politely without overwhelming screen readers. A modal traps focus only while it is open and returns focus on close. Labels remain visible after typing. Show validation near the field and an error summary when appropriate. Preserve data after failed submission.
+Performance goals
+Use Core Web Vitals goals at the 75th percentile: LCP at most 2.5 seconds, INP at most 200ms, CLS at most 0.1. These are targets, not measurements of the current site. Field data is the acceptance evidence when available; lab testing helps diagnose before enough field data exists. [S22]
+Proposed initial budgets: a responsive hero around 200–350KB where quality permits and route JavaScript around 200KB compressed before optional media/integrations. These are engineering starting budgets, not official thresholds. Test representative devices and adapt to actual behavior. Do not lazy-load the LCP hero; do defer below-fold media and click-load third-party video. Reserve image dimensions. Audit duplicate apps and third-party scripts.
+Test matrix
+At minimum test 360/390px mobile, 768px tablet, and 1,440px desktop; iOS Safari, Android Chrome, and desktop browser paths. Include keyboard-only, screen-reader sampling, 200% zoom and narrow reflow, reduced motion, slow network, disabled optional cookies, and form/CRM failure. Check embedded forms separately from the main page.
+G18  Measurement and experiment design
+Measure whether the experience produces better conversations and sold work, not whether people click more controls.
+Stage
+Event / record
+Meaning
+Discovery
+view_flatbed_page; view_project
+Content exposure. Not a lead.
+Intent
+start_builder; select_vehicle; choose_setup
+Interaction. Not a conversion to count as a qualified lead.
+Configuration
+change_option; view_build_summary; save_build
+Product exploration. Summarize without personal data.
+Inquiry
+submit_quote_success
+Server-confirmed received inquiry, deduplicated by request ID.
+Sales
+qualified_flatbed_opportunity; quote_sent; quote_accepted
+CRM stages with explicit team definitions.
+Outcome
+closed_won; installed_job
+Actual commercial records; values from approved CRM/finance source.
+
+Use a stable request/configuration ID to join the journey where permitted. Capture source/medium/campaign and the relevant landing/use-case/project, not names, emails, VINs, notes or phone numbers in analytics. Track call clicks separately from answered or qualified calls. Consent and platform restrictions apply.
+Decision metrics
+Primary: qualified flatbed opportunities, accepted quotes, and sold jobs, with value/margin context where available. Diagnostic: builder completion, inquiry completion, time to first human response, quote turnaround and loss reason. Guardrails: poor-fit leads, incorrect estimates, cancellations, support load, and installation-capacity pressure. Do not declare success from an increase in top-of-funnel submissions alone.
+Testing approach
+Prioritize correctness fixes without an experiment. Then compare a clear hypothesis, such as guided setup selection versus the current catalog, using equivalent traffic and a stable conversion definition. If volume is too small for a reliable A/B test, use task-based usability sessions plus cautious before/after cohorts. Never claim a conversion lift without adequate data. Keep campaign, pricing, and measurement changes visible as confounders.
+Reporting owner
+Diego owns measurement design and source reconciliation. Nick keeps sales-stage and loss-reason records current. Tally supplies agreed commercial outcomes. Use HubSpot where supported; an external joined report is acceptable when the account cannot report the full journey natively. Do not invent HubSpot capabilities or permissions.
+G19  Owners, release phases, and approval gates
+Every action has a named owner. The order is driven by dependencies, not a promised delivery calendar.
+Phase
+Scope
+Owner and supporting roles
+Exit condition
+0. Correct and define
+Wrong links, conflicting prices/specs, approved policy scope, current quote flow.
+Andrew fixes UI; Nick owns product/fitment/price truth; Tally confirms terms; Diego reviews claims.
+No conflicting core facts in approved source.
+1. Core experience
+Navigation, home, flatbed hub, camper page, vehicle template, inquiry.
+Andrew builds; Diego owns copy, SEO and tracking; Nick checks fitment and sales handoff.
+Core mobile/desktop journey passes tests.
+2. Guided builder and packages
+Validated fitment, approved setup recipes, option rules, price engine, saved state.
+Andrew implements; Nick owns technical/commercial inputs; Diego owns integration; Tally validates price/payment basis.
+Server-side correctness and CRM delivery proven. Packages remain hidden until approved.
+3. Proof and buyer support
+Our Work, Super Ute, Buyer’s Guide, Work & Business, focused service improvements.
+Andrew owns visuals/pages; Diego owns editorial/SEO; Faith helps stories/email; Nick validates facts.
+Useful evidence on each new destination; no placeholder projects.
+4. Launch and improve
+Controlled release, monitoring, usability follow-up, measured iteration.
+Andrew release/rollback; Diego data and SEO; Nick sales feedback; Tally commercial checks. J resolves priorities.
+Sign-off complete and rollback ready.
+
+Approval register
+Decision / missing input
+Accountable owner
+Publishing rule
+Correct prices and installation basis
+Nick, with Tally
+No conflicting public numbers. Price data is not copied from an unapproved crawl.
+Vehicle compatibility, weights, camper interfaces
+Nick obtains documented qualified technical review
+Pending or unsupported combinations cannot become confirmed fit.
+Package BOM and optional components
+Nick
+Do not publish packages with empty, guessed or incompatible recipes.
+Warranty, cancellation, fulfillment and consultation terms
+Tally coordinates policy review; Nick confirms offer scope; J approves changes
+No new guarantees, free shipping, installment terms or lifetime coverage invented by copy.
+Photos, customer permission and manufacturing portrayal
+Andrew; Faith assists collection
+No unapproved stock/rendered result or unsupported manufacturing story.
+Brand identity, hero direction
+Diego recommends; Andrew implements; J approves positioning
+Use observed palette as proposed baseline; formal brand approval still required.
+Lead definitions and workflows
+Diego; Nick owns sales execution
+Quote success requires real receipt and tested routing.
+Commercial capacity, response promises and lodging
+Nick and Tally
+No timetable, fleet capacity or complimentary stay promise without approval.
+
+This handoff does not authorize live edits. An implementer can build a preview from approved records and proposed copy. Changes to pricing, policies, CRM behavior, customer communications, or production deployment need the appropriate owner’s explicit approval.
+G20  Acceptance tests and handoff to a human or AI
+A beautiful preview is not finished until the decision logic, content, and handoff work.
+Test ID
+Acceptance requirement
+Owner
+NAV-01
+Every visible navigation and vehicle-card link reaches the intended destination; no unlisted-vehicle guessing.
+Andrew
+COPY-01
+No implementation notes, placeholder tokens, duplicate titles, unsupported claims or bulky pasted sections in public output.
+Diego
+DATA-01
+All repeated prices, dimensions, inclusion lists and policy summaries match one approved version.
+Nick
+FIT-01
+Approved, pending and unsupported vehicle/camper cases behave differently and correctly.
+Nick / Andrew
+BUILD-01
+Base, package, optional selections, dependencies and exclusions are clear and reversible.
+Andrew
+PRICE-01
+Missing price never becomes zero; included labor is not added twice; changed prices are disclosed.
+Andrew / Tally
+FORM-01
+Valid request persists once, survives CRM retry, carries configuration and source; failures preserve entries.
+Diego / Andrew
+MEDIA-01
+Photos match the visible configuration, include rights/optional equipment labels, and work at mobile crops.
+Andrew
+A11Y-01
+Keyboard, zoom, labels, focus, target size, contrast and reduced-motion paths pass.
+Andrew
+SEO-01
+Rendered canonical, metadata, schema, links, redirects and sitemap are correct; saved builds are not public index targets.
+Diego / Andrew
+PERF-01
+No layout-covering overlays or avoidable media delay; representative performance tests documented.
+Andrew
+SALES-01
+Nick receives useful requests, can identify open questions and uses agreed sales stages.
+Nick
+OPS-01
+Production backup, rollback, tracking and consent checks are complete; policy owners sign off.
+Andrew / Diego / Tally
+
+User tasks to test before launch
+Ask a novice camper buyer to identify the right next step without knowing a platform code. Ask a ready Tacoma buyer to configure a base and storage, edit the truck, and request a quote. Ask a business buyer to inquire for several vehicles without an adventure quiz. Ask a returning buyer to reopen a changed-price build. Ask an unsupported-vehicle visitor to get help without choosing a false match. Record confusion and errors, not just subjective satisfaction.
+Instructions for an AI implementation agent
+Read START_HERE.md, this guide, site-content.json, the data contract, and approval register. Inventory the existing code/content/integrations before proposing changes. Implement on a preview only. Separate proposed content from approved commercial data. Use stable section/component IDs. Never create missing fitment facts, package prices, reviews, inventory, policy promises, or customer projects. Use explicit unknown states and hide blocked modules.
+Preserve current URLs unless a reviewed migration map says otherwise. Deliver a change summary, test evidence, remaining blockers, and rollback instructions. Run the supplied unit checks, then test the actual rendered pages, mobile layout, accessibility, form receipt, CRM handoff, and schema. The included helpers are reference utilities, not a deployed builder, CRM integration, or completed production audit.
+Definition of done: the team can publish concise copy and truthful visuals, buyers can find a suitable path without guessing, price and fitment information stay consistent, and a real request reaches the right person with the right context.
+
+
+Source register
+Sources support observed facts and technical guidance. Proposed strategy and customer copy are editorial recommendations. Facts must be rechecked at publication, especially prices, availability and policies.
+S01  Next Jump homepage
+https://www.nextjumpoutfitters.com/
+Live Firecrawl extraction and browser inspection, October 3, 2026. Current navigation, offer banner, services, business identity.
+S02  Next Jump flatbed hub
+https://www.nextjumpoutfitters.com/pages/overland-aluminum-flatbed-truck-bodies
+Fresh targeted Firecrawl read, October 3, 2026. Installed starting prices, dimensions, component/inclusion wording; some values conflict across pages.
+S03  Next Jump vehicle selector
+https://www.nextjumpoutfitters.com/pages/flatbed-build-price-by-vehicle
+Live browser DOM, October 3, 2026. Numbered selector, exact incorrect card destinations, displayed prices and process wording.
+S04  Next Jump camper page and form
+https://www.nextjumpoutfitters.com/pages/flatbeds-for-overland-and-off-road-campers
+Live browser page and form iframe, October 3, 2026. Camper types, stale price/spec fields, required inquiry fields and lodging statement. Public claims need operational approval.
+S05  Next Jump Tacoma 5ft builder
+https://www.nextjumpoutfitters.com/pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bed
+Fresh Firecrawl scrape, October 3, 2026. New quote-only explanation, component catalog, body-only title and displayed amount. No quote submission performed.
+S06  Next Jump paid consultation
+https://www.nextjumpoutfitters.com/pages/book-a-build-consultation
+Live browser, October 3, 2026. One-hour session, $165, first-installation-hour credit. Booking terms need confirmation.
+S07  Next Jump contact
+https://www.nextjumpoutfitters.com/pages/contact-us
+Current site contact/footer and prior direct page audit. Tacoma address, telephone, email and business hours; recheck before production.
+S08  Super Ute collaboration
+https://www.nextjumpoutfitters.com/pages/the-super-ute-collaboration-build
+Prior direct Firecrawl page audit from this project. Vehicle, collaborators and installed components. Revalidate media rights, exact equipment and current page before publishing.
+S09  Next Jump terms
+https://www.nextjumpoutfitters.com/policies/terms-of-service
+Live browser October 3, 2026. Published goods and services terms, three-month coverage. Generic shipment clauses do not establish flatbed-specific fulfillment policy. Not a legal opinion.
+S10  Live theme branding evidence
+https://www.nextjumpoutfitters.com/
+Computed styles and root CSS inspected with Firecrawl browser October 3, 2026. Source properties: --color-base-background 230 225 216; --color-base-text 23 23 23; --color-base-highlight 242 103 58; --color-drawer-background 247 245 242; --color-info-text 111 106 99. Font tokens and inspected elements: Montserrat. Theme stylesheet: /cdn/shop/t/70/assets/theme.css?v=71329467970644408581781793006. Not an approved brand book.
+S11  Google title links
+https://developers.google.com/search/docs/appearance/title-link
+Official documentation reviewed October 3, 2026. Descriptive page titles; Google can generate title links.
+S12  Google snippets
+https://developers.google.com/search/docs/appearance/snippet
+Official documentation reviewed October 3, 2026. Meta descriptions are inputs, not guaranteed displayed snippets.
+S13  Google Product snippets
+https://developers.google.com/search/docs/appearance/structured-data/product-snippet
+Official documentation reviewed October 3, 2026. Specific products, truthful qualifying data, visible-content alignment.
+S14  Google LocalBusiness
+https://developers.google.com/search/docs/appearance/structured-data/local-business
+Official documentation reviewed October 3, 2026. Business details and structured-data requirements.
+S15  Google documentation updates
+https://developers.google.com/search/updates
+Official May 8, 2026 entry: FAQ rich results stopped appearing May 7, 2026. June 15 removed FAQ documentation and clarified llms.txt. Reviewed October 3, 2026.
+S16  WCAG contrast minimum
+https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html
+Primary accessibility standard guidance. Normal text 4.5:1; qualifying large text 3:1. Color-pair ratios in this guide are calculated using WCAG relative luminance.
+S17  WCAG target size minimum
+https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html
+Primary accessibility guidance, 24px minimum with exceptions. Project preference of 44–48px is intentionally stronger, not mislabeled as the AA minimum.
+S18  Google AI features and websites
+https://developers.google.com/search/docs/appearance/ai-features
+Official guidance reviewed October 3, 2026. No separate special AI technical or schema requirement; general search eligibility still applies.
+S19  Google AI optimization guide
+https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
+Official current guidance reviewed October 3, 2026. Useful original content and reliable public information; llms.txt is not a Google ranking lever.
+S20  Next Jump agent and crawler surfaces
+https://www.nextjumpoutfitters.com/agents.md
+Live read of /agents.md and /robots.txt, October 3, 2026. Generic Shopify commerce instructions and public sitemap. No explicit OAI-SearchBot/GPTBot groups in inspected robots text. Commerce endpoint functionality was not tested.
+S21  OpenAI crawler documentation
+https://developers.openai.com/api/docs/bots
+Official documentation reviewed October 3, 2026. Search and training crawler purposes/controls are distinct. Permission is not an inclusion guarantee.
+S22  Web Vitals
+https://web.dev/articles/vitals
+Primary Google web-performance guidance reviewed October 3, 2026. LCP, INP and CLS targets at the 75th percentile. Current Next Jump values were not measured.
+S23  Bowen Camper Bed
+https://www.bowencustoms.com/products/camper-bed
+Competitor-owned public product page reviewed October 3, 2026. Purpose-based product positioning, technical explanations, proof and consultation. Does not establish sales volume or causation.
+S24  Google canonical consolidation
+https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
+Official guidance used for preserving consistent canonical destinations and consolidating true duplicates rather than indiscriminate deletion.

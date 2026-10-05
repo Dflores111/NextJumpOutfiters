@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+# Local preview. Every page returns noindex, nofollow. This file is not access control.

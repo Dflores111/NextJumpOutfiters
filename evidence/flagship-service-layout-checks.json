@@ -1,0 +1,328 @@
+{
+  "method": "CUA Chrome rendered DOM measurements; viewport override, not real device",
+  "checks": [
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=suspension",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/lift-suspension-installation",
+      "proofTopics": [
+        "1993 F-250 lift",
+        "1997 Tahoe · lift, wheels & lighting"
+      ],
+      "scopePoints": 3,
+      "selectedService": "suspension",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=bumpers-racks",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/bumpers-racks-installation-tacoma-wa",
+      "proofTopics": [
+        "Custom roof-rack brackets"
+      ],
+      "scopePoints": 3,
+      "selectedService": "bumpers-racks",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=wheels-tires",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/wheels-tires-off-road-and-overland",
+      "proofTopics": [
+        "1997 Tahoe · lift, wheels & lighting"
+      ],
+      "scopePoints": 3,
+      "selectedService": "wheels-tires",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=power",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/custom-power-solutions-off-road-marine",
+      "proofTopics": [
+        "Solar for a bus conversion"
+      ],
+      "scopePoints": 3,
+      "selectedService": "power",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=lighting",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/custom-lighting-for-off-road-overland",
+      "proofTopics": [
+        "Suspension & lighting"
+      ],
+      "scopePoints": 3,
+      "selectedService": "lighting",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=rooftop-tent",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+      "proofTopics": [],
+      "scopePoints": 3,
+      "selectedService": "rooftop-tent",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=camper",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/authorized-alaskan-campers-installer",
+      "proofTopics": [],
+      "scopePoints": 3,
+      "selectedService": "camper",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=detailing",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/wash-me",
+      "proofTopics": [
+        "Exterior truck detailing"
+      ],
+      "scopePoints": 3,
+      "selectedService": "detailing",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=boat-detail",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/boat-wash",
+      "proofTopics": [],
+      "scopePoints": 3,
+      "selectedService": "boat-detail",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=marine",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/marine-services",
+      "proofTopics": [],
+      "scopePoints": 3,
+      "selectedService": "marine",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "duplicateIds": [],
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=trailer",
+      "heroActionOverflow": 0,
+      "missingImageAlt": 0,
+      "missingLocalFragments": [],
+      "overflow": 0,
+      "path": "/pages/trailer",
+      "proofTopics": [],
+      "scopePoints": 3,
+      "selectedService": "trailer",
+      "width": 1440
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=suspension",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/lift-suspension-installation",
+      "proofTopics": [
+        "1993 F-250 lift",
+        "1997 Tahoe · lift, wheels & lighting"
+      ],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "suspension",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=bumpers-racks",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/bumpers-racks-installation-tacoma-wa",
+      "proofTopics": [
+        "Custom roof-rack brackets"
+      ],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "bumpers-racks",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=wheels-tires",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/wheels-tires-off-road-and-overland",
+      "proofTopics": [
+        "1997 Tahoe · lift, wheels & lighting"
+      ],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "wheels-tires",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=power",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/custom-power-solutions-off-road-marine",
+      "proofTopics": [
+        "Solar for a bus conversion"
+      ],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "power",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=lighting",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/custom-lighting-for-off-road-overland",
+      "proofTopics": [
+        "Suspension & lighting"
+      ],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "lighting",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=rooftop-tent",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+      "proofTopics": [],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "rooftop-tent",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=camper",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/authorized-alaskan-campers-installer",
+      "proofTopics": [],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "camper",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=detailing",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/wash-me",
+      "proofTopics": [
+        "Exterior truck detailing"
+      ],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "detailing",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=boat-detail",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/boat-wash",
+      "proofTopics": [],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "boat-detail",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=marine",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/marine-services",
+      "proofTopics": [],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "marine",
+      "width": 390
+    },
+    {
+      "h1": 1,
+      "headerCTA": "/pages/book-install-services-or-get-a-quote?context=service&service=trailer",
+      "heroActionOverflow": 0,
+      "overflow": 0,
+      "path": "/pages/trailer",
+      "proofTopics": [],
+      "scopeOverflow": 0,
+      "scopePoints": 3,
+      "selectedService": "trailer",
+      "width": 390
+    }
+  ]
+}

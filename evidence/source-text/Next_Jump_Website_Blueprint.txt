@@ -1,0 +1,832 @@
+NEXT JUMP OUTFITTERS
+Flatbed-FirstWebsite Blueprint
+Website audit, sitemap, customer journey,and page-by-page copy
+Keep the useful pages. Fix the buying journey.Make the flatbed decision easier.
+Research date: September 29, 2026
+Working implementation brief. Proposed copy is not yet published.
+Includes core page copy, shared vehicle and service templates,verified findings, approval gates, and a source register.
+
+Inside this blueprint
+Use the links below or the document navigation pane to move between the audit and the copy.
+Part 1. What the current site gets right, and what needs work
+Part 2. Sitemap and customer journey
+Part 3. Page-by-page copy and section architecture
+Page 1. Homepage
+Page 2. Flatbed hub
+Page 3. Camper flatbeds
+Page 4. Build & Price selector
+Page 5. Vehicle page and configuration template
+Page 6. Quote request
+Page 7. Paid Build & Design Consultation
+Page 8. Our Work
+Page 9. Super Ute case study
+Page 10. Flatbed Buyer's Guide
+Page 11. Installation services hub
+Pages 12–17. Service-page copy templates
+Page 12. Lifts & Suspension
+Page 13. Bumpers & Racks
+Page 14. Wheels & Tires
+Page 15. Custom Power
+Page 16. Custom Lighting
+Page 17. Camper / Rooftop-Tent Installation
+Page 18. Vehicle Wash & Detail
+Page 19. About
+Page 20. Contact / Visit
+Part 4. Implementation, SEO, and measurement
+Part 5. Vehicle inventory and research sources
+
+The decision
+Keep Shopify and most of the relevant pages. Improve the buying journey before expanding the site.
+Next Jump already has a flatbed hub, a camper-specific page, vehicle-specific builders, installation pages, customer proof, and a featured collaboration build. The opportunity is not to replace all of that. It is to make those assets work together, remove contradictory information, and help a customer move from interest to a build they understand. [S01–S08]
+At launch, add only two new content destinations: Our Work and a Flatbed Buyer's Guide. Improve the existing camper page rather than creating another one. Keep overlanding and work as useful sections within the main flatbed page until there is enough distinct product information, customer evidence, and demand to justify dedicated pages.
+Recommended positioning: A modular aluminum flatbed configured around your truck, with the installation and wider build handled by the same Tacoma team. This is a positioning recommendation, not a claim that Next Jump alone offers these benefits.
+How to use this document
+Part 1 identifies what to fix and why. Part 2 defines the sitemap and buying journey. Part 3 contains customer-facing copy for the core acquisition pages and reusable service templates. Part 4 covers implementation, measurement, and publication checks. Part 5 lists sources and the existing vehicle-page inventory.
+Copy labels matter. Text after “Headline,” “Body,” “CTA,” or a named customer-facing section is proposed website copy. “Build note” and “Approval needed” are internal instructions, not content to publish. Bracketed fields such as [approved price] must be populated from a verified business source.
+This is a website acquisition blueprint, not a rewrite of every retail SKU, historical blog post, or legal policy.
+Part 1. What the current site gets right, and what needs work
+1.1 The foundation is useful
+The site already addresses campers, work, and overlanding. It has four flatbed sizes, a vehicle selector, accessory product listings, and relevant installation services. The camper page distinguishes slide-in campers, toppers, and purpose-built flatbed campers. The Super Ute page provides an actual truck, named collaborators, and a documented configuration. These are assets to improve, not gaps to fill with duplicate pages. [S02–S05, S08]
+The service business also matters. The business-context files identify installation and flatbeds as the two main offers, with service hours central to the business. The newer direction supplied for this project makes flatbeds the dominant marketing priority, not the only service the company should present. [I01]
+1.2 Priority findings
+Priority
+Observed issue
+Recommended action
+Immediate
+The selector's Tacoma 6.1-foot card links to the Tundra 6.5-foot page. Colorado/Canyon long-bed links to the Ranger 6-foot page. [S04]
+Correct both destinations and QA all vehicle cards, images, and buttons.
+Immediate
+The camper page repeats the midsize-long dimensions and weight under midsize-regular. The vehicle builder lists a different midsize-regular specification. [S03, S05]
+Create one approved fitment/specification record per SKU. Populate all pages from it.
+Immediate
+The camper page shows midsize-regular “from $6,734”; the Tacoma builder shows $9,485 for the body. The package and price basis are not reconciled. [S03, S05]
+Confirm whether figures differ because of package, promotion, installation, or stale content. Do not publish a new starting price by choosing the lowest number.
+Immediate
+Included/optional wording is inconsistent. The flatbed feature copy describes a headache rack as included, while the builder prices a rack separately. [S02, S05]
+Publish a clear “Included / Optional / Quoted after review” table that agrees with the catalog and quote.
+Immediate
+The current clearance ends September 30, 2026. Its terms apply to an installation-only offer and specify separate installation pricing. [S02]
+Assign ownership of the expiry change. Remove or update the promotion everywhere when it ends. Preserve the evergreen flatbed page.
+High
+Product pages describe checkout/payment, but the Tacoma interface asks users to add components to a quote. [S02, S05]
+Use one consistent quote-led process. Describe payment only at the appropriate sales stage.
+High
+Next Jump's design-consultation page charges $165, credited to the first hour of installation labor. [S06]
+Distinguish an initial inquiry from the paid design appointment. Show the fee before booking.
+High
+The homepage introduces a broad outfitter and presents dealership activity before its flatbed offer in “What We Do.” [S01]
+Give flatbeds the lead position. Preserve a clear secondary route to installation services. Confirm dealership operating status before emphasizing it.
+High
+The Super Ute page still contains theme placeholder text at the point where a visitor should take action. [S08]
+Replace it with a build-specific invitation and carry the project context into the inquiry.
+High
+The camper page presents a 6,613-pound maximum-payload figure across sizes and makes broad payload-benefit claims. [S03]
+Separate bed structural ratings from the carrying limits of the actual vehicle. Require technical approval for numbers and comparisons.
+
+These findings establish inconsistencies and likely friction. They do not quantify lost conversions or prove why any competitor sells more.
+1.3 Other changes worth making
+Correct the easy credibility errors. The pages contain “prefect,” “Durbale,” and a sentence contrasting aluminum with “metal.” Aluminum is a metal. Replace broad durability language with specific, supported construction and use information. [S02, S03]
+Make evidence useful at the decision point. A finished build should show the vehicle, the selected components, and why that configuration was chosen. Keep collaborative builds labeled as collaborations. Do not turn a partner endorsement into an apparently independent customer review. [S08]
+Keep the offer separate from the permanent product story. A compact, current promotion can sit near the top. Full promotion terms can live on a dedicated offer page when a campaign needs one, with key restrictions still visible before inquiry or purchase. Do not hide material conditions to make the page look simpler.
+Explain ownership and support. The clearance page describes three-month limited coverage for goods and installation workmanship. Bowen advertises lifetime craftsmanship coverage. Those are different promises, not a copywriting gap we can solve by inventing a stronger warranty. Have the business review what it can genuinely support, then explain the actual coverage plainly. [S02, S13]
+Do not claim shorter delivery without a current installation window. In-stock product and an available install appointment are not the same thing. Likewise, Bowen's published production lead time does not prove sales volume or customer satisfaction. [S02, S13]
+1.4 What to apply from Bowen
+Bowen's public approach
+What to apply at Next Jump
+What not to copy
+Application-specific products such as Camper Beds and Topper Beds. [S13, S14]
+Let customers recognize their intended setup before choosing components.
+Do not create product families that Next Jump does not actually offer.
+Technical explanations connect design decisions to a customer's use. [S13]
+Explain what storage, rack choice, mounting, and modularity allow the buyer to do.
+Do not borrow claims about bed height, stability, or departure angle without validating Next Jump's design.
+The product page distinguishes its standard equipment from priced options. [S13, S14]
+Give every estimate a defined baseline and make optional items obvious.
+Do not compare a bare tray with a competitor's equipped camper-bed package.
+Consultation, production timing, and the ordering route are discussed. [S13]
+Explain what happens after inquiry and what must be confirmed before installation.
+Do not copy a free consultation, production deposit, or delivery promise that conflicts with Next Jump's process.
+Product imagery identifies complete truck/camper combinations. [S14]
+Put real completed rigs and configuration notes next to the relevant buyer journey.
+Do not use aspirational imagery as proof of compatibility for every camper or truck.
+
+Bowen is not a perfect UX model: its retrieved product pages also expose a $0 price before model selection. The lesson is clarity of application and purchase expectations, not copying every interface choice. [S13, S14]
+1.5 Research scope and limits
+Firecrawl's URL map returned 300 URLs at the requested limit. That is an inventory sample, not a count of all pages or proof that all 300 URLs are indexed. The multi-page crawl was rate-limited, so the audit used individual Firecrawl retrievals and targeted public-page reads. The main hub, camper page, selector, Tacoma builder, consultation, contact, and Super Ute pages were directly retrieved with fresh Firecrawl requests. Other relevant service and company pages were inspected through public-page retrieval.
+This review did not measure live conversion rates, ad performance, search rankings, Core Web Vitals, or the competitor's sales. A live interaction attempt was blocked by tool concurrency limits. Form submission, quote persistence, mobile tap behavior, and end-to-end CRM delivery still require staging tests. Embedded-frame blocking messages in the research environment were not treated as customer-facing website failures. Screenshot captures were not used to claim a completed visual or accessibility audit.
+Part 2. Sitemap and customer journey
+2.1 Recommended navigation
+Flatbeds | Installation Services | Our Work | About | Get a Quote
+Put Flatbeds first. Make “Get a Quote” the persistent action. On flatbed pages, preselect flatbeds in the form and retain the visitor's configuration. Do not force a service customer through the flatbed builder.
+The Flatbeds menu should contain Explore Flatbeds, Camper Setups, Build & Price, and the Buyer's Guide. Our Work is the shared proof destination, with flatbed builds featured first.
+2.2 Proposed sitemap
+Home [improve]
+
+Flatbeds [improve existing hub]
+    Camper Setups [improve existing page]
+    Build & Price [improve existing selector]
+        Existing vehicle-specific pages [one improved template]
+    Flatbed Buyer's Guide [new]
+
+Installation Services [improve existing hub]
+    Lifts & Suspension [keep and refine]
+    Bumpers & Racks [keep and refine]
+    Wheels & Tires [keep; verify service details]
+    Custom Power [keep and refine]
+    Custom Lighting [keep and refine]
+    Camper / Rooftop-Tent Installation [existing specialist pages]
+    Vehicle Wash & Detail [keep as supporting service]
+
+Our Work [new gallery/index]
+    Super Ute [improve existing case study]
+    Additional verified builds [add when evidence is ready]
+
+About [improve]
+Contact / Visit the Shop [improve existing page]
+Get a Quote [improve existing intake]
+Build & Design Consultation [existing paid booking step]
+
+Utility and supporting destinations
+    Trailers / Gear / Marine / Boat Detail [retain as appropriate]
+    Partners / Careers / Community [retain]
+    Warranty / Terms / Privacy / Returns [retain approved policies]
+    Dealership [visibility depends on confirmed operating status]
+
+This is a navigation hierarchy, not an instruction to change all Shopify URL paths.
+2.3 Keep, improve, add, or investigate
+Page or group
+Decision
+Reason
+Homepage
+Improve
+Establish flatbeds as the lead offer without erasing installation services.
+/pages/overland-aluminum-flatbed-truck-bodies
+Keep URL; substantially improve
+Make it the primary evergreen flatbed destination.
+Existing camper-flatbed page
+Keep URL; improve
+It already contains the right use-case segmentation.
+Existing selector and vehicle pages
+Keep; fix and redesign the shared experience
+The opportunity is guidance and accuracy, not another set of duplicate vehicle pages.
+Quote and consultation pages
+Keep; clarify different roles
+An inquiry, a paid design session, and a production/payment commitment are not interchangeable.
+Super Ute
+Keep; complete
+Turn an existing proof asset into a useful case study and inquiry route.
+Our Work
+Add
+Organize finished builds around vehicle and use case.
+Flatbed Buyer's Guide
+Add
+Answer cost, fit, configuration, installation, and support questions in one useful place.
+Separate overland/work flatbed pages
+Defer
+Start with sections. Add pages only when they have distinct evidence and a distinct job.
+Legacy flatbed URL, collection/page counterparts, “copy-of” and test pages
+Investigate before changing
+Check actual content, canonicals, links, search traffic, and app dependencies. A URL's name alone does not prove it should be deleted.
+Retail and historical content
+Retain unless a separate audit supports a change
+Lower navigation prominence is different from deleting useful content or revenue sources.
+
+Use redirects only when intentionally retiring an equivalent page. Keep internal links and canonical signals consistent. Google treats duplicate content and canonicalization more carefully than a blanket “duplicates are bad” rule. [S15, S16]
+2.4 The buying journey
+Offer two entry points: “Show me what fits my truck” and “Help me figure out the build.”
+The self-directed path is vehicle, intended use, recommended starting configuration, customization, explained estimate, and quote request. The assisted path starts with the truck and the customer's goal, then lets the team recommend the next step.
+After inquiry, distinguish qualification, any required paid design appointment, final quote approval, payment, scheduling, and installation. The business must approve which projects require the paid consultation.
+Part 3. Page-by-page copy and section architecture
+Page 1. Homepage
+Status: Improve.URL: /Page job: Make the main offer obvious, establish trust, and send flatbed and service visitors to the right path.Source basis: Current offer, location, and service mix. [S01, S02, S07]
+Section 1. Hero
+Headline: Aluminum Flatbeds Built Around Your Truck.
+Body: Make room for the way you actually use your rig. Start with a modular aluminum flatbed, choose the storage and accessories you need, and have our Tacoma team handle the installation.
+Primary CTA: Find My FlatbedSecondary CTA: Talk Through My Build
+Proof line: Veteran-owned. Based in Tacoma, Washington.
+Build note: Use a real, completed flatbed truck. Keep the bed and its practical features visible. Link the primary action to the vehicle selector and the secondary to the flatbed intake. Do not autoplay a heavy background video by default.
+Section 2. Help the customer recognize their use
+Headline: What Do You Need Your Truck to Do?
+Camper card: Make the bed part of your camper setup. Explore configurations for toppers, slide-in campers, and flatbed campers.CTA: Explore Camper Setups
+Overland card: Give your gear a place and keep the setup flexible. Add storage, rack options, and camp accessories around the trips you take.CTA: Explore Flatbed Options
+Work card: Keep tools organized without giving up the rest of the bed. Choose the storage and loading setup that fits your day.CTA: Plan My Work Setup
+Build note: These are navigation cards, not three mandatory steps. Work and overland can open the matching section on the flatbed hub.
+Section 3. Explain the modular value
+Headline: Build What You Need Now. Leave Room for What Comes Next.
+Body: Your truck doesn't have to stay in one configuration forever. Our flatbed system gives you a starting platform with options for storage boxes, dropsides, a tailgate, racks, and camp accessories. Choose the parts that make sense today, then plan compatible additions as your needs change.
+CTA: See How the System Works
+Section 4. Show proof
+Headline: See What the Finished Build Looks Like.
+Body: Take a closer look at the trucks we've outfitted, the components in each setup, and the details that make the build useful.
+Featured build title: The Super Ute: A Ford F-250 With a Different Kind of Bed.
+Featured build body: Explore our collaboration with Adventure Built, Flated, and TRUKD, featuring a Next Jump flatbed, side boxes, and a tailgate.
+CTA: Explore the Super Ute
+Build note: Use verified project photos. Add a short, attributed customer or collaborator quote only after checking permission and source. Show the relationship clearly. [S08]
+Section 5. Make the process understandable
+Headline: You Don't Need a Finished Parts List to Start.
+Step 1 — Tell us about your truck. Share the vehicle, how you use it, and what you'd like to change.
+Step 2 — Work through the configuration. Review the flatbed, options, and installation requirements with our team.
+Step 3 — Approve the plan. Confirm the quoted scope, pricing, and next steps before the work is scheduled.
+Step 4 — Get to know your setup. When the build is complete, we'll walk you through the equipment and how to use it.
+CTA: Start My Flatbed Inquiry
+Approval needed: Operations must confirm the final order/payment/scheduling sequence. Do not imply a submitted form reserves inventory or an install slot.
+Section 6. Retain the rest of the business
+Headline: Need More Than a Flatbed?
+Body: We also handle off-road and overland installation work, from suspension and bumpers to power systems and lighting. Bring us the whole build or the next upgrade you have in mind.
+CTA: Explore Installation Services
+Section 7. Closing action
+Headline: Tell Us What Isn't Working With Your Current Setup.
+Body: More storage, a camper that needs the right foundation, or a truck that has to work during the week. Start with the problem. We'll help you work through the build.
+CTA: Talk Through My Build
+Page 2. Flatbed hub
+Status: Improve existing page, not a new page.URL: /pages/overland-aluminum-flatbed-truck-bodiesPage job: Explain the system, help customers assess fit and value, and move them to the builder or an informed inquiry.Source basis: Existing flatbed offer and configuration options. [S02, S05]
+Section 1. Hero
+Headline: A Flatbed That Works the Way You Do.
+Eyebrow: Modular Aluminum Flatbeds
+Body: Replace your factory bed with a platform you can configure around your truck. Choose the storage and accessories that fit your work or travel plans, with installation at our Tacoma shop.
+Primary CTA: Find My TruckSecondary CTA: Get Help Choosing
+Build note: Put a short “Installation in Tacoma, WA” line near the action. Show a starting price only after its exact inclusions and installation basis are approved.
+Section 2. Why change the factory bed?
+Headline: Stop Working Around a Bed That Doesn't Work for You.
+Body: Reaching over the sides for gear. Rearranging tools to make room for a trip. Trying to make a camper and storage fit the same space. A modular flatbed gives you a different starting point, with options you can arrange around the way you use the truck.
+Section 3. Choose the application
+Headline: Start With the Setup You Have in Mind.
+Camper setup: Plan the bed, camper, and storage together. We'll review the specific truck and camper combination before recommending a configuration.CTA: Explore Camper Flatbeds
+Overland setup: Build around what you carry and how you camp. Explore rack, storage, water, and kitchen options without adding equipment you don't need.CTA: Find My Truck
+Work setup: Keep everyday tools accessible and leave a useful loading area. Choose boxes and side options around the jobs your truck handles.CTA: Talk Through My Work Setup
+Section 4. Explain the product without making the buyer an engineer
+Headline: The Platform Is the Starting Point.
+Aluminum flatbed: Replace the factory bed with the foundation for your configuration.
+Integrated L-track: Use the track system with compatible mounting hardware as part of a planned cargo or accessory setup.
+Storage choices: Add side or underbody boxes where they suit your equipment and vehicle.
+Removable side options: Configure access and containment around the way you load the bed.
+Camper and rack options: Plan the surrounding components around the topper, camper, or rack you intend to use.
+Build note: Pair each explanation with a relevant close-up, not another long gallery. Do not publish unqualified L-track tension figures or treat them as the rating of an entire mounted system.
+Section 5. Clarify sizes and fitment
+Headline: Start With Your Truck, Not a Guess at Bed Size.
+Body: We offer midsize and full-size platforms in regular and long configurations. Select your truck to see the relevant starting point. We'll review model year, existing bed, and installation requirements before the final quote.
+CTA: Choose My Vehicle
+Fallback: Don't see your truck? Send us the details. You don't need to select a different model to ask about fitment.
+Build note: Keep a compact dimensions table for comparison, populated from approved SKU data. The existing four-size labels can remain, but dimensions, weights, model years, and load ratings must be reconciled first.
+Section 6. Explain what is included
+Headline: Know What's in the Build Before You Commit.
+Body: The flatbed, optional accessories, and installation are separate parts of your configuration. Your quote should make each one clear.
+Table labels: Included in this platform / Optional additions / Installation and vehicle-specific work.
+Required data: [Approved base components]; [SKU-linked option prices]; [Installation scope and price basis].
+Customer-facing price note: Your online selection is a starting estimate. The final quote confirms fitment, selected equipment, installation, and applicable taxes.
+Build note: Use an explained product subtotal when an installed estimate cannot yet be supported. Do not label it “total build cost.”
+Section 7. Show relevant builds
+Headline: See the Configuration on an Actual Truck.
+Body: Compare complete builds and take a closer look at the flatbed, storage, and camper or rack setup used on each vehicle.
+CTA: View Flatbed Builds
+Build note: Include the truck, bed size, selected components, and links to the matching vehicle or inquiry route. A photo alone is not fitment verification.
+Section 8. Installation and support
+Headline: Get the Flatbed and the Rest of the Build Working Together.
+Body: A flatbed is one part of the truck. Our Tacoma team can also review the surrounding installation needs, including storage, camper integration, wiring, and other planned upgrades.
+Travel note: Coming from outside the area? Discuss drop-off, the current shop schedule, and pickup arrangements before making travel plans.
+CTA: Plan My Installation
+Section 9. Answer the buying questions
+Will this fit my truck? Fit depends on the vehicle, model year, bed configuration, and planned equipment. Start with your vehicle details so the team can review the right setup.
+Can I add accessories later? The system is modular, with compatible options that can be added as your needs change. Plan future additions early so the initial configuration does not create avoidable rework.
+How much will the complete build cost? The answer depends on the platform, selected accessories, and installation scope. Use the builder to organize your choices, then request an itemized quote for your truck.
+Does “in stock” mean you can install it immediately? Product availability and the installation calendar are separate. Confirm both before making plans.
+What support and warranty apply? Review the written terms for the specific product and installation. Ask the team to explain coverage before you approve your order.
+CTA: Read the Flatbed Buyer's Guide
+Section 10. Final action
+Headline: Let's Find the Right Starting Point.
+Body: Choose your truck to start a build, or send us the details and work through it with the team.
+Primary CTA: Find My FlatbedSecondary CTA: Ask the Team
+Page 3. Camper flatbeds
+Status: Improve the existing page.URL: /pages/flatbeds-for-overland-and-off-road-campersPage job: Help the buyer understand which configuration suits their camper and what must be checked.Source basis: Existing camper types and installation offer. [S03]
+Section 1. Hero
+Headline: Build the Flatbed Around Your Camper Setup.
+Body: A topper, a slide-in, and a flatbed camper need different configurations. Start with your truck and camper details. We'll help you work through the platform, storage, and installation together.
+Primary CTA: Plan My Camper BuildSecondary CTA: Explore Camper Configurations
+Section 2. Choose the camper type
+Headline: Which Kind of Camper Are You Building Around?
+Slide-in campers: Plan the supporting platform and the storage around the camper. We'll review dimensions, mounting requirements, access, and the surrounding equipment before recommending the layout.
+Topper campers: The bed sides, supporting surfaces, and rear access need to work with the topper. Let's review the exact model and the box, tailgate, or rack configuration it requires.
+Flatbed campers: Start with the camper manufacturer's requirements, then match the platform and installation to the truck. Storage and utility connections need to be planned around that combination.
+CTA on each card: Discuss This Setup
+Build note: Brand logos are not a guarantee of universal fit or proof of an authorized relationship. Link each claimed partnership to supporting evidence and use model-specific compatibility language.
+Section 3. Show why the details matter
+Headline: Plan for the Gear Around the Camper, Too.
+Body: Recovery equipment, tools, water, and camp gear all need a place. We'll look at what you carry and how you need to access it, then work through compatible storage and utility options.
+CTA: Explore Storage Options
+Section 4. Address weight responsibly
+Headline: Review the Loaded Setup, Not Just the Empty Camper.
+Body: The flatbed, camper, accessories, water, passengers, and gear all count toward the finished vehicle's weight. A bed's structural rating is not the same as your truck's carrying limit. We'll need the specific vehicle and camper information to review the proposed setup.
+Build note: Have a qualified technical owner approve weight guidance. Use the vehicle's ratings and actual configured weights. Do not claim that an aluminum bed, suspension upgrade, or extra storage automatically increases the truck's rated capacity. [S20]
+Section 5. Connect to installation expertise
+Headline: One Build Plan for the Bed and the Equipment Around It.
+Body: Need power, lighting, or other installation work as part of the camper setup? Include it in the conversation so the components can be planned together.
+CTA: Discuss My Complete Build
+Section 6. Proof and travel
+Headline: See a Camper Configuration Come Together.
+Body: Explore the Super Ute collaboration and its combination of flatbed, storage boxes, tailgate, and topper. Use it as a starting point for ideas, not a universal fitment recipe.
+CTA: Explore the Super Ute
+Travel note: Installation takes place at our Tacoma shop. Confirm scheduling and travel arrangements with the team before booking a trip.
+Approval needed: The current page advertises a complimentary on-site loft. Confirm its operating status, availability, eligibility, and booking terms before making it a promoted benefit. Do not promise lodging as an automatic part of every install.
+Section 7. Final inquiry
+Headline: Already Have a Camper in Mind?
+Body: Tell us the truck and camper model, or share the setup you're considering. We'll help you identify what needs to be checked before you build.
+CTA: Review My Camper Setup
+Page 4. Build & Price selector
+Status: Improve existing page and its routing.URL: /pages/flatbed-build-price-by-vehiclePage job: Give the customer a reliable entry into the correct vehicle build, without asking them to guess.Source basis: Existing selector. [S04]
+Section 1. Start with the vehicle
+Headline: Find the Flatbed for Your Truck.
+Body: Choose your vehicle and bed configuration to start a build. You can explore options now and send your selections to our team for fitment review and a final quote.
+Field labels: Year / Make / Model / Current bed length.
+CTA: See My Starting Options
+Fallback: Not listed or unsure about your bed length? Send us your truck details and we'll help you identify the next step.
+Fallback CTA: Ask About My Truck
+Section 2. Choose a useful starting point
+Headline: How Will You Use the Truck?
+Body: Tell us what you're building toward. We'll start with a relevant configuration instead of making you sort through every accessory.
+Choices: Camper setup / Overland travel / Work and everyday hauling / I'm still figuring it out.
+Build note: Retain the existing Weekender Light, Weekender Heavy, Overlander, and Expedition naming only where the team has defined actual packages. Map the visitor's needs to approved configurations rather than asking them to decode tier names. These are guided starting points, not newly approved products or prices.
+Section 3. Explain recommendations
+Headline: A Starting Build You Can Change.
+Body: Review what's included, remove optional items you don't need, and add the equipment that fits your plans. We'll flag any selections that need a fitment check.
+Recommended-build labels: Why this setup / Included components / Optional additions / Estimated product subtotal.
+CTAs: Customize This Build / Get Help Choosing
+Section 4. Explain the estimate
+Headline: Plan the Build Before Committing to the Quote.
+Body: The online estimate helps you organize your selections. The final quote confirms your truck's fitment, product availability, installation requirements, and applicable taxes.
+Build note: Use this text only with a functioning selection/summary experience. In the MVP, a selected configuration can be passed to the existing quote system rather than requiring a new custom application.
+Page 5. Vehicle page and configuration template
+Status: One improved template for existing vehicle pages.Example URL: /pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bedPage job: Explain the vehicle-specific starting point and help users assemble a coherent, reviewable build.Source basis: Current Tacoma page. [S05]
+Section 1. Vehicle-specific introduction
+Headline: Build Your Tacoma 5-Foot Flatbed.
+Body: Plan a modular aluminum flatbed for your short-bed Tacoma. Start with the platform, choose the storage and accessories that fit your plans, and send the build to our Tacoma team for review.
+Vehicle summary: Toyota Tacoma / 5-foot factory bed / [Model years approved for this configuration].
+CTA: Start My Configuration
+Build note: The selected year and fitment status must be visible. “Fits your truck” is not an acceptable automatic label until the underlying fitment rules support it.
+Section 2. Establish the base
+Headline: Start With the Flatbed.
+Body: This is the foundation of your build. Review the platform details and included components before adding accessories.
+Specification labels: Platform dimensions / Approximate platform weight / What is included / What is not included / Vehicle fitment notes.
+Build note: Populate from the approved catalog. The current Tacoma listing shows 60 × 74.4 × 3 inches and approximately 252 pounds, but other site pages conflict. Treat those as observed values requiring reconciliation, not a newly certified engineering specification.
+Section 3. Add relevant options
+Headline: Add the Parts That Make It Yours.
+Side boxes: Give tools and travel gear a dedicated storage space.
+Dropsides: Add containment around the tray while keeping a removable-side configuration.
+Tailgate: Add rear access and closure for a compatible side-box setup.
+Underbody boxes: Use compatible space below the tray for additional storage.
+Camp kitchen insert: Add a kitchen module to the matching toolbox configuration.
+Rack options: Plan the rack around the load and the equipment it needs to carry.
+Headache rack: Select the configuration appropriate to the truck, camper, and planned bed setup.
+Build note: Show only compatible options. The tailgate/box and kitchen/toolbox dependencies must be validated before adding a configuration to a quote. Do not make the customer discover missing required parts at the end.
+Section 4. Persistent build summary
+Panel title: Your Flatbed Build
+Rows: Your truck / Base platform / Selected options / Estimated product subtotal / Installation: quoted after review / Taxes: confirmed in your final quote.
+Primary CTA: Review My BuildAssistance link: Have the Team Help Me Choose
+Microcopy: This is an estimate, not a confirmed order or installation booking.
+Interaction labels: Add to My Build / Added / Remove / Edit Selection / Back to Options.
+Build note: Replace the ambiguous combined “Add Full Package / Request Quote” label with the actual action performed. Review the current button behavior before changing its text. Add a visible response after each selection, but avoid interrupting the customer with a full modal on every add. Use an expandable sticky summary on mobile if testing supports it.
+Section 5. Review before sending
+Headline: Check Your Build Before You Send It.
+Body: Review your truck details and selected components. Add any notes about your camper, current modifications, or future plans so the team has the right context.
+CTA: Request My Quote
+Confirmation copy: Your build request has been sent. Our team will review the vehicle details and selections, then contact you about the next step. Your request does not reserve inventory or an installation date.
+Build note: Show confirmation only after the server confirms successful submission. Provide a retry route and retain selections if submission fails.
+Section 6. Relevant proof and related paths
+Headline: See How Others Have Configured Their Trucks.
+Body: Explore completed builds for ideas, then come back to adjust your own configuration.
+CTA: View Related Builds
+Build note: Show the same vehicle where evidence exists. Otherwise clearly label the example as a different truck. Do not invent a Tacoma customer story to fill this section.
+Page 6. Quote request
+Status: Improve existing intake; use conditional flatbed/service views.URL: /pages/book-install-services-or-get-a-quotePage job: Capture enough information to have a useful next conversation without requiring a complete design.Source basis: Current quote and consultation pages. [S06, S09]
+Section 1. Invitation
+Headline: Tell Us About the Truck You Want to Build.
+Body: You don't need to know every part yet. Share your vehicle, what you're trying to do, and anything that isn't working with the current setup.
+Primary form action: Send My Build Request
+Section 2. The form
+Required starting fields: Name; one usable contact method; vehicle year, make, and model; current bed length or “not sure”; what you need help with.
+Optional fields: Preferred contact method; location; timing; budget range; camper model; existing modifications; photos.
+Field helper: A photo of your current truck or camper can help us understand the setup.
+Consent helper: We'll use these details to respond to your build inquiry.
+Build note: Confirm final privacy/consent wording with the business. Do not preselect marketing consent. Carry any existing builder selections forward so the visitor is not asked to enter them again. Show camper-specific fields only when relevant.
+Section 3. Explain the next step
+Headline: What Happens After You Send It?
+Body: The team will review your request and contact you about the details needed for the next step. Where a dedicated Build & Design Consultation is appropriate, we'll explain the appointment and its fee before you book it.
+Design-consultation note: Our dedicated one-hour Build & Design Consultation is $165, applied to the first hour of installation labor.
+Build note: Confirm which project types require that appointment. An initial inquiry must not be labeled “free consultation” unless that is an approved, operational offer.
+Section 4. Alternate contact and confirmation
+Body: Prefer to talk? Call the shop at (253) 301-0028 during business hours.
+Success headline: We've Received Your Build Request.
+Success body: Thanks for sharing the details. Our team will review the request and contact you about what comes next. This submission does not confirm an order or reserve an installation appointment.
+Error copy: Your request hasn't gone through yet. Your selections are still here. Please try again or call the shop.
+Build note: Do not promise an exact response time until sales has agreed to and can monitor that commitment.
+Page 7. Paid Build & Design Consultation
+Status: Clarify existing page.URL: /pages/book-a-build-consultationPage job: Explain the paid appointment, its deliverable, and the credit without pretending it is a free inquiry.Source basis: Direct current consultation-page retrieval. [S06]
+Section 1. Hero
+Headline: Work Through the Build With a Technician.
+Body: Book a dedicated one-hour Build & Design Consultation to review your vehicle, the equipment you're considering, and the installation plan.
+Price line: $165, applied to your first hour of installation labor.
+CTA: Book My Design Consultation
+Section 2. What the appointment covers
+Headline: Leave With a Clearer Build Plan.
+Body: We'll review recommendations and pricing with you, work through the selected equipment, and refine the build list and cost estimate for your vehicle.
+Section 3. Prepare for the appointment
+Headline: Send the Details Before We Meet.
+Body: Share your vehicle information, existing modifications, and any camper or equipment specifications you already have. A saved build and photos of the truck will give the technician useful context.
+Section 4. Clarify the credit
+Headline: How the Consultation Credit Works.
+Body: The $165 consultation fee is applied to the first hour of installation labor. Review the appointment terms before booking, and ask the team about any questions on scope, scheduling, or the next steps.
+Build note: Remove the current blanket “no risk” framing unless refund and price-match conditions genuinely support it. Do not imply that the fee reserves product stock or a production slot. Reconfirm the exact booking, cancellation, and credit policy before publication.
+Page 8. Our Work
+Status: New gallery/index; use existing verified assets first.Proposed URL: /pages/our-workPage job: Make customer and collaboration evidence easy to find and connect it to a next action.
+Section 1. Hero
+Headline: See What the Build Looks Like Beyond the Parts List.
+Body: Explore trucks we've outfitted and the configurations behind them. Start with the vehicle or setup closest to the one you have in mind.
+Section 2. Build navigation
+Filter labels: Vehicle / Flatbed configuration / Camper setup / Installation work.
+Build note: Only add filters when there are enough projects to make them useful. At launch, a small curated grid is better than a filter panel full of empty results.
+Featured card: The Super UteCard detail: 2017 Ford F-250 · Flatbed, side boxes, tailgate, and topper · Collaboration build.CTA: Explore This Build
+Card template for future projects: [Verified project name] / [Vehicle] / [Actual configuration] / [Customer or collaboration label].
+Section 3. Final action
+Headline: See Something Close to What You Have in Mind?
+Body: Send us the build and tell us what you'd change. We'll use it as a starting point for your truck, not a one-size-fits-all parts list.
+CTA: Talk Through a Similar Build
+Page 9. Super Ute case study
+Status: Complete and restructure the existing page.URL: /pages/the-super-ute-collaboration-buildPage job: Turn a real collaboration into understandable product proof and a relevant lead.Source basis: Vehicle, collaborators, and components listed on the current project page. [S08]
+Section 1. Hero
+Headline: The Super Ute: A New Platform for a Ford F-250.
+Body: A collaboration with Adventure Built, Flated, and TRUKD, built around Kelly Varney's 2017 Ford F-250 Lariat FX4 Crew Cab Short Bed.
+CTA: Watch the Build Walkaround
+Section 2. Configuration
+Headline: What Went Into the Flatbed Setup.
+Body: The build combines a Next Jump full-size regular aluminum flatbed with side toolboxes and a tailgate. A Flated Air-Topper and TRUKD rack complete the documented configuration.
+Build note: Display the verified component list and relevant photos. Do not let outdated product names, dimension labels, or a second incompatible platform remain in a “copy this build” selection.
+Section 3. Explain the useful detail
+Headline: Why the Tailgate Matters in This Setup.
+Body: The tailgate works with the side-box configuration to provide rear access and closure for the topper setup. The surrounding storage is part of the bed layout, rather than a separate box placed in the middle of the tray.
+Build note: Use a short demonstration and a technical-owner-approved caption. Do not imply every topper fits this arrangement.
+Section 4. Show the complete truck
+Headline: Look at the Whole Build.
+Body: Watch the walkaround to see how the bed, storage, topper, and other upgrades come together on the truck.
+CTA: Watch the Walkaround
+Section 5. Replace the placeholder with an action
+Headline: Build Something Like This, Around Your Truck.
+Body: Like the layout but need a different camper, storage setup, or vehicle? Send us the details. We'll use the Super Ute as a conversation starter and work through a configuration for your build.
+CTA: Plan a Similar Build
+Build note: Prefill “Inspired by: Super Ute” in the quote request. Retain the collaboration disclosure. Do not invent project results, total price, customer motivations, or a direct quote that the source does not provide.
+Page 10. Flatbed Buyer's Guide
+Status: New ungated resource.Proposed URL: /pages/flatbed-buyers-guidePage job: Reduce uncertainty before inquiry, support sales conversations, and answer genuine research questions.
+Section 1. Hero
+Headline: Buying a Flatbed? Start With These Decisions.
+Body: The right setup depends on your truck, what it needs to carry, and how you use it. This guide will help you compare configurations and prepare for a useful conversation with the shop.
+Jump links: Vehicle fit / Configuration / Price / Weight / Installation / Support.
+Section 2. Vehicle fit
+Headline: Start With the Exact Truck.
+Body: Bring the year, make, model, current bed length, and details of existing modifications. Trucks with similar names can have different mounting, body, and installation requirements. A photo is helpful, but it doesn't replace the specifications needed for fitment review.
+CTA: Ask About My Truck
+Section 3. Application
+Headline: Decide What the Bed Needs to Make Easier.
+Body: A work setup might prioritize tool access and open loading space. A camper build needs the camper and surrounding equipment planned together. An overland configuration may call for storage, water, or a rack, but the right list depends on the trips you actually take.
+Section 4. Price comparison
+Headline: Compare Complete Scopes, Not Just Starting Prices.
+Body: Check whether the number covers only the platform or also includes boxes, racks, finishing, and installation. Ask about vehicle-specific work and taxes. Two starting prices can represent very different builds.
+Comparison labels: Platform / Included equipment / Optional equipment / Installation / Vehicle-specific work / Taxes / Availability / Warranty.
+CTA: Request a Quote for My Configuration
+Section 5. Weight and load
+Headline: Count Everything the Finished Truck Carries.
+Body: A platform's published load rating does not replace the limits of your vehicle. The final configuration includes the flatbed, camper or cargo, options, water, passengers, and travel gear. Review the truck's specific ratings and the completed setup with the appropriate technical guidance. [S20]
+Build note: Add approved, configuration-specific weights when available. Never label a bed structural limit as the payload of every truck it fits.
+Section 6. Future changes
+Headline: Plan the Next Upgrade Before Buying the First One.
+Body: A modular system can leave room for compatible additions. Tell the team about the camper, rack, or storage you might add later so today's choices support that plan.
+Section 7. Installation and timing
+Headline: Confirm the Product and the Appointment.
+Body: Ask what is available, what work your vehicle needs, and when the shop can schedule it. An in-stock flatbed and an open installation slot are separate things. Confirm the plan before arranging travel or making commitments around the truck.
+CTA: Discuss Installation
+Section 8. Ownership and support
+Headline: Read the Support Terms Before You Approve the Build.
+Body: Ask what is covered for the product and for installation, how long coverage lasts, and who to contact about a problem. Review care instructions and the written terms for your order. Keep copies of the final build list and invoice.
+CTA: Ask a Support Question
+Section 9. Ready to begin
+Headline: Bring the Truck Details. We'll Help With the Build Questions.
+Body: Share what you drive and what you want it to do. A complete parts list isn't required to start the conversation.
+CTA: Start My Flatbed Inquiry
+Page 11. Installation services hub
+Status: Keep the existing URL and service breadth; refine hierarchy.URL: /pages/overland-off-road-installation-services-tacoma-waPage job: Convert local installation demand independently of the flatbed campaign.Source basis: Existing service offering. [S07, S10–S12]
+Section 1. Hero
+Headline: Off-Road & Overland Installation in Tacoma.
+Body: Get the upgrades installed around the way you use your rig. Bring us a single project or a complete build, and we'll help you work through the equipment and installation plan.
+CTA: Discuss My Installation
+Section 2. Choose the work
+Headline: What Are You Planning to Upgrade?
+Lifts & Suspension: Plan the setup around your vehicle, the load it carries, and the terrain you drive.
+Bumpers & Racks: Work through mounting, access, and compatibility before the hardware goes on.
+Wheels & Tires: Choose the combination around clearance, intended use, and the rest of the setup.
+Custom Power: Plan batteries, charging, and distribution around the equipment you need to run.
+Lighting: Match the lighting and controls to the job, with the installation planned as a system.
+Flatbed Conversions: Replace the factory bed and configure the surrounding equipment around your truck.
+Build note: Each card links to its existing service page. Use the customer's service selection to prefill the quote request.
+Section 3. Position the installation value
+Headline: The Parts Need to Work Together.
+Body: A good build is more than a list of upgrades. Existing modifications, mounting space, access, wiring, and future plans all affect the installation. Let's work through those details before choosing the final equipment.
+Section 4. Evidence and process
+Headline: See the Work Before You Book Yours.
+Body: Explore completed installations and the details behind them. Then share your vehicle and goals so the team can explain the next step for your project.
+CTAs: View Our Work / Get a Quote
+Section 5. Supporting services
+Headline: Looking for Wash, Detail, or Marine Work?
+Body: Find the service that matches the vehicle or boat you need help with.
+Links: Vehicle Wash & Detail / Boat Wash & Detail / Marine Services.
+Build note: These routes remain available but do not compete with flatbeds and core installation work in the homepage hero.
+Pages 12–17. Service-page copy templates
+Status: Refine the existing pages, not a new service-site build.Shared page architecture: Hero; scope; why configuration matters; actual proof; next step.Build note: Keep useful existing technical information and real testimonials. Delete broad guarantees or claims that are not technically supported. Each page below supplies its distinct copy; the shared final section follows.
+Page 12. Lifts & Suspension
+URL: /pages/lift-suspension-installationSource basis: Existing service page. [S10]
+Hero headline: A Suspension Setup Matched to Your Rig.
+Hero body: Plan lift and suspension work around the truck you drive, the weight it carries, and how you use it on and off the road.
+Scope headline: Start With the Load and the Driving You Do.
+Scope body: Tell us about the camper, accessories, towing, or everyday use the setup needs to accommodate. We'll review the relevant suspension components and installation requirements rather than starting with lift height alone.
+Decision headline: Adding Weight? Review the Rest of the Setup.
+Decision body: A camper or flatbed build can change what the vehicle carries. Include those plans in the suspension conversation. A suspension upgrade does not automatically change the truck's rated carrying limits.
+Proof headline: Look at the Setup, Not Just the Stance.
+Proof body: See relevant completed work and the components selected for that vehicle's needs.
+CTA: Discuss My Suspension Setup
+Page 13. Bumpers & Racks
+URL: /pages/bumpers-racks-installation-tacoma-waSource basis: Existing service page. [S11]
+Hero headline: Bumper & Rack Installation That Fits the Build.
+Hero body: Plan the bumper, rack, and attached equipment around your vehicle before the installation begins.
+Scope headline: Think Beyond the Mounting Points.
+Scope body: Tell us about the winch, lighting, spare tire, recovery equipment, or cargo you intend to carry. We'll work through the mounting and integration requirements with the rest of the setup in mind.
+Decision headline: Keep Access and Compatibility in the Plan.
+Decision body: Sensors, camera views, vehicle access, and surrounding components can affect the final configuration. Share existing modifications so those details are considered early.
+Proof headline: See How the Equipment Comes Together.
+Proof body: Explore actual installations with the vehicle and fitted components clearly identified.
+CTA: Plan My Bumper or Rack Install
+Page 14. Wheels & Tires
+URL: /pages/wheels-tires-off-road-and-overlandSource basis: Service category confirmed; specific current service scope must be checked before publication. [S07]
+Hero headline: Wheels & Tires Chosen for the Way You Drive.
+Hero body: Work through wheel and tire options around your rig, the roads you travel, and the equipment it carries.
+Scope headline: Start With the Vehicle and Its Current Setup.
+Scope body: Share the year, model, suspension changes, and current tire size. We'll discuss the intended use before recommending the next step.
+Decision headline: Fitment Is More Than a Tire Size.
+Decision body: Clearance, wheel specifications, vehicle load, and existing modifications all belong in the conversation. Don't choose a combination from a photo alone.
+Proof headline: Review Comparable Setups.
+Proof body: Look at documented vehicle configurations and ask how they compare with your truck.
+CTA: Discuss Wheels & Tires
+Approval needed: Confirm who performs mounting, balancing, alignment, and any partner work. Do not advertise those as in-house services by assumption.
+Page 15. Custom Power
+URL: /pages/custom-power-solutions-off-road-marineSource basis: Existing custom-power service. [S12]
+Hero headline: Off-Grid Power Built Around What You Need to Run.
+Hero body: Start with your equipment and how long you plan to use it. We'll work through battery storage, charging, and the installation as one system.
+Scope headline: Tell Us What Needs Power.
+Scope body: Share the devices, expected daily use, available space, and how often you'll be driving or connecting to shore power. Those details help shape a system that fits the actual load.
+Decision headline: Plan Charging and Access Alongside Capacity.
+Decision body: A battery size alone doesn't describe the whole system. Charging sources, distribution, monitoring, and service access all need to be considered.
+Proof headline: Look Behind the Finished Panel.
+Proof body: Show the installed equipment, routing, labeling, and access points in a documented build, with an explanation of the chosen configuration.
+CTA: Plan My Power System
+Build note: Do not promise universal battery runtime, zero maintenance, or a standard battery size for every build. Support specific runtime statements with the actual load and configuration assumptions.
+Page 16. Custom Lighting
+URL: /pages/custom-lighting-for-off-road-overlandSource basis: Existing lighting service page.
+Hero headline: Lighting Chosen for the Job, Installed for the Rig.
+Hero body: Work through the beam pattern, mounting, and controls around how and where you'll use the lights.
+Scope headline: Start With What You Need to See.
+Scope body: Driving, reversing, working around the truck, and setting up camp call for different lighting. Tell us the problem you want to solve before adding another light bar.
+Decision headline: Plan the Wiring and Controls Together.
+Decision body: The installation needs to account for the vehicle's electrical system, mounting location, appropriate circuit protection, and practical control placement.
+Proof headline: See the Installation Details.
+Proof body: Use real photos of the mounting and controls, plus an accurately exposed example of the lighting in use.
+CTA: Discuss My Lighting Setup
+Build note: Have the technical team approve electrical claims. Distinguish road-use and off-road products and confirm applicable product restrictions rather than making blanket legality promises.
+Page 17. Camper / Rooftop-Tent Installation
+Existing routes: /pages/authorized-alaskan-campers-installer and /pages/james-baroud-roof-top-tent-installation-tacoma-wa.
+Hero headline: Plan the Camper or Tent and the Installation Together.
+Hero body: Share the exact camper or tent model and the vehicle it needs to fit. We'll review the mounting setup and any surrounding work before planning the installation.
+Scope headline: Start With the Manufacturer's Requirements.
+Scope body: Product dimensions, mounting instructions, vehicle compatibility, and the supporting rack or bed configuration all need to agree.
+Decision headline: Include the Equipment Around It.
+Decision body: Access, storage, power, and other upgrades can affect the layout. Bring those plans into the conversation before the final configuration is approved.
+Proof headline: See a Relevant Completed Setup.
+Proof body: Show a documented installation with its vehicle, exact equipment, and supporting configuration identified.
+CTA: Discuss My Camper or Tent Install
+Approval needed: Retain the brand-specific pages only with current, verified authorization and service scope. The draft above is neutral shared copy, not a new assertion of dealer or installer authorization.
+Shared final section for these service pages
+Headline: Tell Us About Your Rig and the Upgrade You Have in Mind.
+Body: Share the vehicle, current modifications, and what you'd like to improve. We'll review the request and explain the appropriate next step, including any dedicated design appointment needed for the project.
+CTA: Get a Quote
+Build note: Use service-specific proof, not the same unrelated flatbed testimonial on every page. Keep the paid-consultation explanation accessible where applicable.
+Page 18. Vehicle Wash & Detail
+Status: Retain as a supporting service.URL: /pages/wash-mePage job: Serve a distinct, shorter-consideration customer without distracting from flatbed acquisition.
+Hero headline: Give Your Rig a Proper Clean.
+Hero body: Tell us what you drive and what needs attention. We'll help you choose the relevant wash or detail service and arrange an appointment.
+Scope headline: Start With the Vehicle and Its Condition.
+Scope body: Share the vehicle type, size, and the interior or exterior work you're looking for. Photos can help the team understand the scope before booking.
+Proof headline: See the Work Up Close.
+Proof body: Use before-and-after images from the same job, with consistent framing and lighting.
+Next-step headline: Ready to Book a Detail?
+Next-step body: Send your vehicle details and the service you're considering, or call the shop to discuss the appointment.
+CTA: Request a Detail Appointment
+Build note: Show only approved service inclusions and prices. Keep marine-detail inquiries on their own route. Do not apply a paid custom-build consultation to routine detailing by default.
+Page 19. About
+Status: Improve the current page.URL: /pages/about-usPage job: Explain the people and thinking behind the work, supported by real evidence.Source basis: Current brand story and business identity. [S17]
+Section 1. Hero
+Headline: A Tacoma Shop for People Who Use Their Rigs.
+Body: Next Jump Outfitters is a veteran-owned off-road and overland outfitter. We help customers configure aluminum flatbeds and install the equipment their vehicles need for the way they work and travel.
+Section 2. Why the company exists
+Headline: The Build Should Make Getting Out Easier.
+Body: The truck should support the life you want to live, not become another project you can't finish. Our approach starts with how you use the vehicle and what you want to change, then works toward a practical configuration.
+Section 3. What the approach means
+Headline: Build With the Next Change in Mind.
+Body: A camper, a different trip, or a new use for the truck can change what you need. Our modular flatbed system is designed around compatible options, so the conversation includes where the build might go next.
+Section 4. People and evidence
+Headline: Meet the People Behind the Work.
+Body: Come to the shop, see the equipment, and talk through the build with the team.
+Build note: Add actual team names, roles, experience, shop photographs, and credentials the company can substantiate. Do not invent founding dates, certifications, US manufacturing provenance, or performance statistics. Replace the current quantified “50% less hassle” claim unless evidence supports that number.
+CTA: Visit the Shop
+Page 20. Contact / Visit
+Status: Improve existing page.URL: /pages/contact-usPage job: Make it easy to reach the right person or plan a visit.Source basis: Direct current contact-page retrieval. [S18]
+Section 1. Hero
+Headline: Let's Talk About Your Truck.
+Body: Have a build in mind, a fitment question, or a project you'd like us to look at? Contact the Tacoma team.
+Primary CTA: Start a Build InquirySecondary CTA: Call (253) 301-0028
+Section 2. Shop information
+Headline: Visit Next Jump Outfitters.
+Address: 3721 S Lawrence St, Tacoma, WA 98409.Hours: Monday–Friday, 8 a.m.–5 p.m. Closed weekends.Phone: (253) 301-0028.Email: theteam@nextjumpoutfitters.com.
+Visit note: Contact the team before making a special trip so we can confirm the right next step for your visit.
+CTA: Get Directions
+Section 3. Existing customers
+Headline: Need Help With an Existing Build?
+Body: Send your name, the vehicle, and any order or invoice details that will help us find the project. Describe what you need and include photos when relevant.
+CTA: Contact the Team
+Build note: Add verified map and review links. The fresh Firecrawl read showed an active contact page; an older public-search snapshot showed a password page. This audit does not treat the stale snapshot as a live outage.
+Supporting pages and catalog rules
+Retain active trailer, retail, marine, partner, and community destinations. They need a separate owner-approved scope review before a full copy rewrite. This blueprint does not assume that every publicly listed offering is currently staffed, licensed, in stock, or sold on the same terms as flatbeds.
+For retained product pages, use a consistent template: product name; what it does; compatibility; actual inclusions; verified dimensions and weight; current price basis; installation implications; care and coverage; relevant next step. A product shown in the builder should use the same underlying record as its standalone page.
+For marine and boat-detail pages, keep the audience and inquiry form distinct. For dealership content, confirm current licensing and operating status before restoring it to a high-prominence navigation position. The project business-context material previously identified licensing as pending; that historical note is not a current license-status determination. [I01]
+Part 4. Implementation, SEO, and measurement
+4.1 Fix the product information once
+Create a single approved record for each platform and option, whether in existing Shopify product data or a maintained specification layer.
+Required fields: SKU and product name; model years and truck/bed fitment; dimensions; weight and exactly what that weight includes; documented structural rating and conditions; included components; compatible options; dependencies; price basis; installation scope; availability; applicable coverage; approver and last-reviewed date.
+Price data must distinguish standard price, campaign price, product-only price, and any genuinely installed package price. Do not reuse old “from” prices from marketing blocks. A discount should be applied only to eligible SKUs under the approved offer rules.
+The Super Ute's older builder exposes “Installed (Parts & Labor)” labels while the Tacoma page presents a body-only product list. Inventory and price reconciliation must cover both builder implementations, not only the newest template. [S05, S08]
+4.2 Builder acceptance criteria
+Every vehicle card opens the intended vehicle page, with consistent labeling and a valid fitment route.
+The selected truck remains visible through configuration and inquiry.
+Base-platform and option status are distinct; quantity and required dependencies are validated.
+Adding or removing an item provides clear feedback and updates the correct summary.
+The estimate label explains product, installation, discount, and tax treatment without mixing bases.
+Navigation back to options does not unexpectedly lose the build. A save/share claim appears only if that function is implemented and tested.
+The final request includes the chosen SKUs, quantities, source context, and the price snapshot used at inquiry.
+Confirmation appears only after successful submission. Errors retain the build and provide an alternative contact route.
+Desktop, mobile, keyboard navigation, zoom, form labels, focus, and overlays are tested in staging.
+Analytics never records an option click as a completed lead, quote acceptance, or sale.
+These are implementation tests to run, not behaviors this audit has already proven.
+4.3 SEO and page-purpose map
+Page
+Primary search intent
+Suggested title
+Homepage
+Brand and general outfitter discovery
+Aluminum Flatbeds & Truck Upfitting - Next Jump Outfitters
+Flatbed hub
+Compare modular aluminum flatbeds
+Modular Aluminum Truck Flatbeds - Next Jump Outfitters
+Camper page
+Flatbeds for camper setups
+Flatbeds for Truck Campers & Toppers - Next Jump
+Selector
+Find configuration by vehicle
+Find a Flatbed for Your Truck - Next Jump Outfitters
+Vehicle template
+Specific vehicle and bed fitment
+Toyota Tacoma 5-Foot Flatbed - Next Jump Outfitters
+Buyer's Guide
+Cost, fit, configuration, installation research
+Truck Flatbed Buyer's Guide - Next Jump Outfitters
+Our Work
+Proof and configuration ideas
+Flatbed & Overland Truck Builds - Next Jump Outfitters
+Services hub
+Local installation services
+Off-Road Installation in Tacoma - Next Jump Outfitters
+Contact
+Shop location and contact
+Contact Our Tacoma Shop - Next Jump Outfitters
+
+Search themes are intent hypotheses, not measured keyword-volume or ranking findings.
+Homepage description: Explore modular aluminum flatbeds and off-road installation at Next Jump Outfitters in Tacoma. Find a setup for your truck or talk through your build.
+Flatbed description: Configure an aluminum flatbed around your truck, storage needs, and future plans. Explore options and request a quote with installation in Tacoma.
+Camper description: Plan a flatbed for your topper, slide-in, or flatbed camper. Review the truck, storage, and installation together with Next Jump's Tacoma team.
+Selector description: Choose your truck and bed configuration, explore flatbed options, and send your selections for fitment review and an itemized quote.
+Guide description: Understand flatbed fitment, configuration, pricing, weight, and installation before you buy. Prepare the details for a useful build conversation.
+SEO implementation: Keep established URLs unless there is a justified consolidation. Use real crawlable links between related pages, descriptive titles, accurate canonical tags, and a sitemap that agrees with the intended canonical destinations. Do not make useful product explanations available only after interacting with an app. [S15, S16, S19]
+Use structured data only where it accurately describes visible content and an eligible page type. Validate actual product offers, breadcrumbs, organization details, and article markup as applicable. Do not publish a $0 offer for an unknown price or expect structured data to guarantee enhanced search results. Write FAQs for customers, not as a promise of a rich-result feature. [S21]
+4.4 Measurement plan
+Treat this as an extension and QA of the current tracking work, not a reason to rebuild analytics blindly.
+Track the journey: relevant landing-page visit; builder start; vehicle selection; configuration review; successful inquiry; qualified opportunity; design consultation booked where applicable; quote issued; quote accepted; paid flatbed job.
+Keep commercial definitions separate: A submitted form is a lead. A reviewed, feasible project is a qualified opportunity. An issued quote is not revenue. Use the team's agreed payment/order milestone for a sold job, and reconcile it with the actual record.
+Useful dimensions: landing page, traffic source, campaign, device, truck, use case, new or returning visitor where available, and build/quote identifier. Keep personal information out of analytics event payloads.
+Decision metric: More qualified flatbed opportunities and sold jobs at a viable acquisition cost, not simply more forms or time spent in the builder.
+First compare before and after using equivalent periods and annotate promotions, traffic-mix changes, and inventory shifts. At low lead volumes, use recorded usability issues and sales feedback alongside rates; do not declare an A/B winner from a handful of conversions.
+4.5 Rollout order
+Stage
+Work
+Expected impact / effort
+Immediate
+Correct wrong links, midsize specification duplication, placeholder copy, and promotion expiry ownership. Flag price/inclusion conflicts to the commercial owner.
+High risk reduction; generally low implementation effort, except data reconciliation.
+First release
+Align the product data and quote process. Update homepage, hub, camper page, selector, and the shared vehicle template.
+High journey value; medium effort with product and developer involvement.
+Next release
+Clarify inquiry vs paid design, carry selections into the form, complete Super Ute, launch Our Work and the Buyer's Guide.
+High trust and sales-support value; medium effort.
+After validation
+Refine service templates, expand verified case studies, and test which starting configurations and calls to action generate qualified opportunities.
+Medium-to-high potential; effort depends on evidence and traffic.
+Later, only if justified
+Create separate work/overland pages or a more advanced configurator.
+Conditional; do not prioritize ahead of the proven routing and information problems.
+
+These are prioritization judgments, not forecasts of conversion uplift or delivery commitments.
+4.6 Decisions the business must approve
+Pricing and packages: The authoritative starting price, its inclusions, installed vs product-only treatment, and promotion rules.
+Consultation: Whether the $165 design appointment applies to all flatbed inquiries or selected project types; cancellation terms; the exact labor credit.
+Fitment and engineering: Correct dimensions, weights, model years, dependencies, load limits, and any claim of improved payload, handling, or departure angle.
+Fulfillment: Standard installation policy beyond the clearance offer, shipping or pickup exceptions if any, current scheduling, and customer travel arrangements.
+Support: Product and installation warranty, exclusions, care instructions, and a clear claims contact.
+Business status and proof: Dealership operating status, active installer/dealer relationships, permission for project imagery and quotes, and the advertised loft's availability and terms.
+None of these decisions should stop correction of the verified bad links or placeholder text. They should stop unapproved promises from being published.
+Part 5. Vehicle inventory and research sources
+5.1 Existing vehicle-page inventory
+Preserve these as existing routes while checking actual fitment. This inventory is not certification that every listed vehicle/year is supported. The shared template supplies the body copy; each page needs its own approved fitment information, relevant proof, and correct product configuration.
+All paths below begin with /pages/aluminum-flatbed-truck-body-.
+Vehicle-page label
+Existing URL suffix
+Toyota Tacoma 5-foot short bed
+toyota-tacoma-5ft-short-bed
+Toyota Tacoma 6.1-foot long bed
+toyota-tacoma-6-1ft-long-bed
+Toyota Tundra 6.5-foot standard bed
+toyota-tundra-6-5ft-standard-bed
+Toyota Tundra 8-foot long bed
+toyota-tundra-8ft-long-bed
+Ford Ranger 5-foot short bed
+ford-ranger-5ft-short-bed
+Ford Ranger 6-foot long bed
+ford-ranger-6ft-long-bed
+Ford Super Duty 8-foot long bed
+ford-super-duty-8ft-long-bed
+Chevrolet Colorado 5.2-foot short bed
+chevrolet-colorado-5-2ft-short-bed
+Chevrolet Colorado 6.2-foot long bed
+chevrolet-colorado-6-2ft-long-bed
+Chevrolet Silverado 6.6-foot standard bed
+chevrolet-silverado-6-6ft-standard-bed
+Chevrolet Silverado 8.1-foot long bed
+chevrolet-silverado-8-1ft-long-bed
+Jeep Gladiator JT 5-foot bed
+jeep-gladiator-jt-5ft-standard-bed
+Ram 6.4-foot standard bed
+ram-6-4ft-standard-bed
+Ram 8-foot long bed
+ram-8ft-long-bed
+Ram Heavy Duty 6.75-foot short bed
+ram-heavy-duty-6-75ft-short-bed
+Ram Heavy Duty 8-foot long bed
+ram-heavy-duty-8ft-long-bed
+Nissan Frontier 5-foot short bed
+nissan-frontier-5ft-short-bed
+Nissan Frontier 6.1-foot long bed
+nissan-frontier-6-1ft-long-bed
+Nissan Titan 6.5-foot standard bed
+nissan-titan-6-5ft-standard-bed
+
+Headline rule: “Build Your [Vehicle] [Factory Bed Length] Flatbed.” Use an unambiguous model designation where “Ram” alone is insufficient. Factory-bed labels and replacement-platform dimensions are different fields.
+Intro rule: “Plan a modular aluminum flatbed for your [vehicle and factory-bed configuration]. Review the platform and compatible options, then send your build to our Tacoma team for fitment review and a quote.” Add genuinely vehicle-specific notes rather than repeating the same page with only a brand name swapped.
+5.2 Source register
+All sources were accessed for this audit on September 29, 2026. Public-search cache dates varied; fresh Firecrawl retrieval was preferred where the two disagreed. A source proves what the business publicly says, not independently verified product performance.
+S01 — Next Jump homepage. Public-page retrieval. Homepage positioning, offer order, and contact details.https://www.nextjumpoutfitters.com/
+S02 — Main flatbed hub. Fresh Firecrawl and public-page retrieval. Product system, configuration copy, current promotion, and clearance conditions.https://www.nextjumpoutfitters.com/pages/overland-aluminum-flatbed-truck-bodies
+S03 — Camper flatbeds. Fresh Firecrawl and public-page retrieval. Camper segmentation, published specs/prices, installation offer, and lodging claim.https://www.nextjumpoutfitters.com/pages/flatbeds-for-overland-and-off-road-campers
+S04 — Vehicle selector. Fresh Firecrawl and public-page retrieval. Vehicle destinations and process copy.https://www.nextjumpoutfitters.com/pages/flatbed-build-price-by-vehicle
+S05 — Tacoma 5-foot builder. Fresh Firecrawl and public-page retrieval. Body-only listing, option prices, and quote controls.https://www.nextjumpoutfitters.com/pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bed
+S06 — Build & Design Consultation. Fresh Firecrawl retrieval; direct public-page fetch intermittently unavailable. One-hour appointment, $165 fee, first-hour installation labor credit, and existing risk/price-match language.https://www.nextjumpoutfitters.com/pages/book-a-build-consultation
+S07 — Installation services hub. Public-page retrieval. Existing installation breadth and testimonials.https://www.nextjumpoutfitters.com/pages/overland-off-road-installation-services-tacoma-wa
+S08 — Super Ute collaboration. Fresh Firecrawl retrieval, cross-checked with public-page text. Vehicle, collaborators, configuration, placeholder, and the older embedded builder.https://www.nextjumpoutfitters.com/pages/the-super-ute-collaboration-build
+S09 — Quote intake. Public-page retrieval. Existing general inquiry route. Embedded form functionality was not verified.https://www.nextjumpoutfitters.com/pages/book-install-services-or-get-a-quote
+S10 — Lifts & Suspension. Public-page retrieval. Existing service approach and proof.https://www.nextjumpoutfitters.com/pages/lift-suspension-installation
+S11 — Bumpers & Racks. Public-page retrieval. Existing integration and compatibility messaging.https://www.nextjumpoutfitters.com/pages/bumpers-racks-installation-tacoma-wa
+S12 — Custom Power. Public-page retrieval. Existing system-design and installation offering.https://www.nextjumpoutfitters.com/pages/custom-power-solutions-off-road-marine
+S13 — Bowen Camper Bed. Public-page retrieval. Application, included equipment, options, consultation, warranty, and lead-time messaging. No sales-volume inference.https://www.bowencustoms.com/products/camper-bed
+S14 — Bowen Topper Beds. Public-page retrieval. Application-specific product presentation and initial $0 model-selection placeholder.https://www.bowencustoms.com/products/bed-replacement-systems
+S15 — Google Search Central: canonical URLs. Primary technical guidance on redirects, canonical tags, and consistent internal links.https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls
+S16 — Google Search Central: canonicalization. Primary guidance explaining duplicate-page handling and canonical selection.https://developers.google.com/search/docs/crawling-indexing/canonicalization
+S17 — Next Jump About. Public-page retrieval. Current story, modular proposition, and quantified hassle-reduction claim.https://www.nextjumpoutfitters.com/pages/about-us
+S18 — Next Jump Contact. Fresh Firecrawl retrieval. Active contact page, address, current posted hours, phone, and inquiry content.https://www.nextjumpoutfitters.com/pages/contact-us
+S19 — Google Search Central: link best practices. Primary guidance on crawlable links and descriptive linking.https://developers.google.com/search/docs/crawling-indexing/links-crawlable
+S20 — Ford: chassis-cab payload guidance. Manufacturer guidance that payload depends on accessories and vehicle configuration and that a specific vehicle's carrying capacity must be checked. Used for the distinction between a platform's rating and the vehicle's limits, not for a Next Jump product rating.https://www.ford.com/commercial-trucks/chassis-cab/2024/
+S21 — Google Search Central: structured data guidelines. Primary guidance on visible, representative content and the absence of guaranteed rich results.https://developers.google.com/search/docs/appearance/structured-data/sd-policies
+I01 — Business Context Review Guide(1).md and Business Context Profile — Revision 2 (1).md. Retrieved from the user's Library. Historical operating context on the two core offers, price uncertainty, supporting services, and dealership licensing. Those documents do not replace current commercial approval.
+Additional public pages reviewed or inventoried: custom lighting, vehicle detailing, marine services, the legacy flatbed URL, the Build & Price collection, and the vehicle-specific/collection URL families. They informed the scope and cleanup queue; inventory alone was not treated as a completed content or functionality audit.
+Final recommendation
+Don't make the site bigger just to make it look more complete. Make the flatbed decision easier to understand and easier to act on.
+The first win is a customer who recognizes the right setup, reaches the correct vehicle page, understands the estimate, and sends a useful request without having to solve the build alone. The site can then grow around real customer questions and completed projects instead of another layer of overlapping pages.
