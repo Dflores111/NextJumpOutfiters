@@ -3,13 +3,14 @@ import {ArrowUpRight, ArrowDown, Check, ChevronDown, Quote, Plus, MoveVertical, 
 import {P, inquiry, services, serviceImages, serviceKeys} from './routes.js';
 import {Inquiry} from './Inquiry.jsx';
 import {reviews, proofByContext, googleReviews} from './customerProof.js';
+import {actionMotionProps} from './actionMotion.js';
 
 export function JourneyImage({file, alt, eager=false, sizes='100vw', ...props}) {
   const stem=file.replace(/\.[^.]+$/, '');
   return <img src={`/images/${stem}-1600.webp`} srcSet={`/images/${stem}-640.webp 640w, /images/${stem}-1000.webp 1000w, /images/${stem}-1600.webp 1600w`} sizes={sizes} alt={alt} loading={eager?'eager':'lazy'} fetchPriority={eager?'high':'auto'} width="1600" height="1000" {...props}/>;
 }
 export function JourneyAction({to, children, secondary=false}) {
-  return <a className={`journey-action ${secondary?'journey-action-secondary':''}`} href={to}><span>{children}</span><ArrowUpRight aria-hidden="true" size={21}/></a>;
+  return <a className={`journey-action ${secondary?'journey-action-secondary':''}`} href={to} {...actionMotionProps(to)}><span>{children}</span><ArrowUpRight aria-hidden="true" size={21}/></a>;
 }
 
 // Modern Hero + Scroll Expansion Hero: bounded native scroll, visible offer and actions.

@@ -5,10 +5,11 @@ import './pages-expressive.css';
 import {WalkaroundFilm} from './BuildStories.jsx';
 import RigExplorer from './RigExplorer.jsx';
 import {FullPhotoHero, CustomerProof, ServiceExplorer, JourneyFAQ, LeadSection} from './Journey.jsx';
+import {actionMotionProps} from './actionMotion.js';
 // Art-direction inspiration: saved Image Mask and Clip-Path Image specimens.
 // Keep geometric media framing; use site-native CSS, real destinations and reduced motion.
 const image=(name)=>'/images/'+name;
-function Button({to,children,light=false}){return <a className={`button page-action ${light?'button-light':'button-primary'}`} href={to}><span>{children}</span><ArrowUpRight size={21} aria-hidden="true"/></a>}
+function Button({to,children,light=false}){return <a className={`button page-action ${light?'button-light':'button-primary'}`} href={to} {...actionMotionProps(to)}><span>{children}</span><ArrowUpRight size={21} aria-hidden="true"/></a>}
 function Photo({file,alt,eager=false,...rest}){return <img src={image(file.replace(/\.[^.]+$/, '-1000.webp'))} srcSet={`${image(file.replace(/\.[^.]+$/, '-640.webp'))} 640w, ${image(file.replace(/\.[^.]+$/, '-1000.webp'))} 1000w, ${image(file.replace(/\.[^.]+$/, '-1600.webp'))} 1600w`} sizes="(max-width: 600px) 100vw, 65vw" alt={alt} width="1600" height="1000" loading={eager?'eager':'lazy'} {...rest}/>}
 function Intro({id,file,action,to}){
   const page=pages.find(p=>p.id===id);

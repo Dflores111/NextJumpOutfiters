@@ -1,0 +1,115 @@
+/* Shiny Button mechanism extraction: shop chrome at rest, two tire lines on hover.
+   Decorations stay behind the label and inside the existing hit target. */
+:is(.journey-action,.button,.exp-action) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+:is(.journey-action,.button,.exp-action)::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+  border: 0;
+  border-radius: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(125deg,transparent 0 7px,#fff 7px 13px,transparent 13px 21px);
+  background-size: 36px 100%;
+  mask-image: linear-gradient(transparent 9%,#000 9% 25%,transparent 25% 75%,#000 75% 91%,transparent 91%);
+  opacity: 0;
+  transform: none;
+  clip-path: inset(0);
+  animation: none;
+  transition: opacity .2s;
+}
+
+:is(.journey-action,.button,.exp-action):not(:disabled):not([aria-disabled=true]):is(:hover,:focus-visible)::before {
+  opacity: .56;
+  animation: shopTrackReveal .55s cubic-bezier(.2,.7,.3,1) both,shopTreadRoll 1.4s linear infinite;
+}
+
+/* A short metallic pass followed by breathing room. Only quote actions repeat it. */
+:is(.journey-action,.button,.exp-action)[data-priority=quote] {
+  box-shadow: inset 0 1px 0 #fff8,inset 0 -2px 0 #101c1929,0 4px 14px #101c1914;
+}
+
+:is(.journey-action,.button,.exp-action)[data-priority=quote]::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  top: -50%;
+  bottom: -50%;
+  left: -55%;
+  width: 50%;
+  border-radius: 0;
+  background: linear-gradient(105deg,transparent 8%,#718b922b 27%,#eafaffb8 43%,#fff 49%,#cadbe7a3 54%,#7b90993b 65%,transparent 85%);
+  mask-image: linear-gradient(transparent 8%,#000 25%,#0003 45% 60%,#000 78%,transparent 95%);
+  transform: translateX(0);
+  opacity: 0;
+  animation: shopChromeIdle 7.2s ease-in-out infinite;
+}
+
+.site-header :is(.button,.journey-action)[data-priority=quote]::after { animation-delay: -1.1s; }
+:is(.journey-action,.button,.exp-action)[data-priority=quote][data-ambient-visible=false]::after { animation-play-state: paused; }
+:is(.journey-action,.button,.exp-action)[data-priority=quote]:is(:hover,:focus-visible)::after {
+  animation: shopChromePass .85s cubic-bezier(.2,.7,.3,1) both;
+}
+
+/* Real destination cards share the chrome pass, confined to their existing surface. */
+.service-tab-links a {
+  isolation: isolate;
+  overflow: hidden;
+}
+.service-tab-links a::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 -55%;
+  width: 50%;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(105deg,transparent 10%,#cadbe74d 35%,#fff 48%,#eafaff80 55%,transparent 80%);
+  opacity: 0;
+}
+.service-tab-links a::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 6px;
+  height: 7px;
+  pointer-events: none;
+  background: repeating-linear-gradient(125deg,transparent 0 7px,#36533b 7px 12px,transparent 12px 21px);
+  opacity: 0;
+  transition: opacity .2s;
+}
+.service-tab-links a:is(:hover,:focus-visible)::before { animation: shopChromePass .85s cubic-bezier(.2,.7,.3,1) both; }
+.service-tab-links a:is(:hover,:focus-visible)::after { opacity: .38; }
+
+@keyframes shopTrackReveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@keyframes shopTreadRoll { from { background-position: 0 0; } to { background-position: 36px 0; } }
+@keyframes shopChromePass {
+  0% { transform: translateX(0); opacity: 0; }
+  15% { opacity: .85; }
+  80% { opacity: .85; }
+  100% { transform: translateX(320%); opacity: 0; }
+}
+@keyframes shopChromeIdle {
+  0%,12% { transform: translateX(0); opacity: 0; }
+  16% { opacity: .9; }
+  38% { transform: translateX(320%); opacity: .9; }
+  42%,100% { transform: translateX(320%); opacity: 0; }
+}
+
+:is(.journey-action,.button,.exp-action):is(:disabled,[aria-disabled=true])::before,
+:is(.journey-action,.button,.exp-action):is(:disabled,[aria-disabled=true])::after { display: none; }
+
+html[data-motion=off] :is(.journey-action,.button,.exp-action,.service-tab-links a)::before,
+html[data-motion=off] :is(.journey-action,.button,.exp-action,.service-tab-links a)::after { display: none; }
+@media(prefers-reduced-motion:reduce) {
+  :is(.journey-action,.button,.exp-action,.service-tab-links a)::before,
+  :is(.journey-action,.button,.exp-action,.service-tab-links a)::after { display: none; }
+}

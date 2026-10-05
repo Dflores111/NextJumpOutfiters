@@ -2,6 +2,10 @@
 
 Updated October 5, 2026. Original Node preview: `http://127.0.0.1:4173`. Hosted Worker preview: `http://127.0.0.1:4174`.
 
+## Tire-track and chrome refinement
+
+The latest action treatment uses brighter twin tire lines that remain visible during hover/focus, recurring chrome emphasis on quote actions, and a matching hover/focus pass on service destination cards. The 27 existing tests passed. Chromium checks exercised actual pointer hover, keyboard focus, fixed button geometry, manual pause/resume, offscreen idle state, a 390-pixel layout and the hero-to-inquiry action. Decorative layers do not intercept input. Details and component provenance: [action motion polish](evidence/action-motion-polish.md).
+
 ## GitHub and ChatGPT Site publication candidate
 
 The complete existing experience is preserved in a Cloudflare Workers-compatible build. The original 24 tests plus three hosted receipt tests pass: **27 passed, zero failed**. The hosted tests execute the generated schema in SQLite and check anonymous persistence, token-gated status, personal-field exclusion, concurrent idempotency, conflicting retries, cross-origin rejection and storage-failure behavior. Production dependencies have zero reported audit vulnerabilities.
