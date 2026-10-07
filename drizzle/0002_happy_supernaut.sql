@@ -1,0 +1,1 @@
+ALTER TABLE `master_fitments` ADD `product_revision` integer DEFAULT 0 NOT NULL;

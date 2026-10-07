@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CAMPER_TYPES, USE_OPTIONS, SERVICE_OPTIONS, TOPICS, normalizeContext, normalizeProjectContext, PROJECT_LABELS, FEATURE_LABELS, validateInquiryFields } from './inquiry-contract.js';
-import { parseSavedBuild, validateBuild, products, STORAGE_KEY } from './builder/domain.js';
+import { parseSavedBuild, validateBuild, buildItems, STORAGE_KEY } from './builder/domain.js';
 import NativeInquiry from './NativeInquiry.jsx';
 import { buildInquirySummary } from './hubspot-contract.js';
+import {RECORD_KEY} from './builder/useBuildRecord.js';
 import './inquiry.css';
 
 const QUOTE_PATH = '/pages/book-install-services-or-get-a-quote';
@@ -27,6 +28,7 @@ export function Inquiry({ query = {}, embedded = false }) {
   const [liveForm, setLiveForm] = useState(false);
   const [liveRequested, setLiveRequested] = useState(false);
   const [build, setBuild] = useState(null);
+  const [buildReference,setBuildReference]=useState(null);
   const [errors, setErrors] = useState({});
   const [state, setState] = useState('idle');
   const [notice, setNotice] = useState('');
@@ -35,11 +37,12 @@ export function Inquiry({ query = {}, embedded = false }) {
   const headingRef = useRef(null);
   const busy = state === 'submitting' || state === 'checking';
   useEffect(() => {
-    if (!['flatbed', 'camper', 'work'].includes(initial.context)) return;
+    if (!['flatbed', 'camper', 'work'].includes(initial.context) && query.build!=='local') return;
     try {
       const saved = parseSavedBuild(localStorage.getItem(STORAGE_KEY));
       if (saved) {
         setBuild(saved);
+        const reference=JSON.parse(localStorage.getItem(RECORD_KEY)||'null');if(reference&&JSON.stringify(reference.config)===JSON.stringify(saved))setBuildReference({id:reference.id,version:reference.version});
         setForm(current => ({ ...current, intendedUse: useFor(saved), camperType: camperFor(saved) }));
       }
     } catch { /* The inquiry remains available when browser storage is blocked. */ }
@@ -114,7 +117,7 @@ export function Inquiry({ query = {}, embedded = false }) {
   return <section className={`inquiry-layout ${embedded ? 'inquiry-embedded' : ''}`} aria-label="Quote inquiry preview">
     <div className="inquiry-main">
       <div className="inquiry-mode-choice"><div><strong>Ready to talk to the team?</strong><p>{liveForm ? 'You are using the shop’s live form. Your website preview draft is kept while you stay on this page.' : 'Try the short preview below, or open the existing live form to send a real inquiry.'}</p></div><button type="button" aria-pressed={liveForm} onClick={() => { setLiveRequested(true); setLiveForm(current => !current); }}>{liveForm ? 'Return to website preview' : 'Open the live shop form'}</button></div>
-      {liveRequested && <div hidden={!liveForm}><NativeInquiry context={form.context} service={form.service} summary={buildInquirySummary(form, build)} /></div>}
+      {liveRequested && <div hidden={!liveForm}><NativeInquiry context={form.context} service={form.service} summary={buildInquirySummary(form, build, buildReference)} /></div>}
       <div hidden={liveForm}>
       <div className="preview-disclosure"><strong>Website preview</strong><p>This form demonstrates the inquiry. Contact details are not saved or sent to the shop.</p></div>
       {(form.project || form.feature) && <p className="inquiry-context">{form.project && <>Inspired by {PROJECT_LABELS[form.project]}. </>}{form.feature && <>Interested in {FEATURE_LABELS[form.feature].toLowerCase()}. </>}These details stay with your request.</p>}
@@ -123,7 +126,7 @@ export function Inquiry({ query = {}, embedded = false }) {
         {notice && <div className={`inquiry-status ${state}`} role={['failed', 'invalid'].includes(state) ? 'alert' : 'status'}>{notice}</div>}
         {build && <div className="inquiry-build" id="inquiry-build" tabIndex="-1">
           <div><span className="inquiry-eyebrow">Your saved configuration</span><h3>{[build.truck.year, build.truck.make, build.truck.model].filter(Boolean).join(' ') || 'Truck details to confirm'}</h3><p>{build.truck.bed ? `${build.truck.bed} bed · ` : ''}{build.use || 'Use to confirm'}</p></div>
-          <ul>{build.selected.map(id => <li key={id}>{products.find(item => item.id === id)?.name || id}</li>)}</ul>
+          <ul>{buildItems(build).map(item => <li key={item.id}>{item.name}</li>)}</ul>
           <p className="field-hint">Pricing and fitment still need review. Your request does not place an order or reserve an installation.</p>
           {errors.build && <p className="field-error">{errors.build}</p>}
           <div className="inquiry-inline-actions"><a href={`${BUILDER_PATH}?resume=1`}>Review saved build</a><button type="button" onClick={() => { setBuild(null); setErrors(current => ({ ...current, build: undefined })); }}>Continue without this build</button></div>

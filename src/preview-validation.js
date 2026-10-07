@@ -22,8 +22,7 @@ export function validatePreviewRequest(data, { sanitizeBuild, validateBuild } = 
     const valid = validation === true || validation?.valid === true || validation?.ok === true;
     if (!valid) throw fail(422, 'This saved build needs review. Open the builder to check your selections.');
     const sanitized = sanitizeBuild(data.build);
-    const route = vehicleRoutes.find((item) => item.make === sanitized.truck.make && item.model === sanitized.truck.model && item.bed === sanitized.truck.bed);
-    build = { version: 1, truck: { year: /^\d{4}$/.test(sanitized.truck.year) ? sanitized.truck.year : '', make: route?.make || 'Other / not sure', model: route?.model || '', bed: route?.bed || '' }, use: sanitized.use, camperType: sanitized.camperType, selected: sanitized.selected };
+    build = sanitized;
     // Free-text build notes and unrecognized truck labels are deliberately excluded.
   }
   const normalized = { ...data, context: cleanString(data.context, 20), build };
@@ -44,4 +43,3 @@ export function validatePreviewRequest(data, { sanitizeBuild, validateBuild } = 
     build,
   };
 }
-

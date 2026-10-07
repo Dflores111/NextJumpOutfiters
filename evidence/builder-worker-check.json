@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-07T20:24:27.463Z",
+  "runtime": "Local Cloudflare Worker with generated D1 schema",
+  "result": "PASS",
+  "savedVersions": 2,
+  "exactRetry": "PASS",
+  "immutableReopen": "PASS",
+  "missingAccessKey": 401,
+  "wrongAccessKey": 404,
+  "staffWithoutConfiguration": 403,
+  "signInWithoutConfiguration": 503,
+  "builderSSR": 200,
+  "approvedTotal": null,
+  "privateSourceImports": 0
+}

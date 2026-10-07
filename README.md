@@ -1,12 +1,14 @@
 # Next Jump website rebuild
 
-The complete flatbed-first website rebuild, prepared for GitHub and a public ChatGPT Site. It includes the accepted photography, motion, hover effects, responsive layouts, all 49 routes, truck explorer, galleries and configurator. It preserves the existing Shopify page paths and keeps retail/policy links on the live store. An optional native HubSpot form can send a real inquiry when a visitor explicitly chooses and submits it. This project is not a Shopify theme export or a replacement for the live Shopify storefront.
+The complete website rebuild and guided-builder foundation for GitHub and a public ChatGPT Site. It includes the accepted photography, motion, responsive layouts, preserved routes, truck explorer and galleries, plus flatbed/vehicle starting plans, durable saved versions and a private local Product Master/inventory workspace. Existing Shopify paths and retail/policy links remain. The native HubSpot form sends a real inquiry only when a visitor chooses and submits it. Shopify cutover is not complete.
 
 Repository: https://github.com/Dflores111/NextJumpOutfiters
 
 Shareable Site: https://next-jump-outfitters.diegoafmejia111.chatgpt.site
 
 Read [publication preparation and verification](evidence/publication-preparation.md) for the hosted adaptation and its boundaries. Earlier evidence documents the development history.
+
+Read [the October 7 builder and Product Master release](evidence/builder-product-master-release.md) for implemented behavior, private import results and cutover requirements. It supersedes earlier recommendations to adapt this rebuild into a Shopify theme.
 
 ## Run
 
@@ -47,7 +49,8 @@ Open http://127.0.0.1:4174. The local Worker database is disposable development 
 - A real-photo Super Ute explorer with numbered feature points, keyboard tabs, a detail dialog and context-preserving inquiry actions.
 - Eleven service detail pages with prominent photography, concrete scope, planning requirements, relevant proof, FAQs and preselected inquiries.
 - Preserved vehicle page inventory, with route-derived truck context and a four-stage configurator.
-- Explicit optional equipment, dependency confirmation, undo, local anonymous saving, and actual JSON download.
+- Adjustable starting plans, help-me-choose, comparison, optional equipment, dependency confirmation, undo, browser drafts, server-saved immutable versions and JSON download.
+- Product Master review, revision-specific fitment, separate installed/parts prices, stock classification, counted inventory/reservations and activity in a local staff workspace. Google/Microsoft work-account login and server roles are implemented; [shop credentials and a named roster](evidence/staff-work-account-setup.md) are required before production access opens.
 - Contextual preview inquiry forms, receipt validation, idempotency and a receipt-only confirmation screen; an explicit switch to six verified existing HubSpot native forms.
 - Safe project/feature context in native inquiries, a copy fallback and preserved local drafts when switching back.
 - Server-rendered content, branded social metadata/image, an explicit indexing allowlist, true 404s, preview noindex and security headers.
@@ -63,7 +66,7 @@ Read [the latest implementation and verification record](evidence/next-level-fin
 
 All configuration prices are unknown pending approved records. Vehicle routes identify existing page labels, not certified fitment. The old prototype's numeric prices and proposed packages are not presented as offers. No payment, booking or marketing delivery is implemented. No conversion analytics service is installed.
 
-Anonymous builds stay in this browser. The default preview form validates contact fields but does not persist them. The local Node API saves a non-personal configuration receipt under the ignored `.preview-data/` directory; the hosted Worker saves the same allowlisted configuration in D1. Names, contact details, free text and marketing choices are discarded. A saved preview receipt is not an inquiry to Next Jump.
+Browser drafts stay on the device. Explicit saved plans persist as immutable anonymous versions in hosted D1, or local SQLite in development, and reopen with a capability link. The default preview form validates contact fields but does not persist them. The local Node API saves a non-personal configuration receipt under the ignored `.preview-data/` directory; the hosted Worker saves the same allowlisted configuration in D1. Names, contact details, free text and marketing choices are discarded. A saved preview receipt is not an inquiry to Next Jump.
 
 **Open the live shop form** is different: it loads Next Jump's existing native HubSpot form, and submitting that form sends a real inquiry. Current native requirements, validation, consent and optional uploads remain HubSpot-managed. Only allowlisted project/build context is copied into an empty description field; personal entries are not silently transferred. Switching back preserves the local draft. Native rendering and context prefill have been checked, but no agent-generated live submission or end-to-end CRM delivery test has been performed. See [inquiry integration](evidence/launch-integration.md).
 
@@ -71,7 +74,7 @@ The sitemap XML is intentionally empty because this review Site has no approved 
 
 ## Continue toward launch
 
-Read [release checklist](evidence/release-checklist.md), [integration boundaries](evidence/integration-boundaries.md), [media and launch brief](evidence/media-and-launch-brief.md), and [source conflicts](evidence/source-conflicts.md). The next production work is adapting this candidate into the actual unpublished Shopify theme, approving commercial/fitment records and final intake requirements, then verifying deployed inquiry receipt and routing. Read [QA.md](QA.md) for what was actually checked and what remains unverified.
+Read [release checklist](evidence/release-checklist.md), [integration boundaries](evidence/integration-boundaries.md), [media and launch brief](evidence/media-and-launch-brief.md), and [source conflicts](evidence/source-conflicts.md). The next production work follows the Product Master cutover checklist: named staff access, an approved initial catalog, counted inventory, verified sales/payment handoff and a rehearsed migration before retiring Shopify. Read [QA.md](QA.md) for what was actually checked and what remains unverified.
 
 Supplied text is preserved under `evidence/source-text`. The UI uses proposed page copy, with changes for available assets and truthful preview states. Live image source URLs and publication-rights status are listed in `evidence/asset-manifest.json`; prior component-image provenance is preserved in `public/images/sources.json`. Font files were reused from the current storefront's Montserrat URLs.
 

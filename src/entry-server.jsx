@@ -14,10 +14,10 @@ export function metadata(url) {
   const path = new URL(url, 'http://localhost').pathname.replace(/\/$/, '') || '/';
   const vehicle = vehicleRoutes.find(page => page.path === path);
   const page = pages.find(page => page.path === path);
-  const known = !!(page || vehicle || path === P.sitemap);
-  const title = vehicle ? `${vehicle.label} Flatbed Planner | Next Jump` : path === P.sitemap ? 'Website Sitemap | Next Jump Outfitters' : page?.title || 'Page not found | Next Jump Outfitters';
-  const description = vehicle ? `Plan a flatbed configuration for your ${vehicle.label}. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.` : page?.description || 'Find your next build with Next Jump Outfitters in Tacoma.';
-  const privatePage = privatePaths.includes(path);
+  const known = !!(page || vehicle || path === P.sitemap || path === '/staff');
+  const title = path==='/staff'?'Product Master | Next Jump Staff':path===P.builder?'Plan Your Truck Build | Next Jump Outfitters':vehicle ? `${vehicle.label} Flatbed Planner | Next Jump` : path === P.sitemap ? 'Website Sitemap | Next Jump Outfitters' : page?.title || 'Page not found | Next Jump Outfitters';
+  const description = path===P.builder?'Plan a flatbed or vehicle upgrades in four simple steps. Choose a starting direction, adjust priorities and save your plan for a fitment and quote conversation.':vehicle ? `Plan a flatbed configuration for your ${vehicle.label}. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.` : page?.description || 'Find your next build with Next Jump Outfitters in Tacoma.';
+  const privatePage = privatePaths.includes(path) || path === '/staff';
   const schema = path === '/' || path === P.contact ? business : known && !privatePage ? { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: origin }, { '@type': 'ListItem', position: 2, name: vehicle?.label || page?.label || 'Sitemap', item: origin + path }] } : null;
   return { status: known ? 200 : 404, ...buildSeoHead({ path, title, description, known, privatePage, schema }, siteRelease) };
 }

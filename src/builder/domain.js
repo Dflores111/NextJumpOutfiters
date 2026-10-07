@@ -1,3 +1,4 @@
+import { planningProducts, startingPlans, upgradeIntents, upgradeModels } from '../catalog/planning.js';
 // Routing inventory from the supplied Website Blueprint, section 5.1.
 // These are existing page labels, not certified fitment records.
 export const STORAGE_KEY = 'nj-build-v1';
@@ -25,15 +26,16 @@ export const vehicleRoutes = [
   route('nissan-titan-6-5ft-standard-bed', 'Nissan', 'Titan', '6.5 ft', 'Nissan Titan 6.5-foot standard bed'),
 ];
 
-export const products = [
-  { id: 'base', name: 'Aluminum flatbed', category: 'Foundation', image: 'base-2.jpg', description: 'An open, modular foundation. Your truck determines the platform and mounting details.', price: null, status: PENDING_REVIEW },
-  { id: 'headache', name: 'Cab protection rack', category: 'Carry', image: 'headache-0.jpg', description: 'A rack behind the cab. Ask the team to review it with your load and camper plans.', price: null, status: PENDING_REVIEW },
-  { id: 'sides', name: 'Removable sides', category: 'Carry', image: 'sides-2.jpg', description: 'Sides for a contained load area, with open access when removed.', price: null, status: PENDING_REVIEW },
-  { id: 'tailgate', name: 'Tailgate upgrade', category: 'Carry', image: 'tailgate-0.jpg', description: 'A rear closure to review with your sides and any camper or topper.', price: null, status: PENDING_REVIEW },
-  { id: 'boxes', name: 'Upper storage boxes', category: 'Storage', image: 'boxes-1.jpg', description: 'Accessible storage above the deck. Required when considering the kitchen insert.', price: null, status: PENDING_REVIEW },
-  { id: 'underbody', name: 'Rear underbody storage', category: 'Storage', image: 'underbody-0.jpg', description: 'Make use of space below the flatbed, subject to vehicle clearance and mounting review.', price: null, status: PENDING_REVIEW },
-  { id: 'kitchen', name: 'Camp kitchen insert', category: 'Camp', image: 'kitchen-0.jpg', description: 'A pull-out kitchen insert for upper storage boxes. Both components need a fitment review.', requires: 'boxes', price: null, status: PENDING_REVIEW },
-];
+export const products = planningProducts;
+export const buildKind = build => build?.plan?.kind === 'vehicle' ? 'vehicle' : 'flatbed';
+export const buildItems = build => buildKind(build) === 'vehicle' ? upgradeIntents.filter(p => build.plan.upgradeIds.includes(p.id)) : products.filter(p => build.selected.includes(p.id));
+const answerOptions = { load: ['occasional','permanent','unsure'], trips: ['weekend','multi-day','remote'], priority: ['flexibility','work','camp','camper'] };
+export function sanitizePlan(value = {}) {
+  if(!value||typeof value!=='object'||Array.isArray(value))value={};
+  const kind = value.kind === 'vehicle' ? 'vehicle' : 'flatbed';
+  const answers = Object.fromEntries(Object.entries(answerOptions).filter(([key, values]) => values.includes(value.answers?.[key])).map(([key]) => [key, value.answers[key]]));
+  return { kind, packageId: startingPlans.some(p => p.kind === kind && p.id === value.packageId) ? value.packageId : '', answers, upgradeIds: upgradeIntents.filter(p => Array.isArray(value.upgradeIds)&&value.upgradeIds.includes(p.id)).map(p => p.id), fulfillment: value.fulfillment === 'diy' ? 'diy' : 'installed' };
+}
 export const uses = ['Daily use & weekends', 'Work & hauling', 'Longer overland trips', 'Camper setup', 'Still exploring'];
 export const camperTypes = ['Topper / camper shell', 'Slide-in camper', 'Flatbed camper', 'Still deciding'];
 const cleanText = (value, max = 120) => typeof value === 'string' ? value.slice(0, max).trim() : '';
@@ -49,7 +51,7 @@ export function vehicleFromRoute(value) {
 }
 export function createBuild(routeVehicle = null) {
   const vehicle = vehicleFromRoute(routeVehicle);
-  return { version: 1, truck: { year: cleanText(vehicle?.year, 4), make: cleanText(vehicle?.make), model: cleanText(vehicle?.model), bed: cleanText(vehicle?.bed) }, use: '', camperType: '', selected: ['base'] };
+  return { version: 1, truck: { year: cleanText(vehicle?.year, 4), make: cleanText(vehicle?.make), model: cleanText(vehicle?.model), bed: cleanText(vehicle?.bed) }, use: '', camperType: '', selected: ['base'], plan: sanitizePlan() };
 }
 export function normalizeSelected(ids = []) {
   const valid = new Set(products.map(p => p.id));
@@ -68,26 +70,35 @@ export function toggleSelected(ids, id) {
 export function sanitizeBuild(value) {
   if (!value || typeof value !== 'object' || value.version !== 1 || !value.truck || !Array.isArray(value.selected)) return null;
   const truck = { year: validModelYear(value.truck.year) ? value.truck.year : '', make: cleanText(value.truck.make), model: cleanText(value.truck.model), bed: cleanText(value.truck.bed) };
+  const plan = sanitizePlan(value.plan);
+  const makes = plan.kind === 'vehicle' ? Object.keys(upgradeModels) : makeOptions;
+  const models = plan.kind === 'vehicle' ? upgradeModels[truck.make] || [] : modelOptions(truck.make);
   if (!truck.make) { truck.model = ''; truck.bed = ''; }
-  else if (!makeOptions.includes(truck.make)) { truck.make = 'Other / not sure'; truck.model = 'Not sure'; truck.bed = 'Not sure'; }
-  else if (truck.model && !modelOptions(truck.make).includes(truck.model)) { truck.model = 'Not listed / not sure'; truck.bed = 'Not sure'; }
+  else if (!makes.includes(truck.make)) { truck.make = 'Other / not sure'; truck.model = 'Not sure'; truck.bed = 'Not sure'; }
+  else if (truck.model && !models.includes(truck.model)) { truck.model = 'Not listed / not sure'; truck.bed = 'Not sure'; }
   else if (!truck.model) truck.bed = '';
   else if (truck.bed && !bedOptions(truck.make, truck.model).includes(truck.bed)) truck.bed = 'Not sure';
-  return { version: 1, truck, use: uses.includes(value.use) ? value.use : '', camperType: camperTypes.includes(value.camperType) ? value.camperType : '', selected: normalizeSelected(value.selected) };
+  if(plan.kind==='vehicle')truck.bed='';
+  return { version: 1, truck, use: uses.includes(value.use) ? value.use : '', camperType: camperTypes.includes(value.camperType) ? value.camperType : '', selected: plan.kind === 'vehicle' ? [] : normalizeSelected(value.selected), plan };
 }
 export function parseSavedBuild(raw) { try { return sanitizeBuild(JSON.parse(raw)); } catch { return null; } }
-export function truckReady(truck) { return !!truck && validModelYear(truck.year ?? '') && !!truck.make && (truck.make === 'Other / not sure' || (!!truck.model && !!truck.bed)); }
+export function truckReady(truck, kind = 'flatbed') { return !!truck && validModelYear(truck.year ?? '') && !!truck.make && (truck.make === 'Other / not sure' || (!!truck.model && (kind === 'vehicle' || !!truck.bed))); }
 export function validateBuild(value) {
   const errors = [];
   const build = sanitizeBuild(value);
   if (!build) return { valid: false, errors: ['Build data is missing or has an unsupported format.'], value: null };
-  if (!truckReady(build.truck)) errors.push('Choose your truck details or the unsure option.');
+  if (!truckReady(build.truck, buildKind(build))) errors.push('Choose your truck details or the unsure option.');
   if (!validModelYear(value.truck.year ?? '')) errors.push('Use a four-digit model year from 1900 to 2100 or leave it blank.');
   if (!uses.includes(value.use)) errors.push('Choose how you plan to use your truck.');
   if (value.use === 'Camper setup' && !camperTypes.includes(value.camperType)) errors.push('Choose a camper type or Still deciding.');
-  if (!value.selected.includes('base')) errors.push('The flatbed foundation must be included.');
+  if (buildKind(build) === 'flatbed' && !value.selected.includes('base')) errors.push('The flatbed foundation must be included.');
   if (value.selected.some(id => !products.some(p => p.id === id))) errors.push('A selected option is not recognized.');
   if (value.selected.includes('kitchen') && !value.selected.includes('boxes')) errors.push('The kitchen insert requires upper storage boxes.');
   if (new Set(value.selected).size !== value.selected.length) errors.push('Selected options must be unique.');
+  if(buildKind(build)==='vehicle'&&value.selected.length)errors.push('Flatbed parts do not belong in a vehicle-upgrade plan.');
+  if(value.plan?.fulfillment&&!['installed','diy'].includes(value.plan.fulfillment))errors.push('Choose an installed or parts-only preference.');
+  if (value.plan && !['vehicle','flatbed'].includes(value.plan.kind)) errors.push('Choose a recognized build direction.');
+  if (value.plan?.packageId && !startingPlans.some(p => p.id === value.plan.packageId && p.kind === buildKind(build))) errors.push('The starting plan does not match your build direction.');
+  if (value.plan?.upgradeIds && (!Array.isArray(value.plan.upgradeIds) || value.plan.upgradeIds.some(id => !upgradeIntents.some(p => p.id === id)) || new Set(value.plan.upgradeIds).size !== value.plan.upgradeIds.length)) errors.push('Choose recognized, unique upgrade priorities.');
   return { valid: errors.length === 0, errors, value: build };
 }

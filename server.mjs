@@ -7,6 +7,8 @@ import path from 'node:path';
 import { cleanString, validateInquiryFields, PROJECT_LABELS, FEATURE_LABELS } from './src/inquiry-contract.js';
 
 import { vehicleRoutes } from './src/builder/domain.js';
+import {catalogService} from './src/catalog/service.js';
+import {openLocalMaster} from './scripts/local-master.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const sha = (value) => createHash('sha256').update(value).digest('hex');
@@ -132,7 +134,7 @@ export function isAllowedHost(host) { return /^(?:localhost|127\.0\.0\.1|\[::1\]
 export function isPrivatePath(requestUrl) {
   let pathname;
   try { pathname = decodeURIComponent(new URL(requestUrl, 'http://localhost').pathname); } catch { return true; }
-  return pathname.split('/').some((part) => part === '.preview-data' || part === 'evidence' || part === '.env' || part.startsWith('.env.') || part === '.git' || part === 'server.mjs' || part === 'tests');
+  return pathname.split('/').some((part) => part === '.preview-data' || part === 'evidence' || part === '.env' || part.startsWith('.env.') || part === '.git' || part === 'server.mjs' || part === 'tests' || part === 'db' || part === 'drizzle' || part === 'scripts' || part.endsWith('.sqlite') || part.endsWith('.sqlite-wal') || part.endsWith('.sqlite-shm'));
 }
 
 export async function startServer({ port = Number(process.env.PORT || 4173), host = '127.0.0.1' } = {}) {
@@ -141,6 +143,7 @@ export async function startServer({ port = Number(process.env.PORT || 4173), hos
   const dataDir = path.resolve(process.env.PREVIEW_DATA_DIR || path.join(root, '.preview-data'));
   if ([path.join(root, 'public'), path.join(root, 'dist/client')].some((folder) => dataDir === folder || dataDir.startsWith(folder + path.sep))) throw new Error('PREVIEW_DATA_DIR must be outside public asset directories.');
   const api = createPreviewHandler({ sanitizeBuild, validateBuild, dataDir });
+  const master = await openLocalMaster(dataDir,root);
   const vite = production ? null : await (await import('vite')).createServer({ root, server: { middlewareMode: true }, appType: 'custom' });
   const productionEntry = production ? await import(pathToFileURL(path.join(root, 'dist/server/entry-server.js')).href) : null;
   const server = http.createServer(async (req, res) => {
@@ -148,6 +151,12 @@ export async function startServer({ port = Number(process.env.PORT || 4173), hos
     try {
       if (!isAllowedHost(req.headers.host)) { json(res, 403, { error: 'This preview is available only on localhost.' }); return; }
       if (isPrivatePath(req.url)) { json(res, 404, { error: 'Not found.' }); return; }
+      if (/^\/api\/(catalog|builds|staff)(\/|\?|$)/.test(req.url)) {
+        let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>24000){json(res,413,{error:'This request is too large.'});return;}chunks.push(chunk);}
+        const request=new Request(`http://${req.headers.host}${req.url}`,{method:req.method,headers:req.headers,...(!['GET','HEAD'].includes(req.method)?{body:Buffer.concat(chunks)}:{})});
+        const response=await catalogService(request,{DB:master.DB},{localStaff:true});
+        if(response){res.writeHead(response.status,Object.fromEntries(response.headers));res.end(await response.text());return;}
+      }
       if (await api(req, res)) return;
       const url = new URL(req.url, `http://${req.headers.host}`);
       if (!['GET', 'HEAD'].includes(req.method)) { json(res, 405, { error: 'Method not allowed.' }); return; }
@@ -184,6 +193,7 @@ export async function startServer({ port = Number(process.env.PORT || 4173), hos
       if (!res.headersSent) json(res, 500, { error: 'This preview request could not be completed.' }); else res.end();
     }
   });
+  server.on('close',()=>master.close());
   await new Promise((resolve, reject) => { server.once('error', reject); server.listen(port, host, resolve); });
   console.log(`Next Jump preview ready at http://${host}:${server.address().port} (${production ? 'production build' : 'development'})`);
   server.on('close', () => vite?.close());

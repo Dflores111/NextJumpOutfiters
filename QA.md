@@ -1,6 +1,18 @@
 # Rebuild verification
 
-Updated October 5, 2026. Original Node preview: `http://127.0.0.1:4173`. Hosted Worker preview: `http://127.0.0.1:4174`.
+Updated October 7, 2026. Original Node preview defaults to `http://127.0.0.1:4173`. This builder release's Node/staff preview uses `http://127.0.0.1:4175`; its disposable Worker verification uses port 4176. Earlier checks below retain their original dates and counts.
+
+## Builder and Product Master foundation
+
+**46 tests passed, zero failed.** The added coverage checks both planning branches, sanitized configuration contracts, approved pricing/fitment gates, ambiguous matches, frozen save versions, capability-gated reopen, retries/concurrent edits, operator revision checks, counted/reserved stock, classification rules, role enforcement and Google/Microsoft token/session validation. JWT tests use synthetic signed identities; the shop's actual OAuth application and accounts have not been configured or tested.
+
+Rendered checks cover desktop, 390 and 320 pixels, both builder branches, chooser focus, comparison/dependency dialogs, save/reopen, version changes, quote context, restart/undo, staff search/review and inventory navigation. The first reduced inventory product projection revealed a selector error in the browser; it was repaired and the inventory view was rechecked. Motion pause disables the checked transitions. No overflow or broken images was observed in checked builder states. [Visual proof](evidence/builder-starting-plans.jpg).
+
+The production build passes. Client JavaScript is 477.31 kB / 139.37 kB gzip; CSS is 192.29 kB / 36.25 kB gzip. The hosted backend is verified separately against the local Worker/D1 schema; [runtime result](evidence/builder-worker-check.json). No production test inquiry or private source import is performed by that check.
+
+Production dependencies report zero audit findings. Worker tooling was updated to 4.148.0 and the compatible source-map patch was applied. The remaining audit reports three high and four moderate findings in development tooling (Wrangler/Miniflare's image dependency and Drizzle's old esbuild chain). Automatic recommendations involve incompatible upgrades/downgrades; no forced migration or blanket clean-security claim is made. Keep development servers loopback-only; resolve/retest tooling before broader operator rollout.
+
+The private local staging contains 1,756 draft product candidates and 2,340 unreconciled stock snapshots. Repeating the same import inserted zero duplicates; it approved zero prices/fitments and created zero inventory movements. Neither candidates nor private costs are included in the public Site/Git source. The customer-facing release remains a planning/quote foundation. Production staff access, approved commercial data, real-account acceptance, backup/restore and Shopify cutover remain governed by the [release checklist](evidence/builder-product-master-release.md) and [staff account setup](evidence/staff-work-account-setup.md).
 
 ## Service-specific card refinement
 

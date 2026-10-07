@@ -1,11 +1,18 @@
 import {render,seoResources} from './entry-server.jsx';
 import template from 'virtual:next-jump-template';
 import {hostedReceipts,hostedSecurityHeaders} from './hosted-receipts.js';
+import {catalogService} from './catalog/service.js';
+import {workAuth,staffIdentity,staffLoginResponse} from './catalog/work-auth.js';
 
 export default {async fetch(request,env){
  const url=new URL(request.url);
  let decoded;try{decoded=decodeURIComponent(url.pathname)}catch{return new Response('Not found',{status:404})}
  if(decoded.includes('\\')||decoded.split('/').some(p=>p.startsWith('.')))return new Response('Not found',{status:404,headers:hostedSecurityHeaders});
+ const auth=await workAuth(request,env);if(auth)return auth;
+ const staffPath=url.pathname==='/staff'||url.pathname.startsWith('/staff/')||url.pathname.startsWith('/api/staff');
+ const identity=staffPath?await staffIdentity(request,env):null;
+ if((url.pathname==='/staff'||url.pathname.startsWith('/staff/'))&&!identity)return staffLoginResponse(request,env);
+ const catalog=await catalogService(request,env,{staffIdentity:identity});if(catalog)return catalog;
  const api=await hostedReceipts(request,env);if(api)return api;
  if(!['GET','HEAD'].includes(request.method))return new Response('Method not allowed',{status:405,headers:hostedSecurityHeaders});
  if(url.pathname.startsWith('/api/'))return new Response('Not found',{status:404,headers:hostedSecurityHeaders});
