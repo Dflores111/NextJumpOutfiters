@@ -3,6 +3,7 @@ import {validateBuild,buildItems,buildKind,validModelYear,makeOptions,modelOptio
 import {upgradeModels} from './planning.js';
 import {canStaff,localIdentity,staffActor,staffPermission} from './access.js';
 import {inventoryItems,saveInventorySettings,inventoryHistory} from './inventory-service.js';
+import {lookupBarcode,barcodes,saveBarcode,listOperations,operationDetail,createPurchase,purchaseAction,receivePurchase,createJob,addJobParts,finishJob} from './operations-service.js';
 
 // Edge-compatible service. D1 and the local SQLite adapter share this contract.
 const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow'};
@@ -59,6 +60,7 @@ async function inventory(db){const rows=await all(db,"SELECT p.id,p.title,json_e
 async function moveInventory(request,db,actor){
  const input=await body(request),key=request.headers.get('idempotency-key');if(!token(key))throw fail(400,'A valid inventory action key is required.');
  const action={productId:text(input.productId,40),location:text(input.location),kind:text(input.kind),quantity:input.quantity,reference:text(input.reference),reason:text(input.reason,300)};
+ if(/^(job|po):/i.test(action.reference))throw fail(422,'Use Jobs or Purchasing to change stock linked to these records.');
  if(!locations.includes(action.location)||!['COUNT','RECEIVE','RESERVE','RELEASE'].includes(action.kind)||!Number.isSafeInteger(action.quantity)||action.quantity<0||action.quantity>1000000||(action.kind!=='COUNT'&&action.quantity===0)||!action.reason||(['RESERVE','RELEASE'].includes(action.kind)&&!action.reference))throw fail(422,'Choose a location, valid quantity, reason and a job/build reference for reservations.');
  const fingerprint=await hash(JSON.stringify(action)),eventKey=await hash(key),prior=await one(db,'SELECT * FROM inventory_movements WHERE event_key=?',eventKey);
  if(prior){if(prior.fingerprint!==fingerprint)throw fail(409,'This action key was already used for a different change.');return json({movement:prior,reused:true});}
@@ -113,7 +115,7 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
   const identity=localStaff?localIdentity:staffIdentity,permission=staffPermission(path,request.method);
   if(staff&&!identity)throw fail(403,'Sign in with an authorized shop account to use this workspace.');
   if(staff&&permission!=='session'&&!canStaff(identity,permission))throw fail(403,'Your staff role cannot perform this action. Ask the shop administrator if your access needs to change.');
-  if(path==='/api/staff/session'&&request.method==='GET')return json({identity,permissions:['catalog','inventory','sales','audit'].filter(p=>canStaff(identity,p))});
+  if(path==='/api/staff/session'&&request.method==='GET')return json({identity,permissions:['catalog','inventory','purchasing','sales','audit'].filter(p=>canStaff(identity,p))});
   if(!env.DB)throw fail(503,'Saved builds are temporarily unavailable. Your browser draft is still here.');
   if(request.method!=='GET')sameOrigin(request);
   if(path==='/api/builds'&&request.method==='POST')return await saveBuild(request,env.DB);
@@ -123,13 +125,27 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
    const latest=await one(env.DB,'SELECT id,version FROM build_versions WHERE build_id=? ORDER BY version DESC LIMIT 1',row.build_id);return json({...buildRecord(row),latestId:latest.id,latestVersion:latest.version});
   }
   if(staff){const actor=staffActor(identity),db=env.DB;
+   if(path==='/api/staff/barcodes'&&request.method==='GET')return json(url.searchParams.has('productId')?await barcodes(db,url.searchParams.get('productId')):await lookupBarcode(db,url.searchParams));
+   if(path==='/api/staff/barcodes'&&request.method==='POST')return json(await saveBarcode(db,await body(request),request.headers.get('idempotency-key'),actor));
+   for(const kind of ['purchases','jobs']){
+    const base=`/api/staff/${kind}`,isPurchase=kind==='purchases';
+    if(path===base&&request.method==='GET')return json(await listOperations(db,url.searchParams,kind));
+    if(path===base&&request.method==='POST')return json(await (isPurchase?createPurchase:createJob)(db,await body(request),request.headers.get('idempotency-key'),actor),201);
+    if(path.startsWith(base+'/')){const [recordId,step,...extra]=path.slice(base.length+1).split('/');if(!/^[a-f0-9-]{36}$/i.test(recordId)||extra.length)continue;
+     if(!step&&request.method==='GET')return json(await operationDetail(db,recordId,kind,canStaff(identity,'purchasing')));
+     if(request.method==='POST'&&(!step||isPurchase&&step==='receive'||!isPurchase&&step==='parts')){
+      const handler=isPurchase?(step==='receive'?receivePurchase:purchaseAction):(step==='parts'?addJobParts:finishJob);
+      return json(await handler(db,recordId,await body(request),request.headers.get('idempotency-key'),actor));
+     }
+    }
+   }
    if(path==='/api/staff/products'&&request.method==='POST'){const input=await body(request),title=text(input.title,300),category=text(input.category,200);if(!title||!category)throw fail(422,'Add a product name and category.');const productId=id(),time=now();await db.batch([db.prepare('INSERT INTO master_products (id,source_key,title,category,state,revision,planning_slot,data_json,updated_at) VALUES (?,?,?,?,?,?,?,?,?)').bind(productId,`manual:${productId}`,title,category,'DRAFT',1,null,JSON.stringify({source:'Manual staff entry',supplierSku:text(input.supplierSku,100)||null,prices:{}}),time),db.prepare('INSERT INTO master_audit (id,subject_id,action,actor,payload,created_at) VALUES (?,?,?,?,?,?)').bind(id(),productId,'PRODUCT_CREATED',actor,JSON.stringify({title,category}),time)]);return json({product:decodeProduct(await one(env.DB,'SELECT * FROM master_products WHERE id=?',productId))},201);}
    if(path==='/api/staff/products'&&request.method==='GET'){const q=text(url.searchParams.get('q'),80),rows=await all(env.DB,'SELECT * FROM master_products WHERE title LIKE ? ORDER BY title LIMIT 100',`%${q}%`);return json({products:rows.map(decodeProduct),locations,total:(await one(env.DB,'SELECT COUNT(*) AS count FROM master_products')).count,localOnly:!!identity.local});}
    if(path==='/api/staff/options'&&request.method==='GET'){const q=text(url.searchParams.get('q'),80);const rows=await all(db,"SELECT id,title,json_extract(data_json,'$.stockType') AS stockType,json_extract(data_json,'$.options') AS options FROM master_products WHERE title LIKE ? ORDER BY title LIMIT 100",`%${q}%`);return json({products:rows.map(({options,...p})=>{const values=options?JSON.parse(options):[];return {...p,variant:Array.isArray(values)?values.filter(Boolean).join(' · '):''};})});}
    if(/^\/api\/staff\/products\/[a-zA-Z0-9-]{36}$/.test(path)&&request.method==='PATCH')return await updateProduct(request,env.DB,path.split('/').at(-1),actor);
    if(/^\/api\/staff\/products\/[a-zA-Z0-9-]{36}\/quick$/.test(path)&&request.method==='PATCH')return await updateProduct(request,db,path.split('/').at(-2),actor,true);
    if(path==='/api/staff/fitments'&&request.method==='POST')return await fitment(request,env.DB,actor);
-   if(path==='/api/staff/inventory'&&request.method==='GET')return json({stock:await inventory(env.DB),candidates:await all(env.DB,'SELECT * FROM inventory_sources ORDER BY location LIMIT 100'),candidateCount:(await one(env.DB,'SELECT COUNT(*) AS count FROM inventory_sources')).count,locations});
+   if(path==='/api/staff/inventory'&&request.method==='GET')return json({stock:await inventory(env.DB),candidates:canStaff(identity,'catalog')?await all(env.DB,'SELECT * FROM inventory_sources ORDER BY location LIMIT 100'):[],candidateCount:(await one(env.DB,'SELECT COUNT(*) AS count FROM inventory_sources')).count,locations});
    if(path==='/api/staff/inventory'&&request.method==='POST')return await moveInventory(request,env.DB,actor);
    if(path==='/api/staff/inventory/items'&&request.method==='GET')return json(await inventoryItems(db,url.searchParams));
    if(path==='/api/staff/inventory/settings'&&request.method==='PATCH')return json(await saveInventorySettings(db,await body(request),request.headers.get('idempotency-key'),actor));

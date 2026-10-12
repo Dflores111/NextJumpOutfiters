@@ -1,10 +1,13 @@
 {
-  "checkedAt": "2026-10-12T02:46:26.984Z",
+  "checkedAt": "2026-10-12T17:01:52.633Z",
   "runtime": "Disposable local Cloudflare Worker",
   "result": "PASS",
   "checks": {
     "/staff": 403,
     "/api/staff/session": 403,
+    "/api/staff/barcodes?code=001234567890": 403,
+    "/api/staff/purchases": 403,
+    "/api/staff/jobs": 403,
     "/api/staff/inventory/items": 403,
     "/api/staff/inventory/00000000-0000-0000-0000-000000000000/history": 403,
     "PATCH /api/staff/inventory/settings": 403,

@@ -5,7 +5,12 @@ import './styles.css';
 import HomeExperience from './HomeExperience.jsx';
 import {useExperienceMotion} from './useExperienceMotion.js';
 import Builder from './builder/Builder.jsx';
-import StaffWorkspace from './catalog/StaffWorkspace.jsx';
+// Shop tools load only on the private route; customers do not download the IMS.
+function StaffWorkspace(){
+ const [Workspace,setWorkspace]=useState(null),[failed,setFailed]=useState(false);
+ useEffect(()=>{let active=true;import('./catalog/StaffWorkspace.jsx').then(module=>{if(active)setWorkspace(()=>module.default);}).catch(()=>{if(active)setFailed(true);});return()=>{active=false;};},[]);
+ return Workspace?<Workspace/>:<main style={{padding:40}} role={failed?'alert':'status'}>{failed?<>The shop workspace could not load. <button onClick={()=>window.location.reload()}>Reload workspace</button></>:'Loading shop workspace…'}</main>;
+}
 import {Inquiry,Confirmation} from './Inquiry.jsx';
 import {vehicleRoutes} from './builder/domain.js';
 import {Flatbeds,Campers,Work,Projects,SuperUte,ServiceHub,Guide,Contact,Consultation,Packages,Sitemap} from './Pages.jsx';

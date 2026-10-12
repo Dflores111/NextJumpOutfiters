@@ -1,0 +1,21 @@
+{
+  "checkedOn": "2026-10-12",
+  "result": "PASS",
+  "data": "Synthetic DEMO records in a disposable local SQLite database",
+  "productionDataWrites": 0,
+  "checks": [
+    "Barcode entry with Enter opens the exact linked part",
+    "Barcode selection inside a draft order adds a part without submitting the order",
+    "New purchase order saves and opens its persisted detail",
+    "Partial delivery persists and updates received quantities",
+    "Job completion deducts actual use and releases unused holds",
+    "Saved stock quantities survive server restart",
+    "390px mobile viewport has 390px document width",
+    "Mobile receiving form controls are at least 44px tall",
+    "Modal step focus, Escape close and focus return",
+    "No nested form elements",
+    "Reduced-motion styles present",
+    "Inventory module loads from its own production chunk"
+  ],
+  "scannerHardwareTested": false
+}

@@ -22,6 +22,21 @@ export const inventoryMovements=sqliteTable('inventory_movements',{
 export const inventorySettings=sqliteTable('inventory_settings',{
  productId:text('product_id').notNull().references(()=>masterProducts.id),location:text('location').notNull(),bin:text('bin'),minLevel:integer('min_level'),revision:integer('revision').notNull(),updatedAt:text('updated_at').notNull(),
 },t=>[uniqueIndex('inventory_settings_product_location').on(t.productId,t.location)]);
+export const productBarcodes=sqliteTable('product_barcodes',{
+ code:text('code').primaryKey(),productId:text('product_id').notNull().references(()=>masterProducts.id),createdBy:text('created_by').notNull(),createdAt:text('created_at').notNull(),
+},t=>[index('barcode_product').on(t.productId)]);
+export const purchaseOrders=sqliteTable('purchase_orders',{
+ id:text('id').primaryKey(),number:text('number').notNull().unique(),supplier:text('supplier').notNull(),location:text('location').notNull(),status:text('status').notNull(),revision:integer('revision').notNull(),expectedOn:text('expected_on'),notes:text('notes').notNull(),createdBy:text('created_by').notNull(),createdAt:text('created_at').notNull(),updatedAt:text('updated_at').notNull(),
+},t=>[index('purchase_status_location').on(t.status,t.location)]);
+export const purchaseOrderLines=sqliteTable('purchase_order_lines',{
+ orderId:text('order_id').notNull().references(()=>purchaseOrders.id),productId:text('product_id').notNull().references(()=>masterProducts.id),quantity:integer('quantity').notNull(),received:integer('received').notNull().default(0),unitCostCents:integer('unit_cost_cents'),
+},t=>[uniqueIndex('purchase_order_product').on(t.orderId,t.productId)]);
+export const stockJobs=sqliteTable('stock_jobs',{
+ id:text('id').primaryKey(),number:text('number').notNull().unique(),title:text('title').notNull(),vehicle:text('vehicle').notNull(),location:text('location').notNull(),status:text('status').notNull(),revision:integer('revision').notNull(),notes:text('notes').notNull(),createdBy:text('created_by').notNull(),createdAt:text('created_at').notNull(),updatedAt:text('updated_at').notNull(),
+},t=>[index('job_status_location').on(t.status,t.location)]);
+export const stockJobLines=sqliteTable('stock_job_lines',{
+ jobId:text('job_id').notNull().references(()=>stockJobs.id),productId:text('product_id').notNull().references(()=>masterProducts.id),quantity:integer('quantity').notNull(),used:integer('used'),
+},t=>[uniqueIndex('stock_job_product').on(t.jobId,t.productId)]);
 export const masterAudit=sqliteTable('master_audit',{
  id:text('id').primaryKey(),subjectId:text('subject_id').notNull(),action:text('action').notNull(),actor:text('actor').notNull(),payload:text('payload').notNull(),createdAt:text('created_at').notNull(),
 });

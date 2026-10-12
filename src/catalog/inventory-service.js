@@ -20,6 +20,7 @@ const base=`WITH ledger AS (
  CASE WHEN l.verified>0 AND json_extract(p.data_json,'$.stockType')='STOCKED' THEN l.onhand ELSE NULL END AS onhand,
  COALESCE(l.reserved,0) AS reserved,
  CASE WHEN l.verified>0 AND json_extract(p.data_json,'$.stockType')='STOCKED' THEN l.onhand-l.reserved ELSE NULL END AS available,
+ COALESCE((SELECT SUM(pl.quantity-pl.received) FROM purchase_order_lines pl JOIN purchase_orders po ON po.id=pl.order_id WHERE pl.product_id=p.id AND po.location=? AND po.status IN ('ORDERED','PARTIAL')),0) AS incoming,
  s.bin,s.min_level AS minLevel,COALESCE(s.revision,0) AS revision,
  MAX(p.updated_at,COALESCE(l.changed,''),COALESCE(s.updated_at,'')) AS updatedAt
  FROM master_products p LEFT JOIN ledger l ON l.product_id=p.id
@@ -31,7 +32,7 @@ export async function inventoryItems(db,params){
  const location=locationOf(params.get('location')||inventoryLocations[0]),q=(params.get('q')||'').trim().slice(0,100),view=params.get('view')||'all',sort=params.get('sort')||'title',direction=params.get('direction')||'asc',state=params.get('state')||'',category=(params.get('category')||'').slice(0,200);
  const page=Number(params.get('page')||1),pageSize=Number(params.get('pageSize')||50);
  if(!Object.hasOwn(views,view)||!Object.hasOwn(orders,sort)||!['asc','desc'].includes(direction)||!Number.isSafeInteger(page)||page<1||page>100000||!Number.isSafeInteger(pageSize)||pageSize<1||pageSize>100||!['','DRAFT','REVIEW','APPROVED','RETIRED'].includes(state))throw fail(422,'Choose valid inventory filters.');
- const filters=[],args=[location,location];
+ const filters=[],args=[location,location,location];
  if(q){filters.push("(title LIKE ? ESCAPE '\\' OR sku LIKE ? ESCAPE '\\' OR mpn LIKE ? ESCAPE '\\' OR variant LIKE ? ESCAPE '\\' OR id=?)");const term=`%${q.replace(/[\\%_]/g,'\\$&')}%`;args.push(term,term,term,term,q);}
  if(category){filters.push('category=?');args.push(category);}if(state){filters.push('state=?');args.push(state);}
  const where=filters.length?filters.join(' AND '):'1';
@@ -78,7 +79,7 @@ export async function saveInventorySettings(db,input,key,actor){
 }
 export async function inventoryHistory(db,productId,location){
  locationOf(location);if(!await one(db,'SELECT id FROM master_products WHERE id=?',productId))throw fail(404,'Item not found.');
- const movements=await all(db,'SELECT id,kind,onhand_delta,reserved_delta,reference,reason,actor,created_at FROM inventory_movements WHERE product_id=? AND location=? ORDER BY created_at DESC,id DESC LIMIT 30',productId,location);
+ const movements=await all(db,`SELECT m.id,m.kind,m.onhand_delta,m.reserved_delta,m.reference,m.reason,m.actor,m.created_at,COALESCE(j.number||' · '||j.title,o.number||' · '||o.supplier,m.reference) AS referenceLabel FROM inventory_movements m LEFT JOIN stock_jobs j ON m.reference='job:'||j.id LEFT JOIN purchase_orders o ON m.reference='po:'||o.id WHERE m.product_id=? AND m.location=? ORDER BY m.created_at DESC,m.id DESC LIMIT 30`,productId,location);
  const edits=await all(db,`SELECT a.id,a.actor,a.created_at,json_extract(a.payload,'$.field') AS field,json_extract(a.payload,'$.value') AS value FROM master_audit a WHERE action='INVENTORY_SETTINGS' AND json_extract(payload,'$.location')=? AND EXISTS (SELECT 1 FROM json_each(a.payload,'$.items') j WHERE json_extract(j.value,'$.id')=?) ORDER BY a.created_at DESC,a.id DESC LIMIT 30`,location,productId);
  const productChanges=await all(db,`SELECT id,actor,created_at,json_extract(payload,'$.title') AS title,json_extract(payload,'$.stockType') AS stockType FROM master_audit WHERE subject_id=? AND action='PRODUCT_REVIEW' AND json_type(payload,'$.stockType')='text' ORDER BY created_at DESC,id DESC LIMIT 15`,productId);
  return {movements,edits,productChanges,location};

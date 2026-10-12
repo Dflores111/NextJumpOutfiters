@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-10-12T17:03:32.733Z",
+  "runtime": "Disposable local Cloudflare Worker + D1",
+  "result": "PASS",
+  "checks": [
+    "Schema migrations",
+    "Exact barcode lookup with leading zeros",
+    "Purchase order create and order",
+    "Partial receipt with exact retry",
+    "Job reservation",
+    "Actual-use completion with exact retry",
+    "Unused hold release",
+    "Reloaded ledger and incoming projection"
+  ],
+  "opening": 10,
+  "received": 2,
+  "used": 2,
+  "finalOnhand": 10,
+  "finalReserved": 0,
+  "finalIncoming": 3,
+  "privateSourceImports": 0,
+  "productionStockWrites": 0
+}
