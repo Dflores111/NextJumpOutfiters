@@ -43,7 +43,7 @@ test('session tampering, revocation, changed roles and same-origin logout are en
  assert.equal(await staffIdentity(signed,{...config,STAFF_SESSION_EPOCH:'2'}),null);
  assert.equal(await staffIdentity(signed,{...config,STAFF_ROSTER_JSON:JSON.stringify([{email:'other@example.test',subject:'another',roles:['admin']}])}),null);
  const promoted=await staffIdentity(signed,{...config,STAFF_ROSTER_JSON:JSON.stringify([{email:'tech@example.test',subject:'123456789',roles:['sales']}])});assert.equal(canStaff(promoted,'inventory'),false);assert.equal(canStaff(promoted,'sales'),true);
- assert.equal((await workAuth(request('/auth/logout',{method:'POST',headers:{Origin:'https://attacker.example'}}),config)).status,403);
+ for(const Origin of ['https://attacker.example','null'])assert.equal((await workAuth(request('/auth/logout',{method:'POST',headers:{Origin,'Sec-Fetch-Site':'same-origin'}}),config)).status,403);
  const logout=await workAuth(request('/auth/logout',{method:'POST',headers:{Origin:origin}}),config);assert.equal(logout.status,303);assert.match(logout.headers.get('Set-Cookie'),/Max-Age=0/);
 });
 
