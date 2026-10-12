@@ -1,8 +1,9 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
 import {Barcode,Search,X,Plus,Trash2,Package,Check,MapPin} from 'lucide-react';
+import {api} from './workspace-api.js';
+export {api};
 export const actionKey=()=>Array.from(crypto.getRandomValues(new Uint8Array(32)),n=>n.toString(16).padStart(2,'0')).join('');
-export async function api(path,method='GET',body,key,signal){const response=await fetch(`/api/staff/${path}`,{method,signal,headers:{...(body?{'Content-Type':'application/json'}:{}),...(key?{'Idempotency-Key':key}:{})},...(body?{body:JSON.stringify(body)}:{})});const value=await response.json();if(!response.ok)throw Error(value.error||'This action could not be completed.');return value;}
 export function Modal({open,onClose,title,children,busy=false,wide=false,focusKey=''}){
  const ref=useRef(null),closeRef=useRef(onClose),[mounted,setMounted]=useState(false);closeRef.current=onClose;
  useEffect(()=>setMounted(true),[]);

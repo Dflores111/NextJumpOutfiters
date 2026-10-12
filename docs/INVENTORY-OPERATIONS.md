@@ -51,7 +51,7 @@ At the previous verified release, production work-account configuration and the 
 - Job and PO references are protected from manual stock actions. The history shows readable job/PO numbers and names.
 - Cancelled and completed records keep their history. Received stock is not erased by cancelling outstanding order quantities.
 - One order/job supports up to 25 distinct physical parts. Lists page 30 records; part search covers the full catalog. Service/labor and unclassified candidates do not become physical inventory.
-- Inventory UI and CSS load only on the staff route, keeping the customer site download smaller.
+- Inventory UI and CSS load only on staff and inventory-demo routes, keeping the customer site download smaller.
 
 ## What to learn from the reference platforms
 
@@ -77,6 +77,8 @@ For Next Jump, prioritize reliable part identity, location/bin, known on-hand vs
 5. Before Shopify cutover, complete returns/damage adjustments, transfers as needed, accounting/valuation decisions, backups and restore verification, operational ownership and reconciliation. No cutover has occurred.
 
 ## Validation and reproducible demo
+
+The [open inventory review](OPEN-INVENTORY-DEMO.md) at `/inventory-demo` is available without sign-in. It uses sample data in each visitor's browser tab; it is separate from private staff access and hosted D1. It supports the same stock, purchasing and job workflows with resettable examples.
 
 The automated suite includes barcode uniqueness/leading zeros, role and cost boundaries, partial/over receiving, stale and simultaneous retries, failed-transaction rollback, location scope, incoming quantities, job overbooking, actual-use deductions, cancellation and list pagination.
 
