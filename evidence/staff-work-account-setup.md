@@ -1,6 +1,6 @@
 # Staff work-account setup
 
-Google Workspace and Microsoft 365 sign-in are implemented behind configuration. No provider, account roster or credentials have been assumed. Production staff access stays closed until those are supplied and a real sign-in is verified. The local pilot deliberately uses a development identity.
+Google Workspace and Microsoft 365 can now be enabled together. The owner selected both, with Outlook/Microsoft primary and `120vc.com` as the confirmed company domain. Production staff access stays closed until company application credentials, exact named identities and roles are supplied and a real sign-in is verified. The local pilot deliberately uses a development identity.
 
 ## Accounts and permissions
 
@@ -18,11 +18,11 @@ Assign individual people. Do not approve everyone in a domain. A person may rece
 Configure these as server environment variables/secrets through Sites. They do not belong in Git, VITE variables, screenshots, public assets or chat messages containing credentials.
 
 - `STAFF_ORIGIN`: exact HTTPS site origin, without a trailing slash. Register that origin plus `/auth/callback` as the provider's exact web redirect URI.
-- `STAFF_PROVIDER`: `google` or `microsoft`.
-- `STAFF_CLIENT_ID`, `STAFF_CLIENT_SECRET`: the shop-owned web OAuth application credentials. Only `openid email profile` is requested; no mail, files, CRM or inventory provider scopes.
+- `STAFF_PROVIDERS`: `microsoft,google`; `STAFF_PRIMARY_PROVIDER`: `microsoft`. Each configured provider is independently available; an incomplete provider never becomes an active button. Legacy single-provider `STAFF_PROVIDER` and `STAFF_CLIENT_ID` / `STAFF_CLIENT_SECRET` remain supported.
+- `STAFF_MICROSOFT_CLIENT_ID`, `STAFF_MICROSOFT_CLIENT_SECRET`, `STAFF_GOOGLE_CLIENT_ID`, `STAFF_GOOGLE_CLIENT_SECRET`: separate company-owned web OAuth application credentials. Only `openid email profile` is requested; no mail, files, CRM or inventory provider scopes.
 - `STAFF_SESSION_SECRET`: at least 32 random bytes, encoded for storage, generated privately. Rotate it to invalidate all existing login/session cookies.
 - `STAFF_SESSION_EPOCH`: default `1`; increment to invalidate all sessions after an access/security change.
-- `STAFF_ROSTER_JSON`: an array of exact named identities, each with `email`, stable `subject`, and `roles`. Example shape only: `[{"email":"person@shop-domain.example","subject":"provider-stable-user-id","roles":["inventory"]}]`.
+- `STAFF_ROSTER_JSON`: an array of exact named identities, each with `provider`, `email`, stable `subject`, and `roles`. Example shape only: `[{"provider":"microsoft","email":"person@shop-domain.example","subject":"actual-entra-object-uuid","roles":["inventory"]},{"provider":"google","email":"person@shop-domain.example","subject":"actual-google-sub","roles":["inventory"]}]`. The same email at two providers is two distinct identities; neither acquires the other's roles. Untagged entries are rejected when both providers are selected.
 - Google: `STAFF_GOOGLE_DOMAIN`, plus each user's stable Google account `sub`. The ID token must have a verified email, exact Workspace domain, matching named email and stable subject. A domain hint alone does not authorize access. Obtain IDs through the shop's directory administrator or a trusted identity export.
 - Microsoft: `STAFF_MICROSOFT_TENANT` must be the shop's exact tenant GUID, not `common`/`organizations`. Each roster `subject` is the user's Entra object ID (`oid`) in that tenant. Email/UPN claims do not grant access. Use a single-tenant web application and the directory's actual user object IDs.
 
@@ -35,3 +35,15 @@ The login uses authorization code with PKCE S256, signed ten-minute state/nonce 
 Before opening staff access, sign in with one actual administrator and one inventory-only account. Verify unauthorized/personal/external accounts are rejected; an inventory-only account cannot read cost records, approve prices, or open activity/sales data. Verify a real permitted change carries the named identity. Then test removal/role changes and session invalidation. Enforce the shop's MFA/device requirements in the identity provider.
 
 Synthetic tests cover valid and denied Google/Microsoft claims, invalid/expired tokens, state, nonce, PKCE, session tampering, role revocation and server permissions. They do not establish that the shop's live provider registration or credentials work. No real-account login has been completed in this release.
+
+## 120VC setup status — October 12, 2026
+
+Microsoft's public OIDC discovery endpoint for `120vc.com` returns tenant `974b58d7-bb75-4452-9f95-099645250bfc`. This verifies discovery only; it does not prove tenant administrator access or authorize any employee.
+
+Both application registrations use the exact redirect URI:
+
+`https://next-jump-outfitters.diegoafmejia111.chatgpt.site/auth/callback`
+
+The public `/staff` address now serves a branded, accessible sign-in page without sending the inventory application or any private records to anonymous visitors. When configuration is incomplete it returns 403, with disabled options labeled Setup pending. Every staff API remains protected independently. Sessions and login flows are bound to the provider, client ID and tenant/domain; changing that connection invalidates its cookies.
+
+Outstanding: the owner and reviewers' exact email addresses, company-controlled Microsoft and Google application registrations, immutable provider identifiers and approved roles. Confirm whether Google accounts are managed Workspace accounts at `120vc.com`; a Google account using an Outlook email alone does not satisfy the required Workspace `hd` claim. No private catalog or synthetic inventory is seeded into hosted production D1 by this change.
