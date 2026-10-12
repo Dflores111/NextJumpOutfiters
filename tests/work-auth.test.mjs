@@ -103,3 +103,14 @@ test('failed callbacks offer a fresh sign-in and log only a fixed failure reason
  }
  assert.deepEqual(messages,[['staff_sign_in_rejected','missing_flow'],['staff_sign_in_rejected','invalid_flow']]);
 });
+
+test('token exchange uses the edge-compatible manual mode and rejects redirects without forwarding credentials',async t=>{
+ const messages=[];t.mock.method(console,'warn',(...args)=>messages.push(args));
+ const config=env('microsoft'),flow=await start(config);let calls=0;
+ const response=await workAuth(request(`/auth/callback?state=${flow.flow.state}&code=synthetic`,{headers:{Cookie:flow.cookie}}),config,{fetchImpl:async(url,options)=>{
+  calls++;assert.equal(url,authConfig(config).token);assert.equal(options.redirect,'manual');
+  return new Response(null,{status:302,headers:{Location:'https://untrusted.example/token'}});
+ }});
+ assert.equal(calls,1);assert.equal(response.status,403);assert.deepEqual(messages,[['staff_sign_in_rejected','token_exchange']]);
+ assert.equal((await response.text()).includes(config.STAFF_CLIENT_SECRET),false);
+});

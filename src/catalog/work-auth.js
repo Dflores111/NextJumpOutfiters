@@ -113,7 +113,8 @@ export async function workAuth(request,env,{fetchImpl=fetch,keyResolver}={}){
   if(url.href.length>12000||url.searchParams.getAll('state').length!==1||url.searchParams.getAll('code').length!==1||!flow||url.searchParams.get('state')!==flow.state||url.searchParams.has('error'))return denied('flow_mismatch');
   let phase='token_exchange';
   try{
-   const token=await fetchImpl(config.token,{method:'POST',redirect:'error',signal:AbortSignal.timeout(10000),headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:config.clientId,client_secret:config.clientSecret,code:url.searchParams.get('code'),redirect_uri:config.origin+'/auth/callback',code_verifier:flow.verifier})});
+   // Workers supports manual redirects; non-2xx replies below are rejected without following them.
+   const token=await fetchImpl(config.token,{method:'POST',redirect:'manual',signal:AbortSignal.timeout(10000),headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:config.clientId,client_secret:config.clientSecret,code:url.searchParams.get('code'),redirect_uri:config.origin+'/auth/callback',code_verifier:flow.verifier})});
    if(!token.ok)return denied('token_exchange');phase='token_response';const result=await token.json();if(typeof result.id_token!=='string'||result.id_token.length>16000)return denied('token_response');
    phase='identity_verification';
    if(!resolvers.has(config.jwks))resolvers.set(config.jwks,createRemoteJWKSet(new URL(config.jwks),{timeoutDuration:10000}));
