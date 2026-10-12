@@ -6,7 +6,7 @@ export function staffPermission(path,method){
  if(path==='/api/staff/session')return 'session';
  if(path==='/api/staff/options')return 'inventory';
  if(path.startsWith('/api/staff/products')||path==='/api/staff/fitments')return 'catalog';
- if(path==='/api/staff/inventory')return 'inventory';
+ if(path==='/api/staff/inventory'||path.startsWith('/api/staff/inventory/'))return 'inventory';
  if(path==='/api/staff/builds')return 'sales';
  if(path==='/api/staff/audit')return 'audit';
  return null;

@@ -19,6 +19,9 @@ export const inventorySources=sqliteTable('inventory_sources',{
 export const inventoryMovements=sqliteTable('inventory_movements',{
  id:text('id').primaryKey(),eventKey:text('event_key').notNull().unique(),fingerprint:text('fingerprint').notNull(),productId:text('product_id').notNull().references(()=>masterProducts.id),location:text('location').notNull(),kind:text('kind').notNull(),onhandDelta:integer('onhand_delta').notNull(),reservedDelta:integer('reserved_delta').notNull(),reference:text('reference').notNull(),actor:text('actor').notNull(),reason:text('reason').notNull(),createdAt:text('created_at').notNull(),
 },t=>[index('inventory_product_location').on(t.productId,t.location)]);
+export const inventorySettings=sqliteTable('inventory_settings',{
+ productId:text('product_id').notNull().references(()=>masterProducts.id),location:text('location').notNull(),bin:text('bin'),minLevel:integer('min_level'),revision:integer('revision').notNull(),updatedAt:text('updated_at').notNull(),
+},t=>[uniqueIndex('inventory_settings_product_location').on(t.productId,t.location)]);
 export const masterAudit=sqliteTable('master_audit',{
  id:text('id').primaryKey(),subjectId:text('subject_id').notNull(),action:text('action').notNull(),actor:text('actor').notNull(),payload:text('payload').notNull(),createdAt:text('created_at').notNull(),
 });

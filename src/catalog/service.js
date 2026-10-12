@@ -2,6 +2,7 @@ import {publicPlanningCatalog} from './planning.js';
 import {validateBuild,buildItems,buildKind,validModelYear,makeOptions,modelOptions,bedOptions} from '../builder/domain.js';
 import {upgradeModels} from './planning.js';
 import {canStaff,localIdentity,staffActor,staffPermission} from './access.js';
+import {inventoryItems,saveInventorySettings,inventoryHistory} from './inventory-service.js';
 
 // Edge-compatible service. D1 and the local SQLite adapter share this contract.
 const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow'};
@@ -75,8 +76,9 @@ async function moveInventory(request,db,actor){
  await run(db,`INSERT OR IGNORE INTO inventory_movements (id,event_key,fingerprint,product_id,location,kind,onhand_delta,reserved_delta,reference,actor,reason,created_at) SELECT ?,?,?,?,?,?,${delta},?,?,?,?,? WHERE ${condition}`,id(),eventKey,fingerprint,action.productId,action.location,action.kind,...deltaArgs,reservedDelta,action.reference,actor,action.reason,now(),...conditionArgs);
  const saved=await one(db,'SELECT * FROM inventory_movements WHERE event_key=?',eventKey);if(!saved)throw fail(409,'This change would exceed verified available stock or release stock held for another job.');if(saved.fingerprint!==fingerprint)throw fail(409,'This action key belongs to another change.');return json({movement:saved,reused:false},201);
 }
-async function updateProduct(request,db,productId,actor){
+async function updateProduct(request,db,productId,actor,quick=false){
  const input=await body(request),row=await one(db,'SELECT * FROM master_products WHERE id=?',productId);if(!row)throw fail(404,'Product not found.');
+ if(quick){if(Object.keys(input).some(key=>!['revision','title','category','supplierSku','stockType','reason'].includes(key)))throw fail(422,'Quick edits cannot change approvals, prices or builder mappings.');input.state=row.state;input.planningSlot=row.planning_slot||'';}
  if(!Number.isSafeInteger(input.revision)||input.revision!==row.revision)throw fail(409,'This product changed. Refresh before editing.');
  if(!['DRAFT','REVIEW','APPROVED','RETIRED'].includes(input.state)||!text(input.reason,300))throw fail(422,'Choose a review state and record your reason.');
  const data=JSON.parse(row.data_json);data.prices??={};
@@ -125,9 +127,13 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
    if(path==='/api/staff/products'&&request.method==='GET'){const q=text(url.searchParams.get('q'),80),rows=await all(env.DB,'SELECT * FROM master_products WHERE title LIKE ? ORDER BY title LIMIT 100',`%${q}%`);return json({products:rows.map(decodeProduct),locations,total:(await one(env.DB,'SELECT COUNT(*) AS count FROM master_products')).count,localOnly:!!identity.local});}
    if(path==='/api/staff/options'&&request.method==='GET'){const q=text(url.searchParams.get('q'),80);const rows=await all(db,"SELECT id,title,json_extract(data_json,'$.stockType') AS stockType,json_extract(data_json,'$.options') AS options FROM master_products WHERE title LIKE ? ORDER BY title LIMIT 100",`%${q}%`);return json({products:rows.map(({options,...p})=>{const values=options?JSON.parse(options):[];return {...p,variant:Array.isArray(values)?values.filter(Boolean).join(' · '):''};})});}
    if(/^\/api\/staff\/products\/[a-zA-Z0-9-]{36}$/.test(path)&&request.method==='PATCH')return await updateProduct(request,env.DB,path.split('/').at(-1),actor);
+   if(/^\/api\/staff\/products\/[a-zA-Z0-9-]{36}\/quick$/.test(path)&&request.method==='PATCH')return await updateProduct(request,db,path.split('/').at(-2),actor,true);
    if(path==='/api/staff/fitments'&&request.method==='POST')return await fitment(request,env.DB,actor);
    if(path==='/api/staff/inventory'&&request.method==='GET')return json({stock:await inventory(env.DB),candidates:await all(env.DB,'SELECT * FROM inventory_sources ORDER BY location LIMIT 100'),candidateCount:(await one(env.DB,'SELECT COUNT(*) AS count FROM inventory_sources')).count,locations});
    if(path==='/api/staff/inventory'&&request.method==='POST')return await moveInventory(request,env.DB,actor);
+   if(path==='/api/staff/inventory/items'&&request.method==='GET')return json(await inventoryItems(db,url.searchParams));
+   if(path==='/api/staff/inventory/settings'&&request.method==='PATCH')return json(await saveInventorySettings(db,await body(request),request.headers.get('idempotency-key'),actor));
+   if(/^\/api\/staff\/inventory\/[a-zA-Z0-9-]{36}\/history$/.test(path)&&request.method==='GET')return json(await inventoryHistory(db,path.split('/').at(-2),url.searchParams.get('location')));
    if(path==='/api/staff/builds'&&request.method==='GET')return json({builds:(await all(env.DB,'SELECT * FROM build_versions ORDER BY created_at DESC LIMIT 100')).map(buildRecord)});
    if(path==='/api/staff/audit'&&request.method==='GET')return json({events:await all(env.DB,'SELECT id,subject_id,action,actor,payload,created_at FROM master_audit ORDER BY created_at DESC LIMIT 100'),movements:await all(env.DB,'SELECT * FROM inventory_movements ORDER BY created_at DESC LIMIT 100')});
   }
