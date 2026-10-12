@@ -111,17 +111,24 @@ export async function workAuth(request,env,{fetchImpl=fetch,keyResolver}={}){
   const clear=cookie(FLOW,'',0),flow=await verifyCookie(config,getCookie(request,FLOW),'flow');
   const denied=(stage='identity_validation')=>rejectSignIn(stage);
   if(url.href.length>12000||url.searchParams.getAll('state').length!==1||url.searchParams.getAll('code').length!==1||!flow||url.searchParams.get('state')!==flow.state||url.searchParams.has('error'))return denied('flow_mismatch');
+  let phase='token_exchange';
   try{
    const token=await fetchImpl(config.token,{method:'POST',redirect:'error',signal:AbortSignal.timeout(10000),headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:config.clientId,client_secret:config.clientSecret,code:url.searchParams.get('code'),redirect_uri:config.origin+'/auth/callback',code_verifier:flow.verifier})});
-   if(!token.ok)return denied('token_exchange');const result=await token.json();if(typeof result.id_token!=='string'||result.id_token.length>16000)return denied('token_response');
+   if(!token.ok)return denied('token_exchange');phase='token_response';const result=await token.json();if(typeof result.id_token!=='string'||result.id_token.length>16000)return denied('token_response');
+   phase='identity_verification';
    if(!resolvers.has(config.jwks))resolvers.set(config.jwks,createRemoteJWKSet(new URL(config.jwks),{timeoutDuration:10000}));
    const {payload}=await jwtVerify(result.id_token,keyResolver||resolvers.get(config.jwks),{issuer:config.issuer,audience:config.clientId,algorithms:['RS256'],requiredClaims:['exp','iat','sub','nonce'],maxTokenAge:'10m',clockTolerance:5});
-   if(payload.nonce!==flow.nonce||(payload.azp&&payload.azp!==config.clientId)||(Array.isArray(payload.aud)&&payload.aud.length>1&&payload.azp!==config.clientId))return denied();
+   if(payload.nonce!==flow.nonce||(payload.azp&&payload.azp!==config.clientId)||(Array.isArray(payload.aud)&&payload.aud.length>1&&payload.azp!==config.clientId))return denied('nonce_or_client');
    const identity=claimsIdentity(config,payload);if(!identity)return denied('not_invited');
    const lifetime=Math.min(1800,payload.exp-Math.floor(Date.now()/1000));if(lifetime<=0)return denied();
    const headers=new Headers({...responseHeaders,Location:'/staff'});headers.append('Set-Cookie',clear);headers.append('Set-Cookie',cookie(SESSION,await sign(config,{subject:identity.subject},'session',lifetime),lifetime));
    return new Response(null,{status:303,headers});
-  }catch{return denied();}
+  }catch(error){
+   const codes={ERR_JWT_CLAIM_VALIDATION_FAILED:'claim',ERR_JWT_EXPIRED:'expired',ERR_JWKS_TIMEOUT:'key_timeout',ERR_JWKS_NO_MATCHING_KEY:'key_missing',ERR_JWS_SIGNATURE_VERIFICATION_FAILED:'signature'};
+   const kind=codes[error?.code]||({TypeError:'type',ReferenceError:'reference',SyntaxError:'syntax'}[error?.name])||'failed';
+   const claim=['iss','aud','iat','exp','nonce','sub'].includes(error?.claim)?'_'+error.claim:'';
+   return denied(phase+'_'+kind+claim);
+  }
  }
  return plain('Not found.',404);
 }
