@@ -90,3 +90,16 @@ test('sign-in page offers both choices, discloses unavailable options and expose
  const closed=staffLoginResponse(request('/staff'),{});assert.equal(closed.status,403);assert.match(await closed.text(),/Team access is being connected/);
  assert.equal(await staffLoginResponse(request('/staff',{method:'HEAD'}),config).text(),'');
 });
+
+test('failed callbacks offer a fresh sign-in and log only a fixed failure reason',async t=>{
+ const messages=[];t.mock.method(console,'warn',(...args)=>messages.push(args));
+ const config=env('microsoft'),flow=await start(config),path='/auth/callback?code=private-callback-code&state=private-callback-state';
+ for(const headers of [{},{Cookie:flow.cookie.slice(0,-8)+'tampered'}]){
+  const response=await workAuth(request(path,{headers}),config),html=await response.text();
+  assert.equal(response.status,403);assert.match(response.headers.get('Content-Type'),/text\/html/);
+  assert.match(html,/role="alert"/);assert.match(html,/Start a fresh request/);assert.match(html,/href="\/auth\/login\?provider=microsoft"/);
+  assert.match(response.headers.get('Set-Cookie'),/Max-Age=0/);
+  for(const value of ['private-callback-code','private-callback-state',flow.cookie,config.STAFF_CLIENT_SECRET,config.STAFF_SESSION_SECRET])assert.equal(html.includes(value),false);
+ }
+ assert.deepEqual(messages,[['staff_sign_in_rejected','missing_flow'],['staff_sign_in_rejected','invalid_flow']]);
+});

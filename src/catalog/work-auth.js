@@ -75,6 +75,13 @@ export async function staffIdentity(request,env){
 }
 export async function workAuth(request,env,{fetchImpl=fetch,keyResolver}={}){
  const url=new URL(request.url);if(!url.pathname.startsWith('/auth/'))return null;
+ const rejectSignIn=stage=>{
+  // Only a fixed reason is logged. Never log callback URLs, codes, tokens or cookies.
+  console.warn('staff_sign_in_rejected',stage);
+  const response=staffLoginResponse(request,env,{retry:true});
+  response.headers.append('Set-Cookie',cookie(FLOW,'',0));
+  return response;
+ };
  if(url.searchParams.getAll('provider').length>1)return plain('Choose one sign-in provider.',400);
  let config;
  if(url.pathname==='/auth/callback'){
@@ -83,7 +90,7 @@ export async function workAuth(request,env,{fetchImpl=fetch,keyResolver}={}){
    const candidate=authConfig(env,provider);
    if(candidate&&await verifyCookie(candidate,getCookie(request,FLOW),'flow')){config=candidate;break;}
   }
-  if(!config)return plain('Sign-in could not be completed. Return to /staff and try again.',403);
+  if(!config)return rejectSignIn(getCookie(request,FLOW)?'invalid_flow':'missing_flow');
  }else config=authConfig(env,url.searchParams.get('provider')||undefined);
  if(url.pathname==='/auth/logout')config=selectedProviders(env).map(provider=>authConfig(env,provider)).find(Boolean);
  if(!config||url.origin!==config.origin)return plain('Staff sign-in is awaiting shop account configuration.',503);
@@ -102,15 +109,15 @@ export async function workAuth(request,env,{fetchImpl=fetch,keyResolver}={}){
  }
  if(url.pathname==='/auth/callback'){
   const clear=cookie(FLOW,'',0),flow=await verifyCookie(config,getCookie(request,FLOW),'flow');
-  const denied=()=>new Response('Sign-in could not be completed. Return to /staff and try again, or ask the shop administrator to confirm your access.',{status:403,headers:{...responseHeaders,'Content-Type':'text/plain; charset=utf-8','Set-Cookie':clear}});
-  if(url.href.length>12000||url.searchParams.getAll('state').length!==1||url.searchParams.getAll('code').length!==1||!flow||url.searchParams.get('state')!==flow.state||url.searchParams.has('error'))return denied();
+  const denied=(stage='identity_validation')=>rejectSignIn(stage);
+  if(url.href.length>12000||url.searchParams.getAll('state').length!==1||url.searchParams.getAll('code').length!==1||!flow||url.searchParams.get('state')!==flow.state||url.searchParams.has('error'))return denied('flow_mismatch');
   try{
    const token=await fetchImpl(config.token,{method:'POST',redirect:'error',signal:AbortSignal.timeout(10000),headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',client_id:config.clientId,client_secret:config.clientSecret,code:url.searchParams.get('code'),redirect_uri:config.origin+'/auth/callback',code_verifier:flow.verifier})});
-   if(!token.ok)return denied();const result=await token.json();if(typeof result.id_token!=='string'||result.id_token.length>16000)return denied();
+   if(!token.ok)return denied('token_exchange');const result=await token.json();if(typeof result.id_token!=='string'||result.id_token.length>16000)return denied('token_response');
    if(!resolvers.has(config.jwks))resolvers.set(config.jwks,createRemoteJWKSet(new URL(config.jwks),{timeoutDuration:10000}));
    const {payload}=await jwtVerify(result.id_token,keyResolver||resolvers.get(config.jwks),{issuer:config.issuer,audience:config.clientId,algorithms:['RS256'],requiredClaims:['exp','iat','sub','nonce'],maxTokenAge:'10m',clockTolerance:5});
    if(payload.nonce!==flow.nonce||(payload.azp&&payload.azp!==config.clientId)||(Array.isArray(payload.aud)&&payload.aud.length>1&&payload.azp!==config.clientId))return denied();
-   const identity=claimsIdentity(config,payload);if(!identity)return denied();
+   const identity=claimsIdentity(config,payload);if(!identity)return denied('not_invited');
    const lifetime=Math.min(1800,payload.exp-Math.floor(Date.now()/1000));if(lifetime<=0)return denied();
    const headers=new Headers({...responseHeaders,Location:'/staff'});headers.append('Set-Cookie',clear);headers.append('Set-Cookie',cookie(SESSION,await sign(config,{subject:identity.subject},'session',lifetime),lifetime));
    return new Response(null,{status:303,headers});
@@ -118,10 +125,10 @@ export async function workAuth(request,env,{fetchImpl=fetch,keyResolver}={}){
  }
  return plain('Not found.',404);
 }
-export function staffLoginResponse(request,env){
+export function staffLoginResponse(request,env,{retry=false}={}){
  if(!['GET','HEAD'].includes(request.method))return plain('Method not allowed.',405);
  const selected=selectedProviders(env),primary=env.STAFF_PRIMARY_PROVIDER||selected[0]||'microsoft';
  const providers=[...new Set([primary,...selected,'microsoft','google'])].filter(provider=>['google','microsoft'].includes(provider)).map(provider=>({provider,ready:Boolean(authConfig(env,provider))}));
  const ready=providers.some(provider=>provider.ready);
- return new Response(request.method==='HEAD'?null:staffSignInPage(providers),{status:ready?200:403,headers:{...responseHeaders,'Content-Type':'text/html; charset=utf-8','X-Frame-Options':'DENY','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"}});
+ return new Response(request.method==='HEAD'?null:staffSignInPage(providers,{retry}),{status:retry?403:ready?200:403,headers:{...responseHeaders,'Content-Type':'text/html; charset=utf-8','X-Frame-Options':'DENY','Content-Security-Policy':"default-src 'none'; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"}});
 }
