@@ -143,3 +143,9 @@ Before launch, complete `evidence/release-checklist.md`: approve commercial/fitm
 - Local browser checks: private source import, real-source draft preview and shop output, plus an explicitly synthetic local customer quote saved/reopened and found in staff Quotes. The appointment inquiry retained the verified quote reference; no inquiry was submitted.
 - Responsive checks at 390px: package editor and customer quote controls/text stay within the viewport; desktop and mobile layouts were inspected. New hover transitions respect reduced motion.
 - Synthetic quote data exists only in isolated local QA. Publication does not import QA data or create live test orders, jobs, counts or customer quotes. Native production deployment and the authenticated source import are separate final verification steps.
+
+### Hosted verification
+
+Site version 13 deployed the connected workflow at source `6809a57c7e582d56f4b4eb3d53781e7ebe5540da`. Microsoft sign-in succeeded. The authenticated source import was verified against the native live database: 33 draft parts, three draft packages, 13 draft standards, and zero inventory movements, purchase orders, stock jobs or customer package quotes. Anonymous staff API requests returned 403; the public package menu contained no unreviewed packages. The real-source draft shop brief rendered and downloaded as HTML with no private cost field or executable script.
+
+Final polish preserves vehicle details when changing a reopened quote and labels archived packages explicitly. The reopened/change/save path passed in the isolated local browser, and all 94 tests passed again. Final publication uses the exact source-helper commit and saved Site version.
