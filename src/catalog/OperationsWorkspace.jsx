@@ -9,7 +9,7 @@ const date=v=>new Date(v).toLocaleString(undefined,{month:'short',day:'numeric',
 const dollars=c=>c==null?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(c/100);
 export default function OperationsWorkspace({canCatalog,canPurchasing}){
  const [mode,setMode]=useState('stock');
- return <div className="inv-workbench ops-workspace"><div className="ops-nav" role="group" aria-label="Inventory areas">{[['stock','Stock',Warehouse],['purchases','Purchasing',ShoppingCart],['jobs','Jobs',Wrench]].map(([id,label,Icon])=><button key={id} type="button" aria-pressed={mode===id} onClick={()=>setMode(id)}><Icon size={19}/>{label}</button>)}</div>{mode==='stock'?<InventoryWorkspace canCatalog={canCatalog} onJobs={()=>setMode('jobs')} onPurchasing={()=>setMode('purchases')}/>:<OperationsBoard key={mode} kind={mode} canPurchasing={canPurchasing}/>}</div>;
+ return <div className="inv-workbench ops-workspace"><div className="ops-nav" role="group" aria-label="Inventory areas">{[['stock','Stock',Warehouse],['purchases','Purchasing',ShoppingCart],['jobs','Jobs',Wrench]].map(([id,label,Icon])=><button key={id} type="button" aria-pressed={mode===id} onClick={()=>setMode(id)}><Icon size={19}/>{label}</button>)}</div>{mode==='stock'?<InventoryWorkspace canCatalog={canCatalog} canPurchasing={canPurchasing} onJobs={()=>setMode('jobs')} onPurchasing={()=>setMode('purchases')}/>:<OperationsBoard key={mode} kind={mode} canPurchasing={canPurchasing}/>}</div>;
 }
 function OperationsBoard({kind,canPurchasing}){
  const po=kind==='purchases';

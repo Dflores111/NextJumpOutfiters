@@ -79,3 +79,7 @@ Read [release checklist](evidence/release-checklist.md), [integration boundaries
 Supplied text is preserved under `evidence/source-text`. The UI uses proposed page copy, with changes for available assets and truthful preview states. Live image source URLs and publication-rights status are listed in `evidence/asset-manifest.json`; prior component-image provenance is preserved in `public/images/sources.json`. Font files were reused from the current storefront's Montserrat URLs.
 
 The original website and builder-prototype projects remain in the local workspace. This repository includes the complete website and hosted adaptation; it does not include unrelated workspace projects or local visitor data.
+
+## Curated Tacoma package pilot
+
+The connected package workflow is documented in [TACOMA-PACKAGE-PILOT.md](docs/TACOMA-PACKAGE-PILOT.md). Review the source-backed drafts at `/staff?tab=packages`; approved packages feed `/pages/tacoma-lift-packages`. One saved estimate produces the customer rundown and private shop install brief. Supplier availability remains separate from counted inventory. Private source files are imported through authenticated staff access and are never bundled with the website.

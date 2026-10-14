@@ -4,6 +4,7 @@ import {upgradeModels} from './planning.js';
 import {canStaff,localIdentity,staffActor,staffPermission} from './access.js';
 import {inventoryItems,saveInventorySettings,inventoryHistory} from './inventory-service.js';
 import {lookupBarcode,barcodes,saveBarcode,listOperations,operationDetail,createPurchase,purchaseAction,receivePurchase,createJob,addJobParts,finishJob} from './operations-service.js';
+import {packageService} from './package-service.js';
 
 // Edge-compatible service. D1 and the local SQLite adapter share this contract.
 const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow'};
@@ -21,10 +22,10 @@ const locations=['Tacoma Showroom','Overland Expo Redmond','Online Shop Shipping
 const writeRates=new Map();
 function rateLimit(request){const time=Date.now(),key=request.headers.get('cf-connecting-ip')||'local',current=writeRates.get(key),bucket=current&&time-current.start<60000?current:{start:time,count:0};bucket.count++;writeRates.set(key,bucket);if(writeRates.size>1000)for(const [key,value]of writeRates)if(time-value.start>=60000)writeRates.delete(key);if(bucket.count>30)throw fail(429,'Too many saves. Wait a minute; your browser draft is still here.');}
 export const vehicleKey=truck=>[truck.year,truck.make,truck.model,truck.bed].join('|');
-async function body(request){
+async function body(request,maxBytes=24000){
  if(!(request.headers.get('content-type')||'').startsWith('application/json'))throw fail(415,'Send this request as JSON.');
  const reader=request.body?.getReader();if(!reader)throw fail(400,'A request is required.');
- let size=0,parts=[];for(;;){const chunk=await reader.read();if(chunk.done)break;size+=chunk.value.length;if(size>24000){await reader.cancel();throw fail(413,'This request is too large.');}parts.push(chunk.value);}
+ let size=0,parts=[];for(;;){const chunk=await reader.read();if(chunk.done)break;size+=chunk.value.length;if(size>maxBytes){await reader.cancel();throw fail(413,'This request is too large.');}parts.push(chunk.value);}
  try{const bytes=new Uint8Array(size);let offset=0;for(const p of parts){bytes.set(p,offset);offset+=p.length;}const value=JSON.parse(new TextDecoder().decode(bytes));if(!value||typeof value!=='object'||Array.isArray(value))throw Error();return value;}catch{throw fail(400,'This request is not valid JSON.');}
 }
 function sameOrigin(request){const origin=request.headers.get('origin');const site=request.headers.get('sec-fetch-site');if(origin!==new URL(request.url).origin||(site&&!['same-origin','none'].includes(site)))throw fail(403,'Use this workspace to make the change.');}
@@ -87,6 +88,7 @@ async function updateProduct(request,db,productId,actor,quick=false){
  const title=input.title===undefined?row.title:text(input.title,300),category=input.category===undefined?row.category:text(input.category,200);if(!title||!category)throw fail(422,'Product name and category cannot be empty.');
  if(input.supplierSku!==undefined)data.supplierSku=text(input.supplierSku,100)||null;if(input.manufacturerPartNumber!==undefined)data.manufacturerPartNumber=text(input.manufacturerPartNumber,100)||null;
  if(input.stockType!==undefined){if(!['UNREVIEWED','STOCKED','NON_STOCKED','SERVICE'].includes(input.stockType))throw fail(422,'Choose a recognized inventory classification.');data.stockType=input.stockType;}
+ if(input.tags!==undefined){if(!Array.isArray(input.tags)||input.tags.length>30||input.tags.some(tag=>typeof tag!=='string'||!tag.trim()||tag.length>80))throw fail(422,'Use short, consistent sales and collection tags.');data.tags=[...new Set(input.tags.map(tag=>tag.trim()))];}
  if(input.price){const p=input.price;if(!['installed','diy'].includes(p.mode)||!Number.isSafeInteger(p.cents)||p.cents<0||p.cents>100000000||!['DRAFT','APPROVED'].includes(p.state))throw fail(422,'Use a valid price mode, integer cents and approval state.');data.prices[p.mode]={cents:p.cents,currency:'USD',state:p.state,approvedBy:p.state==='APPROVED'?actor:null,updatedAt:now()};}
  const slot=input.planningSlot===''?null:text(input.planningSlot,50);if(slot&&!publicPlanningCatalog().products.concat(publicPlanningCatalog().upgrades).some(p=>p.id===slot))throw fail(422,'Choose a recognized planning option.');
  const actionId=id(),time=now(),payload=JSON.stringify({revision:row.revision+1,state:input.state,title,category,stockType:data.stockType||'UNREVIEWED',planningSlot:slot,reason:text(input.reason,300),price:input.price||null,previous:{revision:row.revision,state:row.state,title:row.title,category:row.category}});
@@ -108,7 +110,7 @@ async function fitment(request,db,actor){
 }
 export async function catalogService(request,env,{localStaff=false,staffIdentity=null}={}){
  const url=new URL(request.url),path=url.pathname;
- if(!path.startsWith('/api/catalog')&&!path.startsWith('/api/builds')&&!path.startsWith('/api/staff'))return null;
+ if(!path.startsWith('/api/catalog')&&!path.startsWith('/api/builds')&&!path.startsWith('/api/staff')&&!path.startsWith('/api/packages')&&!path.startsWith('/api/package-quotes'))return null;
  try{
   if(path==='/api/catalog'&&request.method==='GET')return json(publicPlanningCatalog());
   const staff=path.startsWith('/api/staff');
@@ -118,6 +120,8 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
   if(path==='/api/staff/session'&&request.method==='GET')return json({identity,permissions:['catalog','inventory','purchasing','sales','audit'].filter(p=>canStaff(identity,p))});
   if(!env.DB)throw fail(503,'Saved builds are temporarily unavailable. Your browser draft is still here.');
   if(request.method!=='GET')sameOrigin(request);
+  if(path==='/api/package-quotes'&&request.method==='POST')rateLimit(request);
+  const packageResponse=await packageService(request,env.DB,{identity:staff?identity:null,readBody:body,json});if(packageResponse)return packageResponse;
   if(path==='/api/builds'&&request.method==='POST')return await saveBuild(request,env.DB);
   if(/^\/api\/builds\/[a-zA-Z0-9-]{36}$/.test(path)&&request.method==='GET'){
    const access=request.headers.get('x-build-access');if(!token(access))throw fail(401,'Use the reopen link to access this build.');
@@ -140,7 +144,7 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
     }
    }
    if(path==='/api/staff/products'&&request.method==='POST'){const input=await body(request),title=text(input.title,300),category=text(input.category,200);if(!title||!category)throw fail(422,'Add a product name and category.');const productId=id(),time=now();await db.batch([db.prepare('INSERT INTO master_products (id,source_key,title,category,state,revision,planning_slot,data_json,updated_at) VALUES (?,?,?,?,?,?,?,?,?)').bind(productId,`manual:${productId}`,title,category,'DRAFT',1,null,JSON.stringify({source:'Manual staff entry',supplierSku:text(input.supplierSku,100)||null,prices:{}}),time),db.prepare('INSERT INTO master_audit (id,subject_id,action,actor,payload,created_at) VALUES (?,?,?,?,?,?)').bind(id(),productId,'PRODUCT_CREATED',actor,JSON.stringify({title,category}),time)]);return json({product:decodeProduct(await one(env.DB,'SELECT * FROM master_products WHERE id=?',productId))},201);}
-   if(path==='/api/staff/products'&&request.method==='GET'){const q=text(url.searchParams.get('q'),80),rows=await all(env.DB,'SELECT * FROM master_products WHERE title LIKE ? ORDER BY title LIMIT 100',`%${q}%`);return json({products:rows.map(decodeProduct),locations,total:(await one(env.DB,'SELECT COUNT(*) AS count FROM master_products')).count,localOnly:!!identity.local});}
+   if(path==='/api/staff/products'&&request.method==='GET'){const q=text(url.searchParams.get('q'),80),rows=await all(env.DB,"SELECT * FROM master_products WHERE instr(lower(title),lower(?))>0 OR instr(lower(COALESCE(json_extract(data_json,'$.supplierSku'),'')),lower(?))>0 OR instr(lower(COALESCE(json_extract(data_json,'$.manufacturerPartNumber'),'')),lower(?))>0 ORDER BY title LIMIT 100",q,q,q);return json({products:rows.map(decodeProduct),locations,total:(await one(env.DB,'SELECT COUNT(*) AS count FROM master_products')).count,localOnly:!!identity.local});}
    if(path==='/api/staff/options'&&request.method==='GET'){const q=text(url.searchParams.get('q'),80);const rows=await all(db,"SELECT id,title,json_extract(data_json,'$.stockType') AS stockType,json_extract(data_json,'$.options') AS options FROM master_products WHERE title LIKE ? ORDER BY title LIMIT 100",`%${q}%`);return json({products:rows.map(({options,...p})=>{const values=options?JSON.parse(options):[];return {...p,variant:Array.isArray(values)?values.filter(Boolean).join(' · '):''};})});}
    if(/^\/api\/staff\/products\/[a-zA-Z0-9-]{36}$/.test(path)&&request.method==='PATCH')return await updateProduct(request,env.DB,path.split('/').at(-1),actor);
    if(/^\/api\/staff\/products\/[a-zA-Z0-9-]{36}\/quick$/.test(path)&&request.method==='PATCH')return await updateProduct(request,db,path.split('/').at(-2),actor,true);

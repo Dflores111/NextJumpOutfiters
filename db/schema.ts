@@ -43,3 +43,15 @@ export const masterAudit=sqliteTable('master_audit',{
 export const buildVersions=sqliteTable('build_versions',{
  id:text('id').primaryKey(),buildId:text('build_id').notNull(),version:integer('version').notNull(),parentId:text('parent_id'),keyHash:text('key_hash').notNull().unique(),accessHash:text('access_hash').notNull(),fingerprint:text('fingerprint').notNull(),config:text('config_json').notNull(),estimate:text('estimate_json').notNull(),createdAt:text('created_at').notNull(),
 },t=>[uniqueIndex('build_version_number').on(t.buildId,t.version)]);
+export const curatedPackages=sqliteTable('curated_packages',{
+ id:text('id').primaryKey(),sourceKey:text('source_key').notNull().unique(),title:text('title').notNull(),category:text('category').notNull(),state:text('state').notNull(),revision:integer('revision').notNull(),data:text('data_json').notNull(),updatedAt:text('updated_at').notNull(),
+});
+export const buildStandards=sqliteTable('build_standards',{
+ id:text('id').primaryKey(),sourceKey:text('source_key').notNull().unique(),title:text('title').notNull(),category:text('category').notNull(),state:text('state').notNull(),revision:integer('revision').notNull(),data:text('data_json').notNull(),updatedAt:text('updated_at').notNull(),
+});
+export const productSupply=sqliteTable('product_supply',{
+ productId:text('product_id').primaryKey().references(()=>masterProducts.id),revision:integer('revision').notNull(),data:text('data_json').notNull(),updatedAt:text('updated_at').notNull(),
+});
+export const packageQuotes=sqliteTable('package_quotes',{
+ id:text('id').primaryKey(),number:text('number').notNull().unique(),packageId:text('package_id').notNull().references(()=>curatedPackages.id),packageRevision:integer('package_revision').notNull(),keyHash:text('key_hash').notNull().unique(),accessHash:text('access_hash').notNull(),fingerprint:text('fingerprint').notNull(),snapshot:text('snapshot_json').notNull(),createdAt:text('created_at').notNull(),
+});

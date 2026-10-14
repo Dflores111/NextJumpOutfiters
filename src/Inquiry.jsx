@@ -4,6 +4,7 @@ import { parseSavedBuild, validateBuild, buildItems, STORAGE_KEY } from './build
 import NativeInquiry from './NativeInquiry.jsx';
 import { buildInquirySummary } from './hubspot-contract.js';
 import {RECORD_KEY} from './builder/useBuildRecord.js';
+import {reopenPackageQuote,packageInquirySummary} from './catalog/package-client.js';
 import './inquiry.css';
 
 const QUOTE_PATH = '/pages/book-install-services-or-get-a-quote';
@@ -29,6 +30,7 @@ export function Inquiry({ query = {}, embedded = false }) {
   const [liveRequested, setLiveRequested] = useState(false);
   const [build, setBuild] = useState(null);
   const [buildReference,setBuildReference]=useState(null);
+  const [packageQuote,setPackageQuote]=useState(null);
   const [errors, setErrors] = useState({});
   const [state, setState] = useState('idle');
   const [notice, setNotice] = useState('');
@@ -36,6 +38,7 @@ export function Inquiry({ query = {}, embedded = false }) {
   const payloadRef = useRef(null);
   const headingRef = useRef(null);
   const busy = state === 'submitting' || state === 'checking';
+  useEffect(()=>{let active=true;if(query.packageQuote)reopenPackageQuote(query.packageQuote).then(value=>{if(active&&value&&!value.customer.draft){setPackageQuote(value);const q=value.customer;setForm(current=>({...current,vehicleDetails:current.vehicleDetails||`${q.vehicle.year} ${q.vehicle.make} ${q.vehicle.model}`,message:current.message||`Please confirm ${q.title}, quote ${q.number}, and an installation appointment.`}));}}).catch(()=>{});return()=>{active=false;};},[query.packageQuote]);
   useEffect(() => {
     if (!['flatbed', 'camper', 'work'].includes(initial.context) && query.build!=='local') return;
     try {
@@ -117,7 +120,8 @@ export function Inquiry({ query = {}, embedded = false }) {
   return <section className={`inquiry-layout ${embedded ? 'inquiry-embedded' : ''}`} aria-label="Quote inquiry preview">
     <div className="inquiry-main">
       <div className="inquiry-mode-choice"><div><strong>Ready to talk to the team?</strong><p>{liveForm ? 'You are using the shop’s live form. Your website preview draft is kept while you stay on this page.' : 'Try the short preview below, or open the existing live form to send a real inquiry.'}</p></div><button type="button" aria-pressed={liveForm} onClick={() => { setLiveRequested(true); setLiveForm(current => !current); }}>{liveForm ? 'Return to website preview' : 'Open the live shop form'}</button></div>
-      {liveRequested && <div hidden={!liveForm}><NativeInquiry context={form.context} service={form.service} summary={buildInquirySummary(form, build, buildReference)} /></div>}
+      {packageQuote&&<div className="inquiry-build"><span className="inquiry-eyebrow">Your saved package quote</span><h3>{packageQuote.customer.title}</h3><p>{packageQuote.customer.number} · {packageQuote.customer.vehicle.year} Toyota Tacoma</p><p>The package reference and vehicle details carry into the shop’s inquiry. The appointment still needs confirmation.</p></div>}
+      {liveRequested && <div hidden={!liveForm}><NativeInquiry context={form.context} service={form.service} summary={[buildInquirySummary(form, build, buildReference),packageInquirySummary(packageQuote)].filter(Boolean).join('\n\n')} /></div>}
       <div hidden={liveForm}>
       <div className="preview-disclosure"><strong>Website preview</strong><p>This form demonstrates the inquiry. Contact details are not saved or sent to the shop.</p></div>
       {(form.project || form.feature) && <p className="inquiry-context">{form.project && <>Inspired by {PROJECT_LABELS[form.project]}. </>}{form.feature && <>Interested in {FEATURE_LABELS[form.feature].toLowerCase()}. </>}These details stay with your request.</p>}

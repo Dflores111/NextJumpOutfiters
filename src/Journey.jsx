@@ -15,13 +15,13 @@ export function JourneyAction({to, children, secondary=false}) {
 }
 
 // Modern Hero + Scroll Expansion Hero: bounded native scroll, visible offer and actions.
-export function FullPhotoHero({file, alt, kicker, title, description, action='Get a quote', to=inquiry(), secondary, caption, home=false}) {
+export function FullPhotoHero({file, alt, kicker, title, description, action='Get a quote', to=inquiry(), secondary, caption, home=false, footTo='#page-content'}) {
   const id=useId();
   return <section className={`full-photo-hero ${home?'full-photo-home':''}`} data-scene aria-labelledby={id}>
     <div className="full-photo-media"><JourneyImage file={file} alt={alt} eager/></div>
     <div className="full-photo-overlay" aria-hidden="true"/>
     <div className="full-photo-copy container"><p className="hero-kicker">{kicker}</p><h1 id={id}>{title}</h1><p className="hero-description">{description}</p><div className="journey-actions"><JourneyAction to={to}>{action}</JourneyAction>{secondary&&<JourneyAction to={secondary.to} secondary>{secondary.label}</JourneyAction>}</div></div>
-    <div className="full-photo-foot container"><a href="#page-content">Explore what’s possible <ArrowDown size={19}/></a><span>{caption||'Next Jump photography. Equipment varies by project.'}</span></div>
+    <div className="full-photo-foot container"><a href={footTo}>Explore what’s possible <ArrowDown size={19}/></a><span>{caption||'Next Jump photography. Equipment varies by project.'}</span></div>
   </section>;
 }
 

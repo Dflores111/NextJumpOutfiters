@@ -36,6 +36,13 @@
       "when": 1791823290970,
       "tag": "0004_long_flatman",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1791871474262,
+      "tag": "0005_melted_firelord",
+      "breakpoints": true
     }
   ]
 }
