@@ -1,0 +1,86 @@
+/* Photography and project stories, within the approved NJO visual system. */
+.shop-story-people {gap:64px; padding-block:75px 85px; scroll-margin-top:20px}
+.njo-home .shop-story-people {padding-top:10px}
+.shop-story-people > * {min-width:0}
+.shop-story-people .shop-story-photo {margin:0}
+.shop-story-people .shop-story-photo > img {width:100%; height:auto; aspect-ratio:1; object-fit:cover; object-position:0% 50%; border-radius:28px; display:block}
+.shop-story-people .shop-story-stamp {right:18px; bottom:58px; font-size:16px}
+.shop-story-photo figcaption {font-size:14px; color:#55574d; line-height:1.5; margin-top:14px}
+.shop-story-people .shop-story-copy h2 {font-size:clamp(36px,4vw,59px); line-height:1.1; letter-spacing:-.045em; margin:18px 0 26px}
+.shop-story-people .shop-story-copy p {font-size:18px; line-height:1.65}
+.shop-founder-intro {display:flex; align-items:center; gap:18px; margin-bottom:25px}
+.shop-founder-intro > img {width:82px; height:82px; object-fit:contain; flex-shrink:0; border-radius:50%; background:#e6e0d4}
+.shop-founder-intro strong {display:block; font-size:19px; line-height:1.4}
+.shop-founder-intro span {display:block; font-size:14px; line-height:1.5; color:#55574d; margin-top:3px}
+#meet-j-scott {scroll-margin-top:20px}
+.shop-story-people .journey-actions {align-items:center; gap:14px 24px; flex-wrap:wrap}
+.shop-visit-link {display:inline-flex; align-items:center; min-height:44px; text-decoration:underline; text-underline-offset:5px; font-size:16px; font-weight:650}
+
+.story-project-facts {display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:30px; padding:30px 0; margin:25px 0 0; border-block:1px solid #ccc3b4}
+.story-project-facts dt {font-size:13px; font-weight:750; text-transform:uppercase; letter-spacing:.06em; color:#6b4b35; margin-bottom:10px}
+.story-project-facts dd {font-size:21px; line-height:1.4; font-weight:650; margin:0; letter-spacing:-.02em}
+.story-refined .project-story-intro {scroll-margin-top:20px; padding-top:65px}
+.story-refined .project-story-intro h2 {font-size:clamp(38px,4.2vw,60px); text-wrap:balance}
+.story-field-study {margin-bottom:60px}
+.story-study-heading {margin-bottom:35px; max-width:850px}
+.story-study-heading h2 {font-size:clamp(32px,3.4vw,49px); line-height:1.13; letter-spacing:-.04em; margin:15px 0 0; text-wrap:balance}
+.story-study-grid {display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:65px; align-items:center}
+.story-study-grid > * {min-width:0}
+.story-photograph {margin:0}
+.story-photo-open {display:block; position:relative; width:100%; padding:0; border:0; border-radius:26px; overflow:hidden; background:#e6e0d4; cursor:zoom-in; color:white; font:inherit}
+.story-photo-open > img {display:block; width:100%; height:auto; aspect-ratio:3/2; object-fit:contain}
+.story-photograph-portrait .story-photo-open > img {aspect-ratio:4/5; object-fit:cover; object-position:50% 64%}
+.story-photo-open > span {position:absolute; right:16px; bottom:16px; display:flex; align-items:center; gap:12px; min-height:44px; background:#202c22; color:white; border:1px solid #f4f0e860; border-radius:24px; padding:10px 16px; font-size:14px; line-height:1.4; font-weight:650}
+.story-photo-open:is(:hover,:focus-visible) > span {background:#f67a34; color:#171717; border-color:#f67a34}
+.story-photo-open:focus-visible {outline:3px solid #a94316; outline-offset:5px}
+.story-photograph figcaption {font-size:14px; line-height:1.6; margin-top:14px; color:#55574d}
+.story-field-notes {list-style:none; padding:0; margin:0; display:grid; gap:28px}
+.story-field-notes li {display:flex; align-items:flex-start; gap:23px; border-top:1px solid #c9c0b1; padding-top:24px}
+.story-note-number {font-size:17px; line-height:1.5; font-weight:750; color:#a8400d; flex:0 0 28px}
+.story-field-notes h3 {font-size:25px; line-height:1.2; letter-spacing:-.03em; margin:0 0 14px}
+.story-field-notes p {font-size:18px; line-height:1.65; margin:0}
+.story-photo-dialog {width:min(1200px,calc(100vw - 48px)); max-width:none; max-height:92svh; padding:18px; border:1px solid #687268; border-radius:22px; background:#1e2820; color:#fff; overflow:auto}
+.story-photo-dialog::backdrop {background:#09120ee8}
+.story-photo-dialog-heading {display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:15px}
+.story-photo-dialog-heading p {color:#f4f0e8; font-size:15px; line-height:1.5; margin:0}
+.story-photo-dialog-heading button {display:grid; place-items:center; flex:0 0 44px; min-height:44px; padding:8px; border:1px solid #b7c0b2; border-radius:50%; background:#f4f0e8; color:#1c2c20; cursor:pointer}
+.story-photo-dialog > img {display:block; width:100%; height:auto; max-height:72svh; object-fit:contain}
+.project-next-actions {display:flex; flex-direction:column; gap:20px; align-items:flex-start; flex-shrink:0}
+.project-next-actions .text-link {display:inline-flex; align-items:center; gap:12px; min-height:44px; font-size:16px; line-height:1.5; text-decoration:underline; text-underline-offset:5px}
+#story-study-heading {scroll-margin-top:20px}
+
+@media(max-width:1100px) {
+ .shop-story-people {gap:40px}
+ .story-study-grid {gap:35px}
+ .story-field-notes p {font-size:17px}
+}
+@media(max-width:800px) {
+ .shop-story-people {padding-block:50px 60px; gap:30px}
+ .shop-story-people .shop-story-photo > img {aspect-ratio:4/3; object-position:30% 50%}
+ .shop-story-people .shop-story-copy h2 {font-size:clamp(36px,6vw,49px)}
+ .story-study-grid {grid-template-columns:1fr; gap:32px}
+ .project-next-actions {margin-top:25px}
+ .story-photograph-portrait {max-width:560px; width:100%; justify-self:center}
+ .story-photo-dialog {width:calc(100vw - 24px); padding:12px; border-radius:15px}
+ .story-photo-dialog-heading {gap:15px}
+}
+@media(max-width:600px) {
+ .shop-story-people .shop-story-copy h2 {font-size:38px}
+ .shop-story-people .shop-story-stamp {font-size:14px; right:12px; bottom:58px; padding:12px}
+ .shop-founder-intro > img {width:72px; height:72px}
+ .shop-founder-intro {gap:14px}
+ .shop-founder-intro span {font-size:14px}
+ .shop-story-people .journey-actions {display:flex; align-items:flex-start}
+ .shop-story-people .journey-action {font-size:14px; padding-inline:18px}
+ .story-project-facts {grid-template-columns:1fr; gap:17px; padding-block:24px}
+ .story-project-facts > div {display:grid; grid-template-columns:95px minmax(0,1fr); gap:16px; align-items:baseline}
+ .story-project-facts dt {font-size:12px; margin:0}
+ .story-project-facts dd {font-size:17px}
+ .story-refined .project-story-intro {padding-top:40px; gap:22px}
+ .story-field-study {margin-bottom:40px}
+ .story-study-heading {margin-bottom:25px}
+ .story-field-notes {gap:22px}
+ .story-field-notes li {gap:15px; padding-top:22px}
+ .story-field-notes h3 {font-size:24px}
+ .story-photo-open > span {right:12px; bottom:12px; font-size:13px; padding:10px 13px}
+}

@@ -31,6 +31,7 @@ import {CompleteBuilds,WhyNJO,TripCare,TripsCommunity} from './Marketing.jsx';
 import {FlatbedJourney} from './FlatbedStages.jsx';
 import {interestInquiry} from './marketing-content.js';
 import './njo5.css';
+import './story-refinements.css';
 const img=(name)=>'/images/'+name;
 export function LinkButton({to,children,light=false,outline=false,...props}){return <a href={to} className={`button ${outline?'button-outline':light?'button-light':'button-primary'}`} {...actionMotionProps(to)} {...props}>{children}</a>}
 function Photo({file,alt,className='',eager=false,...props}){return <img className={className} src={img(file.replace(/\.[^.]+$/, '-1000.webp'))} srcSet={`${img(file.replace(/\.[^.]+$/, '-640.webp'))} 640w, ${img(file.replace(/\.[^.]+$/, '-1000.webp'))} 1000w, ${img(file.replace(/\.[^.]+$/, '-1600.webp'))} 1600w`} sizes="(max-width: 600px) 100vw, 50vw" alt={alt} width="1600" height="1000" loading={eager?'eager':'lazy'} fetchPriority={eager?'high':'auto'} {...props}/>}

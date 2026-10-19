@@ -1,0 +1,38 @@
+{
+  "scope": "Local marketing and project-story refinement only",
+  "layoutObservations": 63,
+  "paths": [
+    "/",
+    "/pages/why-njo",
+    "/pages/about-us",
+    "/pages/complete-expedition-truck-builds",
+    "/pages/our-work",
+    "/pages/dillon-f250-lift-project",
+    "/pages/alaskan-camper-flatbed-setup"
+  ],
+  "widths": [
+    360,
+    390,
+    600,
+    768,
+    800,
+    900,
+    1024,
+    1440,
+    1920
+  ],
+  "layoutResult": "No horizontal overflow, missing or duplicate H1, failed loaded images, or new photo controls wider than their containers.",
+  "photoControls": "Dillon and Alaskan full-photo controls open on click/Enter; initial focus is on Close; Escape and close-button click restore opener focus and page scrolling. Mobile photo remains within the viewport. Caption contrast checked.",
+  "dillonInquiry": "Get a suspension quote reaches context=service, project=dillon-f250, service=suspension; heading, selected service, project label and preview notice verified.",
+  "camperInquiry": "Discuss my camper setup reaches context=camper and project=alaskan-camper; heading, path choice, project label and preview notice verified.",
+  "founderPath": "Earlier shop section links to the founder section on About; both the portrait and heading remain available at the new section anchor.",
+  "noLiveSubmission": true,
+  "limits": [
+    "Chromium viewport QA; no physical-device certification",
+    "Existing bundle-size warning retained",
+    "No new real-customer records, CRM mapping or production deployment",
+    "One verified photo per Dillon/Alaskan project; no invented before-and-after or undocumented part specifications"
+  ],
+  "founderAnchorResult": "On settled mobile navigation the whole founder portrait is visible, its top at 110 px below a 77 px header.",
+  "localBrowserDiagnostics": "No localhost console warnings or errors observed in the final review."
+}

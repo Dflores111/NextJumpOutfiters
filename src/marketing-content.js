@@ -21,7 +21,7 @@ export const serviceCopy = {
  P22:['Get the camper and truck working together.',"We'll look at the camper, truck, mounting and carrying setup before planning the installation.",'Discuss my camper setup','Plan the truck, mounting and camper together.'],
 };
 export const startingPaths=[
- {title:'Upgrade my truck',text:'Lifts, wheels, tires, lighting, bumpers, racks and more. Get the work you need without committing to a full build.',action:'See installation services',to:P.services,file:'flagship-dillon-f250.webp',alt:"Dillon's lifted green and white F-250, an actual customer project"},
- {title:'Build a flatbed or camper',text:"Start with a modular aluminum flatbed. Add storage, a camper setup and other gear when you're ready.",action:'Explore flatbeds & campers',to:P.flatbeds,file:'flagship-ranger-flatbed.jpg',alt:'Ford Ranger photographed with a Next Jump flatbed'},
- {title:'Plan a complete build',text:'Bring the truck you own or ask us to help find one. Build the full setup at once, or take it a piece at a time.',action:'Explore complete builds',to:P.complete,file:'ute-tent.jpg',alt:'The Super Ute collaboration with its camp setup deployed'},
+ {title:'Upgrade my truck',text:'Lifts, wheels, tires, lighting, bumpers, racks and more. Get the work you need without committing to a full build.',action:'See installation services',to:P.services,file:'flagship-dillon-f250.webp',alt:"Dillon's lifted green and white F-250, an actual customer project",imagePosition:'50% 64%'},
+ {title:'Build a flatbed or camper',text:"Start with a modular aluminum flatbed. Add storage, a camper setup and other gear when you're ready.",action:'Explore flatbeds & campers',to:P.flatbeds,file:'flagship-ranger-flatbed.jpg',alt:'Ford Ranger photographed with a Next Jump flatbed',imagePosition:'50% 58%'},
+ {title:'Plan a complete build',text:'Bring the truck you own or ask us to help find one. Build the full setup at once, or take it a piece at a time.',action:'Explore complete builds',to:P.complete,file:'ute-front.jpg',alt:'The completed Super Ute collaboration on a forest road, with flatbed, side storage and camp equipment',imagePosition:'50% 68%'},
 ];
