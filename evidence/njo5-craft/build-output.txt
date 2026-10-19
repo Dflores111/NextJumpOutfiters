@@ -1,0 +1,32 @@
+
+> next-jump-outfitters@1.0.0 build
+> node scripts/build-hosted.mjs
+
+vite v6.4.3 building for production...
+transforming...
+✓ 1651 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/client/index.html                            0.55 kB │ gzip:   0.34 kB
+dist/client/assets/sql-wasm-DfANybxk.wasm       658.41 kB │ gzip: 322.99 kB
+dist/client/assets/StaffWorkspace-Dwsi7Sd1.css   31.24 kB │ gzip:   7.17 kB
+dist/client/assets/index-D4n6hKIe.css           221.98 kB │ gzip:  41.57 kB
+dist/client/assets/StaffWorkspace-D0-mpT93.js    98.39 kB │ gzip:  26.65 kB
+dist/client/assets/demo-runtime-tMkh5pin.js     118.49 kB │ gzip:  35.85 kB
+dist/client/assets/index-hRHvlKrD.js            510.13 kB │ gzip: 150.71 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.48s
+vite v6.4.3 building SSR bundle for production...
+transforming...
+✓ 1699 modules transformed.
+rendering chunks...
+dist/server/index.js                            69.48 kB
+dist/server/assets/service-qjFrdg3i.js          87.99 kB
+dist/server/assets/demo-runtime-CCvhC3jg.js     92.13 kB
+dist/server/assets/StaffWorkspace-C7xBKdat.js  147.45 kB
+dist/server/entry-server.js                    932.06 kB
+✓ built in 873ms
