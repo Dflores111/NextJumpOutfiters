@@ -1,24 +1,19 @@
 import React from 'react';
-import {ArrowUpRight} from 'lucide-react';
 import {BuildStories} from './BuildStories.jsx';
-import RigExplorer from './RigExplorer.jsx';
 import {ShopStoryTeaser} from './Story.jsx';
-import {P, inquiry} from './routes.js';
-import {FullPhotoHero, PhotoChapter, CustomerProof, JourneyFAQ, LeadSection, JourneyAction} from './Journey.jsx';
-
-export default function HomeExperience(){
-  return <div className="expressive-home journey-home">
-    <FullPhotoHero home file="hero.png" alt="Next Jump Ford F-350 aluminum flatbed on a wooded trail" kicker="NEXT JUMP OUTFITTERS / TACOMA, WASHINGTON" title={<>Aluminum flatbeds.<br/><em>Serious truck upgrades.</em></>} description="More space for gear. A setup that works together. We build modular flatbeds and install off-road equipment for work, camping and everything in between." action="Get a quote" to="#start-project" secondary={{to:P.builder,label:'Plan your flatbed'}}/>
-    <div id="page-content" className="journey-value-strip"><span>Modular aluminum flatbeds</span><span>Off-road & overland installations</span><span>Veteran-owned Tacoma shop</span></div>
-    <div className="journey-chapters container">
-      <div className="journey-section-head" data-reveal><div><span className="eyebrow">LESS COMPROMISE. MORE TRUCK.</span><h2>Build around<br/><span className="trail-mark">what you actually do.</span></h2></div><p>Haul the tools. Pack for a longer trip. Make camp easier. Start with the job your current setup can’t do.</p></div>
-      <PhotoChapter file="ute-detail.jpg" alt="Super Ute flatbed with its tailgate down and side storage boxes" label="MODULAR ALUMINUM FLATBEDS" title={<>More room.<br/>Less digging.</>} to={P.flatbeds} action="Explore the flatbed system" secondary={{to:inquiry('flatbed'),label:'Get a flatbed quote'}}>Replace the factory bed with an open platform. Add storage boxes, removable sides and camp equipment around the gear you carry.</PhotoChapter>
-      <PhotoChapter file="services-hero.jpg" alt="Black Toyota 4Runner outfitted with a rooftop tent on a forest trail" label="OFF-ROAD & OVERLAND INSTALLATION" title={<>Off-road installs.<br/><span className="trail-mark">Done right.</span></>} to={P.services} action="Explore installation services" secondary={{to:inquiry('service'),label:'Get an installation quote'}}>Suspension, tires, racks, lighting, power and camping equipment. Planned around your vehicle and installed at our Tacoma shop.</PhotoChapter>
-      <div className="journey-use-links"><a href={P.camper}>Building around a camper? <ArrowUpRight/></a><a href={P.work}>Need a truck that works harder? <ArrowUpRight/></a></div>
-    </div>
-    <CustomerProof to="#start-project"/>
-    <RigExplorer/><BuildStories/>
-    <ShopStoryTeaser/><JourneyFAQ/>
-    <LeadSection/>
-  </div>;
-}
+import {P,inquiry} from './routes.js';
+import {FullPhotoHero,PhotoChapter,CustomerProof} from './Journey.jsx';
+import {StartingPaths,BrandDifference,BuildWays,Questions,MarketingClose} from './Marketing.jsx';
+export default function HomeExperience(){return <div className="expressive-home journey-home njo-home">
+ <FullPhotoHero home file="hero.png" alt="Next Jump Ford F-350 aluminum flatbed on a wooded trail" kicker="OFF-ROAD & OVERLAND SHOP · TACOMA, WA" title={<>From one truck upgrade to a <em>complete expedition build.</em></>} description="Need a lift, flatbed or full build? We'll help you choose what fits, do the work, and keep track of what comes next." signature="You drive. We're your pit crew." action="Explore installation services" to={P.services} secondary={{to:P.complete,label:'Plan my build'}}/>
+ <div id="page-content"><StartingPaths/></div>
+ <BrandDifference/>
+ <BuildStories compact/>
+ <CustomerProof to={inquiry('general')}/>
+ <BuildWays/>
+ <div className="container njo-flatbed-teaser"><PhotoChapter file="flagship-ranger-flatbed.jpg" alt="Ford Ranger with a Next Jump modular flatbed and dropsides" label="MODULAR FLATBEDS" title="Start with a flatbed. Build from there." to={P.flatbeds+'#five-stages'} action="See the five stages">An open aluminum deck today. Lockable storage or a camper setup later. The NJO modular system is designed to grow with what you need from your truck.</PhotoChapter></div>
+ <section className="njo-editorial container"><h2>The shop doesn't have to disappear after pickup.</h2><div><span className="eyebrow">BEYOND THE INSTALL</span><p>Getting ready for a trip? Dealing with something that broke? We plan to help with readiness checks, trip itineraries and post-trip care. These are paid services, separate from the build warranty.</p><a className="text-link" href={P.care}>Explore trip prep & care</a></div></section>
+ <ShopStoryTeaser/>
+ <Questions items={[["Can I come in for just a lift or lighting?","Absolutely. One-time installs are welcome. You don't have to sign up for a full build."],["Do I need to know which parts I want?","No. Tell us what you drive and what you want the truck to do. We'll help work through the options."],["Do I have to build everything at once?","No. You can start with one upgrade, or talk to us about planning the whole build and available financing."]]}/>
+ <MarketingClose/>
+ </div>}

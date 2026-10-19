@@ -6,6 +6,7 @@ import { buildInquirySummary } from './hubspot-contract.js';
 import {RECORD_KEY} from './builder/useBuildRecord.js';
 import {reopenPackageQuote,packageInquirySummary} from './catalog/package-client.js';
 import './inquiry.css';
+import {interests} from './marketing-content.js';
 
 const QUOTE_PATH = '/pages/book-install-services-or-get-a-quote';
 const BUILDER_PATH = '/pages/flatbed-build-price-by-vehicle';
@@ -25,7 +26,9 @@ function Field({ name, label, error, hint, children, optional = false }) {
 
 export function Inquiry({ query = {}, embedded = false }) {
   const initial = normalizeContext(query);
-  const [form, setForm] = useState({ ...initial, topic: '', firstName: '', preferredContact: 'email', email: '', phone: '', vehicleDetails: '', needVehicleHelp: false, intendedUse: '', camperType: '', workGoal: '', vehicleCount: '', company: '', message: '', marketingOptIn: false, ...normalizeProjectContext(query) });
+  const [interestKey,setInterestKey]=useState(Object.hasOwn(interests,query.interest)?query.interest:'');
+  const interest=interests[interestKey];
+  const [form, setForm] = useState({ ...initial, topic: interest?.topic||'', firstName: '', preferredContact: 'email', email: '', phone: '', vehicleDetails: '', needVehicleHelp: false, intendedUse: '', camperType: '', workGoal: '', vehicleCount: '', company: '', message: '', marketingOptIn: false, ...normalizeProjectContext(query) });
   const [liveForm, setLiveForm] = useState(false);
   const [liveRequested, setLiveRequested] = useState(false);
   const [build, setBuild] = useState(null);
@@ -60,6 +63,8 @@ export function Inquiry({ query = {}, embedded = false }) {
   const hasVehicle = build?.truck?.make && build.truck.make !== 'Other / not sure';
   const isVessel = ['marine', 'boat-detail'].includes(form.service);
   const vehicleLabel = form.context === 'service' && isVessel ? 'Vessel details' : form.context === 'service' && form.service === 'trailer' ? 'Trailer details' : 'Truck or vehicle details';
+  const heading=interest?.heading||({service:'Tell us about the upgrade you need.',flatbed:"Let's work through your flatbed setup.",camper:"Let's work through your flatbed setup.",work:'Tell us about your work truck.',general:"Tell us what you're working on."}[form.context]);
+  const chooseContext=value=>{const nextInterest=interests[value];setInterestKey(nextInterest?value:'');setLiveForm(false);setForm(current=>({...current,context:nextInterest?'general':value,topic:nextInterest?.topic||current.topic}));setErrors({});setNotice('');setState('idle');};
   const currentContextLabel = { flatbed: 'Your flatbed', camper: 'Your camper plans', work: 'Your work', service: 'Your installation or service', general: 'Your question' }[form.context];
 
   async function showConfirmation(data) {
@@ -86,7 +91,7 @@ export function Inquiry({ query = {}, embedded = false }) {
     const fields = validateInquiryFields(payload);
     if (build && !completeBuild) fields.build = 'Your saved build needs a little more detail. Review it or continue without it.';
     if (Object.keys(fields).length) {
-      setErrors(fields); setState('invalid'); setNotice('Please check the fields below. Your entries are still here.');
+      setErrors(fields); setState('invalid'); setNotice('Check the highlighted details so we know how to reach you.');
       requestAnimationFrame(() => { const first = document.getElementById(`inquiry-${Object.keys(fields)[0]}`); (first || headingRef.current)?.focus(); });
       return;
     }
@@ -119,14 +124,16 @@ export function Inquiry({ query = {}, embedded = false }) {
 
   return <section className={`inquiry-layout ${embedded ? 'inquiry-embedded' : ''}`} aria-label="Quote inquiry preview">
     <div className="inquiry-main">
-      <div className="inquiry-mode-choice"><div><strong>Ready to talk to the team?</strong><p>{liveForm ? 'You are using the shop’s live form. Your website preview draft is kept while you stay on this page.' : 'Try the short preview below, or open the existing live form to send a real inquiry.'}</p></div><button type="button" aria-pressed={liveForm} onClick={() => { setLiveRequested(true); setLiveForm(current => !current); }}>{liveForm ? 'Return to website preview' : 'Open the live shop form'}</button></div>
+      {!embedded&&<><h1 className="njo-inquiry-heading">{heading}</h1><p>Start with the basics. We'll review the details with you before anything is booked.</p><div className="njo-inquiry-switch"><label htmlFor="inquiry-path">What can we help with?</label><select id="inquiry-path" value={interestKey||form.context} onChange={e=>chooseContext(e.target.value)}><option value="general">Something else / not sure</option><option value="service">An installation</option><option value="flatbed">A flatbed or camper</option>{form.context==='camper'&&<option value="camper">My camper setup</option>}{form.context==='work'&&<option value="work">My work truck</option>}<option value="complete-build">A complete build</option><option value="trip-care">Trip prep or vehicle care</option>{interestKey&&!['complete-build','trip-care'].includes(interestKey)&&<option value={interestKey}>{interest.label}</option>}</select></div></>}
+      {interest&&<div className="njo-interest-context"><strong>{interest.label}</strong><p>For a real conversation about this request, call <a href="tel:+12533010028">(253) 301-0028</a>. Availability and scope need shop confirmation.</p></div>}
+      {!interest&&<div className="inquiry-mode-choice"><div><strong>Ready to talk to the team?</strong><p>{liveForm ? 'You are using the shop’s live form. Your website preview draft is kept while you stay on this page.' : 'Try the short preview below, or open the existing live form to send a real inquiry.'}</p></div><button type="button" aria-pressed={liveForm} onClick={() => { setLiveRequested(true); setLiveForm(current => !current); }}>{liveForm ? 'Return to website preview' : 'Open the live shop form'}</button></div>}
       {packageQuote&&<div className="inquiry-build"><span className="inquiry-eyebrow">Your saved package quote</span><h3>{packageQuote.customer.title}</h3><p>{packageQuote.customer.number} · {packageQuote.customer.vehicle.year} Toyota Tacoma</p><p>The package reference and vehicle details carry into the shop’s inquiry. The appointment still needs confirmation.</p></div>}
-      {liveRequested && <div hidden={!liveForm}><NativeInquiry context={form.context} service={form.service} summary={[buildInquirySummary(form, build, buildReference),packageInquirySummary(packageQuote)].filter(Boolean).join('\n\n')} /></div>}
+      {liveRequested && !interest && <div hidden={!liveForm}><NativeInquiry context={form.context} service={form.service} summary={[buildInquirySummary(form, build, buildReference),packageInquirySummary(packageQuote)].filter(Boolean).join('\n\n')} /></div>}
       <div hidden={liveForm}>
-      <div className="preview-disclosure"><strong>Website preview</strong><p>This form demonstrates the inquiry. Contact details are not saved or sent to the shop.</p></div>
+      <div className="preview-disclosure"><strong>Website preview</strong><p>This is a website preview. Requests entered here are not sent to the shop. Contact details and messages are not retained.</p></div>
       {(form.project || form.feature) && <p className="inquiry-context">{form.project && <>Inspired by {PROJECT_LABELS[form.project]}. </>}{form.feature && <>Interested in {FEATURE_LABELS[form.feature].toLowerCase()}. </>}These details stay with your request.</p>}
       <form onSubmit={submit} noValidate>
-        <h2 ref={headingRef} tabIndex="-1">{currentContextLabel}</h2>
+        <h2 ref={headingRef} tabIndex="-1">{embedded?heading:currentContextLabel}</h2>
         {notice && <div className={`inquiry-status ${state}`} role={['failed', 'invalid'].includes(state) ? 'alert' : 'status'}>{notice}</div>}
         {build && <div className="inquiry-build" id="inquiry-build" tabIndex="-1">
           <div><span className="inquiry-eyebrow">Your saved configuration</span><h3>{[build.truck.year, build.truck.make, build.truck.model].filter(Boolean).join(' ') || 'Truck details to confirm'}</h3><p>{build.truck.bed ? `${build.truck.bed} bed · ` : ''}{build.use || 'Use to confirm'}</p></div>
@@ -135,9 +142,9 @@ export function Inquiry({ query = {}, embedded = false }) {
           {errors.build && <p className="field-error">{errors.build}</p>}
           <div className="inquiry-inline-actions"><a href={`${BUILDER_PATH}?resume=1`}>Review saved build</a><button type="button" onClick={() => { setBuild(null); setErrors(current => ({ ...current, build: undefined })); }}>Continue without this build</button></div>
         </div>}
-        {form.context === 'service' && <Field name="service" label="What can we help with?" error={errors.service}><select {...control('service')}><option value="">Choose a service</option>{SERVICE_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></Field>}
-        {form.context !== 'general' && !hasVehicle && <>
-          <Field name="vehicleDetails" label={vehicleLabel} error={errors.vehicleDetails} hint={isVessel ? 'Make, model, and size, if you know them.' : 'Year, make, and model are a useful start. You can ask for help if you are unsure.'}><input {...control('vehicleDetails')} maxLength="180" disabled={form.needVehicleHelp} autoComplete="off" /></Field>
+        {form.context === 'service' && <Field name="service" label="What can we help with?" error={errors.service}><select {...control('service')}><option value="">Choose a service</option>{SERVICE_OPTIONS.filter(([id])=>!['boat-detail','marine','trailer'].includes(id)||id===form.service).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></Field>}
+        {(form.context !== 'general'||!!interest) && !hasVehicle && <>
+          <Field name="vehicleDetails" label={isVessel||form.service==='trailer'?vehicleLabel:"Which truck is this for?"} optional={form.context==='general'} error={errors.vehicleDetails} hint={isVessel ? 'Make, model, and size, if you know them.' : 'Year, make, and model are a useful start. You can ask for help if you are unsure.'}><input {...control('vehicleDetails')} maxLength="180" disabled={form.needVehicleHelp} autoComplete="off" /></Field>
           <label className="inquiry-check"><input type="checkbox" checked={form.needVehicleHelp} onChange={event => set('needVehicleHelp', event.target.checked)} />I need help identifying {isVessel ? 'my vessel' : 'my vehicle'}.</label>
         </>}
         {form.context === 'flatbed' && <Field name="intendedUse" label="What do you have in mind?" error={errors.intendedUse}><select {...control('intendedUse')}><option value="">Choose a use</option>{USE_OPTIONS.map(use => <option key={use}>{use}</option>)}</select></Field>}
@@ -147,21 +154,21 @@ export function Inquiry({ query = {}, embedded = false }) {
           <Field name="vehicleCount" label="How many vehicles?" error={errors.vehicleCount}><select {...control('vehicleCount')}><option value="">Choose a count</option>{['1', '2–5', '6+', 'Not sure'].map(count => <option key={count}>{count}</option>)}</select></Field>
           <Field name="company" label="Company" optional><input {...control('company')} maxLength="120" autoComplete="organization" /></Field>
         </>}
-        {form.context === 'general' && <Field name="topic" label="What is your question about?" error={errors.topic}><select {...control('topic')}><option value="">Choose a topic</option>{TOPICS.map(topic => <option key={topic}>{topic}</option>)}</select></Field>}
-        <Field name="message" label={form.context === 'general' ? 'How can we help?' : form.context === 'service' ? 'What would you like help with?' : 'Anything else we should know?'} error={errors.message} optional={!['general', 'service'].includes(form.context)}><textarea {...control('message')} maxLength="1500" rows="4" placeholder={form.context === 'service' ? 'The work you have in mind, or the problem you would like to solve.' : undefined} /></Field>
+        {form.context === 'general' && !interest && <Field name="topic" label="What is your question about?" error={errors.topic}><select {...control('topic')}><option value="">Choose a topic</option>{TOPICS.map(topic => <option key={topic}>{topic}</option>)}</select></Field>}
+        <Field name="message" label={['general','service'].includes(form.context)?'What are you trying to change or solve?':'Anything else we should know?'} hint="A few sentences are enough." error={errors.message} optional={!['general', 'service'].includes(form.context)}><textarea {...control('message')} maxLength="1500" rows="4" placeholder={form.context === 'service' ? 'The work you have in mind, or the problem you would like to solve.' : undefined} /></Field>
         <fieldset className="inquiry-contact"><legend>Your contact details</legend><p className="field-hint">These fields demonstrate validation. Contact details are not saved or sent from this preview.</p>
-          <Field name="firstName" label="First name" error={errors.firstName}><input {...control('firstName')} autoComplete="given-name" maxLength="80" /></Field>
-          <fieldset className="inquiry-preference"><legend>Preferred contact method</legend><div>{['email', 'phone'].map(method => <label key={method}><input type="radio" name="preferredContact" checked={form.preferredContact === method} onChange={() => set('preferredContact', method)} />{method === 'email' ? 'Email' : 'Phone'}</label>)}</div></fieldset>
+          <Field name="firstName" label="Your name" error={errors.firstName}><input {...control('firstName')} autoComplete="given-name" maxLength="80" /></Field>
+          <fieldset className="inquiry-preference"><legend>How should we reach you?</legend><div>{['email', 'phone'].map(method => <label key={method}><input type="radio" name="preferredContact" checked={form.preferredContact === method} onChange={() => set('preferredContact', method)} />{method === 'email' ? 'Email' : 'Phone'}</label>)}</div></fieldset>
           {form.preferredContact === 'email' ? <Field name="email" label="Email address" error={errors.email}><input {...control('email')} type="email" inputMode="email" autoComplete="email" maxLength="254" /></Field> : <Field name="phone" label="Phone number" error={errors.phone}><input {...control('phone')} type="tel" inputMode="tel" autoComplete="tel" maxLength="32" /></Field>}
         </fieldset>
-        <label className="inquiry-check"><input type="checkbox" checked={form.marketingOptIn} onChange={event => set('marketingOptIn', event.target.checked)} />Keep me informed about Next Jump news. <span>Optional. No subscription is created in this preview.</span></label>
+        <label className="inquiry-check"><input type="checkbox" checked={form.marketingOptIn} onChange={event => set('marketingOptIn', event.target.checked)} />Can we send you occasional NJO news? <span>Optional. No subscription is created in this preview.</span></label>
         <p className="inquiry-terms">Sending a request on the finished site will not place an order or book an installation. The team will review your configuration and confirm the next step.</p>
-        <button className="inquiry-submit" type="submit" disabled={busy || state === 'received'}>{state === 'submitting' ? 'Saving preview…' : state === 'checking' ? 'Checking receipt…' : state === 'received' ? 'Preview saved' : 'Save preview request'}</button>
+        <button className="inquiry-submit" type="submit" disabled={busy || state === 'received'}>{state === 'submitting' ? 'Saving preview…' : state === 'checking' ? 'Checking receipt…' : state === 'received' ? 'Preview saved' : 'Preview my request'}</button>
         <noscript><p>This website preview needs JavaScript to save a request. You can still contact the shop using the contact page.</p></noscript>
       </form>
       </div>
     </div>
-    {!embedded && <aside className="inquiry-aside"><span className="inquiry-eyebrow">A conversation comes first</span><h2>Let's work out your next step.</h2><p>You do not need a finished plan. Bring the truck, the gear, or the question you have been thinking about.</p><hr /><h3>Ready to reach the team?</h3><p>{liveForm ? 'The live form sends your inquiry to Next Jump. You can also call the Tacoma team directly.' : 'The short preview does not send inquiries. Open the live shop form above or call the team.'}</p><a href="tel:+12533010028">Call (253) 301-0028</a><a href="/pages/contact-us">Contact & visit</a><a href={BUILDER_PATH}>Explore a flatbed configuration</a></aside>}
+    {!embedded && <aside className="inquiry-aside"><span className="inquiry-eyebrow">A conversation comes first</span><h2>Let's work out your next step.</h2><p>You do not need a finished plan. Bring the truck, the gear, or the question you have been thinking about.</p><hr /><h3>Ready to reach the team?</h3><p>{interest?'The short preview does not send inquiries. Call the Tacoma team to discuss this request.':liveForm ? 'The live form sends your inquiry to Next Jump. You can also call the Tacoma team directly.' : 'The short preview does not send inquiries. Open the live shop form above or call the team.'}</p><a href="tel:+12533010028">Call (253) 301-0028</a><a href="/pages/contact-us">Contact & visit</a><a href={BUILDER_PATH}>Explore a flatbed configuration</a></aside>}
   </section>;
 }
 
@@ -184,7 +191,7 @@ export function Confirmation() {
   return <section className="confirmation-panel" aria-live="polite">
     <span className="inquiry-eyebrow">Website preview</span>
     <h1>{status === 'loading' ? 'Checking your preview receipt.' : status === 'received' ? 'Your preview request is saved.' : status === 'empty' ? 'No request has been submitted.' : 'We could not verify a saved request.'}</h1>
-    {status === 'received' ? <><p>Your configuration and inquiry type were saved on this website preview. <strong>Nothing was sent to Next Jump.</strong> Your contact details and message were not retained.</p><p className="receipt-reference">Preview reference: {receipt.receiptId.slice(0, 8)}</p><h2>The next step is a conversation.</h2><p>For a real quote, contact the Tacoma team. A quote request does not place an order, reserve stock, or book an installation.</p></> : <p>{status === 'loading' ? 'A confirmation appears only after the preview server verifies a saved receipt.' : 'Opening this page does not submit a request. Nothing has been sent to the shop. You can return to the form or contact the team directly.'}</p>}
+    {status === 'received' ? <><p>This was a preview. <strong>No request was sent to NJO.</strong> Call the shop if you'd like to reach the team now. Only the supported configuration and inquiry type were saved; contact details and your message were not retained.</p><p className="receipt-reference">Preview reference: {receipt.receiptId.slice(0, 8)}</p><h2>The next step is a conversation.</h2><p>For a real quote, contact the Tacoma team. A quote request does not place an order, reserve stock, or book an installation.</p></> : <p>{status === 'loading' ? 'A confirmation appears only after the preview server verifies a saved receipt.' : 'Opening this page does not submit a request. Nothing has been sent to the shop. You can return to the form or contact the team directly.'}</p>}
     <div className="confirmation-actions"><a className="inquiry-submit" href="/pages/contact-us">Contact the shop</a><a href={QUOTE_PATH}>Back to inquiry</a><a href={`${BUILDER_PATH}?resume=1`}>Return to your build</a></div>
   </section>;
 }

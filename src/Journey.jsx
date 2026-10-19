@@ -4,6 +4,7 @@ import {P, inquiry, services, serviceImages, serviceKeys} from './routes.js';
 import {Inquiry} from './Inquiry.jsx';
 import {reviews, proofByContext, googleReviews} from './customerProof.js';
 import {actionMotionProps} from './actionMotion.js';
+import {serviceCopy,interestInquiry} from './marketing-content.js';
 import {ServiceSignature} from './ServiceSignature.jsx';
 
 export function JourneyImage({file, alt, eager=false, sizes='100vw', ...props}) {
@@ -15,12 +16,12 @@ export function JourneyAction({to, children, secondary=false}) {
 }
 
 // Modern Hero + Scroll Expansion Hero: bounded native scroll, visible offer and actions.
-export function FullPhotoHero({file, alt, kicker, title, description, action='Get a quote', to=inquiry(), secondary, caption, home=false, footTo='#page-content'}) {
+export function FullPhotoHero({file, alt, kicker, title, description, action='Get a quote', to=inquiry(), secondary, caption, signature, home=false, footTo='#page-content'}) {
   const id=useId();
   return <section className={`full-photo-hero ${home?'full-photo-home':''}`} data-scene aria-labelledby={id}>
     <div className="full-photo-media"><JourneyImage file={file} alt={alt} eager/></div>
     <div className="full-photo-overlay" aria-hidden="true"/>
-    <div className="full-photo-copy container"><p className="hero-kicker">{kicker}</p><h1 id={id}>{title}</h1><p className="hero-description">{description}</p><div className="journey-actions"><JourneyAction to={to}>{action}</JourneyAction>{secondary&&<JourneyAction to={secondary.to} secondary>{secondary.label}</JourneyAction>}</div></div>
+    <div className="full-photo-copy container"><p className="hero-kicker">{kicker}</p><h1 id={id}>{title}</h1><p className="hero-description">{description}</p>{signature&&<p className="hero-signature">{signature}</p>}<div className="journey-actions"><JourneyAction to={to}>{action}</JourneyAction>{secondary&&<JourneyAction to={secondary.to} secondary>{secondary.label}</JourneyAction>}</div></div>
     <div className="full-photo-foot container"><a href={footTo}>Explore what’s possible <ArrowDown size={19}/></a><span>{caption||'Next Jump photography. Equipment varies by project.'}</span></div>
   </section>;
 }
@@ -51,18 +52,18 @@ export function CustomerProof({to=inquiry(),context='home'}) {
 const serviceDetails={P16:['Lifts & suspension','Get the stance and ride your setup needs.'],P17:['Bumpers & racks','Add protection and room for your gear.'],P18:['Wheels & tires','Match the rubber to the road ahead.'],P19:['Power & electrical','Keep the essentials powered away from campgrounds.'],P20:['Lighting','See the trail. Light up camp.'],P21:['Rooftop tents','Give your next campsite a better setup.'],P22:['Camper installation','Bring the truck and camper together.'],P23:['Vehicle detailing','Get the road trip off your rig.'],P24:['Boat detailing','Get your boat ready for its next outing.'],P25:['Marine outfitting','Plan equipment around life on the water.'],P26:['Trailer projects','Build more room into your adventures.']};
 
 const serviceGroups=[
-  {name:'Off-road & performance',file:'services-hero.jpg',alt:'Toyota 4Runner equipped for overland travel',title:'Make the upgrades work together.',text:'Suspension, tires, racks, lighting and power should fit the vehicle—and how you use it.',ids:['P16','P17','P18','P19','P20']},
-  {name:'Camping & overland',file:'ute-tent.jpg',alt:'Super Ute with its rooftop tent deployed at camp',title:'From daily driver to basecamp.',text:'Plan the tent, camper and carrying setup around your truck, your gear and your trips.',ids:['P21','P22']},
-  {name:'Care & other projects',file:'boat.png',alt:'Boat shown by Next Jump Outfitters',title:'Keep the rest of your adventures ready.',text:'Vehicle detailing, marine projects and trailer work. Share the details so we can confirm the service scope.',ids:['P23','P24','P25','P26']}
+ {name:'Truck upgrades',file:'services-hero.jpg',alt:'Toyota 4Runner equipped for overland travel',title:'Make the upgrades work together.',text:'Suspension, tires, racks, lighting and power should fit the vehicle and how you use it.',ids:['P16','P18','P20','P17','P19']},
+ {name:'Tents & campers',file:'ute-tent.jpg',alt:'Super Ute with its rooftop tent deployed at camp',title:'From daily driver to basecamp.',text:'Plan the tent, camper and carrying setup around your truck, your gear and your trips.',ids:['P21','P22']},
+ {name:'Protection & finishing',file:'install.jpg',alt:'Installation work at the Next Jump shop',title:'Protect the truck you use.',text:'Ask about the materials, coverage and installation scope for your vehicle. The shop confirms what it can take on.',ids:[],extras:[['recovery','Recovery & protection','Think through the recovery gear and vehicle protection that fit your use.'],['paint-protection','Paint protection film',"Protect high-wear areas of your truck. We'll confirm the coverage and scope."],['rhino-lining','Rhino lining','Add a tough surface where your truck takes a beating. Ask which areas and finishes we can do.']]}
 ];
 function moveTab(event,index,count,activate,refs){let target=index;if(event.key==='ArrowRight')target=(index+1)%count;else if(event.key==='ArrowLeft')target=(index+count-1)%count;else if(event.key==='Home')target=0;else if(event.key==='End')target=count-1;else return;event.preventDefault();activate(target);refs.current[target]?.focus()}
 
 export function ServiceExplorer(){
   const [active,setActive]=useState(0);const refs=useRef([]);const uid=useId();
   return <section className="service-explorer container" aria-labelledby={`${uid}-heading`}>
-    <div className="journey-section-head" data-reveal><div><span className="eyebrow">PICK THE JOB. SEE THE POSSIBILITIES.</span><h2 id={`${uid}-heading`}><span className="trail-mark">Upgrade your rig.</span></h2></div><p>One upgrade or a complete setup. Start with the problem you want to solve.</p></div>
+    <div className="journey-section-head" data-reveal><div><span className="eyebrow">INSTALLATION SERVICES</span><h2 id={`${uid}-heading`}>What can we help with?</h2></div><p>One upgrade or a complete setup. Start with the problem you want to solve.</p></div>
     <div className="journey-tabs" role="tablist" aria-label="Installation categories">{serviceGroups.map((g,i)=><button key={g.name} type="button" role="tab" id={`${uid}-tab-${i}`} aria-controls={`${uid}-panel-${i}`} aria-selected={active===i} tabIndex={active===i?0:-1} ref={el=>refs.current[i]=el} onClick={()=>setActive(i)} onKeyDown={e=>moveTab(e,i,serviceGroups.length,setActive,refs)}>{g.name}</button>)}</div>
-    {serviceGroups.map((g,i)=><div key={g.name} className="service-tab-panel" id={`${uid}-panel-${i}`} role="tabpanel" aria-labelledby={`${uid}-tab-${i}`} hidden={active!==i} tabIndex={0}><div className="service-tab-media"><JourneyImage file={g.file} alt={g.alt}/><div><h3>{g.title}</h3><p>{g.text}</p></div></div><div className="service-tab-links">{g.ids.map(id=>{const s=services.find(x=>x.id===id);const [title,description]=serviceDetails[id];return <a key={id} href={s.path} data-service={serviceKeys[id]}><ServiceSignature service={serviceKeys[id]}/><span className="service-link-copy"><strong>{title}</strong><span>{description}</span></span><ArrowUpRight className="service-link-arrow" size={23} aria-hidden="true"/></a>})}</div><JourneyAction to={inquiry('service')}>Request an installation quote</JourneyAction></div>)}
+    {serviceGroups.map((g,i)=><div key={g.name} className="service-tab-panel" id={`${uid}-panel-${i}`} role="tabpanel" aria-labelledby={`${uid}-tab-${i}`} hidden={active!==i} tabIndex={0}><div className="service-tab-media"><JourneyImage file={g.file} alt={g.alt}/><div><h3>{g.title}</h3><p>{g.text}</p></div></div><div className="service-tab-links">{g.ids.map(id=>{const s=services.find(x=>x.id===id);const [title]=serviceDetails[id];const description=serviceCopy[id]?.[3]||serviceDetails[id][1];return <a key={id} href={s.path} data-service={serviceKeys[id]}><ServiceSignature service={serviceKeys[id]}/><span className="service-link-copy"><strong>{title}</strong><span>{description}</span></span><ArrowUpRight className="service-link-arrow" size={23} aria-hidden="true"/></a>})}{g.extras?.map(([key,title,text])=><a key={key} href={interestInquiry(key)} data-service="bumpers-racks"><ServiceSignature service="bumpers-racks"/><span className="service-link-copy"><strong>{title}</strong><span>{text}</span><small>Ask about availability & scope</small></span><ArrowUpRight className="service-link-arrow" size={23} aria-hidden="true"/></a>)}</div></div>)}
   </section>;
 }
 
