@@ -9,3 +9,5 @@ dist/
 .sites-artifacts/
 .env.*
 !.env.example
+
+__pycache__/

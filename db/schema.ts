@@ -55,3 +55,6 @@ export const productSupply=sqliteTable('product_supply',{
 export const packageQuotes=sqliteTable('package_quotes',{
  id:text('id').primaryKey(),number:text('number').notNull().unique(),packageId:text('package_id').notNull().references(()=>curatedPackages.id),packageRevision:integer('package_revision').notNull(),keyHash:text('key_hash').notNull().unique(),accessHash:text('access_hash').notNull(),fingerprint:text('fingerprint').notNull(),snapshot:text('snapshot_json').notNull(),createdAt:text('created_at').notNull(),
 });
+export const catalogSourceRows=sqliteTable('catalog_source_rows',{
+ id:text('id').primaryKey(),sourceKey:text('source_key').notNull().unique(),sourceId:text('source_id').notNull(),kind:text('kind').notNull(),title:text('title').notNull(),group:text('group_name').notNull(),file:text('file').notNull(),sheet:text('sheet').notNull(),row:integer('row_number').notNull(),data:text('data_json').notNull(),createdAt:text('created_at').notNull(),
+},t=>[index('source_rows_kind_group').on(t.kind,t.group)]);

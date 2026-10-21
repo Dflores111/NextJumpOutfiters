@@ -46,7 +46,7 @@ export function Inquiry({ query = {}, embedded = false }) {
       if (saved) {
         setBuild(saved);
         const reference=JSON.parse(localStorage.getItem(RECORD_KEY)||'null');if(reference&&JSON.stringify(reference.config)===JSON.stringify(saved))setBuildReference({id:reference.id,version:reference.version});
-        setForm(current => ({ ...current, intendedUse: useFor(saved), camperType: camperFor(saved) }));
+        setForm(current => ({ ...current, intendedUse: useFor(saved), camperType: camperFor(saved),...(initial.context==='service'?{vehicleDetails:[saved.truck.year,saved.truck.make,saved.truck.model].filter(Boolean).join(' '),message:`I'd like an estimate for ${saved.plan?.packageId?.replaceAll('-',' ')||'my vehicle upgrades'}. Please review my saved build and confirm the parts and installation.`}:{}) }));
       }
     } catch { /* The inquiry remains available when browser storage is blocked. */ }
   }, []);
@@ -129,7 +129,7 @@ export function Inquiry({ query = {}, embedded = false }) {
         <h2 ref={headingRef} tabIndex="-1">{currentContextLabel}</h2>
         {notice && <div className={`inquiry-status ${state}`} role={['failed', 'invalid'].includes(state) ? 'alert' : 'status'}>{notice}</div>}
         {build && <div className="inquiry-build" id="inquiry-build" tabIndex="-1">
-          <div><span className="inquiry-eyebrow">Your saved configuration</span><h3>{[build.truck.year, build.truck.make, build.truck.model].filter(Boolean).join(' ') || 'Truck details to confirm'}</h3><p>{build.truck.bed ? `${build.truck.bed} bed · ` : ''}{build.use || 'Use to confirm'}</p></div>
+          <div><span className="inquiry-eyebrow">Your saved configuration</span><h3>{[build.truck.year, build.truck.make, build.truck.model].filter(Boolean).join(' ') || 'Truck details to confirm'}</h3><p>{[build.truck.bed?`${build.truck.bed} factory bed`:'',build.use].filter(Boolean).join(' · ')}</p></div>
           <ul>{buildItems(build).map(item => <li key={item.id}>{item.name}</li>)}</ul>
           <p className="field-hint">Pricing and fitment still need review. Your request does not place an order or reserve an installation.</p>
           {errors.build && <p className="field-error">{errors.build}</p>}
@@ -140,7 +140,7 @@ export function Inquiry({ query = {}, embedded = false }) {
           <Field name="vehicleDetails" label={vehicleLabel} error={errors.vehicleDetails} hint={isVessel ? 'Make, model, and size, if you know them.' : 'Year, make, and model are a useful start. You can ask for help if you are unsure.'}><input {...control('vehicleDetails')} maxLength="180" disabled={form.needVehicleHelp} autoComplete="off" /></Field>
           <label className="inquiry-check"><input type="checkbox" checked={form.needVehicleHelp} onChange={event => set('needVehicleHelp', event.target.checked)} />I need help identifying {isVessel ? 'my vessel' : 'my vehicle'}.</label>
         </>}
-        {form.context === 'flatbed' && <Field name="intendedUse" label="What do you have in mind?" error={errors.intendedUse}><select {...control('intendedUse')}><option value="">Choose a use</option>{USE_OPTIONS.map(use => <option key={use}>{use}</option>)}</select></Field>}
+        {form.context === 'flatbed' && !completeBuild && <Field name="intendedUse" label="What do you have in mind?" error={errors.intendedUse}><select {...control('intendedUse')}><option value="">Choose a use</option>{USE_OPTIONS.map(use => <option key={use}>{use}</option>)}</select></Field>}
         {form.context === 'camper' && <Field name="camperType" label="What kind of camper?" error={errors.camperType}><select {...control('camperType')}><option value="">Choose a camper type</option>{CAMPER_TYPES.map(type => <option key={type}>{type}</option>)}</select></Field>}
         {form.context === 'work' && <>
           <Field name="workGoal" label="What does your truck need to carry or do?" error={errors.workGoal}><textarea {...control('workGoal')} maxLength="1000" rows="3" /></Field>

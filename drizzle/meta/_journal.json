@@ -43,6 +43,13 @@
       "when": 1791871474262,
       "tag": "0005_melted_firelord",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1792555781114,
+      "tag": "0006_lumpy_lake",
+      "breakpoints": true
     }
   ]
 }

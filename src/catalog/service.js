@@ -4,6 +4,9 @@ import {upgradeModels} from './planning.js';
 import {canStaff,localIdentity,staffActor,staffPermission} from './access.js';
 import {inventoryItems,saveInventorySettings,inventoryHistory} from './inventory-service.js';
 import {lookupBarcode,barcodes,saveBarcode,listOperations,operationDetail,createPurchase,purchaseAction,receivePurchase,createJob,addJobParts,finishJob} from './operations-service.js';
+import {sourceService} from './source-service.js';
+import {cleanCatalogFields} from './catalog-fields.js';
+import {flatbedSizeFor} from '../builder/journey-domain.js';
 import {packageService} from './package-service.js';
 
 // Edge-compatible service. D1 and the local SQLite adapter share this contract.
@@ -90,6 +93,9 @@ async function updateProduct(request,db,productId,actor,quick=false){
  if(input.stockType!==undefined){if(!['UNREVIEWED','STOCKED','NON_STOCKED','SERVICE'].includes(input.stockType))throw fail(422,'Choose a recognized inventory classification.');data.stockType=input.stockType;}
  if(input.tags!==undefined){if(!Array.isArray(input.tags)||input.tags.length>30||input.tags.some(tag=>typeof tag!=='string'||!tag.trim()||tag.length>80))throw fail(422,'Use short, consistent sales and collection tags.');data.tags=[...new Set(input.tags.map(tag=>tag.trim()))];}
  if(input.price){const p=input.price;if(!['installed','diy'].includes(p.mode)||!Number.isSafeInteger(p.cents)||p.cents<0||p.cents>100000000||!['DRAFT','APPROVED'].includes(p.state))throw fail(422,'Use a valid price mode, integer cents and approval state.');data.prices[p.mode]={cents:p.cents,currency:'USD',state:p.state,approvedBy:p.state==='APPROVED'?actor:null,updatedAt:now()};}
+ if(input.catalogFields!==undefined)data.catalogFields=cleanCatalogFields(input.catalogFields);
+ if(input.sourceIdentityEvidence!==undefined)data.sourceIdentityEvidence=text(input.sourceIdentityEvidence,1000);
+ if(data.sourceIdentityIssue&&!data.sourceIdentityEvidence&&(input.state==='APPROVED'||data.stockType==='STOCKED'||input.price?.state==='APPROVED'))throw fail(422,'Confirm the reused supplier SKU and size identity, and record the evidence before approval or stock tracking.');
  const slot=input.planningSlot===''?null:text(input.planningSlot,50);if(slot&&!publicPlanningCatalog().products.concat(publicPlanningCatalog().upgrades).some(p=>p.id===slot))throw fail(422,'Choose a recognized planning option.');
  const actionId=id(),time=now(),payload=JSON.stringify({revision:row.revision+1,state:input.state,title,category,stockType:data.stockType||'UNREVIEWED',planningSlot:slot,reason:text(input.reason,300),price:input.price||null,previous:{revision:row.revision,state:row.state,title:row.title,category:row.category}});
  const eligible="(?='STOCKED' OR NOT EXISTS(SELECT 1 FROM inventory_movements WHERE product_id=? GROUP BY location HAVING SUM(reserved_delta)>0))",classification=data.stockType||'UNREVIEWED';
@@ -119,8 +125,15 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
   if(staff&&permission!=='session'&&!canStaff(identity,permission))throw fail(403,'Your staff role cannot perform this action. Ask the shop administrator if your access needs to change.');
   if(path==='/api/staff/session'&&request.method==='GET')return json({identity,permissions:['catalog','inventory','purchasing','sales','audit'].filter(p=>canStaff(identity,p))});
   if(!env.DB)throw fail(503,'Saved builds are temporarily unavailable. Your browser draft is still here.');
+  if(path==='/api/catalog/flatbed-match'&&request.method==='GET'){
+   const truck=Object.fromEntries(['year','make','model','bed'].map(k=>[k,text(url.searchParams.get(k),120)])),size=flatbedSizeFor(truck);
+   const estimate=await estimateBuild(env.DB,{version:1,truck,use:'',selected:['base'],plan:{kind:'flatbed',fulfillment:'installed'}}),match=estimate.lines.find(l=>l.state==='APPROVED');
+   let product=null;if(match){const p=await one(env.DB,'SELECT data_json FROM master_products WHERE id=?',match.productId),d=JSON.parse(p.data_json);if(!d.sourceIdentityIssue||d.sourceIdentityEvidence)product={title:match.productTitle,revision:match.revision,installedCents:match.cents,dimensionsMm:d.catalogFields?.dimensionsMm||null};}
+   return json({size,product,requiresFitmentReview:true});
+  }
   if(request.method!=='GET')sameOrigin(request);
   if(path==='/api/package-quotes'&&request.method==='POST')rateLimit(request);
+  const sourceResponse=await sourceService(request,env.DB,{identity:staff?identity:null,readBody:body,json});if(sourceResponse)return sourceResponse;
   const packageResponse=await packageService(request,env.DB,{identity:staff?identity:null,readBody:body,json});if(packageResponse)return packageResponse;
   if(path==='/api/builds'&&request.method==='POST')return await saveBuild(request,env.DB);
   if(/^\/api\/builds\/[a-zA-Z0-9-]{36}$/.test(path)&&request.method==='GET'){

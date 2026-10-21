@@ -89,7 +89,7 @@ export function validateBuild(value) {
   if (!build) return { valid: false, errors: ['Build data is missing or has an unsupported format.'], value: null };
   if (!truckReady(build.truck, buildKind(build))) errors.push('Choose your truck details or the unsure option.');
   if (!validModelYear(value.truck.year ?? '')) errors.push('Use a four-digit model year from 1900 to 2100 or leave it blank.');
-  if (!uses.includes(value.use)) errors.push('Choose how you plan to use your truck.');
+  if (buildKind(build)==='vehicle' && !uses.includes(value.use)) errors.push('Choose how you plan to use your truck.');
   if (value.use === 'Camper setup' && !camperTypes.includes(value.camperType)) errors.push('Choose a camper type or Still deciding.');
   if (buildKind(build) === 'flatbed' && !value.selected.includes('base')) errors.push('The flatbed foundation must be included.');
   if (value.selected.some(id => !products.some(p => p.id === id))) errors.push('A selected option is not recognized.');

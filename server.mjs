@@ -152,7 +152,7 @@ export async function startServer({ port = Number(process.env.PORT || 4173), hos
       if (!isAllowedHost(req.headers.host)) { json(res, 403, { error: 'This preview is available only on localhost.' }); return; }
       if (isPrivatePath(req.url)) { json(res, 404, { error: 'Not found.' }); return; }
       if (/^\/api\/(catalog|builds|staff|packages|package-quotes)(\/|\?|$)/.test(req.url)) {
-        const maxBytes=req.url.split('?')[0]==='/api/staff/package-imports'?500000:24000;
+        const maxBytes=['/api/staff/package-imports','/api/staff/source-imports'].includes(req.url.split('?')[0])?500000:24000;
         let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>maxBytes){json(res,413,{error:'This request is too large.'});return;}chunks.push(chunk);}
         const request=new Request(`http://${req.headers.host}${req.url}`,{method:req.method,headers:req.headers,...(!['GET','HEAD'].includes(req.method)?{body:Buffer.concat(chunks)}:{})});
         const response=await catalogService(request,{DB:master.DB},{localStaff:true});

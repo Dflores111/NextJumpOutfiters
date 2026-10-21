@@ -4,8 +4,8 @@ import {P,pages,nav,services,serviceImages,serviceKeys,inquiry,external} from '.
 import './styles.css';
 import HomeExperience from './HomeExperience.jsx';
 import {useExperienceMotion} from './useExperienceMotion.js';
-import Builder from './builder/Builder.jsx';
-import LiftBuilder from './catalog/LiftBuilder.jsx';
+import Builder from './builder/BuilderJourneys.jsx';
+const LiftBuilder=props=><><h1 className="sr-only">Tacoma lift packages and estimates</h1><Builder {...props} pilot/></>;
 // Shop tools load only on the staff and demo routes.
 function StaffWorkspace({demo=false}){
  const [Workspace,setWorkspace]=useState(null),[failed,setFailed]=useState(false);
@@ -36,6 +36,7 @@ function quoteForPath(path){
   if(path===P.rangerStory)return inquiry('flatbed',{project:'ranger-flatbed'});
   if(path===P.quote)return '#main';
   if(path===P.builder||vehicleRoutes.some(v=>v.path===path))return inquiry('general',{build:'local'});
+  if(path===P.lifts)return inquiry('service',{service:'suspension',build:'local'});
   if(path===P.dillon)return inquiry('service',{service:'suspension',project:'dillon-f250'});
   if(path===P.camperStory)return inquiry('camper',{project:'alaskan-camper'});
   if(path===P.ute)return inquiry('flatbed',{project:'super-ute'});

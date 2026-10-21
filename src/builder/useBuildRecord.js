@@ -2,7 +2,7 @@ import {useEffect,useRef,useState} from 'react';
 import {sanitizeBuild} from './domain.js';
 export const RECORD_KEY='nj-build-record-v1';
 const randomKey=()=>Array.from(crypto.getRandomValues(new Uint8Array(32)),n=>n.toString(16).padStart(2,'0')).join('');
-export function useBuildRecord(build,setBuild,setFeedback){
+export function useBuildRecord(build,setBuild,setFeedback,reviewStep=3){
  const [record,setRecord]=useState(null),[state,setState]=useState('idle'),[error,setError]=useState(''),[link,setLink]=useState('');
  const access=useRef(''),pending=useRef(null);
  useEffect(()=>{
@@ -27,7 +27,7 @@ export function useBuildRecord(build,setBuild,setFeedback){
    const response=await fetch('/api/builds',{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':pending.current.key,'X-Build-Access':access.current},body:JSON.stringify(data)});
    const value=await response.json();if(!response.ok)throw Error(value.error||'Your build could not be saved.');
    setRecord(value);pending.current=null;setState('saved');
-   const url=new URL(window.location.href);url.searchParams.set('step','3');url.hash=new URLSearchParams({saved:value.id,key:access.current}).toString();setLink(url.href);
+   const url=new URL(window.location.href);url.searchParams.set('step',String(reviewStep));url.hash=new URLSearchParams({saved:value.id,key:access.current}).toString();setLink(url.href);
    setFeedback({message:`Version ${value.version} saved. Keep the reopen link to return on another device. No inquiry has been sent.`});
   }catch(error){setError(error.message||'Your build could not be saved. Your choices are still here.');setState('error');}
  }

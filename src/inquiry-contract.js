@@ -31,7 +31,7 @@ export function validateInquiryFields(data) {
   if (!CONTEXTS.includes(data.context)) errors.context = 'Choose a supported inquiry type.';
   const hasTruck = data.build?.truck?.make && data.build?.truck?.model;
   if (['flatbed', 'camper', 'work'].includes(data.context) && !hasTruck && !cleanString(data.vehicleDetails, 180) && !data.needVehicleHelp) errors.vehicleDetails = 'Tell us about your truck or choose vehicle help.';
-  if (data.context === 'flatbed' && !USE_OPTIONS.includes(data.intendedUse)) errors.intendedUse = 'Choose what you have in mind, including Not sure.';
+  if (data.context === 'flatbed' && !hasTruck && !USE_OPTIONS.includes(data.intendedUse)) errors.intendedUse = 'Choose what you have in mind, including Not sure.';
   if (data.context === 'camper' && !CAMPER_TYPES.includes(data.camperType)) errors.camperType = 'Choose a camper type, including Not decided.';
   if (data.context === 'work') {
     if (!cleanString(data.workGoal, 1000)) errors.workGoal = 'Describe the equipment or work you need to support.';

@@ -7,5 +7,5 @@ export async function reopenPackageQuote(id,{fetchImpl=fetch,readAccess=key=>loc
 }
 export function packageInquirySummary(record){
  const q=record?.customer;if(!q||q.draft)return '';
- return [`Saved package quote: ${q.number}`,`Package: ${q.title} (revision ${q.packageRevision})`,`Truck: ${q.vehicle.year} ${q.vehicle.make} ${q.vehicle.model}`,`Current suspension: ${q.vehicle.suspension}`,`Use: ${q.vehicle.use}`,`Handoff: ${q.fulfillment==='installed'?'Installed by Next Jump':'Parts only'}`,`Quote reference: ${record.id}`,'Vehicle fitment, parts availability and the appointment still need shop confirmation.'].join('\n');
+ return [`Saved package quote: ${q.number}`,`Package: ${q.title} (revision ${q.packageRevision})`,...(q.variantLabel?[`Scope: ${q.variantLabel}`]:[]),`Truck: ${q.vehicle.year} ${q.vehicle.make} ${q.vehicle.model}`,`Current suspension: ${q.vehicle.suspension}`,`Use: ${q.vehicle.use}`,`Handoff: ${q.fulfillment==='installed'?'Installed by Next Jump':'Parts only'}`,`Quote reference: ${record.id}`,'Vehicle fitment, parts availability and the appointment still need shop confirmation.'].join('\n');
 }

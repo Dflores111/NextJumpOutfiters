@@ -1,4 +1,5 @@
 import {packageTotals,releaseProblems,publicPackage,cleanIntake,packageStates,supplierModes} from './package-domain.js';
+import {selectVariant,variantsFor,privateCostTotals} from './variant-domain.js';
 import {staffActor} from './access.js';
 const fail=(status,message)=>Object.assign(Error(message),{status});
 const all=async(db,sql,...args)=>(await db.prepare(sql).bind(...args).all()).results;
@@ -30,34 +31,55 @@ async function command(db,action,input,key,actor,entityId,condition,args,effects
 function cleanPackageData(input){
  const vehicle=input?.vehicle;
  if(!vehicle||!cleanText(vehicle.make,80)||!cleanText(vehicle.model,80)||!Number.isSafeInteger(vehicle.yearFrom)||!Number.isSafeInteger(vehicle.yearTo)||vehicle.yearFrom<1900||vehicle.yearTo>2100||vehicle.yearTo<vehicle.yearFrom)throw fail(422,'Set a clear vehicle and year range.');
- if(!Array.isArray(input.lines)||!input.lines.length||input.lines.length>25||new Set(input.lines.map(l=>l.productId)).size!==input.lines.length)throw fail(422,'Use 1 to 25 different parts per package.');
- const lines=input.lines.map(line=>{if(!uuid(line.productId))throw fail(422,'Choose an existing part.');const quantity=nullableNumber(line.quantity,{max:100000});if(quantity===0)throw fail(422,'Remove a part instead of setting its quantity to zero.');return {productId:line.productId,role:cleanText(line.role,100),quantity,unitRetailCents:nullableNumber(line.unitRetailCents)};});
- const hours=nullableNumber(input.labor?.hours,{integer:false,max:200});if(hours!==null&&Math.abs(hours*60-Math.round(hours*60))>1e-7)throw fail(422,'Use labor time in whole minutes.');
- return {menuOrder:nullableNumber(input.menuOrder,{max:1000})??100,audience:cleanText(input.audience,150),description:cleanText(input.description,600),vehicle:{make:cleanText(vehicle.make,80),model:cleanText(vehicle.model,80),yearFrom:vehicle.yearFrom,yearTo:vehicle.yearTo},lines,
-  labor:{hours,rateCents:nullableNumber(input.labor?.rateCents),alignmentCents:nullableNumber(input.labor?.alignmentCents)},fitmentNotes:cleanText(input.fitmentNotes,2000),installNotes:cleanText(input.installNotes,3000),
+ const cleanLines=lines=>{
+  if(!Array.isArray(lines)||!lines.length||lines.length>25||new Set(lines.map(l=>l.productId)).size!==lines.length)throw fail(422,'Use 1 to 25 different parts per package.');
+  return lines.map(line=>{if(!uuid(line.productId))throw fail(422,'Choose an existing part.');const quantity=nullableNumber(line.quantity,{max:100000});if(quantity===0)throw fail(422,'Remove a part instead of setting its quantity to zero.');return {productId:line.productId,role:cleanText(line.role,100),quantity,unitRetailCents:nullableNumber(line.unitRetailCents),unitCostCents:nullableNumber(line.unitCostCents)};});
+ };
+ const cleanLabor=value=>{
+  const result={rateCents:nullableNumber(value?.rateCents),alignmentCents:nullableNumber(value?.alignmentCents),useBreakdown:value?.useBreakdown===true,rustApplies:value?.rustApplies===true};
+  for(const key of ['hours','frontHours','rearHours','rustHours']){const n=nullableNumber(value?.[key],{integer:false,max:200});if(n!==null&&Math.abs(n*60-Math.round(n*60))>1e-7)throw fail(422,'Use labor time in whole minutes.');result[key]=n;}return result;
+ };
+ let variants;
+ if(input.variants!==undefined){
+  if(!Array.isArray(input.variants)||!input.variants.length||input.variants.length>4||new Set(input.variants.map(v=>v.id)).size!==input.variants.length)throw fail(422,'Use up to four distinct package scopes.');
+  variants=input.variants.map(v=>{if(!/^[a-z][a-z0-9-]{1,39}$/.test(v.id)||!cleanText(v.label,80))throw fail(422,'Name each package scope.');return {id:v.id,label:cleanText(v.label,80),enabled:v.enabled===true,lines:cleanLines(v.lines),labor:cleanLabor(v.labor)};});
+ }
+ const defaultVariantId=variants?input.defaultVariantId:null,primary=variants?.find(v=>v.id===defaultVariantId);
+ if(variants&&(!primary||!primary.enabled))throw fail(422,'Choose an enabled default scope.');
+ const useLevel=input.useLevel||null;if(useLevel&&!['weekender','overlander-light','overlander-heavy'].includes(useLevel))throw fail(422,'Choose one of the three pilot uses.');
+ return {menuOrder:nullableNumber(input.menuOrder,{max:1000})??100,audience:cleanText(input.audience,150),description:cleanText(input.description,600),vehicle:{make:cleanText(vehicle.make,80),model:cleanText(vehicle.model,80),yearFrom:vehicle.yearFrom,yearTo:vehicle.yearTo},lines:primary?primary.lines:cleanLines(input.lines),
+  labor:primary?primary.labor:cleanLabor(input.labor),...(variants?{variants,defaultVariantId}:{}),useLevel,
+  specs:Object.fromEntries(['recommendedLiftHeight','stockCoil','levelingMethod'].map(k=>[k,cleanText(input.specs?.[k],300)])),vehicleQuestions:Array.isArray(input.vehicleQuestions)?input.vehicleQuestions.slice(0,20).map(q=>cleanText(q,600)):[],
+  fitmentNotes:cleanText(input.fitmentNotes,2000),installNotes:cleanText(input.installNotes,3000),
   excludes:Array.isArray(input.excludes)?input.excludes.slice(0,12).map(v=>cleanText(v,150)).filter(Boolean):[],diyAllowed:input.diyAllowed===true,
   approvals:Object.fromEntries(['parts','pricing','fitment'].map(key=>[key,input.approvals?.[key]===true])),reviewEvidence:cleanText(input.reviewEvidence,1000)};
 }
+async function materializePackage(db,data){
+ if(data.variants){for(const v of data.variants)v.lines=await materializeLines(db,v.lines);const v=data.variants.find(v=>v.id===data.defaultVariantId);data.lines=v.lines;data.labor=v.labor;}
+ else data.lines=await materializeLines(db,data.lines);return data;
+}
+function allPackageLines(data){return data.variants?data.variants.flatMap(v=>v.lines):data.lines;}
 async function materializeLines(db,lines){
  return Promise.all(lines.map(async line=>{const p=await one(db,'SELECT id,title,revision,state,data_json FROM master_products WHERE id=?',line.productId);if(!p||p.state==='RETIRED')throw fail(422,'A package part is missing or retired. Choose a replacement.');const data=JSON.parse(p.data_json);return {...line,title:p.title,productRevision:p.revision,supplierSku:data.supplierSku||null,supplier:data.supplier||null,installOnly:(data.tags||[]).includes('Install-Only')};}));
 }
 async function readPackage(db,id){
  const row=decoded(await one(db,'SELECT * FROM curated_packages WHERE id=?',id));if(!row)throw fail(404,'Package not found.');
- const products=await all(db,"SELECT p.id,p.revision,p.state FROM master_products p JOIN json_each(?) j ON p.id=json_extract(j.value,'$.productId')",JSON.stringify(row.data.lines));
- const current=new Map(products.map(p=>[p.id,p]));row.stale=row.data.lines.some(line=>!current.has(line.productId)||current.get(line.productId).state==='RETIRED'||current.get(line.productId).revision!==line.productRevision);
- row.totals=packageTotals(row.data);row.problems=[...releaseProblems(row.data),...(row.stale?['A part changed. Review the package against the current part records.']:[])];return row;
+ const products=await all(db,"SELECT p.id,p.revision,p.state FROM master_products p JOIN json_each(?) j ON p.id=json_extract(j.value,'$.productId')",JSON.stringify(allPackageLines(row.data)));
+ const current=new Map(products.map(p=>[p.id,p]));row.stale=allPackageLines(row.data).some(line=>!current.has(line.productId)||current.get(line.productId).state==='RETIRED'||current.get(line.productId).revision!==line.productRevision);
+ row.variantCosts=variantsFor(row.data).map(v=>({id:v.id,...privateCostTotals(v)}));row.totals=packageTotals(row.data);row.problems=[...releaseProblems(row.data),...(row.stale?['A part changed. Review the package against the current part records.']:[])];return row;
 }
 async function savePackage(db,id,input,key,actor){
  const requestInput={id,input},prior=await replay(db,requestInput,key,actor);if(prior)return readPackage(db,prior.entityId);
  const row=await readPackage(db,id);if(input.revision!==row.revision)throw fail(409,'This package changed. Reload it before saving.');
  if(!packageStates.includes(input.state)||!cleanText(input.title)||!cleanText(input.category))throw fail(422,'Choose a package name, category and state.');
  const data={...cleanPackageData(input.data),source:row.data.source,sourceTotalCents:row.data.sourceTotalCents??null,
+  sourceSummary:row.data.sourceSummary,sourceRowKey:row.data.sourceRowKey,sourceDescription:row.data.sourceDescription,
   issues:(row.data.issues||[]).map(issue=>({...issue,resolved:input.data.issues?.find(value=>value.id===issue.id)?.resolved===true}))};
- data.lines=await materializeLines(db,data.lines);
+ await materializePackage(db,data);
  if(input.state==='PUBLISHED'){
   const problems=releaseProblems(data);if(problems.length)throw fail(422,problems.join(' '));data.reviewedBy=actor;data.reviewedAt=timestamp();
  }else{data.approvals={parts:false,pricing:false,fitment:false};data.reviewedBy=null;data.reviewedAt=null;}
- const lineJson=JSON.stringify(data.lines),clean={revision:input.revision,state:input.state,title:cleanText(input.title),category:cleanText(input.category,80),data};
+ const lineJson=JSON.stringify(allPackageLines(data)),clean={revision:input.revision,state:input.state,title:cleanText(input.title),category:cleanText(input.category,80),data};
  await command(db,'PACKAGE_'+input.state,requestInput,key,actor,id,
   "EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=?) AND NOT EXISTS(SELECT 1 FROM json_each(?) j LEFT JOIN master_products p ON p.id=json_extract(j.value,'$.productId') WHERE p.id IS NULL OR p.state='RETIRED' OR p.revision<>json_extract(j.value,'$.productRevision'))",[id,input.revision,lineJson],
   ({gate,gateArgs,time})=>[db.prepare(`UPDATE curated_packages SET title=?,category=?,state=?,revision=revision+1,data_json=?,updated_at=? WHERE id=? AND revision=? AND ${gate}`).bind(clean.title,clean.category,clean.state,JSON.stringify(data),time,id,input.revision,...gateArgs)],{state:input.state,revision:input.revision+1,title:clean.title});
@@ -74,7 +96,7 @@ async function importSources(db,input,key,actor){
  const definitions=[];
  for(const p of input.packages){
   const lines=[];for(const line of p.data?.lines||[]){const product=await one(db,'SELECT id FROM master_products WHERE source_key=?',line.sourceKey);if(!product)throw fail(422,'Import the source parts before their packages.');lines.push({...line,productId:product.id});}
-  const data=cleanPackageData({...p.data,lines});data.lines=await materializeLines(db,data.lines);data.approvals={parts:false,pricing:false,fitment:false};
+  const data=cleanPackageData({...p.data,lines});await materializePackage(db,data);data.approvals={parts:false,pricing:false,fitment:false};
   data.source=p.data.source;data.sourceTotalCents=nullableNumber(p.data.sourceTotalCents);data.issues=(p.data.issues||[]).slice(0,20).map(i=>({id:cleanText(i.id,80),message:cleanText(i.message,600),resolved:false}));
   if(!cleanText(p.sourceKey,200)||!cleanText(p.title)||!cleanText(p.category))throw fail(422,'A source package is incomplete.');
   definitions.push({id:crypto.randomUUID(),sourceKey:cleanText(p.sourceKey,200),title:cleanText(p.title),category:cleanText(p.category,80),data});
@@ -109,23 +131,26 @@ async function buildQuote(db,pack,intake,fulfillment,draft){
   const supply=await readSupply(db,line.productId);
   lines.push({productId:line.productId,productRevision:line.productRevision,title:line.title,role:line.role,quantity:line.quantity,supplierSku:d.supplierSku||null,supplier:d.supplier||null,available:stock?.verified&&d.stockType==='STOCKED'?stock.available:null,supply:supply.supply});
  }
- return {customer:{title:pack.title,packageId:pack.id,packageRevision:pack.revision,vehicle:intake,fulfillment,lines:customerPackage.lines,totals,fitmentNotes:pack.data.fitmentNotes,excludes:pack.data.excludes,draft,requiresVehicleConfirmation:true,stockReserved:false,orderPlaced:false},shop:{lines,labor:pack.data.labor,installNotes:pack.data.installNotes,source:pack.data.source,packageIssues:pack.data.issues||[],status:'PLANNING',stockAsOf:timestamp()}};
+ return {customer:{title:pack.title,variantId:pack.data.variantId||pack.data.defaultVariantId||'front-rear',variantLabel:pack.data.variantLabel||'',packageId:pack.id,packageRevision:pack.revision,vehicle:intake,fulfillment,lines:customerPackage.lines,totals,fitmentNotes:pack.data.fitmentNotes,excludes:pack.data.excludes,draft,requiresVehicleConfirmation:true,stockReserved:false,orderPlaced:false},shop:{lines,labor:pack.data.labor,installNotes:pack.data.installNotes,source:pack.data.source,packageIssues:pack.data.issues||[],status:'PLANNING',stockAsOf:timestamp()}};
 }
 async function saveQuote(request,db,input,draft=false){
  const key=request.headers.get('idempotency-key'),access=request.headers.get('x-build-access');if(!token(key)||!token(access))throw fail(400,'A valid quote save and reopen key are required.');
  if(!uuid(input.packageId)||!Number.isSafeInteger(input.revision)||!['installed','diy'].includes(input.fulfillment))throw fail(422,'Choose a package and fulfillment option.');
- const clean={packageId:input.packageId,revision:input.revision,fulfillment:input.fulfillment,intake:{year:Number(input.intake?.year),suspension:input.intake?.suspension,use:input.intake?.use},draft};
+ const clean={packageId:input.packageId,revision:input.revision,variantId:input.variantId||null,fulfillment:input.fulfillment,intake:{year:Number(input.intake?.year),suspension:input.intake?.suspension,use:input.intake?.use},draft};
  const fingerprint=await hash(JSON.stringify(clean)),keyHash=await hash(key),accessHash=await hash(access);
  const previous=await one(db,'SELECT * FROM package_quotes WHERE key_hash=?',keyHash);
  if(previous){if(previous.fingerprint!==fingerprint||previous.access_hash!==accessHash)throw fail(409,'This save key belongs to a different quote.');return {id:previous.id,...JSON.parse(previous.snapshot_json),reused:true};}
  const pack=await readPackage(db,input.packageId);if(pack.revision!==input.revision)throw fail(409,'The package changed. Refresh the estimate before saving.');
  if(!draft&&(pack.state!=='PUBLISHED'||pack.stale||pack.problems.length))throw fail(409,'This package is being reviewed. Ask the shop for a custom estimate.');
  if(input.fulfillment==='diy'&&!pack.data.diyAllowed)throw fail(422,'This package is offered with installation.');
- const intake=cleanIntake(clean.intake,pack.data.vehicle),snapshot=await buildQuote(db,pack,intake,input.fulfillment,draft),id=crypto.randomUUID(),time=timestamp(),number='NJO-'+id.slice(0,8).toUpperCase();
+ if(!draft&&pack.data.useLevel&&clean.intake.use!==({'weekender':'daily','overlander-light':'trips','overlander-heavy':'permanent'}[pack.data.useLevel]))throw fail(422,'Choose the package that matches your selected use.');
+ const variant=variantsFor(pack.data).find(v=>v.id===(clean.variantId||pack.data.defaultVariantId||'front-rear'));if(!variant||!variant.enabled)throw fail(422,'Choose an available package scope.');
+ const chosen={...pack,data:selectVariant(pack.data,variant.id)};
+ const intake=cleanIntake(clean.intake,pack.data.vehicle),snapshot=await buildQuote(db,chosen,intake,input.fulfillment,draft),id=crypto.randomUUID(),time=timestamp(),number='NJO-'+id.slice(0,8).toUpperCase();
  snapshot.customer={...snapshot.customer,number,createdAt:time};
  // The package and component revisions are checked again in the write itself.
  const condition="EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=? AND (?=1 OR state='PUBLISHED')) AND NOT EXISTS(SELECT 1 FROM json_each(?) j LEFT JOIN master_products p ON p.id=json_extract(j.value,'$.productId') WHERE p.id IS NULL OR p.state='RETIRED' OR p.revision<>json_extract(j.value,'$.productRevision'))";
- try{await db.prepare(`INSERT OR IGNORE INTO package_quotes (id,number,package_id,package_revision,key_hash,access_hash,fingerprint,snapshot_json,created_at) SELECT ?,?,?,?,?,?,?,?,? WHERE ${condition} AND (SELECT COUNT(*) FROM package_quotes)<10000`).bind(id,number,pack.id,pack.revision,keyHash,accessHash,fingerprint,JSON.stringify(snapshot),time,pack.id,pack.revision,draft?1:0,JSON.stringify(pack.data.lines)).run();}catch{throw fail(503,'The quote could not be saved. Keep this page open and retry.');}
+ try{await db.prepare(`INSERT OR IGNORE INTO package_quotes (id,number,package_id,package_revision,key_hash,access_hash,fingerprint,snapshot_json,created_at) SELECT ?,?,?,?,?,?,?,?,? WHERE ${condition} AND (SELECT COUNT(*) FROM package_quotes)<10000`).bind(id,number,pack.id,pack.revision,keyHash,accessHash,fingerprint,JSON.stringify(snapshot),time,pack.id,pack.revision,draft?1:0,JSON.stringify(chosen.data.lines)).run();}catch{throw fail(503,'The quote could not be saved. Keep this page open and retry.');}
  const saved=await one(db,'SELECT * FROM package_quotes WHERE key_hash=?',keyHash);if(!saved)throw fail(409,'The package changed, or quote storage is full. Refresh before retrying.');if(saved.fingerprint!==fingerprint||saved.access_hash!==accessHash)throw fail(409,'This save key belongs to a different quote.');
  return {id:saved.id,...JSON.parse(saved.snapshot_json),reused:saved.id!==id};
 }
@@ -154,7 +179,8 @@ export async function packageService(request,db,{identity,readBody,json}){
   const input=await readBody(request);if(!uuid(input.packageId)||!Number.isSafeInteger(input.revision))throw fail(422,'Choose a saved package to preview.');const pack=await readPackage(db,input.packageId);
   if(input.revision!==pack.revision)throw fail(409,'The package changed. Reload before previewing.');
   if(!['installed','diy'].includes(input.fulfillment)||input.fulfillment==='diy'&&!pack.data.diyAllowed)throw fail(422,'Choose an available fulfillment option.');
-  const snapshot=await buildQuote(db,pack,cleanIntake(input.intake,pack.data.vehicle),input.fulfillment,true);
+  const variant=selectVariant(pack.data,input.variantId);if(!variant)throw fail(422,'Choose a package scope.');
+  const snapshot=await buildQuote(db,{...pack,data:variant},cleanIntake(input.intake,pack.data.vehicle),input.fulfillment,true);
   snapshot.customer={...snapshot.customer,number:'DRAFT PREVIEW',createdAt:timestamp()};return json({id:null,...snapshot,preview:true});
  }
  if(path==='/api/staff/standards'&&method==='GET')return json({standards:(await all(db,'SELECT * FROM build_standards ORDER BY category,title LIMIT 100')).map(decoded)});
@@ -169,3 +195,5 @@ export async function packageService(request,db,{identity,readBody,json}){
  }
  return null;
 }
+
+export {command,replay,cleanPackageData,materializePackage,readPackage,allPackageLines};
