@@ -62,3 +62,25 @@ test('demo transport never calls the hosted API, and staff failures never fall b
  const staff=createWorkspaceApi({fetchImpl:async()=>new Response(JSON.stringify({error:'Staff access required'}),{status:403}),loadDemo:async()=>{demo++;}});await assert.rejects(staff('session'),/Staff access required/);assert.equal(demo,1);
  const response=await catalogService(new Request('https://example.test/api/staff/session'),{DB:{}},{});assert.equal(response.status,403);
 });
+
+test('demo quote prepares a job and shortage order without changing its saved estimate',async t=>{
+ const engine=await createDemoEngine(SQL,schema);t.after(()=>engine.close());
+ const quote=(await call(engine,'package-quotes')).value.quotes[0];assert.equal(quote.customer.number,'NJO-DEMO-PREP');
+ const path=`package-quotes/${quote.id}/prepare`,plan=(await call(engine,path)).value;
+ assert.deepEqual(plan.issues,[]);assert.equal(plan.lines.reduce((n,l)=>n+l.shortage,0),1);
+ const payload={location,reviewToken:plan.reviewToken,confirmed:true,orders:plan.lines.filter(l=>l.shortage).map(l=>({productId:l.productId,quantity:l.shortage,supplier:l.supplier}))};
+ const result=await call(engine,path,'POST',payload);assert.equal(result.status,201,JSON.stringify(result));assert.equal(result.value.purchases.length,1);
+ const restored=await createDemoEngine(SQL,schema,engine.export());t.after(()=>restored.close());
+ assert.equal((await call(restored,path)).value.existing.job.id,result.value.job.id);assert.equal((await call(restored,'package-quotes')).value.quotes.length,1);
+ assert.deepEqual((await call(restored,'package-quotes/'+quote.id)).value.customer,quote.customer);
+});
+
+test('older demo sessions gain the handoff tables without losing edited stock',async t=>{
+ const engine=await createDemoEngine(SQL,schema);t.after(()=>engine.close());
+ const light=await stock(engine);await call(engine,'inventory','POST',{productId:light.id,location,kind:'COUNT',quantity:19,reason:'Demo saved count'});
+ const legacy=new SQL.Database(engine.export());legacy.run('PRAGMA foreign_keys=OFF');
+ legacy.run('DROP TABLE quote_job_handoffs; DROP TABLE job_purchase_orders; DROP TABLE job_requirements; DELETE FROM package_quotes; DELETE FROM curated_packages;');
+ const restored=await createDemoEngine(SQL,schema,legacy.export());legacy.close();t.after(()=>restored.close());
+ assert.equal((await stock(restored)).onhand,19);const quote=(await call(restored,'package-quotes')).value.quotes[0];
+ assert.equal((await call(restored,`package-quotes/${quote.id}/prepare`)).status,200);
+});

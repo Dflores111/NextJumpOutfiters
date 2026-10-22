@@ -58,3 +58,12 @@ export const packageQuotes=sqliteTable('package_quotes',{
 export const catalogSourceRows=sqliteTable('catalog_source_rows',{
  id:text('id').primaryKey(),sourceKey:text('source_key').notNull().unique(),sourceId:text('source_id').notNull(),kind:text('kind').notNull(),title:text('title').notNull(),group:text('group_name').notNull(),file:text('file').notNull(),sheet:text('sheet').notNull(),row:integer('row_number').notNull(),data:text('data_json').notNull(),createdAt:text('created_at').notNull(),
 },t=>[index('source_rows_kind_group').on(t.kind,t.group)]);
+export const quoteJobHandoffs=sqliteTable('quote_job_handoffs',{
+ quoteId:text('quote_id').primaryKey().references(()=>packageQuotes.id),jobId:text('job_id').notNull().unique().references(()=>stockJobs.id),createdBy:text('created_by').notNull(),createdAt:text('created_at').notNull(),
+});
+export const jobRequirements=sqliteTable('job_requirements',{
+ jobId:text('job_id').notNull().references(()=>stockJobs.id),productId:text('product_id').notNull().references(()=>masterProducts.id),quantity:integer('quantity').notNull(),
+},t=>[uniqueIndex('job_requirement_product').on(t.jobId,t.productId)]);
+export const jobPurchaseOrders=sqliteTable('job_purchase_orders',{
+ orderId:text('order_id').primaryKey().references(()=>purchaseOrders.id),jobId:text('job_id').notNull().references(()=>stockJobs.id),
+});

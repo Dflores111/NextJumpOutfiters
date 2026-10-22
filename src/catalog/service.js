@@ -7,6 +7,7 @@ import {lookupBarcode,barcodes,saveBarcode,listOperations,operationDetail,create
 import {sourceService} from './source-service.js';
 import {cleanCatalogFields} from './catalog-fields.js';
 import {flatbedSizeFor} from '../builder/journey-domain.js';
+import {quotePreparation,prepareQuoteJob,reserveMissingJobParts} from './quote-job-service.js';
 import {packageService} from './package-service.js';
 
 // Edge-compatible service. D1 and the local SQLite adapter share this contract.
@@ -135,6 +136,13 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
   if(request.method!=='GET')sameOrigin(request);
   if(path==='/api/package-quotes'&&request.method==='POST')rateLimit(request);
   const sourceResponse=await sourceService(request,env.DB,{identity:staff?identity:null,readBody:body,json});if(sourceResponse)return sourceResponse;
+  const prepareMatch=path.match(/^\/api\/staff\/package-quotes\/([a-f\d-]{36})\/prepare$/i);
+  if(prepareMatch){
+   if(!canStaff(identity,'inventory'))throw fail(403,'Inventory access is required to prepare jobs.');
+   if(request.method==='GET')return json(await quotePreparation(env.DB,prepareMatch[1],url.searchParams.get('location')||locations[0]));
+   if(request.method==='POST')return json(await prepareQuoteJob(env.DB,prepareMatch[1],await body(request),request.headers.get('idempotency-key'),staffActor(identity),canStaff(identity,'purchasing')),201);
+  }
+  if(/^\/api\/staff\/jobs\/[a-f\d-]{36}\/reserve-missing$/i.test(path)&&request.method==='POST')return json(await reserveMissingJobParts(env.DB,path.split('/').at(-2),await body(request),request.headers.get('idempotency-key'),staffActor(identity)));
   const packageResponse=await packageService(request,env.DB,{identity:staff?identity:null,readBody:body,json});if(packageResponse)return packageResponse;
   if(path==='/api/builds'&&request.method==='POST')return await saveBuild(request,env.DB);
   if(/^\/api\/builds\/[a-zA-Z0-9-]{36}$/.test(path)&&request.method==='GET'){

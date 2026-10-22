@@ -18,7 +18,7 @@ function linesOf(value,{cost=false,zero=false}={}){
 // A command is a transaction gate plus an immutable audit receipt. Every effect is
 // guarded by the same receipt and current revision, and stock events have unique
 // keys. Lost responses and concurrent retries cannot receive or consume twice.
-async function command(db,action,input,key,actor,entityId,condition,conditionArgs,effects,failureMessage){
+export async function command(db,action,input,key,actor,entityId,condition,conditionArgs,effects,failureMessage){
  if(typeof key!=='string'||!/^[a-zA-Z0-9_-]{32,96}$/.test(key))throw fail(400,'A valid action key is required.');
  const commandId=await hash(key),fingerprint=await hash(JSON.stringify({action,input}));
  const check=row=>{if(row.actor!==actor||JSON.parse(row.payload).fingerprint!==fingerprint)throw fail(409,'This action key belongs to a different change.');return JSON.parse(row.payload).entityId;};
@@ -77,7 +77,11 @@ export async function operationDetail(db,id,kind,canPurchasing=false){
  const lines=await all(db,`SELECT l.product_id AS productId,l.quantity,${po?'l.received':'l.used'},p.title,COALESCE(json_extract(p.data_json,'$.supplierSku'),'') AS sku${po&&canPurchasing?',l.unit_cost_cents AS unitCostCents':''} FROM ${po?'purchase_order_lines':'stock_job_lines'} l JOIN master_products p ON p.id=l.product_id WHERE ${po?'l.order_id':'l.job_id'}=? ORDER BY p.title COLLATE NOCASE`,id);
  // Audit payloads can contain purchasing costs; receiving staff see only receipts.
  const activity=await all(db,`SELECT id,action,actor,created_at,json_extract(payload,'$.reference') AS reference,json_extract(payload,'$.note') AS note${po?",CASE WHEN action='PO_RECEIVED' THEN json_extract(payload,'$.lines') ELSE NULL END AS lines":''} FROM master_audit WHERE subject_id=? ORDER BY created_at DESC,id DESC LIMIT 40`,id);
- return {record,lines,activity:activity.map(row=>({...row,...(row.lines?{lines:JSON.parse(row.lines)}:{})}))};
+ const link=await one(db,po?'SELECT h.quote_id,h.job_id,j.number AS jobNumber,q.number AS quoteNumber FROM job_purchase_orders p JOIN quote_job_handoffs h ON h.job_id=p.job_id JOIN stock_jobs j ON j.id=h.job_id JOIN package_quotes q ON q.id=h.quote_id WHERE p.order_id=?':'SELECT h.quote_id,h.job_id,q.number AS quoteNumber,q.snapshot_json FROM quote_job_handoffs h JOIN package_quotes q ON q.id=h.quote_id WHERE h.job_id=?',id);
+ const requirements=!po&&link?await all(db,`SELECT r.product_id AS productId,p.title,r.quantity AS required,COALESCE(l.quantity,0) AS held FROM job_requirements r JOIN master_products p ON p.id=r.product_id LEFT JOIN stock_job_lines l ON l.job_id=r.job_id AND l.product_id=r.product_id WHERE r.job_id=?`,id):[];
+ const purchases=!po&&link?await all(db,'SELECT o.id,o.number,o.supplier,o.status FROM job_purchase_orders p JOIN purchase_orders o ON o.id=p.order_id WHERE p.job_id=?',id):[];
+ const brief=link?.snapshot_json?JSON.parse(link.snapshot_json):null;if(link)delete link.snapshot_json;
+ return {record,lines,requirements,purchases,source:link?{...link,...(brief?{installNotes:brief.shop.installNotes,labor:brief.shop.labor,fitmentNotes:brief.customer.fitmentNotes}: {})}:null,activity:activity.map(row=>({...row,...(row.lines?{lines:JSON.parse(row.lines)}:{})}))};
 }
 export async function createPurchase(db,input,key,actor){
  const clean={supplier:text(input.supplier,160,true),location:location(input.location),notes:text(input.notes||'',500),expectedOn:input.expectedOn||null,lines:linesOf(input.lines,{cost:true})};
@@ -121,15 +125,15 @@ export async function createJob(db,input,key,actor){
   ...reserveParts(db,clean.lines,clean.location,ctx)
  ]);
 }
-function reserveParts(db,lines,at,{gate,gateArgs,time,commandId,entityId,actor},rev=null){
+export function reserveParts(db,lines,at,{gate,gateArgs,time,commandId,entityId,actor},rev=null){
  const encoded=JSON.stringify(lines),eligible=rev===null?'1':currentJob,args=rev===null?[]:[entityId,rev];
  return [
   db.prepare(`INSERT OR IGNORE INTO inventory_movements (id,event_key,fingerprint,product_id,location,kind,onhand_delta,reserved_delta,reference,actor,reason,created_at) SELECT ?||':'||json_extract(value,'$.productId'),?||':'||json_extract(value,'$.productId'),?,json_extract(value,'$.productId'),?,'RESERVE',0,json_extract(value,'$.quantity'),?,?,?,? FROM json_each(?) WHERE ${gate} AND ${eligible}`).bind(commandId,commandId,commandId,at,`job:${entityId}`,actor,'Parts reserved for job',time,encoded,...gateArgs,...args),
   db.prepare(`INSERT INTO stock_job_lines (job_id,product_id,quantity,used) SELECT ?,json_extract(value,'$.productId'),json_extract(value,'$.quantity'),NULL FROM json_each(?) WHERE ${gate} AND ${eligible} ON CONFLICT(job_id,product_id) DO UPDATE SET quantity=quantity+excluded.quantity`).bind(entityId,encoded,...gateArgs,...args)
  ];
 }
-export async function addJobParts(db,id,input,key,actor){
- const clean={revision:revision(input.revision),lines:linesOf(input.lines)},row=await one(db,'SELECT location FROM stock_jobs WHERE id=?',id);if(!row)throw fail(404,'Job not found.');const encoded=JSON.stringify(clean.lines);
+export async function addJobParts(db,id,input,key,actor,{missingOnly=false}={}){
+ const clean={revision:revision(input.revision),lines:linesOf(input.lines),...(missingOnly?{missingOnly:true}:{})},row=await one(db,'SELECT location FROM stock_jobs WHERE id=?',id);if(!row)throw fail(404,'Job not found.');const encoded=JSON.stringify(clean.lines);
  return command(db,'JOB_PARTS_ADDED',clean,key,actor,id,`${currentJob} AND ${availableLines} AND (SELECT COUNT(*) FROM stock_job_lines WHERE job_id=?)+(SELECT COUNT(*) FROM json_each(?) j WHERE NOT EXISTS(SELECT 1 FROM stock_job_lines l WHERE l.job_id=? AND l.product_id=json_extract(j.value,'$.productId')))<=25 AND NOT EXISTS(SELECT 1 FROM json_each(?) j JOIN stock_job_lines l ON l.job_id=? AND l.product_id=json_extract(j.value,'$.productId') WHERE l.quantity+json_extract(j.value,'$.quantity')>1000000)`,[id,clean.revision,encoded,row.location,row.location,row.location,id,encoded,id,encoded,id],ctx=>[
   ...reserveParts(db,clean.lines,row.location,ctx,clean.revision),
   db.prepare(`UPDATE stock_jobs SET revision=revision+1,updated_at=? WHERE id=? AND revision=? AND ${ctx.gate}`).bind(ctx.time,id,clean.revision,...ctx.gateArgs)
@@ -141,8 +145,9 @@ export async function finishJob(db,id,input,key,actor){
  // Completion must account for every held part, including zero used. Manual stock
  // actions cannot release the protected job: reference. Unused units are released.
  const eligible=`${currentJob} AND NOT EXISTS(SELECT 1 FROM stock_job_lines l JOIN stock_jobs o ON o.id=l.job_id WHERE l.job_id=? AND (COALESCE((SELECT SUM(reserved_delta) FROM inventory_movements WHERE product_id=l.product_id AND location=o.location AND reference='job:'||o.id),0)<>l.quantity OR COALESCE((SELECT SUM(onhand_delta) FROM inventory_movements WHERE product_id=l.product_id AND location=o.location),0)<l.quantity))${cancel?'':` AND (SELECT COUNT(*) FROM stock_job_lines WHERE job_id=?)=json_array_length(?) AND NOT EXISTS(SELECT 1 FROM json_each(?) j LEFT JOIN stock_job_lines l ON l.job_id=? AND l.product_id=json_extract(j.value,'$.productId') WHERE l.product_id IS NULL OR json_extract(j.value,'$.quantity')>l.quantity)`}`;
- const args=[id,clean.revision,id,...(cancel?[]:[id,encoded,encoded,id])];
- return command(db,cancel?'JOB_CANCELLED':'JOB_COMPLETED',clean,key,actor,id,eligible,args,({gate,gateArgs,time,commandId})=>[
+ const ready=cancel?'1':"NOT EXISTS(SELECT 1 FROM job_requirements r LEFT JOIN stock_job_lines l ON l.job_id=r.job_id AND l.product_id=r.product_id WHERE r.job_id=? AND COALESCE(l.quantity,0)<r.quantity)";
+ const args=[id,clean.revision,id,...(cancel?[]:[id,encoded,encoded,id,id])];
+ return command(db,cancel?'JOB_CANCELLED':'JOB_COMPLETED',clean,key,actor,id,`${eligible} AND ${ready}`,args,({gate,gateArgs,time,commandId})=>[
   db.prepare(`INSERT OR IGNORE INTO inventory_movements (id,event_key,fingerprint,product_id,location,kind,onhand_delta,reserved_delta,reference,actor,reason,created_at) SELECT ?||':'||l.product_id,?||':'||l.product_id,?,l.product_id,o.location,?,${cancel?'0':"-(SELECT json_extract(value,'$.quantity') FROM json_each(?) WHERE json_extract(value,'$.productId')=l.product_id)"},-l.quantity,'job:'||o.id,?,?,? FROM stock_job_lines l JOIN stock_jobs o ON o.id=l.job_id WHERE l.job_id=? AND ${gate} AND ${currentJob}`).bind(commandId,commandId,commandId,cancel?'RELEASE':'JOB_USE',...(cancel?[]:[encoded]),actor,cancel?`Job cancelled: ${clean.note}`:`Job completed${clean.note?': '+clean.note:''}`,time,id,...gateArgs,id,clean.revision),
   db.prepare(`UPDATE stock_job_lines SET used=${cancel?'0':"(SELECT json_extract(value,'$.quantity') FROM json_each(?) WHERE json_extract(value,'$.productId')=stock_job_lines.product_id)"} WHERE job_id=? AND ${gate} AND ${currentJob}`).bind(...(cancel?[]:[encoded]),id,...gateArgs,id,clean.revision),
   db.prepare(`UPDATE stock_jobs SET status=?,revision=revision+1,updated_at=? WHERE id=? AND revision=? AND ${gate}`).bind(cancel?'CANCELLED':'COMPLETE',time,id,clean.revision,...gateArgs)
