@@ -82,3 +82,40 @@ test('download projections escape text and inquiry handoff carries the saved ref
  record.customer.title='<script>alert(1)</script>';const customer=quoteDocument(record),shop=quoteDocument(record,'shop');assert.ok(customer.includes('&lt;script&gt;'));assert.ok(!customer.includes('<script>'));assert.ok(!customer.includes('SYN-123'));assert.ok(shop.includes('SYN-123'));assert.ok(!shop.includes('candidateCost'));
  const summary=packageInquirySummary(record);assert.ok(summary.includes(record.customer.number));assert.ok(!summary.includes('access'));assert.equal(packageInquirySummary({...record,customer:{...record.customer,draft:true}}),'');env.database.close();
 });
+
+test('duplicate creates an audited private copy, keeps shared parts, and resets every inherited approval',async()=>{
+ const env=await fixture(),p=await publish(env,await seed(env)),path='/api/staff/packages/'+p.id+'/duplicate',input={revision:p.revision,useLevel:'overlander-light'},action=key();
+ assert.equal((await call(env,path,'POST',input,null)).status,403);assert.equal((await call(env,path,'POST',input,inventory)).status,403);
+ assert.equal((await call(env,path,'POST',{...input,revision:1})).status,409);
+ const r=await call(env,path,'POST',input,admin,{'Idempotency-Key':action});assert.equal(r.status,201,JSON.stringify(r));const c=r.value;
+ assert.notEqual(c.id,p.id);assert.equal(c.state,'DRAFT');assert.equal(c.data.useLevel,'overlander-light');assert.equal(c.data.lines[0].productId,p.data.lines[0].productId);assert.deepEqual(c.data.vehicle,p.data.vehicle);assert.equal(c.data.clonedFrom.revision,p.revision);assert.ok(Object.values(c.data.cloneReview).every(v=>v===false));assert.ok(Object.values(c.data.approvals).every(v=>v===false));assert.equal(c.data.reviewEvidence,'');assert.equal(c.data.issues[0].resolved,false);
+ assert.equal((await call(env,path,'POST',input,admin,{'Idempotency-Key':action})).value.id,c.id);assert.equal(count(env,'curated_packages'),2);assert.equal(count(env,'master_products'),1);
+ const bypass=ready(c);delete bypass.data.clonedFrom;delete bypass.data.cloneReview;assert.equal((await call(env,'/api/staff/packages/'+c.id,'PATCH',bypass)).status,422);
+ const release=ready(c);release.data.cloneReview=Object.fromEntries(Object.keys(c.data.cloneReview).map(k=>[k,true]));assert.equal((await call(env,'/api/staff/packages/'+c.id,'PATCH',release)).status,200);
+ assert.equal(count(env,'inventory_movements'),0);assert.equal(count(env,'stock_jobs'),0);assert.equal(count(env,'purchase_orders'),0);env.database.close();
+});
+test('only one published package can serve overlapping vehicle years and the same use',async()=>{
+ const env=await fixture(),p=await seed(env);p.data.useLevel='weekender';const original=await publish(env,p);
+ const copy=(await call(env,'/api/staff/packages/'+original.id+'/duplicate','POST',{revision:original.revision,useLevel:'weekender'})).value;
+ const input=ready(copy);input.data.cloneReview=Object.fromEntries(Object.keys(copy.data.cloneReview).map(k=>[k,true]));let r=await call(env,'/api/staff/packages/'+copy.id,'PATCH',input);assert.equal(r.status,422);assert.match(r.value.error,/already serves/);
+ await call(env,'/api/staff/packages/'+original.id,'PATCH',{...ready(original),state:'ARCHIVED'});
+ r=await call(env,'/api/staff/packages/'+copy.id,'PATCH',input);assert.equal(r.status,200,JSON.stringify(r));env.database.close();
+});
+test('saving review progress retains checks; changing package contents resets draft approval',async()=>{
+ const env=await fixture(),p=await seed(env),input={...ready(p),state:'DRAFT'};let r=await call(env,'/api/staff/packages/'+p.id,'PATCH',input);assert.equal(r.status,200);assert.ok(Object.values(r.value.data.approvals).every(v=>!v));
+ const reviewed={...ready(r.value),state:'DRAFT'};r=await call(env,'/api/staff/packages/'+p.id,'PATCH',reviewed);assert.equal(r.status,200);assert.ok(Object.values(r.value.data.approvals).every(Boolean));
+ const changed={...ready(r.value),state:'DRAFT'};changed.data.lines[0].quantity=3;r=await call(env,'/api/staff/packages/'+p.id,'PATCH',changed);assert.equal(r.status,200);assert.ok(Object.values(r.value.data.approvals).every(v=>!v));env.database.close();
+});
+test('media validation is stored safely and customer, purchasing and install outputs stay distinct',async()=>{
+ const env=await fixture(),p=await seed(env),input=ready(p);input.data.media=[{url:'javascript:alert(1)',alt:'Unsafe',kind:'vehicle'}];assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',input)).status,422);
+ input.data.media=[{url:'/images/fixture.webp',alt:'Synthetic test image',kind:'vehicle'}];let r=await call(env,'/api/staff/packages/'+p.id,'PATCH',input);assert.equal(r.status,200);const saved=r.value;
+ const preview=(await call(env,'/api/staff/package-preview','POST',{packageId:saved.id,revision:saved.revision,fulfillment:'installed',intake})).value;
+ assert.equal(preview.customer.description,input.data.description);assert.equal(preview.customer.media[0].alt,'Synthetic test image');assert.equal(preview.customer.lines[0].supplierSku,undefined);
+ const customer=quoteDocument(preview,'customer'),purchasing=quoteDocument(preview,'purchasing'),install=quoteDocument(preview,'shop');assert.ok(!customer.includes('SYN-123'));assert.ok(purchasing.includes('What to order'));assert.ok(purchasing.includes('SYN-123'));assert.ok(!purchasing.includes('<h2>Install preparation</h2>'));assert.ok(install.includes('<h2>Install preparation</h2>'));assert.equal(count(env,'package_quotes'),0);env.database.close();
+});
+
+test('concurrent duplicate retries create a single draft and a single audit event',async()=>{
+ const env=await fixture(),p=await seed(env),before=count(env,'master_audit'),action=key(),input={revision:p.revision,useLevel:'overlander-heavy'},path='/api/staff/packages/'+p.id+'/duplicate';
+ const results=await Promise.all([call(env,path,'POST',input,admin,{'Idempotency-Key':action}),call(env,path,'POST',input,admin,{'Idempotency-Key':action})]);
+ assert.ok(results.every(r=>r.status===201),JSON.stringify(results));assert.equal(new Set(results.map(r=>r.value.id)).size,1);assert.equal(count(env,'curated_packages'),2);assert.equal(count(env,'master_audit'),before+1);env.database.close();
+});

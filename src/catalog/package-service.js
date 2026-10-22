@@ -1,6 +1,7 @@
 import {packageTotals,releaseProblems,publicPackage,cleanIntake,packageStates,supplierModes} from './package-domain.js';
 import {selectVariant,variantsFor,privateCostTotals} from './variant-domain.js';
 import {staffActor} from './access.js';
+import {clonePackageDraft,useLabels,copyChecks,reviewContent} from './package-workflow.js';
 const fail=(status,message)=>Object.assign(Error(message),{status});
 const all=async(db,sql,...args)=>(await db.prepare(sql).bind(...args).all()).results;
 const one=(db,sql,...args)=>db.prepare(sql).bind(...args).first();
@@ -47,8 +48,14 @@ function cleanPackageData(input){
  const defaultVariantId=variants?input.defaultVariantId:null,primary=variants?.find(v=>v.id===defaultVariantId);
  if(variants&&(!primary||!primary.enabled))throw fail(422,'Choose an enabled default scope.');
  const useLevel=input.useLevel||null;if(useLevel&&!['weekender','overlander-light','overlander-heavy'].includes(useLevel))throw fail(422,'Choose one of the three pilot uses.');
+ const media=(Array.isArray(input.media)?input.media:[]).slice(0,8).map(item=>{
+  const url=cleanText(item.url,1200),alt=cleanText(item.alt,200),kind=item.kind==='part'?'part':'vehicle';
+  if(!url)return null;
+  if(!/^\/(?!\/)[\w/.-]+\.(?:png|jpe?g|webp|avif)$/i.test(url)&&!/^https:\/\/[^\s]+$/i.test(url))throw fail(422,'Use an existing site image path or an HTTPS image URL.');
+  if(!alt)throw fail(422,'Describe each image so its contents are clear.');return {url,alt,kind};
+ }).filter(Boolean);
  return {menuOrder:nullableNumber(input.menuOrder,{max:1000})??100,audience:cleanText(input.audience,150),description:cleanText(input.description,600),vehicle:{make:cleanText(vehicle.make,80),model:cleanText(vehicle.model,80),yearFrom:vehicle.yearFrom,yearTo:vehicle.yearTo},lines:primary?primary.lines:cleanLines(input.lines),
-  labor:primary?primary.labor:cleanLabor(input.labor),...(variants?{variants,defaultVariantId}:{}),useLevel,
+  labor:primary?primary.labor:cleanLabor(input.labor),...(variants?{variants,defaultVariantId}:{}),useLevel,media,
   specs:Object.fromEntries(['recommendedLiftHeight','stockCoil','levelingMethod'].map(k=>[k,cleanText(input.specs?.[k],300)])),vehicleQuestions:Array.isArray(input.vehicleQuestions)?input.vehicleQuestions.slice(0,20).map(q=>cleanText(q,600)):[],
   fitmentNotes:cleanText(input.fitmentNotes,2000),installNotes:cleanText(input.installNotes,3000),
   excludes:Array.isArray(input.excludes)?input.excludes.slice(0,12).map(v=>cleanText(v,150)).filter(Boolean):[],diyAllowed:input.diyAllowed===true,
@@ -75,15 +82,31 @@ async function savePackage(db,id,input,key,actor){
  const data={...cleanPackageData(input.data),source:row.data.source,sourceTotalCents:row.data.sourceTotalCents??null,
   sourceSummary:row.data.sourceSummary,sourceRowKey:row.data.sourceRowKey,sourceDescription:row.data.sourceDescription,
   issues:(row.data.issues||[]).map(issue=>({...issue,resolved:input.data.issues?.find(value=>value.id===issue.id)?.resolved===true}))};
+ if(row.data.clonedFrom){data.clonedFrom=row.data.clonedFrom;data.cloneReview=Object.fromEntries(Object.keys(copyChecks).map(k=>[k,input.data.cloneReview?.[k]===true]));}
+ const contentChanged=reviewContent(cleanPackageData(row.data))!==reviewContent(cleanPackageData(input.data))||row.title!==cleanText(input.title);
  await materializePackage(db,data);
  if(input.state==='PUBLISHED'){
   const problems=releaseProblems(data);if(problems.length)throw fail(422,problems.join(' '));data.reviewedBy=actor;data.reviewedAt=timestamp();
- }else{data.approvals={parts:false,pricing:false,fitment:false};data.reviewedBy=null;data.reviewedAt=null;}
+ }else{if(contentChanged){data.approvals={parts:false,pricing:false,fitment:false};if(data.cloneReview)data.cloneReview=Object.fromEntries(Object.keys(copyChecks).map(k=>[k,false]));}data.reviewedBy=null;data.reviewedAt=null;}
+ const uniqueMenu="NOT EXISTS(SELECT 1 FROM curated_packages WHERE id<>? AND state='PUBLISHED' AND json_extract(data_json,'$.useLevel')=? AND lower(json_extract(data_json,'$.vehicle.make'))=lower(?) AND lower(json_extract(data_json,'$.vehicle.model'))=lower(?) AND json_extract(data_json,'$.vehicle.yearFrom')<=? AND json_extract(data_json,'$.vehicle.yearTo')>=?)";
+ const uniqueArgs=[id,data.useLevel,data.vehicle.make,data.vehicle.model,data.vehicle.yearTo,data.vehicle.yearFrom];
+ if(input.state==='PUBLISHED'&&data.useLevel&&await one(db,`SELECT 1 found WHERE NOT (${uniqueMenu})`,...uniqueArgs))throw fail(422,'A published package already serves this vehicle and use. Update that package, or archive it before releasing this replacement.');
  const lineJson=JSON.stringify(allPackageLines(data)),clean={revision:input.revision,state:input.state,title:cleanText(input.title),category:cleanText(input.category,80),data};
  await command(db,'PACKAGE_'+input.state,requestInput,key,actor,id,
-  "EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=?) AND NOT EXISTS(SELECT 1 FROM json_each(?) j LEFT JOIN master_products p ON p.id=json_extract(j.value,'$.productId') WHERE p.id IS NULL OR p.state='RETIRED' OR p.revision<>json_extract(j.value,'$.productRevision'))",[id,input.revision,lineJson],
+  "EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=?) AND NOT EXISTS(SELECT 1 FROM json_each(?) j LEFT JOIN master_products p ON p.id=json_extract(j.value,'$.productId') WHERE p.id IS NULL OR p.state='RETIRED' OR p.revision<>json_extract(j.value,'$.productRevision'))"+(input.state==='PUBLISHED'&&data.useLevel?' AND '+uniqueMenu:''),[id,input.revision,lineJson,...(input.state==='PUBLISHED'&&data.useLevel?uniqueArgs:[])],
   ({gate,gateArgs,time})=>[db.prepare(`UPDATE curated_packages SET title=?,category=?,state=?,revision=revision+1,data_json=?,updated_at=? WHERE id=? AND revision=? AND ${gate}`).bind(clean.title,clean.category,clean.state,JSON.stringify(data),time,id,input.revision,...gateArgs)],{state:input.state,revision:input.revision+1,title:clean.title});
  return readPackage(db,id);
+}
+async function duplicatePackage(db,id,input,key,actor){
+ const requestInput={id,input},prior=await replay(db,requestInput,key,actor);if(prior)return readPackage(db,prior.entityId);
+ const row=await readPackage(db,id);if(input.revision!==row.revision)throw fail(409,'This package changed. Reload it before making a copy.');
+ if(!Object.hasOwn(useLabels,input.useLevel))throw fail(422,'Choose a pilot use for this copy.');
+ const draft=clonePackageDraft(row,input.useLevel),digest=await hash(actor+':'+key),newId=[digest.slice(0,8),digest.slice(8,12),digest.slice(12,16),digest.slice(16,20),digest.slice(20,32)].join('-');
+ await materializePackage(db,draft.data);
+ await command(db,'PACKAGE_DUPLICATED',requestInput,key,actor,newId,'EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=?)',[id,input.revision],({gate,gateArgs,time})=>[
+  db.prepare(`INSERT OR IGNORE INTO curated_packages (id,source_key,title,category,state,revision,data_json,updated_at) SELECT ?,?,?,?,'DRAFT',1,?,? WHERE ${gate}`).bind(newId,'copy:'+newId,draft.title,draft.category,JSON.stringify(draft.data),time,...gateArgs)
+ ],{from:id,fromRevision:row.revision,useLevel:input.useLevel,state:'DRAFT'});
+ return readPackage(db,newId);
 }
 async function importSources(db,input,key,actor){
  if(input.format!=='NJO_PACKAGE_WORKSHOP_V1'||!Array.isArray(input.products)||input.products.length>20||!Array.isArray(input.packages)||input.packages.length>5||!Array.isArray(input.standards)||input.standards.length>20||!/^[a-f\d]{64}$/.test(input.sourceId||''))throw fail(422,'Choose a prepared Next Jump source review file. Import up to 20 parts per batch.');
@@ -131,7 +154,7 @@ async function buildQuote(db,pack,intake,fulfillment,draft){
   const supply=await readSupply(db,line.productId);
   lines.push({productId:line.productId,productRevision:line.productRevision,title:line.title,role:line.role,quantity:line.quantity,supplierSku:d.supplierSku||null,supplier:d.supplier||null,available:stock?.verified&&d.stockType==='STOCKED'?stock.available:null,supply:supply.supply});
  }
- return {customer:{title:pack.title,variantId:pack.data.variantId||pack.data.defaultVariantId||'front-rear',variantLabel:pack.data.variantLabel||'',packageId:pack.id,packageRevision:pack.revision,vehicle:intake,fulfillment,lines:customerPackage.lines,totals,fitmentNotes:pack.data.fitmentNotes,excludes:pack.data.excludes,draft,requiresVehicleConfirmation:true,stockReserved:false,orderPlaced:false},shop:{lines,labor:pack.data.labor,installNotes:pack.data.installNotes,source:pack.data.source,packageIssues:pack.data.issues||[],status:'PLANNING',stockAsOf:timestamp()}};
+ return {customer:{title:pack.title,description:pack.data.description,media:pack.data.media||[],variantId:pack.data.variantId||pack.data.defaultVariantId||'front-rear',variantLabel:pack.data.variantLabel||'',packageId:pack.id,packageRevision:pack.revision,vehicle:intake,fulfillment,lines:customerPackage.lines,totals,fitmentNotes:pack.data.fitmentNotes,excludes:pack.data.excludes,draft,requiresVehicleConfirmation:true,stockReserved:false,orderPlaced:false},shop:{lines,labor:pack.data.labor,installNotes:pack.data.installNotes,source:pack.data.source,packageIssues:pack.data.issues||[],status:'PLANNING',stockAsOf:timestamp()}};
 }
 async function saveQuote(request,db,input,draft=false){
  const key=request.headers.get('idempotency-key'),access=request.headers.get('x-build-access');if(!token(key)||!token(access))throw fail(400,'A valid quote save and reopen key are required.');
@@ -175,6 +198,7 @@ export async function packageService(request,db,{identity,readBody,json}){
   const rows=await all(db,"SELECT id FROM curated_packages ORDER BY category,COALESCE(json_extract(data_json,'$.menuOrder'),100),title LIMIT 100");return json({packages:await Promise.all(rows.map(row=>readPackage(db,row.id)))});
  }
  if(/^\/api\/staff\/packages\/[a-f\d-]{36}$/i.test(path)&&method==='PATCH')return json(await savePackage(db,path.split('/').at(-1),await readBody(request),request.headers.get('idempotency-key'),actor));
+ if(/^\/api\/staff\/packages\/[a-f\d-]{36}\/duplicate$/i.test(path)&&method==='POST')return json(await duplicatePackage(db,path.split('/').at(-2),await readBody(request),request.headers.get('idempotency-key'),actor),201);
  if(path==='/api/staff/package-preview'&&method==='POST'){
   const input=await readBody(request);if(!uuid(input.packageId)||!Number.isSafeInteger(input.revision))throw fail(422,'Choose a saved package to preview.');const pack=await readPackage(db,input.packageId);
   if(input.revision!==pack.revision)throw fail(409,'The package changed. Reload before previewing.');
