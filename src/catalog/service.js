@@ -127,8 +127,9 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
   if(!env.DB)throw fail(503,'Saved builds are temporarily unavailable. Your browser draft is still here.');
   if(path==='/api/catalog/flatbed-match'&&request.method==='GET'){
    const truck=Object.fromEntries(['year','make','model','bed'].map(k=>[k,text(url.searchParams.get(k),120)])),size=flatbedSizeFor(truck);
-   const estimate=await estimateBuild(env.DB,{version:1,truck,use:'',selected:['base'],plan:{kind:'flatbed',fulfillment:'installed'}}),match=estimate.lines.find(l=>l.state==='APPROVED');
-   let product=null;if(match){const p=await one(env.DB,'SELECT data_json FROM master_products WHERE id=?',match.productId),d=JSON.parse(p.data_json);if(!d.sourceIdentityIssue||d.sourceIdentityEvidence)product={title:match.productTitle,revision:match.revision,installedCents:match.cents,dimensionsMm:d.catalogFields?.dimensionsMm||null};}
+   const fulfillment=url.searchParams.get('fulfillment')==='diy'?'diy':'installed';
+   const estimate=await estimateBuild(env.DB,{version:1,truck,use:'',selected:['base'],plan:{kind:'flatbed',fulfillment}}),match=estimate.lines.find(l=>l.state==='APPROVED');
+   let product=null;if(match){const p=await one(env.DB,'SELECT data_json FROM master_products WHERE id=?',match.productId),d=JSON.parse(p.data_json);if(!d.sourceIdentityIssue||d.sourceIdentityEvidence)product={title:match.productTitle,revision:match.revision,priceCents:match.cents,...(fulfillment==='installed'?{installedCents:match.cents}:{}),fulfillment,dimensionsMm:d.catalogFields?.dimensionsMm||null};}
    return json({size,product,requiresFitmentReview:true});
   }
   if(request.method!=='GET')sameOrigin(request);

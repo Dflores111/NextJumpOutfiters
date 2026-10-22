@@ -50,3 +50,27 @@ test('catalog fields validate prices and promotions; reused supplier identities 
  assert.throws(()=>cleanCatalogFields({purchaseCostCents:-1}));assert.throws(()=>cleanCatalogFields({promotion:{enabled:true,retailCents:100}}));assert.equal(cleanCatalogFields({promotion:{enabled:false,retailCents:100}}).promotion.enabled,false);assert.equal(hoursFor({useBreakdown:true,frontHours:2,rearHours:1,rustHours:.5,rustApplies:true}),3.5);
  const env=await fixture();const b=empty();b.products=[{...part(),data:{...part().data,sourceIdentityIssue:'Two sizes share a supplier code'}}];await call(env,'/api/staff/source-imports','POST',b);const p=(await call(env,'/api/staff/products')).value.products[0],input={revision:p.revision,state:'APPROVED',stockType:'STOCKED',planningSlot:'base',reason:'Synthetic identity review'};assert.equal((await call(env,'/api/staff/products/'+p.id,'PATCH',input)).status,422);assert.equal((await call(env,'/api/staff/products/'+p.id,'PATCH',{...input,sourceIdentityEvidence:'Synthetic supplier confirmation',catalogFields:{cogsCents:2300}})).status,200);env.database.close();
 });
+
+test('flatbed builder reads approved backend titles and mode-specific prices and withdraws stale fitment',async()=>{
+ const env=await fixture(),p=await seed(env);const path='/api/staff/products/'+p.id;
+ const base={title:'Synthetic Tacoma platform',category:'Flatbeds',state:'APPROVED',stockType:'STOCKED',planningSlot:'base',reason:'Synthetic test only'};
+ await call(env,path,'PATCH',{...base,revision:p.revision,price:{mode:'installed',cents:320000,state:'APPROVED'}});
+ let product=(await call(env,'/api/staff/products')).value.products[0];
+ await call(env,path,'PATCH',{...base,revision:product.revision,price:{mode:'diy',cents:250000,state:'APPROVED'}});
+ product=(await call(env,'/api/staff/products')).value.products[0];
+ const fit={productId:p.id,revision:product.revision,vehicleKey:'2022|Toyota|Tacoma|5 ft',state:'APPROVED',evidence:'Synthetic testing only'};
+ assert.equal((await call(env,'/api/staff/fitments','POST',fit)).status,200);
+ const route='/api/catalog/flatbed-match?year=2022&make=Toyota&model=Tacoma&bed=5+ft';
+ let match=(await call(env,route,'GET',null,null)).value;
+ assert.equal(match.product.title,base.title);assert.equal(match.product.priceCents,320000);
+ assert.equal((await call(env,route+'&fulfillment=diy','GET',null,null)).value.product.priceCents,250000);
+ assert.equal((await call(env,route.replace('2022','2021'),'GET',null,null)).value.product,null);
+ for(const secret of ['purchaseCost','cogsCents','supplierSku','unitCost'])assert.ok(!JSON.stringify(match).includes(secret));
+ assert.equal((await call(env,path,'PATCH',{...base,title:'Updated synthetic platform',revision:product.revision,price:{mode:'installed',cents:350000,state:'APPROVED'}})).status,200);
+ assert.equal((await call(env,route,'GET',null,null)).value.product,null,'a changed product must be reviewed again');
+ product=(await call(env,'/api/staff/products')).value.products[0];
+ await call(env,'/api/staff/fitments','POST',{...fit,revision:product.revision});
+ match=(await call(env,route,'GET',null,null)).value;
+ assert.equal(match.product.title,'Updated synthetic platform');assert.equal(match.product.priceCents,350000);
+ env.database.close();
+});

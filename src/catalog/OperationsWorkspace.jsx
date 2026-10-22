@@ -8,8 +8,11 @@ const stateLabel={DRAFT:'Draft',ORDERED:'On order',PARTIAL:'Part received',RECEI
 const date=v=>new Date(v).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
 const dollars=c=>c==null?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(c/100);
 export default function OperationsWorkspace({canCatalog,canPurchasing}){
- const [mode,setMode]=useState('stock');
- return <div className="inv-workbench ops-workspace"><div className="ops-nav" role="group" aria-label="Inventory areas">{[['stock','Stock',Warehouse],['purchases','Purchasing',ShoppingCart],['jobs','Jobs',Wrench]].map(([id,label,Icon])=><button key={id} type="button" aria-pressed={mode===id} onClick={()=>setMode(id)}><Icon size={19}/>{label}</button>)}</div>{mode==='stock'?<InventoryWorkspace canCatalog={canCatalog} canPurchasing={canPurchasing} onJobs={()=>setMode('jobs')} onPurchasing={()=>setMode('purchases')}/>:<OperationsBoard key={mode} kind={mode} canPurchasing={canPurchasing}/>}</div>;
+ const readMode=()=>{const value=typeof window==='undefined'?null:new URLSearchParams(location.search).get('area');return ['stock','purchases','jobs'].includes(value)?value:'stock';};
+ const [mode,setMode]=useState(readMode);
+ const navigate=id=>{setMode(id);const url=new URL(location.href);url.searchParams.set('area',id);history.pushState(history.state,'',url.pathname+url.search);};
+ useEffect(()=>{const pop=()=>setMode(readMode());window.addEventListener('popstate',pop);return()=>window.removeEventListener('popstate',pop);},[]);
+ return <div className="inv-workbench ops-workspace"><div className="ops-nav" role="group" aria-label="Inventory areas">{[['stock','Stock',Warehouse],['purchases','Purchasing',ShoppingCart],['jobs','Jobs',Wrench]].map(([id,label,Icon])=><button key={id} type="button" aria-pressed={mode===id} onClick={()=>navigate(id)}><Icon size={19}/>{label}</button>)}</div>{mode==='stock'?<InventoryWorkspace canCatalog={canCatalog} canPurchasing={canPurchasing} onJobs={()=>navigate('jobs')} onPurchasing={()=>navigate('purchases')}/>:<OperationsBoard key={mode} kind={mode} canPurchasing={canPurchasing}/>}</div>;
 }
 function OperationsBoard({kind,canPurchasing}){
  const po=kind==='purchases';
