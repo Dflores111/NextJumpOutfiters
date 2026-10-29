@@ -2,6 +2,8 @@
 
 Verified locally on 2026-10-22 against an isolated copy of the product database. Synthetic QA products and published packages were used for all write tests. No production package was approved, and no production inventory, order, or job was changed.
 
+Historical behavior below is superseded where noted by the October 28 Package Studio release: saving draft changes now keeps the last approved customer release available. A separate publish action replaces that release. See `PACKAGE-STUDIO.md` and the current `SITE-READINESS-REVIEW.md` for later verification.
+
 ## Fixes
 
 - Builder refreshes restore the current step and compatible saved choices. Explicit Flatbed links enter Flatbeds even when an Upfitting draft exists.

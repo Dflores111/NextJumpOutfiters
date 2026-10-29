@@ -6,6 +6,7 @@ import { buildInquirySummary } from './hubspot-contract.js';
 import {RECORD_KEY} from './builder/useBuildRecord.js';
 import {reopenPackageQuote,packageInquirySummary} from './catalog/package-client.js';
 import './inquiry.css';
+import { actionMotionProps } from './actionMotion.js';
 
 const QUOTE_PATH = '/pages/book-install-services-or-get-a-quote';
 const BUILDER_PATH = '/pages/flatbed-build-price-by-vehicle';
@@ -26,8 +27,10 @@ function Field({ name, label, error, hint, children, optional = false }) {
 export function Inquiry({ query = {}, embedded = false }) {
   const initial = normalizeContext(query);
   const [form, setForm] = useState({ ...initial, topic: '', firstName: '', preferredContact: 'email', email: '', phone: '', vehicleDetails: '', needVehicleHelp: false, intendedUse: '', camperType: '', workGoal: '', vehicleCount: '', company: '', message: '', marketingOptIn: false, ...normalizeProjectContext(query) });
-  const [liveForm, setLiveForm] = useState(false);
-  const [liveRequested, setLiveRequested] = useState(false);
+  // Real customer requests are the default. The non-sending test form has an explicit URL.
+  const previewOnly = query.preview === '1';
+  const [liveForm, setLiveForm] = useState(!previewOnly);
+  const [liveRequested, setLiveRequested] = useState(!embedded && !previewOnly);
   const [build, setBuild] = useState(null);
   const [buildReference,setBuildReference]=useState(null);
   const [packageQuote,setPackageQuote]=useState(null);
@@ -117,12 +120,14 @@ export function Inquiry({ query = {}, embedded = false }) {
     } finally { clearTimeout(timeout); }
   }
 
-  return <section className={`inquiry-layout ${embedded ? 'inquiry-embedded' : ''}`} aria-label="Quote inquiry preview">
+  return <section className={`inquiry-layout ${embedded ? 'inquiry-embedded' : ''}`} aria-label={liveForm ? 'Contact Next Jump' : 'Test inquiry form — nothing is sent'}>
     <div className="inquiry-main">
-      <div className="inquiry-mode-choice"><div><strong>Ready to talk to the team?</strong><p>{liveForm ? 'You are using the shop’s live form. Your website preview draft is kept while you stay on this page.' : 'Try the short preview below, or open the existing live form to send a real inquiry.'}</p></div><button type="button" aria-pressed={liveForm} onClick={() => { setLiveRequested(true); setLiveForm(current => !current); }}>{liveForm ? 'Return to website preview' : 'Open the live shop form'}</button></div>
+      {!embedded && <div className="inquiry-intro"><span className="inquiry-eyebrow">YOUR TRUCK. YOUR NEXT STEP.</span><h2>Let’s plan your next build<span>.</span></h2><p>Tell us what you drive and what you want to change. We’ll review the parts, fitment and installation with you.</p></div>}
+      {previewOnly && <div className="inquiry-mode-choice"><div><strong>{liveForm ? 'Shop inquiry form' : 'Test form — nothing is sent'}</strong><p>{liveForm ? 'Submitting this form contacts Next Jump.' : 'Use sample details to test the website. This does not contact the shop.'}</p></div><button type="button" aria-pressed={liveForm} onClick={() => { setLiveRequested(true); setLiveForm(current => !current); }}>{liveForm ? 'Return to test form' : 'Open the live shop form'}</button></div>}
+      {liveForm && !liveRequested && <div className="inquiry-start"><span className="inquiry-eyebrow">LET’S TALK IT THROUGH</span><h2>A clear plan starts here.</h2><p>Share your truck and what you have in mind. You don’t need a parts list to ask for help.</p><button className="button button-primary" {...actionMotionProps(QUOTE_PATH)} type="button" onClick={() => setLiveRequested(true)}>Start my request <span aria-hidden="true">↗</span></button><p className="field-hint">The next form contacts the shop. Parts and appointment details are confirmed with the team.</p></div>}
       {packageQuote&&<div className="inquiry-build"><span className="inquiry-eyebrow">Your saved package quote</span><h3>{packageQuote.customer.title}</h3><p>{packageQuote.customer.number} · {packageQuote.customer.vehicle.year} Toyota Tacoma</p><p>The package reference and vehicle details carry into the shop’s inquiry. The appointment still needs confirmation.</p></div>}
-      {liveRequested && <div hidden={!liveForm}><NativeInquiry context={form.context} service={form.service} summary={[buildInquirySummary(form, build, buildReference),packageInquirySummary(packageQuote)].filter(Boolean).join('\n\n')} /></div>}
-      <div hidden={liveForm}>
+      {liveRequested && <div hidden={!liveForm}><NativeInquiry focusOnMount={embedded} context={form.context} service={form.service} vehicle={packageQuote?.customer?.vehicle || (completeBuild ? build.truck : null)} summary={[buildInquirySummary(form, build, buildReference),packageInquirySummary(packageQuote)].filter(Boolean).join('\n\n')} /></div>}
+      {previewOnly && <div hidden={liveForm}>
       <div className="preview-disclosure"><strong>Website preview</strong><p>This form demonstrates the inquiry. Contact details are not saved or sent to the shop.</p></div>
       {(form.project || form.feature) && <p className="inquiry-context">{form.project && <>Inspired by {PROJECT_LABELS[form.project]}. </>}{form.feature && <>Interested in {FEATURE_LABELS[form.feature].toLowerCase()}. </>}These details stay with your request.</p>}
       <form onSubmit={submit} noValidate>
@@ -159,9 +164,9 @@ export function Inquiry({ query = {}, embedded = false }) {
         <button className="inquiry-submit" type="submit" disabled={busy || state === 'received'}>{state === 'submitting' ? 'Saving preview…' : state === 'checking' ? 'Checking receipt…' : state === 'received' ? 'Preview saved' : 'Save preview request'}</button>
         <noscript><p>This website preview needs JavaScript to save a request. You can still contact the shop using the contact page.</p></noscript>
       </form>
-      </div>
+      </div>}
     </div>
-    {!embedded && <aside className="inquiry-aside"><span className="inquiry-eyebrow">A conversation comes first</span><h2>Let's work out your next step.</h2><p>You do not need a finished plan. Bring the truck, the gear, or the question you have been thinking about.</p><hr /><h3>Ready to reach the team?</h3><p>{liveForm ? 'The live form sends your inquiry to Next Jump. You can also call the Tacoma team directly.' : 'The short preview does not send inquiries. Open the live shop form above or call the team.'}</p><a href="tel:+12533010028">Call (253) 301-0028</a><a href="/pages/contact-us">Contact & visit</a><a href={BUILDER_PATH}>Explore a flatbed configuration</a></aside>}
+    {!embedded && <aside className="inquiry-aside"><span className="inquiry-eyebrow">WHAT HAPPENS NEXT</span><h2>A plan you can feel good about.</h2><ol className="inquiry-next-steps"><li><span className="inquiry-step-number" aria-hidden="true">1</span><strong>We review your truck and goals.</strong><p>We check what you need and which details still need a closer look.</p></li><li><span className="inquiry-step-number" aria-hidden="true">2</span><strong>You get a clear scope and estimate.</strong><p>Confirm the parts, installation and price with the shop.</p></li><li><span className="inquiry-step-number" aria-hidden="true">3</span><strong>We agree on the next step.</strong><p>An appointment is confirmed with you. Sending a request doesn’t book a job.</p></li></ol><hr /><h3>Prefer to talk?</h3><a href="tel:+12533010028">Call (253) 301-0028</a><a href="/pages/contact-us">Contact & visit</a><a href={BUILDER_PATH}>Explore a flatbed configuration</a></aside>}
   </section>;
 }
 

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normalizeProjectContext } from '../src/inquiry-contract.js';
-import { buildInquirySummary, nativeFormFor, resolveNativeForm, prefillNativeContext } from '../src/hubspot-contract.js';
+import { buildInquirySummary, nativeFormFor, resolveNativeForm, prefillNativeContext, prefillNativeSelections } from '../src/hubspot-contract.js';
 import { validatePreviewRequest } from '../server.mjs';
 import { sanitizeBuild, validateBuild } from '../src/builder/domain.js';
 import { buildSeoHead, buildSeoResources, validateRelease } from '../src/seo.js';
@@ -43,6 +43,35 @@ test('native form callback resolution preserves an array-like HTMLFormElement an
   assert.equal(resolveNativeForm({ 0: form, get: () => form }), form);
   assert.equal(resolveNativeForm([form]), form);
   assert.equal(resolveNativeForm(undefined), null);
+});
+test('late quote details update the app prefill but preserve a visitor edit', () => {
+  const field = { value: '', dispatchEvent() {} };
+  const form = { querySelector: () => field };
+  assert.equal(prefillNativeContext(form, 'Service: Suspension'), true);
+  assert.equal(prefillNativeContext(form, 'Service: Suspension\nQuote: NJO-123', 'Service: Suspension'), true);
+  assert.match(field.value, /NJO-123/);
+  field.value += '\nPlease call me after work.';
+  assert.equal(prefillNativeContext(form, 'New quote', 'Service: Suspension\nQuote: NJO-123'), false);
+  assert.match(field.value, /Please call me/);
+});
+test('native intake transfers known vehicle and matching service choices, never contact or consent', () => {
+  const events = [];
+  const names = ['TICKET.vehicle_make__e_g__toyota_', 'TICKET.vehicle_model', 'TICKET.year_of_vehicle', 'TICKET.factory_bed_length', 'TICKET.njo_service_requested'];
+  const fields = Object.fromEntries(names.map(name => [name, { value: '', dispatchEvent: e => events.push(e.type) }]));
+  fields[names[4]].options = [{ value: '', textContent: 'Select the main service', disabled: true }, { value: 'suspension', textContent: 'Suspension' }];
+  const form = { querySelector: selector => { const name = selector.match(/name="([^"]+)"/)[1]; assert.ok(names.includes(name)); return fields[name]; } };
+  const data = { context: 'service', service: 'suspension', vehicle: { year: 2019, make: 'Toyota', model: 'Tacoma', bed: '5 ft', email: 'never@example.test' }, email: 'never@example.test', marketingOptIn: true };
+  const previous = prefillNativeSelections(form, data);
+  assert.deepEqual(names.map(name => fields[name].value), ['Toyota', 'Tacoma', '2019', '5 ft', 'suspension']);
+  assert.equal(events.length, 10);
+  fields[names[2]].value = '2020';
+  prefillNativeSelections(form, { ...data, vehicle: { year: 2021, make: 'Toyota', model: 'Tacoma', bed: '6 ft' } }, previous);
+  assert.equal(fields[names[2]].value, '2020');
+  assert.equal(fields[names[3]].value, '6 ft');
+  fields[names[4]].value = '';
+  prefillNativeSelections(form, { context: 'service', service: 'rooftop-tent' });
+  assert.equal(fields[names[4]].value, '');
+  assert.deepEqual(prefillNativeSelections(null, data), {});
 });
 test('preview stays noindex and sharing metadata has a branded absolute image with safe escaped text', () => {
   const result = buildSeoHead({ path: '/', title: 'Trucks & <builds>', description: '"Useful" gear', known: true }, siteRelease);

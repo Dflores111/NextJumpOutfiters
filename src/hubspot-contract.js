@@ -44,13 +44,44 @@ export function resolveNativeForm(value) {
   if (typeof value?.querySelector === 'function') return value;
   return value?.get?.(0) || value?.[0] || null;
 }
-export function prefillNativeContext(formElement, summary) {
+export function prefillNativeContext(formElement, summary, previousSummary) {
   if (!formElement?.querySelector) return false;
   const field = formElement.querySelector('[name="TICKET.content"], [name="0-5/content"], [name="content"]');
-  if (!field || field.value) return false;
+  if (!field || (field.value && field.value !== previousSummary)) return false;
   field.value = summary;
   const InputEvent = field.ownerDocument?.defaultView?.Event || Event;
   field.dispatchEvent(new InputEvent('input', { bubbles: true }));
   field.dispatchEvent(new InputEvent('change', { bubbles: true }));
   return true;
+}
+
+// Only transfer known builder selections. Never copy contact data, guess fitment,
+// choose consent, or replace something the visitor has changed in the shop form.
+export function prefillNativeSelections(formElement, { vehicle, context, service } = {}, previous = {}) {
+  if (!formElement?.querySelector) return {};
+  const serviceLabels = { flatbed: 'Truck flatbed', suspension: 'Suspension', 'bumpers-racks': 'Bumpers/racks', 'wheels-tires': 'Wheels/tires', power: 'Electrical/power', lighting: 'Lighting', detailing: 'Vehicle detailing', 'boat-detail': 'Boat detailing', marine: 'Marine services' };
+  const selectedService = context === 'camper' ? 'Camper flatbed' : context === 'flatbed' || context === 'work' ? 'Truck flatbed' : serviceLabels[service];
+  const values = {
+    'TICKET.vehicle_make__e_g__toyota_': vehicle?.make,
+    'TICKET.vehicle_model': vehicle?.model,
+    'TICKET.year_of_vehicle': vehicle?.year,
+    'TICKET.factory_bed_length': vehicle?.bed,
+    'TICKET.njo_service_requested': selectedService,
+  };
+  const applied = {};
+  for (const [name, value] of Object.entries(values)) {
+    if (typeof value !== 'string' && typeof value !== 'number') continue;
+    const text = String(value).trim();
+    if (!text || /^(other|not sure|not decided)/i.test(text)) continue;
+    const field = formElement.querySelector(`[name="${name}"]`);
+    if (!field || (field.value && field.value !== previous[name])) continue;
+    const next = field.options ? [...field.options].find(option => !option.disabled && option.textContent.trim().toLowerCase() === text.toLowerCase())?.value : text;
+    if (!next) continue;
+    field.value = next;
+    const InputEvent = field.ownerDocument?.defaultView?.Event || Event;
+    field.dispatchEvent(new InputEvent('input', { bubbles: true }));
+    field.dispatchEvent(new InputEvent('change', { bubbles: true }));
+    applied[name] = next;
+  }
+  return applied;
 }
