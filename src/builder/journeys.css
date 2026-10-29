@@ -5,3 +5,5 @@
 @media(prefers-reduced-motion:reduce){.journey-builder *{transition:none!important;animation:none!important;scroll-behavior:auto!important}.journey-builder button:hover,.journey-builder img{transform:none!important}}
 html[data-motion=off] .journey-builder *{transition:none!important;animation:none!important;scroll-behavior:auto!important}html[data-motion=off] .journey-builder img,html[data-motion=off] .journey-builder button:hover{transform:none!important}
 .journey-fulfillment{margin:28px 0}
+
+.journey-recommendation{padding:26px;border:1px solid var(--line,#d9dacb);border-radius:22px;background:var(--cream,#faf7ee);margin-bottom:22px}.journey-recommendation h3{font-size:clamp(24px,3vw,34px);margin:12px 0}.journey-recommendation p{font-size:18px;line-height:1.6}

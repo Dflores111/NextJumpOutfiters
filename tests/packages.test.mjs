@@ -147,7 +147,7 @@ test('new workbook parts and package writes roll back together',async()=>{
  r=await call(env,'/api/staff/packages/import-apply','POST',{bundle,index:0,reviewToken:plan.reviewToken});assert.equal(r.status,503);assert.equal(count(env,'master_products'),before);assert.equal(count(env,'curated_packages'),1);env.database.close();
 });
 test('future vehicle records remain private drafts during the Tacoma production pilot',async()=>{
- const env=await fixture(),p=await seed(env),input=ready(p);input.data.vehicle={make:'Toyota',model:'4Runner',yearFrom:2010,yearTo:2024};assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',input)).status,422);input.state='DRAFT';assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',input)).status,200);assert.equal((await call(env,'/api/packages','GET',null,null)).value.packages.length,0);env.database.close();
+ const env=await fixture(),p=await seed(env),input=ready(p);input.data.useLevel='expedition';assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',input)).status,422);input.data.useLevel='weekender';input.data.vehicle={make:'Toyota',model:'4Runner',yearFrom:2010,yearTo:2024};assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',input)).status,422);input.state='DRAFT';assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',input)).status,200);assert.equal((await call(env,'/api/packages','GET',null,null)).value.packages.length,0);env.database.close();
 });
 
 test('demo-only saved quote supplies internal views while the public route keeps them private',async()=>{

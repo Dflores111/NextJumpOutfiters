@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createBuild,vehicleRoutes} from '../src/builder/domain.js';
-import {journeyLimit,journeyStep,restoreJourney,buildFromQuote} from '../src/builder/journey-state.js';
+import {journeyLimit,journeyStep,restoreJourney,buildFromQuote,restorePackageSelection} from '../src/builder/journey-state.js';
 
 test('reload restores a valid review step while incomplete or malformed links remain at a safe step',()=>{
  const flat=createBuild(vehicleRoutes[0]);
@@ -35,4 +35,8 @@ test('Tacoma pilot and saved quote use levels restore without borrowing an unrel
  for(const [use,packageId]of [['daily','weekender'],['trips','overlander-light'],['permanent','overlander-heavy']]){
   const build=buildFromQuote({vehicle:{make:'Toyota',model:'Tacoma',year:2022,use}});assert.equal(build.plan.packageId,packageId);assert.equal(journeyStep(3,build),3);
  }
+});
+
+test('package history restores scope and fulfillment; removed scopes fall back to a current offered default',()=>{
+ const pack={defaultVariantId:'front-rear',fulfillment:['installed','diy'],variants:[{id:'front-only'},{id:'front-rear'}]};assert.deepEqual(restorePackageSelection({scope:'front-only',fulfillment:'diy',suspension:'stock'},pack),{scope:'front-only',fulfillment:'diy',suspension:'stock'});assert.deepEqual(restorePackageSelection({scope:'old-scope',fulfillment:'diy',suspension:'bad'},{...pack,fulfillment:['installed']}),{scope:'front-rear',fulfillment:'installed',suspension:'unsure'});
 });

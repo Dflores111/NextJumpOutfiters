@@ -97,6 +97,7 @@ async function savePackage(db,id,input,key,actor,{demo=false}={}){
  await materializePackage(db,data);
  if(input.state==='PUBLISHED'){
   if(!demo&&!(data.vehicle.make==='Toyota'&&data.vehicle.model==='Tacoma'&&data.vehicle.yearFrom===2016&&data.vehicle.yearTo===2023))throw fail(422,'The production pilot is 2016–2023 Toyota Tacoma. Keep other vehicles as drafts for now.');
+  if(!demo&&data.useLevel==='expedition')throw fail(422,'Expedition is future coverage. Keep it as a draft until the pilot expands.');
   const problems=releaseProblems(data);if(problems.length)throw fail(422,problems.join(' '));data.reviewedBy=actor;data.reviewedAt=timestamp();
  }else{if(contentChanged){data.approvals={parts:false,pricing:false,fitment:false};if(data.cloneReview)data.cloneReview=Object.fromEntries(Object.keys(copyChecks).map(k=>[k,false]));}data.reviewedBy=null;data.reviewedAt=null;}
  const uniqueMenu="NOT EXISTS(SELECT 1 FROM package_releases WHERE package_id<>? AND active=1 AND json_extract(data_json,'$.useLevel')=? AND lower(json_extract(data_json,'$.vehicle.make'))=lower(?) AND lower(json_extract(data_json,'$.vehicle.model'))=lower(?) AND json_extract(data_json,'$.vehicle.yearFrom')<=? AND json_extract(data_json,'$.vehicle.yearTo')>=?)";

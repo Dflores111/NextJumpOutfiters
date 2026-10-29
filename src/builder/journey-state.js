@@ -26,3 +26,8 @@ export function buildFromQuote(quote) {
   const level=useLevels.find(value=>value.use===quote.vehicle.use)||useLevels[0];
   return sanitizeBuild({...createBuild(),truck:{...quote.vehicle,year:String(quote.vehicle.year),bed:''},selected:[],use:level.use==='daily'?'Daily use & weekends':'Longer overland trips',plan:{kind:'vehicle',packageId:level.id,upgradeIds:['suspension']}});
 }
+
+export function restorePackageSelection(saved={},pack){
+ const variants=pack.variants||[];
+ return {scope:variants.some(v=>v.id===saved.scope)?saved.scope:pack.defaultVariantId||variants[0]?.id||'',fulfillment:(pack.fulfillment||[]).includes(saved.fulfillment)?saved.fulfillment:'installed',suspension:['stock','modified','unsure'].includes(saved.suspension)?saved.suspension:'unsure'};
+}
