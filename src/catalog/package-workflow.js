@@ -31,3 +31,10 @@ export function changedSections(before,after){
   [diff([a.issues,a.approvals,a.reviewEvidence,a.cloneReview],[b.issues,b.approvals,b.reviewEvidence,b.cloneReview]),'Review checks']
  ].filter(([changed])=>changed).map(([,label])=>label);
 }
+
+// Customer visibility follows the active release, even while its draft is edited.
+export const packageIsShown=record=>!!record.published&&!record.published.stale&&!record.published.problems?.length;
+export function packageStatusLabel(record){
+ if(record.published){if(!packageIsShown(record))return 'Not shown · needs review';return record.hasDraftChanges||record.stale?'In builder · draft changes':'Shown in builder';}
+ return record.state==='ARCHIVED'?'Archived · not shown':'Draft · not shown';
+}

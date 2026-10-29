@@ -1,3 +1,4 @@
+import {packageStatusLabel,packageIsShown} from '../src/catalog/package-workflow.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
@@ -152,4 +153,8 @@ test('future vehicle records remain private drafts during the Tacoma production 
 
 test('demo-only saved quote supplies internal views while the public route keeps them private',async()=>{
  const env=await fixture(),p=await publish(env,await seed(env)),body={packageId:p.id,revision:p.revision,fulfillment:'installed',intake,access:key()};assert.equal((await call(env,'/api/staff/package-demo-quotes','POST',body,admin)).status,403);const r=await call(env,'/api/staff/package-demo-quotes','POST',body,{...admin,provider:'demo'});assert.equal(r.status,201);assert.equal(r.value.shop.lines[0].supplierSku,'SYN-123');assert.equal((await quote(env,p)).value.shop,undefined);env.database.close();
+});
+
+test('operator visibility labels follow the active release while a working draft needs review',()=>{
+ const p={state:'DRAFT',stale:true,hasDraftChanges:true,published:{stale:false,problems:[]}};assert.equal(packageIsShown(p),true);assert.equal(packageStatusLabel(p),'In builder · draft changes');const withdrawn={...p,published:{stale:true,problems:['Part changed']}};assert.equal(packageIsShown(withdrawn),false);assert.equal(packageStatusLabel(withdrawn),'Not shown · needs review');assert.equal(packageStatusLabel({state:'DRAFT',published:null}),'Draft · not shown');
 });
