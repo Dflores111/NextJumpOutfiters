@@ -70,3 +70,6 @@ export const jobPurchaseOrders=sqliteTable('job_purchase_orders',{
 export const packageReleases=sqliteTable('package_releases',{
  id:text('id').primaryKey(),packageId:text('package_id').notNull().references(()=>curatedPackages.id),revision:integer('revision').notNull(),title:text('title').notNull(),category:text('category').notNull(),data:text('data_json').notNull(),active:integer('active').notNull(),publishedBy:text('published_by').notNull(),publishedAt:text('published_at').notNull(),
 },t=>[uniqueIndex('package_release_revision').on(t.packageId,t.revision),index('package_release_active').on(t.packageId,t.active)]);
+export const packageVersions=sqliteTable('package_versions',{
+ id:text('id').primaryKey(),packageId:text('package_id').notNull().references(()=>curatedPackages.id),revision:integer('revision').notNull(),title:text('title').notNull(),category:text('category').notNull(),state:text('state').notNull(),data:text('data_json').notNull(),action:text('action').notNull(),actor:text('actor'),createdAt:text('created_at').notNull(),
+},t=>[uniqueIndex('package_version_revision').on(t.packageId,t.revision)]);

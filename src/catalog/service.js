@@ -10,6 +10,7 @@ import {flatbedSizeFor} from '../builder/journey-domain.js';
 import {quotePreparation,prepareQuoteJob,reserveMissingJobParts} from './quote-job-service.js';
 import {planTransfer,applyTransfer} from './package-transfer-service.js';
 import {packageService} from './package-service.js';
+import {workspaceAttention} from './attention-service.js';
 
 // Edge-compatible service. D1 and the local SQLite adapter share this contract.
 const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow'};
@@ -127,6 +128,7 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
   if(staff&&permission!=='session'&&!canStaff(identity,permission))throw fail(403,'Your staff role cannot perform this action. Ask the shop administrator if your access needs to change.');
   if(path==='/api/staff/session'&&request.method==='GET')return json({identity,permissions:['catalog','inventory','purchasing','sales','audit'].filter(p=>canStaff(identity,p))});
   if(!env.DB)throw fail(503,'Saved builds are temporarily unavailable. Your browser draft is still here.');
+  if(path==='/api/staff/attention'&&request.method==='GET')return json(await workspaceAttention(env.DB,identity,url.searchParams));
   if(path==='/api/catalog/flatbed-match'&&request.method==='GET'){
    const truck=Object.fromEntries(['year','make','model','bed'].map(k=>[k,text(url.searchParams.get(k),120)])),size=flatbedSizeFor(truck);
    const fulfillment=url.searchParams.get('fulfillment')==='diy'?'diy':'installed';

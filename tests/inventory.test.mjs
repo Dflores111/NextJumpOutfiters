@@ -72,3 +72,11 @@ test('quick product edits preserve approval, prices and mapping; held stock stil
  assert.equal((await call(env,`/api/staff/products/${id}/quick`,'PATCH',payload,admin)).status,200);let row=env.database.prepare('SELECT * FROM master_products WHERE id=?').get(id);assert.equal(row.planning_slot,'base');assert.equal(row.state,'APPROVED');assert.equal(JSON.parse(row.data_json).prices.installed.cents,125000);assert.equal(row.revision,2);
  await move(env,id,'COUNT',2);await move(env,id,'RESERVE',1);assert.equal((await call(env,`/api/staff/products/${id}/quick`,'PATCH',{revision:2,stockType:'SERVICE',reason:'Synthetic'},admin)).status,409);env.database.close();
 });
+
+test('attention stock links replace remembered filters and reject unsupported locations or views',async()=>{
+ const {stockViewFromLink}=await import('../src/catalog/inventory-route.js');
+ const base={q:'old search',category:'Lighting',state:'DRAFT',view:'all',location:'Tacoma Showroom',page:8};
+ const linked=stockViewFromLink(base,'?tab=inventory&area=stock&view=uncounted&location=Tacoma+Showroom&q=&category=&state=');
+ assert.equal(linked.view,'uncounted');assert.equal(linked.q,'');assert.equal(linked.category,'');assert.equal(linked.state,'');assert.equal(linked.page,1);
+ assert.equal(stockViewFromLink(base,'?view=invalid&location=unrecognized').location,base.location);assert.equal(stockViewFromLink(base,'?view=invalid').view,'all');
+});

@@ -4,6 +4,7 @@ export const localIdentity={provider:'local',subject:'localhost',email:'Local st
 export function canStaff(identity,permission){return !!identity?.roles?.some(role=>grants[role]?.includes(permission));}
 export function staffPermission(path,method){
  if(path==='/api/staff/session')return 'session';
+ if(path==='/api/staff/attention')return 'session';
  if(path==='/api/staff/source-imports'||path==='/api/staff/source-rows'||path==='/api/staff/package-imports'||path==='/api/staff/package-preview'||path==='/api/staff/package-menu'||path==='/api/staff/package-demo-quotes'||path.startsWith('/api/staff/packages')||path.startsWith('/api/staff/standards'))return 'catalog';
  if(path.startsWith('/api/staff/package-quotes'))return 'sales';
  if(path.startsWith('/api/staff/supply/'))return method==='GET'?'inventory':'purchasing';

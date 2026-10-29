@@ -84,3 +84,25 @@ test('older demo sessions gain the handoff tables without losing edited stock',a
  assert.equal((await stock(restored)).onhand,19);const quote=(await call(restored,'package-quotes')).value.quotes[0];
  assert.equal((await call(restored,`package-quotes/${quote.id}/prepare`)).status,200);
 });
+
+test('attention links cover job shortages and dated deliveries, then clear when resolved',async t=>{
+ const engine=await createDemoEngine(SQL,schema);t.after(()=>engine.close());
+ const quotes=(await call(engine,'package-quotes')).value.quotes,q=quotes.find(q=>q.customer.number==='NJO-DEMO-PREP');
+ const plan=(await call(engine,`package-quotes/${q.id}/prepare?${new URLSearchParams({location})}`)).value;
+ const prepared=await call(engine,`package-quotes/${q.id}/prepare`,'POST',{location,reviewToken:plan.reviewToken,confirmed:true,orders:[]});assert.equal(prepared.status,201,JSON.stringify(prepared));
+ let items=(await call(engine,'attention?'+new URLSearchParams({location}))).value.items;assert.ok(items.some(i=>i.kind==='jobs'&&i.target.record===prepared.value.job.id));
+ const part=await stock(engine),order=(await call(engine,'purchases','POST',{location,supplier:'DEMO dated delivery',expectedOn:'2026-11-03',notes:'Synthetic test only',lines:[{productId:part.id,quantity:1,unitCostCents:100}]})).value;
+ const ordered=await call(engine,'purchases/'+order.id,'POST',{action:'ORDER',revision:1});assert.equal(ordered.status,200,JSON.stringify(ordered));
+ items=(await call(engine,'attention?'+new URLSearchParams({location}))).value.items;assert.ok(items.some(i=>i.target.record===order.id&&i.detail.includes('2026-11-03')));
+ const detail=(await call(engine,'purchases/'+order.id)).value;await call(engine,'purchases/'+order.id+'/receive','POST',{revision:detail.record.revision,reference:'DEMO complete delivery',lines:[{productId:part.id,quantity:1}]});
+ items=(await call(engine,'attention?'+new URLSearchParams({location}))).value.items;assert.ok(!items.some(i=>i.target.record===order.id));
+ const job=(await call(engine,'jobs/'+prepared.value.job.id)).value;await call(engine,'jobs/'+job.record.id,'POST',{action:'CANCEL',revision:job.record.revision,note:'Synthetic cancellation to verify attention clears'});
+ items=(await call(engine,'attention?'+new URLSearchParams({location}))).value.items;assert.ok(!items.some(i=>i.target.record===job.record.id));
+});
+test('an older browser demo gains saved versions without losing existing stock edits',async t=>{
+ const oldSchema=(await Promise.all((await readdir(new URL('../drizzle/',import.meta.url))).filter(f=>f.endsWith('.sql')&&!f.startsWith('0009_')).sort().map(f=>readFile(new URL('../drizzle/'+f,import.meta.url),'utf8')))).join('\n');
+ const old=await createDemoEngine(SQL,oldSchema);t.after(()=>old.close());
+ const part=await stock(old);await call(old,'inventory','POST',{productId:part.id,location,kind:'RECEIVE',quantity:3,reason:'Synthetic existing stock edit'});
+ const updated=await createDemoEngine(SQL,schema,old.export());t.after(()=>updated.close());assert.equal((await stock(updated)).onhand,part.onhand+3);
+ const pack=(await call(updated,'packages')).value.packages.find(p=>p.data.useLevel==='weekender'&&p.published),history=await call(updated,'packages/'+pack.id+'/history');assert.equal(history.status,200);assert.ok(history.value.versions.length>0);assert.equal(history.value.publishedRevision,pack.published.revision);
+});

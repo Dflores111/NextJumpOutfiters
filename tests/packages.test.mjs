@@ -158,3 +158,49 @@ test('demo-only saved quote supplies internal views while the public route keeps
 test('operator visibility labels follow the active release while a working draft needs review',()=>{
  const p={state:'DRAFT',stale:true,hasDraftChanges:true,published:{stale:false,problems:[]}};assert.equal(packageIsShown(p),true);assert.equal(packageStatusLabel(p),'In builder · draft changes');const withdrawn={...p,published:{stale:true,problems:['Part changed']}};assert.equal(packageIsShown(withdrawn),false);assert.equal(packageStatusLabel(withdrawn),'Not shown · needs review');assert.equal(packageStatusLabel({state:'DRAFT',published:null}),'Draft · not shown');
 });
+
+test('saved version history includes drafts and releases; restore is confirmed, private, attributed and idempotent',async()=>{
+ const env=await fixture(),p=await publish(env,await seed(env)),access=key(),q=await quote(env,p,access),before=env.database.prepare('SELECT snapshot_json FROM package_quotes').get().snapshot_json;
+ const changed={revision:p.revision,title:p.title,category:p.category,state:'DRAFT',data:structuredClone(p.data)};changed.data.lines[0].unitRetailCents=20000;
+ const edited=(await call(env,'/api/staff/packages/'+p.id,'PATCH',changed)).value;
+ const history=await call(env,`/api/staff/packages/${p.id}/history`);assert.deepEqual(history.value.versions.map(v=>v.revision),[3,2,1]);assert.equal(history.value.versions[0].actor,'admin@example.test [microsoft:test-admin]');
+ assert.equal((await call(env,`/api/staff/packages/${p.id}/history`,'GET',null,inventory)).status,403);
+ assert.equal((await call(env,`/api/staff/packages/${p.id}/history`,'GET',null,null)).status,403);
+ const path=`/api/staff/packages/${p.id}/restore`,input={revision:edited.revision,fromRevision:2,confirmed:true,reason:'Return to the reviewed parts price'},action=key();
+ assert.equal((await call(env,path,'POST',{...input,confirmed:false})).status,422);assert.equal((await call(env,path,'POST',{...input,reason:''})).status,422);
+ assert.equal((await call(env,path,'POST',input,inventory)).status,403);
+ const restored=await call(env,path,'POST',input,admin,{'Idempotency-Key':action});assert.equal(restored.status,200,JSON.stringify(restored));assert.equal(restored.value.revision,4);assert.equal(restored.value.state,'DRAFT');assert.deepEqual(restored.value.data.approvals,{parts:false,pricing:false,fitment:false});assert.equal(restored.value.data.reviewEvidence,'');assert.equal(restored.value.data.lines[0].unitRetailCents,10000);assert.equal(restored.value.published.revision,2);
+ assert.equal((await call(env,path,'POST',input,admin,{'Idempotency-Key':action})).value.revision,4);assert.equal((await call(env,path,'POST',input)).status,409);
+ assert.equal((await call(env,'/api/packages','GET',null,null)).value.packages[0].revision,2);assert.equal(env.database.prepare('SELECT snapshot_json FROM package_quotes').get().snapshot_json,before);assert.equal(count(env,'inventory_movements'),0);assert.equal(count(env,'purchase_orders'),0);
+ assert.equal(env.database.prepare('SELECT action FROM package_versions WHERE package_id=? AND revision=4').get(p.id).action,'PACKAGE_RESTORED');
+ assert.equal((await call(env,`/api/staff/packages/${p.id}/history/2`)).value.version.data.lines[0].unitRetailCents,10000);
+ assert.equal((await call(env,`/api/staff/packages/${p.id}/history/999`)).status,404);env.database.close();
+});
+test('restoring unavailable historical parts creates a blocked draft and version recording rolls back with failed saves',async()=>{
+ const env=await fixture(),p=await publish(env,await seed(env)),changed={revision:p.revision,title:p.title,category:p.category,state:'DRAFT',data:p.data};
+ const edited=(await call(env,'/api/staff/packages/'+p.id,'PATCH',changed)).value;
+ env.database.prepare("UPDATE master_products SET state='RETIRED',revision=revision+1").run();
+ const restored=await call(env,`/api/staff/packages/${p.id}/restore`,'POST',{revision:edited.revision,fromRevision:2,confirmed:true,reason:'Restore for a replacement part review'});assert.equal(restored.status,200);assert.equal(restored.value.stale,true);assert.equal(restored.value.state,'DRAFT');assert.equal((await call(env,'/api/packages','GET',null,null)).value.packages.length,0);
+ env.database.prepare("UPDATE master_products SET state='DRAFT'").run();
+ const before=count(env,'package_versions'),audits=count(env,'master_audit');
+ env.database.exec("CREATE TRIGGER reject_version BEFORE INSERT ON package_versions WHEN NEW.revision=5 BEGIN SELECT RAISE(ABORT,'synthetic history failure'); END");
+ const r=await call(env,'/api/staff/packages/'+p.id,'PATCH',{...changed,revision:4});assert.equal(r.status,503);assert.equal(count(env,'package_versions'),before);assert.equal(count(env,'master_audit'),audits);assert.equal(env.database.prepare('SELECT revision FROM curated_packages').get().revision,4);env.database.close();
+});
+test('attention items respect staff roles, link to records and resolve after package checks',async()=>{
+ const env=await fixture(),p=await seed(env),path='/api/staff/attention?location=Tacoma+Showroom';
+ let r=await call(env,path);assert.equal(r.status,200,JSON.stringify(r));assert.ok(r.value.items.some(i=>i.packageId===p.id));
+ assert.equal((await call(env,path,'GET',null,null)).status,403);
+ assert.equal((await call(env,path,'GET',null,sales)).value.items.length,0);
+ assert.ok(!(await call(env,path,'GET',null,inventory)).value.items.some(i=>i.kind==='packages'));
+ const cat={...admin,roles:['catalog']},catalogOnly=(await call(env,path,'GET',null,cat)).value;assert.ok(catalogOnly.items.every(i=>i.kind==='packages'));assert.deepEqual(catalogOnly.locations,[]);
+ assert.ok(!JSON.stringify(r.value).includes('candidateCost'));assert.equal((await call(env,'/api/staff/attention?location=Unknown')).status,422);
+ await publish(env,p);r=await call(env,path);assert.ok(!r.value.items.some(i=>i.packageId===p.id));env.database.close();
+});
+
+test('changed shared parts block publication until a new draft is reviewed, with an explicit attention item',async()=>{
+ const env=await fixture(),p=await publish(env,await seed(env));env.database.prepare('UPDATE master_products SET revision=revision+1').run();
+ assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',ready(p))).status,409);
+ const attention=(await call(env,'/api/staff/attention')).value.items.find(i=>i.packageId===p.id);assert.equal(attention.level,'blocked');assert.match(attention.detail,/Customer estimate is hidden/);
+ const draft=(await call(env,'/api/staff/packages/'+p.id,'PATCH',{...ready(p),state:'DRAFT'})).value;assert.equal(draft.stale,false);assert.deepEqual(draft.data.approvals,{parts:false,pricing:false,fitment:false});
+ assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',ready(draft))).status,200);env.database.close();
+});

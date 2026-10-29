@@ -50,11 +50,11 @@ export async function seedDemo(DB){
 
 // Existing browser demos keep their edits; add only this feature's new tables.
 function migrateHandoffDemo(database,schema){
- const names=new Set(['job_purchase_orders','job_requirements','quote_job_handoffs','job_requirement_product','quote_job_handoffs_job_id_unique','package_releases','package_release_revision','package_release_active']);
+ const names=new Set(['job_purchase_orders','job_requirements','quote_job_handoffs','job_requirement_product','quote_job_handoffs_job_id_unique','package_releases','package_release_revision','package_release_active','package_versions','package_version_revision']);
  database.run('BEGIN');
  try{for(const match of schema.matchAll(/CREATE (?:UNIQUE )?(TABLE|INDEX) `([^`]+)`[\s\S]*?;/g)){
   if(names.has(match[2]))database.run(match[0].replace(/(TABLE|INDEX) /,'$1 IF NOT EXISTS '));
- }database.run("INSERT OR IGNORE INTO package_releases (id,package_id,revision,title,category,data_json,active,published_by,published_at) SELECT id||':'||revision,id,revision,title,category,data_json,1,'Previous demo release',updated_at FROM curated_packages p WHERE state='PUBLISHED' AND NOT EXISTS(SELECT 1 FROM package_releases r WHERE r.package_id=p.id)");database.run('COMMIT');}catch(error){database.run('ROLLBACK');throw error;}
+ }database.run("INSERT OR IGNORE INTO package_releases (id,package_id,revision,title,category,data_json,active,published_by,published_at) SELECT id||':'||revision,id,revision,title,category,data_json,1,'Previous demo release',updated_at FROM curated_packages p WHERE state='PUBLISHED' AND NOT EXISTS(SELECT 1 FROM package_releases r WHERE r.package_id=p.id)");for(const statement of schema.split('--> statement-breakpoint'))if(/^\s*(?:CREATE TRIGGER IF NOT EXISTS `package_version_|INSERT OR IGNORE INTO package_versions)/.test(statement))database.run(statement);database.run('COMMIT');}catch(error){database.run('ROLLBACK');throw error;}
 }
 async function seedHandoffQuote(DB){
  if(await DB.prepare("SELECT id FROM package_quotes WHERE number='NJO-DEMO-PREP'").first())return;
@@ -81,9 +81,10 @@ async function seedPackageStudio(DB){
   const existing=await DB.prepare('SELECT id FROM master_products WHERE source_key=?').bind('demo:studio:'+sku).first();if(existing){parts.push(existing.id);continue;}
   const id=crypto.randomUUID();await DB.prepare('INSERT INTO master_products VALUES (?,?,?,?,?,?,?,?,?)').bind(id,'demo:studio:'+sku,title,'Suspension','DRAFT',1,null,JSON.stringify({stockType:'STOCKED',supplier:'DEMO Summit Suspension',supplierSku:sku,prices:{},source:'Synthetic review only'}),new Date().toISOString()).run();await call('inventory',{productId:id,location:'Tacoma Showroom',kind:'COUNT',quantity:qty,reason:'Synthetic studio opening count'});parts.push(id);
  }
+ const revisions=new Map((await DB.prepare('SELECT id,revision FROM master_products').all()).results.map(p=>[p.id,p.revision]));
  for(const [i,level]of ['weekender','overlander-light','overlander-heavy'].entries()){
   if(await DB.prepare('SELECT id FROM curated_packages WHERE source_key=?').bind('demo:studio:'+level).first())continue;
-  const id=crypto.randomUUID(),line=(productId,role,retail)=>({productId,role,quantity:1,unitCostCents:null,unitRetailCents:retail}),front=[line(first.id,'Front suspension',80000)],full=[...front,line(parts[0],'Rear shocks',28000),...(i?[line(parts[i],'Rear springs',i===1?65000:90000)]:[])],labor={hours:4+i,rateCents:17500,alignmentCents:17500,basis:'ESTIMATE'};
+  const id=crypto.randomUUID(),line=(productId,role,retail)=>({productId,productRevision:revisions.get(productId),role,quantity:1,unitCostCents:null,unitRetailCents:retail}),front=[line(first.id,'Front suspension',80000)],full=[...front,line(parts[0],'Rear shocks',28000),...(i?[line(parts[i],'Rear springs',i===1?65000:90000)]:[])],labor={hours:4+i,rateCents:17500,alignmentCents:17500,basis:'ESTIMATE'};
   const variants=[...(i===0?[{id:'front-only',label:'Front only',enabled:true,lines:front,labor:{...labor,hours:3}}]:[]),{id:'front-rear',label:'Front & rear',enabled:true,lines:full,labor}];
   const data={vehicle:{make:'Toyota',model:'Tacoma',yearFrom:2016,yearTo:2023},useLevel:level,audience:['Daily driving & weekends','Gear goes on for trips','Equipment stays onboard'][i],description:'DEMO shop-curated suspension package. All parts, fitment and prices are fictional sample data.',fitmentNotes:'Synthetic demo only; this is not a verified Tacoma specification.',installNotes:'Sample installation: confirm vehicle, fit the listed components, then align. Do not use as a real work instruction.',excludes:['Tax','Freight'],approvals:{},issues:[],media:[],specs:{},lines:full,labor,variants,defaultVariantId:'front-rear',source:{kind:'demo'},reviewEvidence:''};
   const title='DEMO '+['Weekender','Overlander Lite','Overlander Heavy'][i];await DB.prepare('INSERT INTO curated_packages VALUES (?,?,?,?,?,?,?,?)').bind(id,'demo:studio:'+level,title,'Lifts & suspension','DRAFT',1,JSON.stringify(data),new Date().toISOString()).run();

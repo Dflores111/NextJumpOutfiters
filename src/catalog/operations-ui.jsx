@@ -4,13 +4,13 @@ import {Barcode,Search,X,Plus,Trash2,Package,Check,MapPin} from 'lucide-react';
 import {api} from './workspace-api.js';
 export {api};
 export const actionKey=()=>Array.from(crypto.getRandomValues(new Uint8Array(32)),n=>n.toString(16).padStart(2,'0')).join('');
-export function Modal({open,onClose,title,children,busy=false,wide=false,focusKey=''}){
+export function Modal({open,onClose,title,children,busy=false,wide=false,focusKey='',eyebrow='Shop inventory'}){
  const ref=useRef(null),closeRef=useRef(onClose),[mounted,setMounted]=useState(false);closeRef.current=onClose;
  useEffect(()=>setMounted(true),[]);
  useEffect(()=>{if(open){if(!ref.current?.open)ref.current?.showModal();(ref.current?.querySelector('[data-step-heading]')||ref.current?.querySelector('[data-autofocus]')||ref.current?.querySelector('h2'))?.focus();}else ref.current?.close();},[open,mounted,title,focusKey]);
  useEffect(()=>()=>ref.current?.close(),[]);
  if(!mounted)return null;
- return createPortal(<dialog ref={ref} className={`inv-drawer ops-dialog ${wide?'ops-wide':''}`} aria-labelledby={`ops-title-${title.replace(/\W/g,'')}`} onCancel={e=>{e.preventDefault();if(!busy)closeRef.current();}}><div className="inv-drawer-inner"><div className="inv-drawer-top"><span><Package size={17}/>Shop inventory</span><button type="button" aria-label="Close panel" disabled={busy} onClick={onClose}><X size={21}/></button></div><h2 tabIndex={-1} id={`ops-title-${title.replace(/\W/g,'')}`}>{title}</h2>{children}</div></dialog>,document.querySelector('.ops-workspace')||document.body);
+ return createPortal(<dialog ref={ref} className={`inv-drawer ops-dialog ${wide?'ops-wide':''}`} aria-labelledby={`ops-title-${title.replace(/\W/g,'')}`} onCancel={e=>{e.preventDefault();if(!busy)closeRef.current();}}><div className="inv-drawer-inner"><div className="inv-drawer-top"><span><Package size={17}/>{typeof window!=='undefined'&&window.location.pathname==='/inventory-demo'?'Next Jump / Sample data':eyebrow}</span><button type="button" aria-label="Close panel" disabled={busy} onClick={onClose}><X size={21}/></button></div><h2 tabIndex={-1} id={`ops-title-${title.replace(/\W/g,'')}`}>{title}</h2>{children}</div></dialog>,document.querySelector('.ops-workspace')||document.body);
 }
 export function BarcodeLookup({location,onFound,label='Scan barcode'}){
  const [open,setOpen]=useState(false),[code,setCode]=useState(''),[error,setError]=useState(''),[busy,setBusy]=useState(false);const input=useRef(null);

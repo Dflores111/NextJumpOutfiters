@@ -1,0 +1,19 @@
+import React,{useEffect,useState,useRef} from 'react';
+import {Bell,AlertCircle,ArrowRight,RefreshCw,CheckCircle2} from 'lucide-react';
+import {api,Modal} from './operations-ui.jsx';
+import {subscribeCatalogChanges} from './catalog-refresh.js';
+export default function WorkspaceAttention({requestLeave}){
+ const [open,setOpen]=useState(false),[data,setData]=useState(null),[location,setLocation]=useState(()=>new URLSearchParams(window.location.search).get('location')||'Tacoma Showroom'),[kind,setKind]=useState('all'),[error,setError]=useState(''),[loading,setLoading]=useState(false);const sequence=useRef(0);
+ async function refresh(){const n=++sequence.current;setLoading(true);try{const d=await api('attention?'+new URLSearchParams({location}));if(n===sequence.current){setData(d);setError('');}}catch(e){if(n===sequence.current)setError(e.message);}finally{if(n===sequence.current)setLoading(false);}}
+ useEffect(()=>{refresh();const off=subscribeCatalogChanges(refresh);window.addEventListener('njo-workspace-updated',refresh);return()=>{sequence.current++;off();window.removeEventListener('njo-workspace-updated',refresh);};},[location]);
+ const items=(data?.items||[]).filter(i=>kind==='all'||i.kind===kind);
+ function follow(e,target){e.preventDefault();setOpen(false);const base=window.location.pathname,path=base+'?'+new URLSearchParams(target);requestLeave(()=>window.location.assign(path));}
+ return <><button type="button" className="workspace-attention-button" onClick={()=>{setOpen(true);refresh();}}><Bell size={20}/><span>Needs attention</span>{data&&<span className="attention-count">{data.items.length}</span>}{error&&<AlertCircle size={18} aria-label="Could not refresh"/>}</button><Modal title="Needs attention" open={open} onClose={()=>setOpen(false)} wide eyebrow="Next Jump / Shop workspace"><div className="guided-panel">
+  <p>Saved work that needs a check or a next step. This list updates while the workspace is open; it does not send supplier orders or messages.</p><div className="attention-controls">{data?.locations.length>0&&<label>Stock and delivery location<select value={location} onChange={e=>setLocation(e.target.value)}>{data.locations.map(l=><option key={l}>{l}</option>)}</select></label>}<button onClick={refresh} disabled={loading} type="button"><RefreshCw size={18}/>{loading?'Refreshing…':'Refresh list'}</button></div>
+  {error&&<p role="alert" className="package-error">Could not refresh: {error} {data?'The last list is still shown below.':''}</p>}
+  <div className="attention-filters" aria-label="Attention categories">{[['all','All'],['packages','Packages'],['jobs','Jobs'],['deliveries','Orders & deliveries'],['stock','Stock']].filter(([k])=>k==='all'||data?.counts[k]>0).map(([k,label])=><button aria-pressed={kind===k} type="button" key={k} onClick={()=>setKind(k)}>{label} <span>{k==='all'?data?.items.length||0:data?.counts[k]||0}</span></button>)}</div>
+  {loading&&!data&&<p role="status">Checking the workspace…</p>}<div className="attention-list">{items.map(i=><article key={i.id} data-level={i.level}><div><span className="attention-kind">{i.kind==='deliveries'?'Orders & deliveries':i.kind}</span><h3>{i.title}</h3><p>{i.detail}</p></div><a href={'?'+new URLSearchParams(i.target)} onClick={e=>follow(e,i.target)}>{i.action}<ArrowRight size={18}/></a></article>)}</div>
+  {data&&!loading&&!items.length&&!error&&<div className="guided-empty"><CheckCircle2 size={32}/><h3>No open items in this view.</h3><p>This covers records you can access. Shop approval and physical stock checks still matter.</p></div>}
+  {data?.limits.length>0&&<p>Showing the latest 100 records in: {data.limits.join(', ')}.</p>}{data&&<p className="guided-note">Last checked {new Date(data.updatedAt).toLocaleTimeString()}. Package checks cover all vehicles; stock, jobs and deliveries use the selected location.</p>}
+ </div></Modal></>;
+}
