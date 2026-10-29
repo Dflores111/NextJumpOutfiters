@@ -21,7 +21,7 @@ export function cleanCatalogFields(value={}){
 }
 export const useLevels=[
  {id:'weekender',title:'Weekender',use:'daily',line:'Daily driving. Weekend escapes.',description:'A starting point for a truck that runs light most days.',image:'flagship-dillon-f250-640.webp'},
- {id:'overlander-light',title:'Overlander Light',use:'trips',line:'Gear goes on for the trip.',description:'For trip equipment that comes off when you get home.',image:'ute-tent-640.webp'},
+ {id:'overlander-light',title:'Overlander Lite',use:'trips',line:'Gear goes on for the trip.',description:'For trip equipment that comes off when you get home.',image:'ute-tent-640.webp'},
  {id:'overlander-heavy',title:'Overlander Heavy',use:'permanent',line:'Equipment stays onboard.',description:'Plan around the weight the truck carries every day.',image:'hero-640.webp'},
 ];
-export const useLevelForTitle=title=>useLevels.find(level=>level.title===title)?.id||null;
+export const useLevelForTitle=title=>useLevels.find(level=>level.title===title||level.id==='overlander-light'&&title==='Overlander Light')?.id||null;

@@ -119,3 +119,37 @@ test('concurrent duplicate retries create a single draft and a single audit even
  const results=await Promise.all([call(env,path,'POST',input,admin,{'Idempotency-Key':action}),call(env,path,'POST',input,admin,{'Idempotency-Key':action})]);
  assert.ok(results.every(r=>r.status===201),JSON.stringify(results));assert.equal(new Set(results.map(r=>r.value.id)).size,1);assert.equal(count(env,'curated_packages'),2);assert.equal(count(env,'master_audit'),before+1);env.database.close();
 });
+
+test('draft edits retain the active release, publish switches one revision, old quotes remain fixed, archive removes it',async()=>{
+ const env=await fixture(),p=await publish(env,await seed(env)),saved=await quote(env,p),path='/api/staff/packages/'+p.id;
+ const edit={...ready(p),state:'DRAFT'};edit.data.labor.hours=3;let d=(await call(env,path,'PATCH',edit)).value;
+ assert.equal(d.published.revision,p.revision);assert.equal(d.hasDraftChanges,true);let menu=(await call(env,'/api/packages','GET',null,null)).value.packages;assert.equal(menu[0].totals.totalCents,43000);assert.equal((await quote(env,p)).status,201);
+ d=(await call(env,path,'PATCH',{...ready(d),state:'DRAFT'})).value;const updated=await publish(env,d);menu=(await call(env,'/api/packages','GET',null,null)).value.packages;assert.equal(menu[0].totals.totalCents,61000);assert.equal((await quote(env,p)).status,409);assert.equal(count(env,'package_releases'),2);
+ const old=(await call(env,'/api/staff/package-quotes/'+saved.value.id)).value;assert.equal(old.customer.totals.totalCents,43000);assert.equal(old.customer.packageRevision,p.revision);
+ assert.equal((await call(env,path,'PATCH',{...ready(updated),state:'ARCHIVED'})).status,200);assert.equal((await call(env,'/api/packages','GET',null,null)).value.packages.length,0);assert.equal(count(env,'package_releases'),2);env.database.close();
+});
+test('a live release prevents overlapping replacement publication even while its working record is a draft',async()=>{
+ const env=await fixture();let p=await seed(env);p.data.useLevel='weekender';p=await publish(env,p);const draft=(await call(env,'/api/staff/packages/'+p.id,'PATCH',{...ready(p),state:'DRAFT'})).value;
+ const copy=(await call(env,'/api/staff/packages/'+draft.id+'/duplicate','POST',{revision:draft.revision,useLevel:'weekender'})).value;const input=ready(copy);input.data.cloneReview=Object.fromEntries(Object.keys(copy.data.cloneReview).map(k=>[k,true]));assert.equal((await call(env,'/api/staff/packages/'+copy.id,'PATCH',input)).status,422);env.database.close();
+});
+test('workbook imports show a comparison, require a fresh review, preserve published prices and retry once',async()=>{
+ const {exportPackages,importWorkbook}=await import('../src/catalog/package-excel.js'),{DOMParser}=await import('@xmldom/xmldom');const env=await fixture(),p=await publish(env,await seed(env));const bundle=await importWorkbook(exportPackages([p]),'Test.xlsx',DOMParser);bundle.packages[0].data.variants[0].labor.hours=3;
+ const plan=(await call(env,'/api/staff/packages/import-preview','POST',bundle)).value.plans[0];assert.equal(plan.oldTotal,43000);assert.equal(plan.newTotal,61000);
+ const input={bundle,index:0,reviewToken:plan.reviewToken,overwrite:false},action=key();assert.equal((await call(env,'/api/staff/packages/import-apply','POST',{...input,reviewToken:'wrong'})).status,409);
+ let r=await call(env,'/api/staff/packages/import-apply','POST',input,admin,{'Idempotency-Key':action});assert.equal(r.status,200,JSON.stringify(r));const revision=r.value.revision;assert.equal(r.value.state,'DRAFT');assert.equal(r.value.published.totals.totalCents,43000);assert.equal((await call(env,'/api/packages','GET',null,null)).value.packages[0].totals.totalCents,43000);
+ r=await call(env,'/api/staff/packages/import-apply','POST',input,admin,{'Idempotency-Key':action});assert.equal(r.value.revision,revision);assert.equal(count(env,'inventory_movements'),0);
+ const conflict=(await call(env,'/api/staff/packages/import-preview','POST',bundle)).value.plans[0];assert.equal(conflict.conflict,true);assert.equal((await call(env,'/api/staff/packages/import-apply','POST',{bundle,index:0,reviewToken:conflict.reviewToken})).status,409);assert.equal((await call(env,'/api/staff/packages/import-preview','POST',bundle,inventory)).status,403);env.database.close();
+});
+
+test('new workbook parts and package writes roll back together',async()=>{
+ const env=await fixture(),p=await seed(env);const bundle={format:'NJO_PACKAGE_TRANSFER_V1',sourceId:'f'.repeat(64),file:'Synthetic.xlsx',packages:[{sourceKey:'test:new-build',title:'New build',category:'Suspension',data:{...p.data,vehicle:{...p.data.vehicle,yearFrom:2010,yearTo:2015},variants:[{id:'front-rear',label:'Front & rear',enabled:true,lines:[{title:'Synthetic new part',sku:'NEW-TEST',supplier:'Test',role:'Front',quantity:1,unitRetailCents:10000}],labor:p.data.labor}],defaultVariantId:'front-rear'}}]};
+ let r=await call(env,'/api/staff/packages/import-preview','POST',bundle);assert.equal(r.status,200,JSON.stringify(r));const plan=r.value.plans[0],before=count(env,'master_products');env.database.exec("CREATE TRIGGER fail_package BEFORE INSERT ON curated_packages BEGIN SELECT RAISE(ABORT,'QA failure'); END;");
+ r=await call(env,'/api/staff/packages/import-apply','POST',{bundle,index:0,reviewToken:plan.reviewToken});assert.equal(r.status,503);assert.equal(count(env,'master_products'),before);assert.equal(count(env,'curated_packages'),1);env.database.close();
+});
+test('future vehicle records remain private drafts during the Tacoma production pilot',async()=>{
+ const env=await fixture(),p=await seed(env),input=ready(p);input.data.vehicle={make:'Toyota',model:'4Runner',yearFrom:2010,yearTo:2024};assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',input)).status,422);input.state='DRAFT';assert.equal((await call(env,'/api/staff/packages/'+p.id,'PATCH',input)).status,200);assert.equal((await call(env,'/api/packages','GET',null,null)).value.packages.length,0);env.database.close();
+});
+
+test('demo-only saved quote supplies internal views while the public route keeps them private',async()=>{
+ const env=await fixture(),p=await publish(env,await seed(env)),body={packageId:p.id,revision:p.revision,fulfillment:'installed',intake,access:key()};assert.equal((await call(env,'/api/staff/package-demo-quotes','POST',body,admin)).status,403);const r=await call(env,'/api/staff/package-demo-quotes','POST',body,{...admin,provider:'demo'});assert.equal(r.status,201);assert.equal(r.value.shop.lines[0].supplierSku,'SYN-123');assert.equal((await quote(env,p)).value.shop,undefined);env.database.close();
+});

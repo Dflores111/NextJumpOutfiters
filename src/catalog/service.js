@@ -8,6 +8,7 @@ import {sourceService} from './source-service.js';
 import {cleanCatalogFields} from './catalog-fields.js';
 import {flatbedSizeFor} from '../builder/journey-domain.js';
 import {quotePreparation,prepareQuoteJob,reserveMissingJobParts} from './quote-job-service.js';
+import {planTransfer,applyTransfer} from './package-transfer-service.js';
 import {packageService} from './package-service.js';
 
 // Edge-compatible service. D1 and the local SQLite adapter share this contract.
@@ -135,6 +136,8 @@ export async function catalogService(request,env,{localStaff=false,staffIdentity
   }
   if(request.method!=='GET')sameOrigin(request);
   if(path==='/api/package-quotes'&&request.method==='POST')rateLimit(request);
+  if(path==='/api/staff/packages/import-preview'&&request.method==='POST')return json(await planTransfer(env.DB,await body(request,3500000)));
+  if(path==='/api/staff/packages/import-apply'&&request.method==='POST')return json(await applyTransfer(env.DB,await body(request,3500000),request.headers.get('idempotency-key'),staffActor(identity)));
   const sourceResponse=await sourceService(request,env.DB,{identity:staff?identity:null,readBody:body,json});if(sourceResponse)return sourceResponse;
   const prepareMatch=path.match(/^\/api\/staff\/package-quotes\/([a-f\d-]{36})\/prepare$/i);
   if(prepareMatch){

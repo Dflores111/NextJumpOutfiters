@@ -16,7 +16,7 @@ const list=async(engine,path)=>(await call(engine,path+'?location='+encodeURICom
 test('open demo starts with synthetic inventory, barcode, purchasing and job reservations',async t=>{
  const engine=await createDemoEngine(SQL,schema);t.after(()=>engine.close());
  const session=(await call(engine,'session')).value;assert.equal(session.identity.provider,'demo');assert.ok(session.permissions.includes('inventory'));
- const items=await list(engine,'inventory/items');assert.equal(items.total,7);assert.ok(items.items.every(item=>item.title.startsWith('DEMO ')));
+ const items=await list(engine,'inventory/items');assert.equal(items.total,10);assert.ok(items.items.every(item=>item.title.startsWith('DEMO ')));
  const light=await stock(engine);assert.equal(light.onhand,15);assert.equal(light.reserved,2);assert.equal(light.available,13);
  assert.equal((await list(engine,'purchases')).records.length,3);assert.equal((await list(engine,'jobs')).records.length,2);
 });
@@ -52,7 +52,7 @@ test('SQLite demo adapter rolls back failed batches and retains foreign keys aft
  const engine=await createDemoEngine(inspectable,schema);t.after(()=>engine.close());const image=engine.export(),restored=new SQL.Database(image);t.after(()=>restored.close());
  assert.equal(engineDatabase.exec('PRAGMA foreign_keys')[0].values[0][0],1);
  await assert.rejects(browserSqliteAdapter(engineDatabase).batch([browserSqliteAdapter(engineDatabase).prepare("INSERT INTO inventory_settings VALUES ('missing','Tacoma Showroom',NULL,NULL,1,'now')")]));
- assert.equal(restored.exec('SELECT COUNT(*) FROM master_products')[0].values[0][0],7);
+ assert.equal(restored.exec('SELECT COUNT(*) FROM master_products')[0].values[0][0],10);
 });
 
 test('demo transport never calls the hosted API, and staff failures never fall back to demo access',async()=>{
@@ -79,7 +79,7 @@ test('older demo sessions gain the handoff tables without losing edited stock',a
  const engine=await createDemoEngine(SQL,schema);t.after(()=>engine.close());
  const light=await stock(engine);await call(engine,'inventory','POST',{productId:light.id,location,kind:'COUNT',quantity:19,reason:'Demo saved count'});
  const legacy=new SQL.Database(engine.export());legacy.run('PRAGMA foreign_keys=OFF');
- legacy.run('DROP TABLE quote_job_handoffs; DROP TABLE job_purchase_orders; DROP TABLE job_requirements; DELETE FROM package_quotes; DELETE FROM curated_packages;');
+ legacy.run('DROP TABLE quote_job_handoffs; DROP TABLE package_releases; DROP TABLE job_purchase_orders; DROP TABLE job_requirements; DELETE FROM package_quotes; DELETE FROM curated_packages;');
  const restored=await createDemoEngine(SQL,schema,legacy.export());legacy.close();t.after(()=>restored.close());
  assert.equal((await stock(restored)).onhand,19);const quote=(await call(restored,'package-quotes')).value.quotes[0];
  assert.equal((await call(restored,`package-quotes/${quote.id}/prepare`)).status,200);

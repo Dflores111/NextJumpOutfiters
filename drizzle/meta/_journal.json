@@ -57,6 +57,13 @@
       "when": 1792703422727,
       "tag": "0007_mature_wrecking_crew",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1793243840248,
+      "tag": "0008_graceful_madelyne_pryor",
+      "breakpoints": true
     }
   ]
 }

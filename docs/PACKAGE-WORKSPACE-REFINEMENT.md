@@ -1,5 +1,7 @@
 # Package workspace refinement — October 22, 2026
 
+Historical release snapshot. For the current draft/release behavior, editable vehicle coverage and Excel workflow, see [Package Studio](PACKAGE-STUDIO.md).
+
 This refines the existing native catalog and builder. The Shopify meeting notes and screenshots inform the staff workflow; they do not authorize Shopify migration, import live Shopify records, or establish compatibility or pricing.
 
 ## What the shop can do

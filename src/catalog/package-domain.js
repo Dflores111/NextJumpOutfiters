@@ -44,7 +44,7 @@ export function publicPackage(row,{preview=false}={}){
 export function cleanIntake(input,vehicle){
  const year=Number(input?.year);
  if(!Number.isSafeInteger(year)||year<vehicle.yearFrom||year>vehicle.yearTo)throw Object.assign(Error('Choose a year within this package’s reviewed vehicle range.'),{status:422});
- if(!['stock','modified','unsure'].includes(input.suspension)||!['daily','trips','permanent','unsure'].includes(input.use))throw Object.assign(Error('Tell us about your suspension and how you use the truck.'),{status:422});
+ if(!['stock','modified','unsure'].includes(input.suspension)||!['daily','trips','permanent','expedition','unsure'].includes(input.use))throw Object.assign(Error('Tell us about your suspension and how you use the truck.'),{status:422});
  return {year,make:vehicle.make,model:vehicle.model,suspension:input.suspension,use:input.use};
 }
 export const moneyLabel=value=>value===null||value===undefined?'Needs review':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(value/100);

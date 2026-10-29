@@ -1,6 +1,6 @@
 import {variantsFor,hoursFor} from './variant-domain.js';
 
-export const useLabels={weekender:'Weekender','overlander-light':'Overlander Light','overlander-heavy':'Overlander Heavy'};
+export const useLabels={weekender:'Weekender','overlander-light':'Overlander Lite','overlander-heavy':'Overlander Heavy',expedition:'Expedition'};
 export const copyChecks={identity:'Vehicle, use and package name',content:'Customer description and exclusions',parts:'Parts, quantities and supplier codes',pricing:'Scope, labor and price',fitment:'Fitment and installation notes',media:'Images and sales restrictions'};
 export const vehicleLabel=d=>`${d.vehicle.yearFrom}–${d.vehicle.yearTo} ${d.vehicle.make} ${d.vehicle.model}`;
 export function suggestedPackageTitle(data){

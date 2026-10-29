@@ -67,3 +67,6 @@ export const jobRequirements=sqliteTable('job_requirements',{
 export const jobPurchaseOrders=sqliteTable('job_purchase_orders',{
  orderId:text('order_id').primaryKey().references(()=>purchaseOrders.id),jobId:text('job_id').notNull().references(()=>stockJobs.id),
 });
+export const packageReleases=sqliteTable('package_releases',{
+ id:text('id').primaryKey(),packageId:text('package_id').notNull().references(()=>curatedPackages.id),revision:integer('revision').notNull(),title:text('title').notNull(),category:text('category').notNull(),data:text('data_json').notNull(),active:integer('active').notNull(),publishedBy:text('published_by').notNull(),publishedAt:text('published_at').notNull(),
+},t=>[uniqueIndex('package_release_revision').on(t.packageId,t.revision),index('package_release_active').on(t.packageId,t.active)]);

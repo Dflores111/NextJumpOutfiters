@@ -13,6 +13,7 @@
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "fflate": "0.8.3",
     "jose": "^6.2.12",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
@@ -20,6 +21,7 @@
     "sql.js": "^1.13.0"
   },
   "devDependencies": {
+    "@xmldom/xmldom": "0.9.12",
     "drizzle-kit": "0.31.10",
     "drizzle-orm": "0.45.2",
     "vite": "^6.1.0",

@@ -37,7 +37,7 @@ function cleanPackageData(input){
   return lines.map(line=>{if(!uuid(line.productId))throw fail(422,'Choose an existing part.');const quantity=nullableNumber(line.quantity,{max:100000});if(quantity===0)throw fail(422,'Remove a part instead of setting its quantity to zero.');return {productId:line.productId,role:cleanText(line.role,100),quantity,unitRetailCents:nullableNumber(line.unitRetailCents),unitCostCents:nullableNumber(line.unitCostCents)};});
  };
  const cleanLabor=value=>{
-  const result={rateCents:nullableNumber(value?.rateCents),alignmentCents:nullableNumber(value?.alignmentCents),useBreakdown:value?.useBreakdown===true,rustApplies:value?.rustApplies===true};
+  const result={rateCents:nullableNumber(value?.rateCents),alignmentCents:nullableNumber(value?.alignmentCents),useBreakdown:value?.useBreakdown===true,rustApplies:value?.rustApplies===true,basis:value?.basis==='CONFIRMED'?'CONFIRMED':'ESTIMATE'};
   for(const key of ['hours','frontHours','rearHours','rustHours']){const n=nullableNumber(value?.[key],{integer:false,max:200});if(n!==null&&Math.abs(n*60-Math.round(n*60))>1e-7)throw fail(422,'Use labor time in whole minutes.');result[key]=n;}return result;
  };
  let variants;
@@ -47,7 +47,7 @@ function cleanPackageData(input){
  }
  const defaultVariantId=variants?input.defaultVariantId:null,primary=variants?.find(v=>v.id===defaultVariantId);
  if(variants&&(!primary||!primary.enabled))throw fail(422,'Choose an enabled default scope.');
- const useLevel=input.useLevel||null;if(useLevel&&!['weekender','overlander-light','overlander-heavy'].includes(useLevel))throw fail(422,'Choose one of the three pilot uses.');
+ const useLevel=input.useLevel||null;if(useLevel&&!Object.hasOwn(useLabels,useLevel))throw fail(422,'Choose a recognized use.');
  const media=(Array.isArray(input.media)?input.media:[]).slice(0,8).map(item=>{
   const url=cleanText(item.url,1200),alt=cleanText(item.alt,200),kind=item.kind==='part'?'part':'vehicle';
   if(!url)return null;
@@ -69,32 +69,47 @@ function allPackageLines(data){return data.variants?data.variants.flatMap(v=>v.l
 async function materializeLines(db,lines){
  return Promise.all(lines.map(async line=>{const p=await one(db,'SELECT id,title,revision,state,data_json FROM master_products WHERE id=?',line.productId);if(!p||p.state==='RETIRED')throw fail(422,'A package part is missing or retired. Choose a replacement.');const data=JSON.parse(p.data_json);return {...line,title:p.title,productRevision:p.revision,supplierSku:data.supplierSku||null,supplier:data.supplier||null,installOnly:(data.tags||[]).includes('Install-Only')};}));
 }
-async function readPackage(db,id){
- const row=decoded(await one(db,'SELECT * FROM curated_packages WHERE id=?',id));if(!row)throw fail(404,'Package not found.');
+async function inspectPackage(db,row){
+ if(!row)throw fail(404,'Package not found.');
  const products=await all(db,"SELECT p.id,p.revision,p.state FROM master_products p JOIN json_each(?) j ON p.id=json_extract(j.value,'$.productId')",JSON.stringify(allPackageLines(row.data)));
  const current=new Map(products.map(p=>[p.id,p]));row.stale=allPackageLines(row.data).some(line=>!current.has(line.productId)||current.get(line.productId).state==='RETIRED'||current.get(line.productId).revision!==line.productRevision);
  row.variantCosts=variantsFor(row.data).map(v=>({id:v.id,...privateCostTotals(v)}));row.totals=packageTotals(row.data);row.problems=[...releaseProblems(row.data),...(row.stale?['A part changed. Review the package against the current part records.']:[])];return row;
 }
-async function savePackage(db,id,input,key,actor){
+async function readPublishedPackage(db,id){
+ const release=await one(db,'SELECT package_id AS id,revision,title,category,data_json,published_at AS updated_at FROM package_releases WHERE package_id=? AND active=1',id);
+ return release?inspectPackage(db,{...decoded(release),state:'PUBLISHED'}):null;
+}
+async function readPackage(db,id){
+ const row=await inspectPackage(db,decoded(await one(db,'SELECT * FROM curated_packages WHERE id=?',id)));
+ const published=await readPublishedPackage(db,id);
+ row.published=published?{revision:published.revision,title:published.title,category:published.category,data:published.data,totals:published.totals,stale:published.stale,problems:published.problems}:null;
+ row.hasDraftChanges=!!published&&row.revision!==published.revision;return row;
+}
+async function savePackage(db,id,input,key,actor,{demo=false}={}){
  const requestInput={id,input},prior=await replay(db,requestInput,key,actor);if(prior)return readPackage(db,prior.entityId);
  const row=await readPackage(db,id);if(input.revision!==row.revision)throw fail(409,'This package changed. Reload it before saving.');
  if(!packageStates.includes(input.state)||!cleanText(input.title)||!cleanText(input.category))throw fail(422,'Choose a package name, category and state.');
  const data={...cleanPackageData(input.data),source:row.data.source,sourceTotalCents:row.data.sourceTotalCents??null,
-  sourceSummary:row.data.sourceSummary,sourceRowKey:row.data.sourceRowKey,sourceDescription:row.data.sourceDescription,
+  importSource:row.data.importSource,sourceCells:row.data.sourceCells,sourceSummary:row.data.sourceSummary,sourceRowKey:row.data.sourceRowKey,sourceDescription:row.data.sourceDescription,
   issues:(row.data.issues||[]).map(issue=>({...issue,resolved:input.data.issues?.find(value=>value.id===issue.id)?.resolved===true}))};
  if(row.data.clonedFrom){data.clonedFrom=row.data.clonedFrom;data.cloneReview=Object.fromEntries(Object.keys(copyChecks).map(k=>[k,input.data.cloneReview?.[k]===true]));}
  const contentChanged=reviewContent(cleanPackageData(row.data))!==reviewContent(cleanPackageData(input.data))||row.title!==cleanText(input.title);
  await materializePackage(db,data);
  if(input.state==='PUBLISHED'){
+  if(!demo&&!(data.vehicle.make==='Toyota'&&data.vehicle.model==='Tacoma'&&data.vehicle.yearFrom===2016&&data.vehicle.yearTo===2023))throw fail(422,'The production pilot is 2016–2023 Toyota Tacoma. Keep other vehicles as drafts for now.');
   const problems=releaseProblems(data);if(problems.length)throw fail(422,problems.join(' '));data.reviewedBy=actor;data.reviewedAt=timestamp();
  }else{if(contentChanged){data.approvals={parts:false,pricing:false,fitment:false};if(data.cloneReview)data.cloneReview=Object.fromEntries(Object.keys(copyChecks).map(k=>[k,false]));}data.reviewedBy=null;data.reviewedAt=null;}
- const uniqueMenu="NOT EXISTS(SELECT 1 FROM curated_packages WHERE id<>? AND state='PUBLISHED' AND json_extract(data_json,'$.useLevel')=? AND lower(json_extract(data_json,'$.vehicle.make'))=lower(?) AND lower(json_extract(data_json,'$.vehicle.model'))=lower(?) AND json_extract(data_json,'$.vehicle.yearFrom')<=? AND json_extract(data_json,'$.vehicle.yearTo')>=?)";
+ const uniqueMenu="NOT EXISTS(SELECT 1 FROM package_releases WHERE package_id<>? AND active=1 AND json_extract(data_json,'$.useLevel')=? AND lower(json_extract(data_json,'$.vehicle.make'))=lower(?) AND lower(json_extract(data_json,'$.vehicle.model'))=lower(?) AND json_extract(data_json,'$.vehicle.yearFrom')<=? AND json_extract(data_json,'$.vehicle.yearTo')>=?)";
  const uniqueArgs=[id,data.useLevel,data.vehicle.make,data.vehicle.model,data.vehicle.yearTo,data.vehicle.yearFrom];
  if(input.state==='PUBLISHED'&&data.useLevel&&await one(db,`SELECT 1 found WHERE NOT (${uniqueMenu})`,...uniqueArgs))throw fail(422,'A published package already serves this vehicle and use. Update that package, or archive it before releasing this replacement.');
  const lineJson=JSON.stringify(allPackageLines(data)),clean={revision:input.revision,state:input.state,title:cleanText(input.title),category:cleanText(input.category,80),data};
  await command(db,'PACKAGE_'+input.state,requestInput,key,actor,id,
   "EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=?) AND NOT EXISTS(SELECT 1 FROM json_each(?) j LEFT JOIN master_products p ON p.id=json_extract(j.value,'$.productId') WHERE p.id IS NULL OR p.state='RETIRED' OR p.revision<>json_extract(j.value,'$.productRevision'))"+(input.state==='PUBLISHED'&&data.useLevel?' AND '+uniqueMenu:''),[id,input.revision,lineJson,...(input.state==='PUBLISHED'&&data.useLevel?uniqueArgs:[])],
-  ({gate,gateArgs,time})=>[db.prepare(`UPDATE curated_packages SET title=?,category=?,state=?,revision=revision+1,data_json=?,updated_at=? WHERE id=? AND revision=? AND ${gate}`).bind(clean.title,clean.category,clean.state,JSON.stringify(data),time,id,input.revision,...gateArgs)],{state:input.state,revision:input.revision+1,title:clean.title});
+  ({gate,gateArgs,time})=>[
+   ...(input.state==='PUBLISHED'||input.state==='ARCHIVED'?[db.prepare(`UPDATE package_releases SET active=0 WHERE package_id=? AND active=1 AND ${gate} AND EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=?)`).bind(id,...gateArgs,id,input.revision)]:[]),
+   ...(input.state==='PUBLISHED'?[db.prepare(`INSERT OR IGNORE INTO package_releases (id,package_id,revision,title,category,data_json,active,published_by,published_at) SELECT ?,?,?,?,?,?,1,?,? WHERE ${gate} AND EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=?)`).bind(id+':'+(input.revision+1),id,input.revision+1,clean.title,clean.category,JSON.stringify(data),actor,time,...gateArgs,id,input.revision)]:[]),
+   db.prepare(`UPDATE curated_packages SET title=?,category=?,state=?,revision=revision+1,data_json=?,updated_at=? WHERE id=? AND revision=? AND ${gate}`).bind(clean.title,clean.category,clean.state,JSON.stringify(data),time,id,input.revision,...gateArgs)
+  ],{state:input.state,revision:input.revision+1,title:clean.title});
  return readPackage(db,id);
 }
 async function duplicatePackage(db,id,input,key,actor){
@@ -163,25 +178,25 @@ async function saveQuote(request,db,input,draft=false){
  const fingerprint=await hash(JSON.stringify(clean)),keyHash=await hash(key),accessHash=await hash(access);
  const previous=await one(db,'SELECT * FROM package_quotes WHERE key_hash=?',keyHash);
  if(previous){if(previous.fingerprint!==fingerprint||previous.access_hash!==accessHash)throw fail(409,'This save key belongs to a different quote.');return {id:previous.id,...JSON.parse(previous.snapshot_json),reused:true};}
- const pack=await readPackage(db,input.packageId);if(pack.revision!==input.revision)throw fail(409,'The package changed. Refresh the estimate before saving.');
+ const pack=draft?await readPackage(db,input.packageId):await readPublishedPackage(db,input.packageId);if(!pack)throw fail(409,'This package is being reviewed. Ask the shop for a custom estimate.');if(pack.revision!==input.revision)throw fail(409,'The package changed. Refresh the estimate before saving.');
  if(!draft&&(pack.state!=='PUBLISHED'||pack.stale||pack.problems.length))throw fail(409,'This package is being reviewed. Ask the shop for a custom estimate.');
  if(input.fulfillment==='diy'&&!pack.data.diyAllowed)throw fail(422,'This package is offered with installation.');
- if(!draft&&pack.data.useLevel&&clean.intake.use!==({'weekender':'daily','overlander-light':'trips','overlander-heavy':'permanent'}[pack.data.useLevel]))throw fail(422,'Choose the package that matches your selected use.');
+ if(!draft&&pack.data.useLevel&&clean.intake.use!==({'weekender':'daily','overlander-light':'trips','overlander-heavy':'permanent','expedition':'expedition'}[pack.data.useLevel]))throw fail(422,'Choose the package that matches your selected use.');
  const variant=variantsFor(pack.data).find(v=>v.id===(clean.variantId||pack.data.defaultVariantId||'front-rear'));if(!variant||!variant.enabled)throw fail(422,'Choose an available package scope.');
  const chosen={...pack,data:selectVariant(pack.data,variant.id)};
  const intake=cleanIntake(clean.intake,pack.data.vehicle),snapshot=await buildQuote(db,chosen,intake,input.fulfillment,draft),id=crypto.randomUUID(),time=timestamp(),number='NJO-'+id.slice(0,8).toUpperCase();
  snapshot.customer={...snapshot.customer,number,createdAt:time};
  // The package and component revisions are checked again in the write itself.
- const condition="EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=? AND (?=1 OR state='PUBLISHED')) AND NOT EXISTS(SELECT 1 FROM json_each(?) j LEFT JOIN master_products p ON p.id=json_extract(j.value,'$.productId') WHERE p.id IS NULL OR p.state='RETIRED' OR p.revision<>json_extract(j.value,'$.productRevision'))";
- try{await db.prepare(`INSERT OR IGNORE INTO package_quotes (id,number,package_id,package_revision,key_hash,access_hash,fingerprint,snapshot_json,created_at) SELECT ?,?,?,?,?,?,?,?,? WHERE ${condition} AND (SELECT COUNT(*) FROM package_quotes)<10000`).bind(id,number,pack.id,pack.revision,keyHash,accessHash,fingerprint,JSON.stringify(snapshot),time,pack.id,pack.revision,draft?1:0,JSON.stringify(chosen.data.lines)).run();}catch{throw fail(503,'The quote could not be saved. Keep this page open and retry.');}
+ const condition=(draft?"EXISTS(SELECT 1 FROM curated_packages WHERE id=? AND revision=?)":"EXISTS(SELECT 1 FROM package_releases WHERE package_id=? AND revision=? AND active=1)")+" AND NOT EXISTS(SELECT 1 FROM json_each(?) j LEFT JOIN master_products p ON p.id=json_extract(j.value,'$.productId') WHERE p.id IS NULL OR p.state='RETIRED' OR p.revision<>json_extract(j.value,'$.productRevision'))";
+ try{await db.prepare(`INSERT OR IGNORE INTO package_quotes (id,number,package_id,package_revision,key_hash,access_hash,fingerprint,snapshot_json,created_at) SELECT ?,?,?,?,?,?,?,?,? WHERE ${condition} AND (SELECT COUNT(*) FROM package_quotes)<10000`).bind(id,number,pack.id,pack.revision,keyHash,accessHash,fingerprint,JSON.stringify(snapshot),time,pack.id,pack.revision,JSON.stringify(chosen.data.lines)).run();}catch{throw fail(503,'The quote could not be saved. Keep this page open and retry.');}
  const saved=await one(db,'SELECT * FROM package_quotes WHERE key_hash=?',keyHash);if(!saved)throw fail(409,'The package changed, or quote storage is full. Refresh before retrying.');if(saved.fingerprint!==fingerprint||saved.access_hash!==accessHash)throw fail(409,'This save key belongs to a different quote.');
  return {id:saved.id,...JSON.parse(saved.snapshot_json),reused:saved.id!==id};
 }
 export async function packageService(request,db,{identity,readBody,json}){
  const url=new URL(request.url),path=url.pathname,method=request.method;
  if(path==='/api/packages'&&method==='GET'){
-  const candidates=await all(db,"SELECT id FROM curated_packages WHERE state='PUBLISHED' ORDER BY COALESCE(json_extract(data_json,'$.menuOrder'),100),title LIMIT 100"),packages=[];
-  for(const candidate of candidates){const p=await readPackage(db,candidate.id);if(!p.stale&&!p.problems.length)packages.push(publicPackage(p));}
+  const candidates=await all(db,"SELECT package_id AS id FROM package_releases WHERE active=1 ORDER BY COALESCE(json_extract(data_json,'$.menuOrder'),100),title LIMIT 100"),packages=[];
+  for(const candidate of candidates){const p=await readPublishedPackage(db,candidate.id);if(!p.stale&&!p.problems.length&&p.data.vehicle.make==='Toyota'&&p.data.vehicle.model==='Tacoma'&&p.data.vehicle.yearFrom===2016&&p.data.vehicle.yearTo===2023)packages.push(publicPackage(p));}
   return json({packages});
  }
  if(path==='/api/package-quotes'&&method==='POST'){
@@ -197,15 +212,22 @@ export async function packageService(request,db,{identity,readBody,json}){
  if(path==='/api/staff/packages'&&method==='GET'){
   const rows=await all(db,"SELECT id FROM curated_packages ORDER BY category,COALESCE(json_extract(data_json,'$.menuOrder'),100),title LIMIT 100");return json({packages:await Promise.all(rows.map(row=>readPackage(db,row.id)))});
  }
- if(/^\/api\/staff\/packages\/[a-f\d-]{36}$/i.test(path)&&method==='PATCH')return json(await savePackage(db,path.split('/').at(-1),await readBody(request),request.headers.get('idempotency-key'),actor));
+ if(/^\/api\/staff\/packages\/[a-f\d-]{36}$/i.test(path)&&method==='PATCH')return json(await savePackage(db,path.split('/').at(-1),await readBody(request),request.headers.get('idempotency-key'),actor,{demo:identity.provider==='demo'}));
  if(/^\/api\/staff\/packages\/[a-f\d-]{36}\/duplicate$/i.test(path)&&method==='POST')return json(await duplicatePackage(db,path.split('/').at(-2),await readBody(request),request.headers.get('idempotency-key'),actor),201);
  if(path==='/api/staff/package-preview'&&method==='POST'){
-  const input=await readBody(request);if(!uuid(input.packageId)||!Number.isSafeInteger(input.revision))throw fail(422,'Choose a saved package to preview.');const pack=await readPackage(db,input.packageId);
+  const input=await readBody(request);if(!uuid(input.packageId)||!Number.isSafeInteger(input.revision))throw fail(422,'Choose a saved package to preview.');const pack=input.published?await readPublishedPackage(db,input.packageId):await readPackage(db,input.packageId);if(!pack)throw fail(404,'No published revision exists.');
   if(input.revision!==pack.revision)throw fail(409,'The package changed. Reload before previewing.');
   if(!['installed','diy'].includes(input.fulfillment)||input.fulfillment==='diy'&&!pack.data.diyAllowed)throw fail(422,'Choose an available fulfillment option.');
   const variant=selectVariant(pack.data,input.variantId);if(!variant)throw fail(422,'Choose a package scope.');
-  const snapshot=await buildQuote(db,{...pack,data:variant},cleanIntake(input.intake,pack.data.vehicle),input.fulfillment,true);
-  snapshot.customer={...snapshot.customer,number:'DRAFT PREVIEW',createdAt:timestamp()};return json({id:null,...snapshot,preview:true});
+  const snapshot=await buildQuote(db,{...pack,data:variant},cleanIntake(input.intake,pack.data.vehicle),input.fulfillment,!input.published);
+  snapshot.customer={...snapshot.customer,number:input.published?'PUBLISHED PREVIEW':'DRAFT PREVIEW',createdAt:timestamp()};return json({id:null,...snapshot,preview:true});
+ }
+ if(path==='/api/staff/package-demo-quotes'&&method==='POST'){
+  if(identity.provider!=='demo')throw fail(403,'Sample quote saving is available only in the isolated demo.');const input=await readBody(request),headers=new Headers(request.headers);headers.set('x-build-access',input.access||'');const result=await saveQuote({headers},db,input);const row=await one(db,'SELECT snapshot_json FROM package_quotes WHERE id=?',result.id);return json({id:result.id,...JSON.parse(row.snapshot_json),reused:result.reused},201);
+ }
+ if(path==='/api/staff/package-menu'&&method==='GET'){
+  const rows=await all(db,'SELECT package_id AS id FROM package_releases WHERE active=1 ORDER BY title'),packages=[];
+  for(const row of rows){const p=await readPublishedPackage(db,row.id);if(!p.stale&&!p.problems.length)packages.push(publicPackage(p));}return json({packages});
  }
  if(path==='/api/staff/standards'&&method==='GET')return json({standards:(await all(db,'SELECT * FROM build_standards ORDER BY category,title LIMIT 100')).map(decoded)});
  if(/^\/api\/staff\/supply\/[a-f\d-]{36}$/i.test(path)){
@@ -220,4 +242,4 @@ export async function packageService(request,db,{identity,readBody,json}){
  return null;
 }
 
-export {command,replay,cleanPackageData,materializePackage,readPackage,allPackageLines};
+export {command,replay,cleanPackageData,materializePackage,readPackage,allPackageLines,readPublishedPackage,savePackage};
