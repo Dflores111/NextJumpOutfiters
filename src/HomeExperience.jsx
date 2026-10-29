@@ -5,7 +5,7 @@ import {P,inquiry} from './routes.js';
 import {FullPhotoHero,PhotoChapter,CustomerProof} from './Journey.jsx';
 import {StartingPaths,BrandDifference,BuildWays,Questions,MarketingClose} from './Marketing.jsx';
 export default function HomeExperience(){return <div className="expressive-home journey-home njo-home">
- <FullPhotoHero home file="hero.png" alt="Next Jump Ford F-350 aluminum flatbed on a wooded trail" kicker="OFF-ROAD & OVERLAND SHOP · TACOMA, WA" title={<>From one truck upgrade to a <em>complete expedition build.</em></>} description="Need a lift, flatbed or full build? We'll help you choose what fits, do the work, and keep track of what comes next." signature="You drive. We're your pit crew." action="Explore installation services" to={P.services} secondary={{to:P.complete,label:'Plan my build'}}/>
+ <FullPhotoHero home file="hero.png" alt="Next Jump Ford F-350 aluminum flatbed on a wooded trail" kicker="OFF-ROAD & OVERLAND SHOP · TACOMA, WA" title={<>From one truck upgrade to a <em>complete expedition build.</em></>} description="Make room for your tools, plan around a camper or improve how your truck rides. Start with the change you need. We'll work through the parts, fit and installation with you." signature="You drive. We're your pit crew." action="Explore installation services" to={P.services} secondary={{to:P.complete,label:'Explore complete builds'}}/>
  <div id="page-content"><StartingPaths/></div>
  <ShopStoryTeaser/>
  <BrandDifference/>
