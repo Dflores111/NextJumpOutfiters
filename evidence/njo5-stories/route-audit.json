@@ -1,0 +1,2031 @@
+{
+  "generatedAt": "2026-10-19T03:36:35.223Z",
+  "startedAt": "2026-10-19T03:36:34.776Z",
+  "baseUrl": "http://127.0.0.1:4186/",
+  "method": "Node HTTP GET/HEAD against local server-rendered HTML; no browser, no production writes or external requests",
+  "summary": {
+    "routes": 53,
+    "expectedRoutes": 53,
+    "linkAndControlInstances": 3560,
+    "staticActionExpressions": 406,
+    "uniqueImages": 84,
+    "failures": 0,
+    "warnings": 0
+  },
+  "failures": [],
+  "warnings": [],
+  "routes": [
+    {
+      "path": "/",
+      "label": "Home",
+      "publication": "preview",
+      "status": 200,
+      "title": "NJO | Off-Road Installations, Flatbeds & Truck Builds in Tacoma",
+      "description": "Need a lift, flatbed or full build? We'll help you choose what fits, do the work, and keep track of what comes next.",
+      "h1": [
+        "From one truck upgrade to a complete expedition build."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/",
+      "imageCount": 12,
+      "links": 68,
+      "controls": 2,
+      "htmlSha256": "3c6337502474dab18f9d0c70bccc5311a7d7ce71d206cbb931f284d23e99858c",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/overland-aluminum-flatbed-truck-bodies",
+      "label": "Explore Flatbeds",
+      "publication": "preview",
+      "status": 200,
+      "title": "Modular Aluminum Truck Flatbeds & Camper Setups | NJO",
+      "description": "Start with an open aluminum deck. Add storage, a camper setup and other pieces when you need them. The plan starts with your truck and what you want it to do.",
+      "h1": [
+        "More ways to use your truck. One modular flatbed."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/overland-aluminum-flatbed-truck-bodies",
+      "imageCount": 5,
+      "links": 66,
+      "controls": 10,
+      "htmlSha256": "112fb4cf37e79bf4aab516c2cd58541ad23cb5ba4351ada026be4f60eb88dca5",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/flatbeds-for-overland-and-off-road-campers",
+      "label": "Flatbeds for Campers",
+      "publication": "preview",
+      "status": 200,
+      "title": "Flatbeds for Truck Campers | Next Jump Outfitters",
+      "description": "Explore aluminum flatbed configurations for toppers, slide-ins, and flatbed campers. Discuss your truck, storage, and installation with our Tacoma team.",
+      "h1": [
+        "The right foundation for your camper."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/flatbeds-for-overland-and-off-road-campers",
+      "imageCount": 4,
+      "links": 58,
+      "controls": 2,
+      "htmlSha256": "16571991d4c47c73be346fdfb0b40343c72e1c57b764402150b4223e7d8c63e2",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/flatbeds-for-work-and-business",
+      "label": "Flatbeds for Work & Business",
+      "publication": "preview",
+      "status": 200,
+      "title": "Work Truck Flatbeds & Storage | Next Jump Outfitters",
+      "description": "Plan an aluminum flatbed around your work truck, tools, and equipment. Discuss storage layouts and installation with Next Jump Outfitters in Tacoma.",
+      "h1": [
+        "Carry the load. Get to the tools."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/flatbeds-for-work-and-business",
+      "imageCount": 4,
+      "links": 52,
+      "controls": 2,
+      "htmlSha256": "a39891e82154f8deeabd9fae11a799fad80d8d49706f80e0a32a683f0d72d168",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/flatbed-packages",
+      "label": "Flatbed Packages",
+      "publication": "gated",
+      "status": 200,
+      "title": "Plan Your Flatbed Configuration | Next Jump Outfitters",
+      "description": "Explore individual flatbed options or get help choosing. Fixed packages are not available in this website preview.",
+      "h1": [
+        "A starting direction. Your choices."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": null,
+      "imageCount": 2,
+      "links": 47,
+      "controls": 2,
+      "htmlSha256": "e89e6e7a8261cde2bedc81173d89c2c71a9d3fc24d69d7accc59f9d7ce20fb31",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/flatbed-build-price-by-vehicle",
+      "label": "Vehicle Selector",
+      "publication": "preview",
+      "status": 200,
+      "title": "Plan Your Truck Build | Next Jump Outfitters",
+      "description": "Plan a flatbed or vehicle upgrades in four simple steps. Choose a starting direction, adjust priorities and save your plan for a fitment and quote conversation.",
+      "h1": [
+        "Plan your truck build"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/flatbed-build-price-by-vehicle",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 17,
+      "htmlSha256": "c356c3779b9d3df2e9964d8c1dd712bc41f3ae120b959a13196fd2f05b70fcf2",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/book-install-services-or-get-a-quote",
+      "label": "Get a Quote",
+      "publication": "preview",
+      "status": 200,
+      "title": "Request a Build or Installation Quote | Next Jump Outfitters",
+      "description": "Tell Next Jump Outfitters about your vehicle, flatbed plans, or installation project. Share a saved build or start with a question for our Tacoma team.",
+      "h1": [
+        "Let's work through your flatbed setup."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": null,
+      "imageCount": 2,
+      "links": 48,
+      "controls": 15,
+      "htmlSha256": "a9a3bab8803c38eda8330ee1aaa9984adfdc83493864a01fa9590e76d8064060",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/build-request-received",
+      "label": "Quote Confirmation",
+      "publication": "preview",
+      "status": 200,
+      "title": "Preview Request Status | Next Jump Outfitters",
+      "description": "Check whether a website preview request was saved. No inquiry is sent to the shop from this preview.",
+      "h1": [
+        "Checking your preview receipt."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": null,
+      "imageCount": 2,
+      "links": 48,
+      "controls": 2,
+      "htmlSha256": "4cf25c5f0413c089b930733a9dd5e0f3dd3c8ec0bc2ab6513b1674a8071c979b",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/book-a-build-consultation",
+      "label": "Paid Build & Design Consultation",
+      "publication": "preview",
+      "status": 200,
+      "title": "Build & Design Consultation | Next Jump Outfitters",
+      "description": "Discuss a dedicated build and design consultation with Next Jump Outfitters. Confirm scope, fee, and appointment terms with the Tacoma team.",
+      "h1": [
+        "Work through the details with a technician."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/book-a-build-consultation",
+      "imageCount": 2,
+      "links": 48,
+      "controls": 2,
+      "htmlSha256": "a2f394aae4339a1911eef57a70e04012a234f32f99a52a37fa5c0057f8c06733",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/our-work",
+      "label": "Our Work",
+      "publication": "preview",
+      "status": 200,
+      "title": "Truck Builds & Installation Projects | Next Jump Outfitters",
+      "description": "A lift for a classic truck. A modular flatbed. A camp setup with room for more. Browse the work, then tell us what you'd like to do with your truck.",
+      "h1": [
+        "See what we've built. Find your starting point."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/our-work",
+      "imageCount": 7,
+      "links": 53,
+      "controls": 2,
+      "htmlSha256": "44a8e04421c5561b9bcc477844b6a970035cdf4104e598b8391be6564d77864c",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/the-super-ute-collaboration-build",
+      "label": "Super Ute Case Study",
+      "publication": "preview",
+      "status": 200,
+      "title": "Super Ute F-250 Flatbed Build | Next Jump Outfitters",
+      "description": "See the Super Ute F-250 collaboration build with Adventure Built, Flated, and TRUKD. Explore the flatbed, storage, topper layout, and ideas for your truck.",
+      "h1": [
+        "The Super Ute."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/the-super-ute-collaboration-build",
+      "imageCount": 9,
+      "links": 53,
+      "controls": 15,
+      "htmlSha256": "245d9d0abed744aac3bb7e6cbc457ba18ce54f7612a3784277cbc5fced6001b9",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/flatbed-buyers-guide",
+      "label": "Flatbed Buyer\u2019s Guide",
+      "publication": "preview",
+      "status": 200,
+      "title": "Flatbed Buyer\u2019s Guide: Fit, Cost & Options | Next Jump",
+      "description": "Learn what to check before buying a truck flatbed, from fitment and camper compatibility to pricing, installation, storage, and warranty questions.",
+      "h1": [
+        "A clearer starting point for your flatbed build."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/flatbed-buyers-guide",
+      "imageCount": 6,
+      "links": 49,
+      "controls": 2,
+      "htmlSha256": "e8c2f1067325995799085b7341e7e831632f5b92e8b19e412ca041361e9d5cfc",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/overland-off-road-installation-services-tacoma-wa",
+      "label": "Installation Services",
+      "publication": "preview",
+      "status": 200,
+      "title": "Off-Road & Overland Installation Services | NJO Tacoma",
+      "description": "Suspension, wheels and tires, lighting, bumpers, racks, power and more. Tell us what you drive and what you need. We'll help work through the right setup and installation.",
+      "h1": [
+        "Need an upgrade installed? Start here."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/overland-off-road-installation-services-tacoma-wa",
+      "imageCount": 6,
+      "links": 65,
+      "controls": 5,
+      "htmlSha256": "7e0ad99d55f5d32e88a37d7f09244ec8f39e03a46cb7c7ca07dcf0f63c7caf1d",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/lift-suspension-installation",
+      "label": "Lifts & Suspension",
+      "publication": "preview",
+      "status": 200,
+      "title": "Lift & Suspension Installation in Tacoma | Next Jump",
+      "description": "Plan a lift or suspension installation around your vehicle, load, and intended use. Discuss your setup with Next Jump Outfitters in Tacoma, Washington.",
+      "h1": [
+        "Lift and suspension installation, built around your truck."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/lift-suspension-installation",
+      "imageCount": 4,
+      "links": 62,
+      "controls": 14,
+      "htmlSha256": "69183adc0121931af4a94b826e1d52f6615aee2408dc89bc3ca622613eeeba7c",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/bumpers-racks-installation-tacoma-wa",
+      "label": "Bumpers & Racks",
+      "publication": "preview",
+      "status": 200,
+      "title": "Bumper & Rack Installation in Tacoma | Next Jump",
+      "description": "Discuss bumper and rack installation for your truck or off-road vehicle. Review fitment and project details with Next Jump Outfitters in Tacoma.",
+      "h1": [
+        "Bumpers and racks built around what you carry."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/bumpers-racks-installation-tacoma-wa",
+      "imageCount": 4,
+      "links": 59,
+      "controls": 14,
+      "htmlSha256": "98ea3205d71b8f50e70379593ba0132830ea0fef8bda490e647ff8cd96cdbc7b",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/wheels-tires-off-road-and-overland",
+      "label": "Wheels & Tires",
+      "publication": "preview",
+      "status": 200,
+      "title": "Wheels & Tires for Off-Road Trucks | Tacoma | Next Jump",
+      "description": "Plan wheels and tires around your vehicle and intended use. Discuss fitment, existing modifications, and installation with Next Jump Outfitters in Tacoma.",
+      "h1": [
+        "Wheels and tires that fit how you use your truck."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/wheels-tires-off-road-and-overland",
+      "imageCount": 4,
+      "links": 59,
+      "controls": 14,
+      "htmlSha256": "183aca51cd41cc56effd2fe5699ca6e0e7ad4ed033ef315c0dddbc68780ee25a",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/custom-power-solutions-off-road-marine",
+      "label": "Power & electrical",
+      "publication": "preview",
+      "status": 200,
+      "title": "Truck Power & Electrical Installation | NJO Tacoma",
+      "description": "Discuss custom vehicle power, charging, and electrical installations for your travel setup. Start with your equipment needs and Next Jump\u2019s Tacoma team.",
+      "h1": [
+        "Power for the places you want to go."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/custom-power-solutions-off-road-marine",
+      "imageCount": 4,
+      "links": 59,
+      "controls": 14,
+      "htmlSha256": "d98d38f94a7b4fcf767a486e1c965745bbad5cd7c0874df24418b3322c4796d4",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/custom-lighting-for-off-road-overland",
+      "label": "Custom Lighting",
+      "publication": "preview",
+      "status": 200,
+      "title": "Off-Road Lighting Installation in Tacoma | Next Jump",
+      "description": "Discuss vehicle and camp lighting installation with Next Jump Outfitters in Tacoma. Plan placement, controls, and wiring around your truck and intended use.",
+      "h1": [
+        "Better light for the trail, work and camp."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/custom-lighting-for-off-road-overland",
+      "imageCount": 4,
+      "links": 59,
+      "controls": 14,
+      "htmlSha256": "d39fcda2e2aee5df8f1c06e54a9eece4c50c1c1a038bdaba181dfa2c2ce1c42b",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+      "label": "Roof Top Tent Installation",
+      "publication": "preview",
+      "status": 200,
+      "title": "Roof Top Tent Installation in Tacoma | Next Jump",
+      "description": "Discuss rooftop tent and rack installation with Next Jump Outfitters in Tacoma. Review the exact tent, vehicle, mounting requirements, and project scope.",
+      "h1": [
+        "A rooftop tent setup that fits your truck."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+      "imageCount": 4,
+      "links": 56,
+      "controls": 14,
+      "htmlSha256": "e73b4ae37f1bc5b8789a5e6ed29802c3f2b10791f26647612869167d1d01d28a",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/authorized-alaskan-campers-installer",
+      "label": "Alaskan Camper Installation",
+      "publication": "preview",
+      "status": 200,
+      "title": "Alaskan Camper Installation Planning | Next Jump",
+      "description": "Discuss your Alaskan camper and truck configuration with Next Jump Outfitters in Tacoma. Review installation needs, supporting equipment, and next steps.",
+      "h1": [
+        "Get the camper and truck working together."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/authorized-alaskan-campers-installer",
+      "imageCount": 4,
+      "links": 57,
+      "controls": 14,
+      "htmlSha256": "10d373878e18b1e836aad6fdcc20dc5b2d5e9916b1c2a66a95367107517f500c",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/wash-me",
+      "label": "Vehicle Wash & Detail",
+      "publication": "preview",
+      "status": 200,
+      "title": "Vehicle Wash & Detailing in Tacoma | Next Jump",
+      "description": "Ask about vehicle washing and detailing at Next Jump Outfitters in Tacoma. Share your vehicle and its condition to discuss the right service and scope.",
+      "h1": [
+        "Get the trip off your truck."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/wash-me",
+      "imageCount": 4,
+      "links": 57,
+      "controls": 14,
+      "htmlSha256": "6a07254fbcb1ce95b736fef8a7c1c7a2f07d5ecde49ae1886c542e175a30711b",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/boat-wash",
+      "label": "Boat Wash & Detail",
+      "publication": "preview",
+      "status": 200,
+      "title": "Boat Washing & Detailing | Next Jump Outfitters",
+      "description": "Ask Next Jump Outfitters about boat washing and detailing. Share your boat size, location, condition, and preferred timing to discuss service availability.",
+      "h1": [
+        "Boat washing & detailing."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/boat-wash",
+      "imageCount": 4,
+      "links": 55,
+      "controls": 14,
+      "htmlSha256": "52c0edf62faacb1d37b904ec547a78d614c2f6e5a5a70caa26fcb174f57db4a8",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/marine-services",
+      "label": "Marine Outfitting",
+      "publication": "preview",
+      "status": 200,
+      "title": "Marine Outfitting Inquiries | Next Jump Outfitters",
+      "description": "Discuss a marine outfitting project with Next Jump Outfitters. Share your vessel and equipment needs so the team can review scope and availability.",
+      "h1": [
+        "Make more of your time on the water."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/marine-services",
+      "imageCount": 4,
+      "links": 54,
+      "controls": 14,
+      "htmlSha256": "77f7b8b6a93297057ceefb6fd8f27a635ca1fb0bd524e871376c35047eb8fe01",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/trailer",
+      "label": "Trailers",
+      "publication": "preview",
+      "status": 200,
+      "title": "Overland Trailer Builds | Next Jump Outfitters",
+      "description": "Explore trailer-based overland build ideas with Next Jump Outfitters. Discuss the trailer, tow vehicle, equipment, and project scope before planning a build.",
+      "h1": [
+        "Bring your basecamp behind you."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/trailer",
+      "imageCount": 4,
+      "links": 56,
+      "controls": 14,
+      "htmlSha256": "dd8789dc90f8f738c1749cf46fd46d7c6b9f1fba61808f8ec0710c3d3dfe0407",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/about-us",
+      "label": "Our Story",
+      "publication": "preview",
+      "status": 200,
+      "title": "About Our Veteran-Owned Tacoma Shop | Next Jump Outfitters",
+      "description": "We work on trucks built for daily driving, long trips, tough jobs and weekends away. Some people come to us for one installation. Others want the whole rig planned and built. We make room for both.",
+      "h1": [
+        "A shop built for the trucks people actually use."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/about-us",
+      "imageCount": 5,
+      "links": 55,
+      "controls": 12,
+      "htmlSha256": "282aba38f661dc13d081b8cba943c268f57d490163a9488b923f844a329fa228",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/contact-us",
+      "label": "Contact & Visit",
+      "publication": "preview",
+      "status": 200,
+      "title": "Contact & Visit Next Jump Outfitters | Tacoma, WA",
+      "description": "Contact Next Jump Outfitters at (253) 301-0028 or visit our Tacoma shop. Find the address, weekday hours, and the right way to start a build inquiry.",
+      "h1": [
+        "Come talk trucks with us."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/contact-us",
+      "imageCount": 3,
+      "links": 52,
+      "controls": 2,
+      "htmlSha256": "00e64147678c99735c9fd6c8ca614d7316a2dd8cbe5c324b322370ff1e4cfff2",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/dillon-f250-lift-project",
+      "label": "Dillon\u2019s F-250 Lift",
+      "publication": "preview",
+      "status": 200,
+      "title": "Dillon\u2019s 1993 F-250 Lift Project | Next Jump Outfitters",
+      "description": "See Dillon Collins\u2019s lifted 1993 Ford F-250 and read about his experience with the Next Jump Outfitters Tacoma team.",
+      "h1": [
+        "A classic truck. A different stance."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/dillon-f250-lift-project",
+      "imageCount": 4,
+      "links": 52,
+      "controls": 3,
+      "htmlSha256": "35b8af184a45f3b8e301b0ab34ec21aacbd6bd09fca2f88f1e34d9bb441d5639",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/alaskan-camper-flatbed-setup",
+      "label": "Alaskan Camper Setup",
+      "publication": "preview",
+      "status": 200,
+      "title": "Alaskan Camper & Flatbed Setup | Next Jump Outfitters",
+      "description": "Explore a photographed Alaskan camper setup on a Next Jump flatbed, then plan the truck, storage and installation around your own camper.",
+      "h1": [
+        "Take your room on the road."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/alaskan-camper-flatbed-setup",
+      "imageCount": 4,
+      "links": 52,
+      "controls": 3,
+      "htmlSha256": "1e88be39c335ed982e01b673a3a08fd8da7bfdff98b278d7a9245e95f17b54c1",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/ford-ranger-flatbed-setup",
+      "label": "Ford Ranger Flatbed Setup",
+      "publication": "preview",
+      "status": 200,
+      "title": "Ford Ranger Flatbed Setup | Next Jump Outfitters",
+      "description": "Explore a real Ford Ranger with a Next Jump midsize aluminum flatbed, dropsides and underbody storage. Plan a setup around your truck.",
+      "h1": [
+        "Small truck. Big ideas."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/ford-ranger-flatbed-setup",
+      "imageCount": 4,
+      "links": 52,
+      "controls": 2,
+      "htmlSha256": "d3722f0756d20d3d0914fab014b8b1a3ce0a2998a97a51f19dceb969d5b356b3",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/complete-expedition-truck-builds",
+      "label": "Complete Builds",
+      "publication": "preview",
+      "status": 200,
+      "title": "Complete Expedition Truck Builds | Next Jump Outfitters",
+      "description": "Tell us what you want your truck to do. We'll help map the vehicle, parts and installation into one plan. Bring the truck you own or ask us about finding the right one.",
+      "h1": [
+        "One team to build the truck you've been planning."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/complete-expedition-truck-builds",
+      "imageCount": 6,
+      "links": 58,
+      "controls": 2,
+      "htmlSha256": "e871c98990faac2e8417eaaa3e435b47ee4db565d6412cf79964692522776d4b",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/why-njo",
+      "label": "Why NJO",
+      "publication": "preview",
+      "status": 200,
+      "title": "One Team for Your Truck Build & Trip Care | NJO",
+      "description": "There's the fun part of owning an expedition truck. Then there's researching parts, calling shops, tracking changes and getting everything ready for the next trip. We're here to help with that part too.",
+      "h1": [
+        "You bought the truck to use it. We help you spend more time doing that."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/why-njo",
+      "imageCount": 5,
+      "links": 59,
+      "controls": 2,
+      "htmlSha256": "44f825b0fe17e71be702240690f48b10e050e57c9ed0763c2025ef843f1a54b0",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/trip-prep-and-care",
+      "label": "Trip Prep & Care",
+      "publication": "preview",
+      "status": 200,
+      "title": "Trip Prep & Vehicle Care | NJO Tacoma",
+      "description": "Need a hand before you leave or when you get back? Ask about our paid trip preparation, vehicle care and route-planning services.",
+      "h1": [
+        "Spend more time on the trip. Less time getting the truck ready."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/trip-prep-and-care",
+      "imageCount": 3,
+      "links": 51,
+      "controls": 2,
+      "htmlSha256": "66702bbbb2ad12f9e6f67faddcaf5a8d034d1fc8019e00b9c6e2bc05e7cebf12",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/trips-and-community",
+      "label": "Trips & Community",
+      "publication": "preview",
+      "status": 200,
+      "title": "Trips & Community | Next Jump Outfitters",
+      "description": "NJO trips are about trying gear, learning from the trail and finding good places to go. We'll share dates and details as trips are confirmed.",
+      "h1": [
+        "Get out there with people who use their trucks."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/trips-and-community",
+      "imageCount": 4,
+      "links": 51,
+      "controls": 2,
+      "htmlSha256": "055479315020e01c17570ba939d66fdfae76ac60512c7e3698c6a5f4b01175d0",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bed",
+      "label": "Toyota Tacoma 5-foot short bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Toyota Tacoma 5-foot short bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Toyota Tacoma 5-foot short bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Toyota Tacoma 5-foot short bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "21298b5db93f755a4e9171858f86c628420dee729212d691f8b703afd7f046ec",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-toyota-tacoma-6-1ft-long-bed",
+      "label": "Toyota Tacoma 6.1-foot long bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Toyota Tacoma 6.1-foot long bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Toyota Tacoma 6.1-foot long bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Toyota Tacoma 6.1-foot long bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-toyota-tacoma-6-1ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "d4c7fe88daf33669315afec18d58cb69f14484dadef129468efb142a79496d25",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-toyota-tundra-6-5ft-standard-bed",
+      "label": "Toyota Tundra 6.5-foot standard bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Toyota Tundra 6.5-foot standard bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Toyota Tundra 6.5-foot standard bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Toyota Tundra 6.5-foot standard bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-toyota-tundra-6-5ft-standard-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "534c2baf1024dd810eff9fff9cdd9bf082e559a34c65cd37198f0706a76c7bf4",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-toyota-tundra-8ft-long-bed",
+      "label": "Toyota Tundra 8-foot long bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Toyota Tundra 8-foot long bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Toyota Tundra 8-foot long bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Toyota Tundra 8-foot long bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-toyota-tundra-8ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "c26eb79832ab365ea0f77959aa782ba52bf3f74fcb2e388ea61d1b76fc488e9e",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-ford-ranger-5ft-short-bed",
+      "label": "Ford Ranger 5-foot short bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Ford Ranger 5-foot short bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Ford Ranger 5-foot short bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Ford Ranger 5-foot short bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-ford-ranger-5ft-short-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "30072036a1395814a8ba0b43a1c88a4a9798c7b81841d1cc644f1f7379e3fd36",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-ford-ranger-6ft-long-bed",
+      "label": "Ford Ranger 6-foot long bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Ford Ranger 6-foot long bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Ford Ranger 6-foot long bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Ford Ranger 6-foot long bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-ford-ranger-6ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "aaf88ebee52ce6c306a37335ad84fef8c4f32a5caa601cbdf2fff96fc3a779a9",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-ford-super-duty-8ft-long-bed",
+      "label": "Ford Super Duty 8-foot long bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Ford Super Duty 8-foot long bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Ford Super Duty 8-foot long bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Ford Super Duty 8-foot long bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-ford-super-duty-8ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "4e791c60b8a7d1efdc520b656e45dbb27e2bd39846ca6bbdee47dd4ed2509835",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-5-2ft-short-bed",
+      "label": "Chevrolet Colorado 5.2-foot short bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Chevrolet Colorado 5.2-foot short bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Chevrolet Colorado 5.2-foot short bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Chevrolet Colorado 5.2-foot short bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-chevrolet-colorado-5-2ft-short-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "7099c21366fc801b253a2244fadad6d67046d7fe951f3b3f062d2cd094a66c4c",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-6-2ft-long-bed",
+      "label": "Chevrolet Colorado 6.2-foot long bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Chevrolet Colorado 6.2-foot long bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Chevrolet Colorado 6.2-foot long bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Chevrolet Colorado 6.2-foot long bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-chevrolet-colorado-6-2ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "be28b95382e9cce1f95bf3b6156cf34dfeb38797c7d035eb75404ad1e05675b2",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-6-6ft-standard-bed",
+      "label": "Chevrolet Silverado 6.6-foot standard bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Chevrolet Silverado 6.6-foot standard bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Chevrolet Silverado 6.6-foot standard bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Chevrolet Silverado 6.6-foot standard bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-chevrolet-silverado-6-6ft-standard-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "c0b8adc2282242b3654955e901fad1755db277f7a849e89c520fab9c4d0ade74",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-8-1ft-long-bed",
+      "label": "Chevrolet Silverado 8.1-foot long bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Chevrolet Silverado 8.1-foot long bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Chevrolet Silverado 8.1-foot long bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Chevrolet Silverado 8.1-foot long bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-chevrolet-silverado-8-1ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "6452efd91981bf511c8a657caf1ee3b9c7de50ca3a31bd2735afa663dbb5f3e5",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-jeep-gladiator-jt-5ft-standard-bed",
+      "label": "Jeep Gladiator JT 5-foot bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Jeep Gladiator JT 5-foot bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Jeep Gladiator JT 5-foot bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Jeep Gladiator JT 5-foot bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-jeep-gladiator-jt-5ft-standard-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "e60edd4d8f422b145671749b6eeaa2f641292f40c7feba1fa274a88464549d98",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-ram-6-4ft-standard-bed",
+      "label": "Ram 6.4-foot standard bed \u2014 model to confirm",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Ram 6.4-foot standard bed \u2014 model to confirm Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Ram 6.4-foot standard bed \u2014 model to confirm. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Ram 6.4-foot standard bed \u2014 model to confirm"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-ram-6-4ft-standard-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "1ae97b06c1d06e7c9d88aa235db885bcc6112950a4521bf8dfa4c459c83c1107",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-ram-8ft-long-bed",
+      "label": "Ram 8-foot long bed \u2014 model to confirm",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Ram 8-foot long bed \u2014 model to confirm Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Ram 8-foot long bed \u2014 model to confirm. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Ram 8-foot long bed \u2014 model to confirm"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-ram-8ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "b452f9f529233cad340e312626b2498cdf78a9bdd50d29ad4cdbf587a8bcba00",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-6-75ft-short-bed",
+      "label": "Ram Heavy Duty 6.75-foot short bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Ram Heavy Duty 6.75-foot short bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Ram Heavy Duty 6.75-foot short bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Ram Heavy Duty 6.75-foot short bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-ram-heavy-duty-6-75ft-short-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "540a22f55ebc3c82fd70fb3ee50a69383f090021c7345ddfa4f55427df560210",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-8ft-long-bed",
+      "label": "Ram Heavy Duty 8-foot long bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Ram Heavy Duty 8-foot long bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Ram Heavy Duty 8-foot long bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Ram Heavy Duty 8-foot long bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-ram-heavy-duty-8ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "667914f8838e5137b70de0ce34c37e4ecee987f772f5386f39e1a790fbc269a3",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-nissan-frontier-5ft-short-bed",
+      "label": "Nissan Frontier 5-foot short bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Nissan Frontier 5-foot short bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Nissan Frontier 5-foot short bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Nissan Frontier 5-foot short bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-nissan-frontier-5ft-short-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "f81352fa5bb1b88fdbbe416cf268b53fdb17e36e148f8832c5e5f2a5bb9ce1c6",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-nissan-frontier-6-1ft-long-bed",
+      "label": "Nissan Frontier 6.1-foot long bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Nissan Frontier 6.1-foot long bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Nissan Frontier 6.1-foot long bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Nissan Frontier 6.1-foot long bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-nissan-frontier-6-1ft-long-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "e6836aa7af7829bd9fd114fee39dcfb55d45e43f39aed97bff446f772882836a",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/pages/aluminum-flatbed-truck-body-nissan-titan-6-5ft-standard-bed",
+      "label": "Nissan Titan 6.5-foot standard bed",
+      "publication": "preview-fitment-pending",
+      "status": 200,
+      "title": "Nissan Titan 6.5-foot standard bed Flatbed Planner | Next Jump",
+      "description": "Plan a flatbed configuration for your Nissan Titan 6.5-foot standard bed. Explore storage and equipment, with final fitment and pricing reviewed by the Tacoma team.",
+      "h1": [
+        "Nissan Titan 6.5-foot standard bed"
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/pages/aluminum-flatbed-truck-body-nissan-titan-6-5ft-standard-bed",
+      "imageCount": 4,
+      "links": 46,
+      "controls": 15,
+      "htmlSha256": "eef3deda148b81988aa16c397c02d6c8caa35e915a405881541fe086054ac772",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    },
+    {
+      "path": "/sitemap",
+      "label": "Sitemap",
+      "publication": "preview",
+      "status": 200,
+      "title": "Website Sitemap | Next Jump Outfitters",
+      "description": "Find your next build with Next Jump Outfitters in Tacoma.",
+      "h1": [
+        "Every path to your next build."
+      ],
+      "robots": "noindex,nofollow",
+      "canonical": "https://next-jump-outfitters.diegoafmejia111.chatgpt.site/sitemap",
+      "imageCount": 2,
+      "links": 99,
+      "controls": 2,
+      "htmlSha256": "de650b9fa470e2b16e51e901ea65904ef510785c53ab20ed74cbc2937f2d029c",
+      "coverage": "HTTP SSR inspected; browser behavior not exercised"
+    }
+  ],
+  "images": [
+    {
+      "source": "/images/logo.png",
+      "pages": [
+        "/",
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/flatbeds-for-overland-and-off-road-campers",
+        "/pages/flatbeds-for-work-and-business",
+        "/pages/flatbed-packages",
+        "/pages/flatbed-build-price-by-vehicle",
+        "/pages/book-install-services-or-get-a-quote",
+        "/pages/build-request-received",
+        "/pages/book-a-build-consultation",
+        "/pages/our-work",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/flatbed-buyers-guide",
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/lift-suspension-installation",
+        "/pages/bumpers-racks-installation-tacoma-wa",
+        "/pages/wheels-tires-off-road-and-overland",
+        "/pages/custom-power-solutions-off-road-marine",
+        "/pages/custom-lighting-for-off-road-overland",
+        "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+        "/pages/authorized-alaskan-campers-installer",
+        "/pages/wash-me",
+        "/pages/boat-wash",
+        "/pages/marine-services",
+        "/pages/trailer",
+        "/pages/about-us",
+        "/pages/contact-us",
+        "/pages/dillon-f250-lift-project",
+        "/pages/alaskan-camper-flatbed-setup",
+        "/pages/ford-ranger-flatbed-setup",
+        "/pages/complete-expedition-truck-builds",
+        "/pages/why-njo",
+        "/pages/trip-prep-and-care",
+        "/pages/trips-and-community",
+        "/pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tacoma-6-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tundra-6-5ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tundra-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-ranger-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-ranger-6ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-super-duty-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-5-2ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-6-2ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-6-6ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-8-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-jeep-gladiator-jt-5ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-6-4ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-6-75ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-frontier-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-frontier-6-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-titan-6-5ft-standard-bed",
+        "/sitemap"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "source": "/images/hero-1600.webp",
+      "pages": [
+        "/",
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/wheels-tires-off-road-and-overland"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/hero-640.webp",
+      "pages": [
+        "/",
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/flatbed-build-price-by-vehicle",
+        "/pages/wheels-tires-off-road-and-overland",
+        "/pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tacoma-6-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tundra-6-5ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tundra-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-ranger-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-ranger-6ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-super-duty-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-5-2ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-6-2ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-6-6ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-8-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-jeep-gladiator-jt-5ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-6-4ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-6-75ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-frontier-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-frontier-6-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-titan-6-5ft-standard-bed"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/hero-1000.webp",
+      "pages": [
+        "/",
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/flatbed-build-price-by-vehicle",
+        "/pages/wheels-tires-off-road-and-overland",
+        "/pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tacoma-6-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tundra-6-5ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tundra-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-ranger-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-ranger-6ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-super-duty-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-5-2ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-6-2ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-6-6ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-8-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-jeep-gladiator-jt-5ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-6-4ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-6-75ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-frontier-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-frontier-6-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-titan-6-5ft-standard-bed"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-dillon-f250-1600.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/our-work",
+        "/pages/lift-suspension-installation",
+        "/pages/dillon-f250-lift-project",
+        "/pages/dillon-f250-lift-project",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-dillon-f250-640.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/our-work",
+        "/pages/lift-suspension-installation",
+        "/pages/dillon-f250-lift-project",
+        "/pages/dillon-f250-lift-project",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-dillon-f250-1000.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/our-work",
+        "/pages/lift-suspension-installation",
+        "/pages/dillon-f250-lift-project",
+        "/pages/dillon-f250-lift-project",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-ranger-flatbed-1600.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/our-work",
+        "/pages/ford-ranger-flatbed-setup",
+        "/pages/ford-ranger-flatbed-setup"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-ranger-flatbed-640.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/our-work",
+        "/pages/ford-ranger-flatbed-setup",
+        "/pages/ford-ranger-flatbed-setup"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-ranger-flatbed-1000.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/our-work",
+        "/pages/ford-ranger-flatbed-setup",
+        "/pages/ford-ranger-flatbed-setup"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-front-1600.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/our-work",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/bumpers-racks-installation-tacoma-wa",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-front-640.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/our-work",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/bumpers-racks-installation-tacoma-wa",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-front-1000.webp",
+      "pages": [
+        "/",
+        "/",
+        "/pages/our-work",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/bumpers-racks-installation-tacoma-wa",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/install-1600.webp",
+      "pages": [
+        "/",
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/why-njo"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/install-640.webp",
+      "pages": [
+        "/",
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/why-njo"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/install-1000.webp",
+      "pages": [
+        "/",
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/why-njo"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/j-scott.webp",
+      "pages": [
+        "/",
+        "/pages/about-us",
+        "/pages/why-njo"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-camper-slide-in-1600.webp",
+      "pages": [
+        "/",
+        "/pages/our-work",
+        "/pages/alaskan-camper-flatbed-setup",
+        "/pages/alaskan-camper-flatbed-setup",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-camper-slide-in-640.webp",
+      "pages": [
+        "/",
+        "/pages/our-work",
+        "/pages/alaskan-camper-flatbed-setup",
+        "/pages/alaskan-camper-flatbed-setup",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-camper-slide-in-1000.webp",
+      "pages": [
+        "/",
+        "/pages/our-work",
+        "/pages/alaskan-camper-flatbed-setup",
+        "/pages/alaskan-camper-flatbed-setup",
+        "/pages/complete-expedition-truck-builds"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/logo-white.png",
+      "pages": [
+        "/",
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/flatbeds-for-overland-and-off-road-campers",
+        "/pages/flatbeds-for-work-and-business",
+        "/pages/flatbed-packages",
+        "/pages/flatbed-build-price-by-vehicle",
+        "/pages/book-install-services-or-get-a-quote",
+        "/pages/build-request-received",
+        "/pages/book-a-build-consultation",
+        "/pages/our-work",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/flatbed-buyers-guide",
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/lift-suspension-installation",
+        "/pages/bumpers-racks-installation-tacoma-wa",
+        "/pages/wheels-tires-off-road-and-overland",
+        "/pages/custom-power-solutions-off-road-marine",
+        "/pages/custom-lighting-for-off-road-overland",
+        "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+        "/pages/authorized-alaskan-campers-installer",
+        "/pages/wash-me",
+        "/pages/boat-wash",
+        "/pages/marine-services",
+        "/pages/trailer",
+        "/pages/about-us",
+        "/pages/contact-us",
+        "/pages/dillon-f250-lift-project",
+        "/pages/alaskan-camper-flatbed-setup",
+        "/pages/ford-ranger-flatbed-setup",
+        "/pages/complete-expedition-truck-builds",
+        "/pages/why-njo",
+        "/pages/trip-prep-and-care",
+        "/pages/trips-and-community",
+        "/pages/aluminum-flatbed-truck-body-toyota-tacoma-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tacoma-6-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tundra-6-5ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-toyota-tundra-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-ranger-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-ranger-6ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ford-super-duty-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-5-2ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-colorado-6-2ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-6-6ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-chevrolet-silverado-8-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-jeep-gladiator-jt-5ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-6-4ft-standard-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-6-75ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-ram-heavy-duty-8ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-frontier-5ft-short-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-frontier-6-1ft-long-bed",
+        "/pages/aluminum-flatbed-truck-body-nissan-titan-6-5ft-standard-bed",
+        "/sitemap"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "source": "/images/ute-detail-1600.webp",
+      "pages": [
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-detail-640.webp",
+      "pages": [
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-detail-1000.webp",
+      "pages": [
+        "/pages/overland-aluminum-flatbed-truck-bodies",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/camper-1600.webp",
+      "pages": [
+        "/pages/flatbeds-for-overland-and-off-road-campers",
+        "/pages/authorized-alaskan-campers-installer",
+        "/pages/authorized-alaskan-campers-installer"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/camper-640.webp",
+      "pages": [
+        "/pages/flatbeds-for-overland-and-off-road-campers",
+        "/pages/authorized-alaskan-campers-installer",
+        "/pages/authorized-alaskan-campers-installer"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/camper-1000.webp",
+      "pages": [
+        "/pages/flatbeds-for-overland-and-off-road-campers",
+        "/pages/authorized-alaskan-campers-installer",
+        "/pages/authorized-alaskan-campers-installer"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/boxes-1-1000.webp",
+      "pages": [
+        "/pages/flatbeds-for-overland-and-off-road-campers"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/boxes-1-640.webp",
+      "pages": [
+        "/pages/flatbeds-for-overland-and-off-road-campers"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/boxes-1-1600.webp",
+      "pages": [
+        "/pages/flatbeds-for-overland-and-off-road-campers"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/work-1600.webp",
+      "pages": [
+        "/pages/flatbeds-for-work-and-business"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/work-640.webp",
+      "pages": [
+        "/pages/flatbeds-for-work-and-business"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/work-1000.webp",
+      "pages": [
+        "/pages/flatbeds-for-work-and-business"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/shop-1000.webp",
+      "pages": [
+        "/pages/flatbeds-for-work-and-business",
+        "/pages/contact-us"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/shop-640.webp",
+      "pages": [
+        "/pages/flatbeds-for-work-and-business",
+        "/pages/contact-us"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/shop-1600.webp",
+      "pages": [
+        "/pages/flatbeds-for-work-and-business",
+        "/pages/contact-us"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-tent-1600.webp",
+      "pages": [
+        "/pages/our-work",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/custom-power-solutions-off-road-marine",
+        "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+        "/pages/about-us",
+        "/pages/complete-expedition-truck-builds",
+        "/pages/trips-and-community"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-tent-640.webp",
+      "pages": [
+        "/pages/our-work",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/custom-power-solutions-off-road-marine",
+        "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+        "/pages/about-us",
+        "/pages/complete-expedition-truck-builds",
+        "/pages/trips-and-community"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-tent-1000.webp",
+      "pages": [
+        "/pages/our-work",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/the-super-ute-collaboration-build",
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/custom-power-solutions-off-road-marine",
+        "/pages/james-baroud-roof-top-tent-installation-tacoma-wa",
+        "/pages/about-us",
+        "/pages/complete-expedition-truck-builds",
+        "/pages/trips-and-community"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/base-2-1600.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/base-2-640.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/base-2-1000.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/sides-2-1000.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/sides-2-640.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/sides-2-1600.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/headache-0-1000.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/headache-0-640.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/headache-0-1600.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/underbody-0-1000.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/underbody-0-640.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/underbody-0-1600.webp",
+      "pages": [
+        "/pages/flatbed-buyers-guide"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/services-hero-1600.webp",
+      "pages": [
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/overland-off-road-installation-services-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/services-hero-640.webp",
+      "pages": [
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/overland-off-road-installation-services-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/services-hero-1000.webp",
+      "pages": [
+        "/pages/overland-off-road-installation-services-tacoma-wa",
+        "/pages/overland-off-road-installation-services-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-shop-suspension-1600.webp",
+      "pages": [
+        "/pages/lift-suspension-installation"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-shop-suspension-640.webp",
+      "pages": [
+        "/pages/lift-suspension-installation"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/flagship-shop-suspension-1000.webp",
+      "pages": [
+        "/pages/lift-suspension-installation"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/racks-1600.webp",
+      "pages": [
+        "/pages/bumpers-racks-installation-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/racks-640.webp",
+      "pages": [
+        "/pages/bumpers-racks-installation-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/racks-1000.webp",
+      "pages": [
+        "/pages/bumpers-racks-installation-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/wheels-1600.webp",
+      "pages": [
+        "/pages/wheels-tires-off-road-and-overland"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/wheels-640.webp",
+      "pages": [
+        "/pages/wheels-tires-off-road-and-overland"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/wheels-1000.webp",
+      "pages": [
+        "/pages/wheels-tires-off-road-and-overland"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/power-1600.webp",
+      "pages": [
+        "/pages/custom-power-solutions-off-road-marine"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/power-640.webp",
+      "pages": [
+        "/pages/custom-power-solutions-off-road-marine"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/power-1000.webp",
+      "pages": [
+        "/pages/custom-power-solutions-off-road-marine"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/tent-1600.webp",
+      "pages": [
+        "/pages/custom-lighting-for-off-road-overland",
+        "/pages/james-baroud-roof-top-tent-installation-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/tent-640.webp",
+      "pages": [
+        "/pages/custom-lighting-for-off-road-overland",
+        "/pages/james-baroud-roof-top-tent-installation-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/tent-1000.webp",
+      "pages": [
+        "/pages/custom-lighting-for-off-road-overland",
+        "/pages/james-baroud-roof-top-tent-installation-tacoma-wa"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/lighting-1600.webp",
+      "pages": [
+        "/pages/custom-lighting-for-off-road-overland"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/lighting-640.webp",
+      "pages": [
+        "/pages/custom-lighting-for-off-road-overland"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/lighting-1000.webp",
+      "pages": [
+        "/pages/custom-lighting-for-off-road-overland"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/wash-1600.webp",
+      "pages": [
+        "/pages/wash-me",
+        "/pages/wash-me",
+        "/pages/trip-prep-and-care"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/wash-640.webp",
+      "pages": [
+        "/pages/wash-me",
+        "/pages/wash-me",
+        "/pages/trip-prep-and-care"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/wash-1000.webp",
+      "pages": [
+        "/pages/wash-me",
+        "/pages/wash-me",
+        "/pages/trip-prep-and-care"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/boat-1600.webp",
+      "pages": [
+        "/pages/boat-wash",
+        "/pages/boat-wash",
+        "/pages/marine-services",
+        "/pages/marine-services"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/boat-640.webp",
+      "pages": [
+        "/pages/boat-wash",
+        "/pages/boat-wash",
+        "/pages/marine-services",
+        "/pages/marine-services"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/boat-1000.webp",
+      "pages": [
+        "/pages/boat-wash",
+        "/pages/boat-wash",
+        "/pages/marine-services",
+        "/pages/marine-services"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/trailer-1600.webp",
+      "pages": [
+        "/pages/trailer",
+        "/pages/trailer"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/trailer-640.webp",
+      "pages": [
+        "/pages/trailer",
+        "/pages/trailer"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/trailer-1000.webp",
+      "pages": [
+        "/pages/trailer",
+        "/pages/trailer"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-1130-1600.webp",
+      "pages": [
+        "/pages/about-us",
+        "/pages/why-njo",
+        "/pages/trips-and-community"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-1130-640.webp",
+      "pages": [
+        "/pages/about-us",
+        "/pages/why-njo",
+        "/pages/trips-and-community"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "source": "/images/ute-1130-1000.webp",
+      "pages": [
+        "/pages/about-us",
+        "/pages/why-njo",
+        "/pages/trips-and-community"
+      ],
+      "coverage": "local image exists with image content type",
+      "status": 200,
+      "contentType": "image/webp"
+    }
+  ],
+  "notFoundStatus": 404,
+  "limitations": [
+    "Query fields are recorded from destinations; runtime propagation, storage and submission are not proven by HTTP inspection.",
+    "JavaScript interactions, browser focus, responsive layout, downloads and form submission are not exercised.",
+    "Source inventory records dynamic handlers without certifying runtime behavior.",
+    "External store, policies, phone, email and map destinations are listed but not requested."
+  ]
+}

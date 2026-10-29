@@ -7,6 +7,7 @@ import {RECORD_KEY} from './builder/useBuildRecord.js';
 import {reopenPackageQuote,packageInquirySummary} from './catalog/package-client.js';
 import './inquiry.css';
 import { actionMotionProps } from './actionMotion.js';
+import {interests} from './marketing-content.js';
 
 const QUOTE_PATH = '/pages/book-install-services-or-get-a-quote';
 const BUILDER_PATH = '/pages/flatbed-build-price-by-vehicle';
@@ -26,7 +27,9 @@ function Field({ name, label, error, hint, children, optional = false }) {
 
 export function Inquiry({ query = {}, embedded = false }) {
   const initial = normalizeContext(query);
-  const [form, setForm] = useState({ ...initial, topic: '', firstName: '', preferredContact: 'email', email: '', phone: '', vehicleDetails: '', needVehicleHelp: false, intendedUse: '', camperType: '', workGoal: '', vehicleCount: '', company: '', message: '', marketingOptIn: false, ...normalizeProjectContext(query) });
+  const interest = Object.hasOwn(interests, query.interest) ? interests[query.interest] : null;
+  const heading = interest?.heading || ({service:'Tell us about the upgrade you need.',flatbed:"Let's work through your flatbed setup.",camper:"Let's work through your camper setup.",work:'Tell us about your work truck.',general:"Tell us what you are working on."}[initial.context]);
+  const [form, setForm] = useState({ ...initial, topic: interest?.topic || '', firstName: '', preferredContact: 'email', email: '', phone: '', vehicleDetails: '', needVehicleHelp: false, intendedUse: '', camperType: '', workGoal: '', vehicleCount: '', company: '', message: '', marketingOptIn: false, ...normalizeProjectContext(query) });
   // Real customer requests are the default. The non-sending test form has an explicit URL.
   const previewOnly = query.preview === '1';
   const [liveForm, setLiveForm] = useState(!previewOnly);
@@ -122,11 +125,11 @@ export function Inquiry({ query = {}, embedded = false }) {
 
   return <section className={`inquiry-layout ${embedded ? 'inquiry-embedded' : ''}`} aria-label={liveForm ? 'Contact Next Jump' : 'Test inquiry form — nothing is sent'}>
     <div className="inquiry-main">
-      {!embedded && <div className="inquiry-intro"><span className="inquiry-eyebrow">YOUR TRUCK. YOUR NEXT STEP.</span><h2>Let’s plan your next build<span>.</span></h2><p>Tell us what you drive and what you want to change. We’ll review the parts, fitment and installation with you.</p></div>}
+      {!embedded && <div className="inquiry-intro"><span className="inquiry-eyebrow">YOUR TRUCK. YOUR NEXT STEP.</span><h1 className="njo-inquiry-heading">{heading}</h1><p>Tell us what you drive and what you want to change. We’ll review the parts, fitment and installation with you.</p></div>}
       {previewOnly && <div className="inquiry-mode-choice"><div><strong>{liveForm ? 'Shop inquiry form' : 'Test form — nothing is sent'}</strong><p>{liveForm ? 'Submitting this form contacts Next Jump.' : 'Use sample details to test the website. This does not contact the shop.'}</p></div><button type="button" aria-pressed={liveForm} onClick={() => { setLiveRequested(true); setLiveForm(current => !current); }}>{liveForm ? 'Return to test form' : 'Open the live shop form'}</button></div>}
       {liveForm && !liveRequested && <div className="inquiry-start"><span className="inquiry-eyebrow">LET’S TALK IT THROUGH</span><h2>A clear plan starts here.</h2><p>Share your truck and what you have in mind. You don’t need a parts list to ask for help.</p><button className="button button-primary" {...actionMotionProps(QUOTE_PATH)} type="button" onClick={() => setLiveRequested(true)}>Start my request <span aria-hidden="true">↗</span></button><p className="field-hint">The next form contacts the shop. Parts and appointment details are confirmed with the team.</p></div>}
       {packageQuote&&<div className="inquiry-build"><span className="inquiry-eyebrow">Your saved package quote</span><h3>{packageQuote.customer.title}</h3><p>{packageQuote.customer.number} · {packageQuote.customer.vehicle.year} Toyota Tacoma</p><p>The package reference and vehicle details carry into the shop’s inquiry. The appointment still needs confirmation.</p></div>}
-      {liveRequested && <div hidden={!liveForm}><NativeInquiry focusOnMount={embedded} context={form.context} service={form.service} vehicle={packageQuote?.customer?.vehicle || (completeBuild ? build.truck : null)} summary={[buildInquirySummary(form, build, buildReference),packageInquirySummary(packageQuote)].filter(Boolean).join('\n\n')} /></div>}
+      {liveRequested && <div hidden={!liveForm}><NativeInquiry focusOnMount={embedded} context={form.context} service={form.service} vehicle={packageQuote?.customer?.vehicle || (completeBuild ? build.truck : null)} summary={[interest ? `Project interest: ${interest.label}` : '',buildInquirySummary(form, build, buildReference),packageInquirySummary(packageQuote)].filter(Boolean).join('\n\n')} /></div>}
       {previewOnly && <div hidden={liveForm}>
       <div className="preview-disclosure"><strong>Website preview</strong><p>This form demonstrates the inquiry. Contact details are not saved or sent to the shop.</p></div>
       {(form.project || form.feature) && <p className="inquiry-context">{form.project && <>Inspired by {PROJECT_LABELS[form.project]}. </>}{form.feature && <>Interested in {FEATURE_LABELS[form.feature].toLowerCase()}. </>}These details stay with your request.</p>}

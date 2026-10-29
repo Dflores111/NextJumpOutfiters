@@ -1,0 +1,22 @@
+{
+  "baseCommit": "15a55db2bcc9e474c71b4fdb4d96889325dc6f65",
+  "checkedBoundaries": [
+    "src/builder",
+    "src/catalog",
+    "src/NativeInquiry.jsx",
+    "src/hubspot-contract.js",
+    "src/inquiry-contract.js",
+    "src/entry-server.jsx",
+    "src/seo.js",
+    "src/site-release.js",
+    "db",
+    "drizzle",
+    "scripts",
+    "server.mjs",
+    "worker.mjs",
+    "package.json",
+    "package-lock.json"
+  ],
+  "trackedFilesChecked": 107,
+  "changedFiles": []
+}

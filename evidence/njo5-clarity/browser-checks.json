@@ -1,0 +1,177 @@
+{
+  "date": "2026-10-29",
+  "baseUrl": "http://127.0.0.1:4186",
+  "responsive": [
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "overflow": false,
+      "path": "/pages/overland-aluminum-flatbed-truck-bodies",
+      "width": 360
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "overflow": false,
+      "path": "/pages/overland-aluminum-flatbed-truck-bodies",
+      "width": 768
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "overflow": false,
+      "path": "/pages/overland-aluminum-flatbed-truck-bodies",
+      "width": 1024
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "overflow": false,
+      "path": "/pages/overland-aluminum-flatbed-truck-bodies",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 81,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/",
+      "width": 360
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 70,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/",
+      "width": 768
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 32,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/",
+      "width": 1024
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 32,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 134,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/pages/complete-expedition-truck-builds",
+      "width": 360
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 76,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/pages/complete-expedition-truck-builds",
+      "width": 768
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 86,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/pages/complete-expedition-truck-builds",
+      "width": 1024
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 126,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/pages/complete-expedition-truck-builds",
+      "width": 1440
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 91,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/pages/why-njo",
+      "width": 360
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 45,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/pages/why-njo",
+      "width": 768
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 22,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/pages/why-njo",
+      "width": 1024
+    },
+    {
+      "brokenLoadedImages": [],
+      "h1Count": 1,
+      "heroFooterGap": 93,
+      "heroTextButtonOverlap": false,
+      "overflow": false,
+      "path": "/pages/why-njo",
+      "width": 1440
+    }
+  ],
+  "flatbedLinks": [
+    {
+      "link": "Plan a work flatbed",
+      "url": "http://127.0.0.1:4186/pages/flatbed-build-price-by-vehicle?use=work",
+      "heading": "Plan your truck build"
+    },
+    {
+      "link": "/Weekends & overlanding.*Plan a camping flatbed/",
+      "url": "http://127.0.0.1:4186/pages/flatbed-build-price-by-vehicle?use=overland",
+      "heading": "Plan your truck build"
+    },
+    {
+      "link": "/Flatbed camper.*Plan for a flatbed camper/",
+      "url": "http://127.0.0.1:4186/pages/flatbed-build-price-by-vehicle?use=camper&camperType=flatbed",
+      "heading": "Plan your truck build"
+    },
+    {
+      "link": "/Slide-in or topper camper.*Compare camper types/",
+      "url": "http://127.0.0.1:4186/pages/flatbeds-for-overland-and-off-road-campers",
+      "heading": "The right foundation for your camper."
+    }
+  ],
+  "manual": {
+    "phoneScreenshotsAt390": true,
+    "founderStoryAnchorExists": true,
+    "stageDisclosureOpened": true,
+    "homeCompleteBuildLinkChecked": true,
+    "homeWhyNjoLinkChecked": true,
+    "flatbedQuoteContext": "context=flatbed",
+    "quoteRemainsNonSendingPreview": true,
+    "noFormSubmission": true,
+    "mobileMenuOpenedAndClosed": true,
+    "motionPausedAndRestored": true
+  },
+  "console": []
+}

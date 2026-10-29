@@ -1,0 +1,28 @@
+{
+  "scope": "Local NJO 5.0 branch; no production deployment or live form submissions",
+  "flows": {
+    "installation": "Hub to suspension detail to service-specific inquiry; invalid submission focused field errors; fictional phone preview returned verified no-request-sent receipt.",
+    "flatbed": "Five-stage disclosure and existing work-use builder link verified.",
+    "completeBuild": "Owned/sourced vehicle and staged/full copy to complete-build context; change to care retained entered values; fictional email preview receipt verified.",
+    "pitCrew": "Why NJO physically names installations, flatbeds and complete builds; service/build actions and three paths; mobile menu and care navigation verified.",
+    "paidCare": "Availability-led paid service and warranty separation; care inquiry heading; no live mapped form or membership checkout.",
+    "builderToQuote": "2022 Toyota Tacoma, 6.1 ft, Work & hauling, aluminum flatbed, upper boxes, rear underbody storage, kitchen: review, local draft, inquiry summary and resume verified."
+  },
+  "keyboard": [
+    "Desktop and mobile submenu Escape/focus return",
+    "Mobile outer menu Escape/focus return",
+    "Service tab Home/End",
+    "Super Ute ArrowRight tab navigation",
+    "Photo dialog Escape and focus return"
+  ],
+  "motion": "Manual pause toggles data-motion=off and persists across navigation; existing reduced-motion implementation preserved; OS-level preference not emulated.",
+  "responsiveEvidence": "layout-checks.json: 21 paths at 360, 390, 768, 1024 and 1440 px",
+  "compiledRuntime": "Nine routes in local compiled Worker; expected headings, titles, preview noindex/nofollow; zero console errors/warnings observed.",
+  "baselineNote": "Two React hydration #418 logs observed during initial read-only hosted-baseline inspection; not reproduced in local compiled smoke check. Production not changed.",
+  "limitations": [
+    "Chromium viewport tests, not physical mobile devices",
+    "No real CRM delivery, attribution or booking tested",
+    "No Lighthouse score claimed",
+    "New interest presentation is not persistent backend metadata"
+  ]
+}

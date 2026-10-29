@@ -1,0 +1,121 @@
+
+> next-jump-outfitters@1.0.0 test
+> node --test src/builder/domain.test.js tests/*.test.mjs
+
+✔ all 19 source routes are unique and remain pending fitment review (4.793416ms)
+✔ public catalog has no approved or numeric prices and starts with no extras (0.920208ms)
+✔ required base and option dependencies cannot duplicate or disappear (0.376875ms)
+✔ persisted contract strips contacts, notes, totals and malformed data (0.652292ms)
+✔ validation accepts useful uncertain routes but rejects incomplete or invalid payloads (0.620625ms)
+✔ model-year validation gates navigation and rejects malformed API values before sanitation (1.128333ms)
+✔ corrupted saved vehicle values recover to selectable unsure paths (0.116375ms)
+✔ planning directions preserve uncertain vehicles and keep package priorities out of flatbed parts (3.264291ms)
+✔ public catalog never exposes private candidate fields; hosted staff is closed even with a database (33.805875ms)
+✔ server prices require product, price and exact fitment approval; ambiguities and zero prices stay explicit (7.522042ms)
+✔ saved versions survive reconnect, reject missing capabilities and discard contact/free text/client totals (10.879041ms)
+✔ exact retries create one version and freeze pricing; changed retries fail (8.658792ms)
+✔ new versions keep old configurations intact and concurrent edits cannot overwrite (10.931417ms)
+✔ same-origin validation and database failures preserve failure states (5.311833ms)
+✔ staff review uses revision checks and commits one audit; price approval is separate from fitment (8.851042ms)
+✔ imported inventory cannot reserve stock; counted ledger prevents overselling and mismatched releases (13.06125ms)
+✔ inventory retries are idempotent and zero physical count is different from unknown stock (6.539292ms)
+✔ product revisions invalidate earlier fitment approval and uncertain vehicles cannot be approved (3.901333ms)
+✔ services and unclassified imports cannot enter a physical stock ledger (4.552625ms)
+✔ named staff roles protect costs/approvals and attribute stock and draft changes to verified actors (7.82625ms)
+✔ held stock cannot be reclassified; released non-stocked items retain history without availability (31.254792ms)
+✔ hosted D1 receipt is durable, token-gated and discards every personal field (38.550375ms)
+✔ hosted concurrent retry returns exactly one receipt and rejects changed context (8.494542ms)
+✔ hosted cross-origin, invalid and storage-failure requests never produce false success (2.594167ms)
+✔ project and feature context survives preview without accepting arbitrary URL text (1.433209ms)
+✔ native summary preserves product context and excludes contact, free text and unapproved totals (1.931875ms)
+✔ native prefill dispatches input and change without overwriting visitor edits or submitting (0.209584ms)
+✔ native form callback resolution preserves an array-like HTMLFormElement and unwraps jQuery only when needed (0.10375ms)
+✔ preview stays noindex and sharing metadata has a branded absolute image with safe escaped text (0.486875ms)
+✔ launch allowlist includes only approved public pages; inquiry, unknown and unapproved pages stay noindex (0.167125ms)
+✔ invalid release origins or asset paths cannot be configured (0.088667ms)
+✔ open demo starts with synthetic inventory, barcode, purchasing and job reservations (205.006542ms)
+✔ demo receiving updates stock once and survives a browser-style export / restore (52.616708ms)
+✔ completing a demo job deducts actual use, releases holds, and keeps other visitors separate (48.874209ms)
+✔ SQLite demo adapter rolls back failed batches and retains foreign keys after export (18.938834ms)
+✔ demo transport never calls the hosted API, and staff failures never fall back to demo access (0.793542ms)
+✔ inventory search covers SKU, MPN, variants and literal SQL wildcards; stable pagination reaches all candidates (100.604292ms)
+✔ grid distinguishes unknown from counted zero and keeps counts scoped to the selected location (13.309875ms)
+✔ stock views, category/review filters and reorder levels identify the work that needs attention (9.398333ms)
+✔ inventory roles never receive private cost, price or source payloads through the grid or history (6.864ms)
+✔ cell edits preserve other metadata and product/fitment revisions; exact retry writes once (30.982166ms)
+✔ bulk edits are atomic: any stale or missing participant saves neither rows nor audit (17.787333ms)
+✔ concurrent edits cannot overwrite and 50-row selection stays within D1 parameter limits (9.348709ms)
+✔ settings validate values, unique selection, CSRF, role and actor-bound retry keys (8.527375ms)
+✔ item activity shows relevant changes only at the selected location (24.444333ms)
+✔ quick product edits preserve approval, prices and mapping; held stock still blocks reclassification (8.2285ms)
+✔ barcode lookup preserves leading zeros and case; aliases are unique and cost-free (40.23525ms)
+✔ purchase orders receive in parts, preserve unknown baseline and never receive twice (67.297417ms)
+✔ purchase receiving is atomic on concurrent stale revisions and cancellation keeps prior receipts (20.818417ms)
+✔ draft order edits are revision checked, and retired or non-physical parts are rejected (19.209667ms)
+✔ job completion deducts actual use and releases unused holds, once only (22.189959ms)
+✔ jobs cannot overbook, use uncounted stock, omit held parts, overconsume or release protected holds manually (9.471208ms)
+✔ jobs add parts atomically and cancellation releases all holds without deducting stock (12.342542ms)
+✔ roles, cost projections, cross-origin writes and actor-bound command receipts stay protected (13.051417ms)
+✔ malformed quantities, duplicate lines, dates and location fail before writes (15.882875ms)
+✔ incoming quantities are separate from available stock and stay scoped to the PO location (10.982375ms)
+✔ simultaneous exact retries create one job and receive one delivery (9.938208ms)
+✔ concurrent completion and cancellation cannot both consume or release a job (6.698708ms)
+✔ a database error rolls back the command receipt, stock and order counters together (7.611833ms)
+✔ operations lists search literal wildcards, filter statuses and paginate beyond the first page (19.173208ms)
+✔ package math preserves unknown quantities and explicit zero alignment; minutes calculate deterministically (0.935541ms)
+✔ private source import creates drafts only, preserves unknowns and never fabricates stock or public prices (32.54825ms)
+✔ imports are idempotent and repeat source loads preserve staff edits; SQL failures roll back the complete batch (42.579583ms)
+✔ package publishing requires complete quantities, alignment, source decisions and human evidence (15.868917ms)
+✔ publishing exposes a public allowlist and changed part revisions immediately withdraw the estimate (41.072042ms)
+✔ package saves reject competing revisions and exact retry does not publish a second revision (6.579375ms)
+✔ quote saves calculate on the server, stay immutable, require reopen capability and create no order or reservation (7.714292ms)
+✔ concurrent quote retries create exactly one snapshot; wrong years, DIY and cross-origin writes fail (8.532042ms)
+✔ staff draft previews are ephemeral and protected; source drafts cannot be saved as customer quotes (5.66025ms)
+✔ supplier reports distinguish unknown from zero and never become warehouse inventory (5.92025ms)
+✔ source SKU search is literal and Install-Only tags prevent parts-only publication (6.084958ms)
+✔ download projections escape text and inquiry handoff carries the saved reference without credentials (19.1605ms)
+✔ email OR phone is accepted; unselected contact channel is not required (1.452042ms)
+✔ forms validate context-specific data without imposing truck fields on general or marine inquiries (0.190333ms)
+✔ server validates component dependencies and rejects fabricated prices instead of trusting client totals (0.47175ms)
+✔ durable receipt excludes all contact, free text, notes and consent; verified status requires opaque token (46.419458ms)
+✔ concurrent double-click and timeout retry reuse exactly one receipt (24.198167ms)
+✔ a repeat customer making a new inquiry gets a distinct receipt (28.322541ms)
+✔ CSRF, malformed data, huge bodies and invalid requests never produce receipts (19.824875ms)
+✔ storage failure and capacity limits report failure, never confirmation (10.1005ms)
+✔ rate limits bound local API use and state when a retry is allowed (17.721209ms)
+✔ private files and non-local hostnames are rejected before Vite/static middleware (0.406417ms)
+✔ work sign-in remains closed with missing settings, an unknown provider or ambiguous roster (16.277917ms)
+staff_sign_in_rejected flow_mismatch
+✔ authorization redirects use PKCE, random state/nonce and a secure short-lived cookie (17.522333ms)
+staff_sign_in_rejected not_invited
+staff_sign_in_rejected not_invited
+staff_sign_in_rejected not_invited
+staff_sign_in_rejected nonce_or_client
+staff_sign_in_rejected nonce_or_client
+staff_sign_in_rejected identity_verification_claim_aud
+staff_sign_in_rejected identity_verification_claim_iss
+staff_sign_in_rejected identity_verification_expired_exp
+staff_sign_in_rejected not_invited
+✔ Google tokens require verified Workspace identity, the named subject and matching nonce/audience/issuer (448.771291ms)
+staff_sign_in_rejected not_invited
+staff_sign_in_rejected not_invited
+staff_sign_in_rejected not_invited
+✔ Microsoft uses tenant and object ID for authorization rather than an email-shaped claim (139.623708ms)
+✔ session tampering, revocation, changed roles and same-origin logout are enforced (28.1065ms)
+✔ both providers use separate clients and separate roles even for the same email (83.599375ms)
+✔ multi-provider settings reject ambiguous rosters and shared legacy credentials (0.182167ms)
+staff_sign_in_rejected identity_verification_claim_aud
+staff_sign_in_rejected invalid_flow
+✔ a provider cannot reuse the other provider flow or audience (42.148958ms)
+✔ removing one provider and changing its connection revoke only the corresponding sessions (41.582417ms)
+✔ sign-in page offers both choices, discloses unavailable options and exposes no roster or credentials (0.538ms)
+✔ failed callbacks offer a fresh sign-in and log only a fixed failure reason (1.340792ms)
+✔ token exchange uses the edge-compatible manual mode and rejects redirects without forwarding credentials (0.482708ms)
+ℹ tests 94
+ℹ suites 0
+ℹ pass 94
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1059.657333

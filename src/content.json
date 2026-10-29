@@ -3,10 +3,10 @@
     "id": "P01",
     "label": "Home",
     "path": "/",
-    "headline": "Aluminum flatbeds. Serious truck upgrades.",
-    "intro": "Modular aluminum flatbeds and off-road installations for work, camping and everyday adventure. Built around your vehicle by Next Jump Outfitters in Tacoma.",
-    "title": "Aluminum Flatbeds & Truck Builds | Next Jump Outfitters",
-    "description": "Explore modular aluminum flatbeds for camping, overlanding, and work. Build a configuration and plan installation with Next Jump Outfitters in Tacoma.",
+    "headline": "From one truck upgrade to a complete expedition build.",
+    "intro": "Make room for your tools, plan around a camper or improve how your truck rides. Start with the change you need. We'll work through the parts, fit and installation with you.",
+    "title": "NJO | Off-Road Installations, Flatbeds & Truck Builds in Tacoma",
+    "description": "Truck upgrades, aluminum flatbeds and camper setups in Tacoma. Work through parts, fit and installation with Next Jump Outfitters.",
     "sections": [
       {
         "id": "P01-01",
@@ -59,10 +59,10 @@
     "id": "P02",
     "label": "Explore Flatbeds",
     "path": "/pages/overland-aluminum-flatbed-truck-bodies",
-    "headline": "More room for the gear. More ways to use your truck.",
-    "intro": "Replace your factory bed with a modular aluminum flatbed. Configure storage, removable sides and camp equipment around what you carry.",
-    "title": "Modular Aluminum Flatbeds | Next Jump Outfitters",
-    "description": "Explore aluminum flatbeds, storage options, and camper configurations. Find a starting setup for your truck and plan installation in Tacoma, Washington.",
+    "headline": "Load from three sides. Build on one flatbed.",
+    "intro": "Get tools, materials and camp gear in and out without working around wheel wells. An open aluminum deck and drop sides give you loading access from the left, right and rear. Start with your truck, then review the size and options.",
+    "title": "Modular Aluminum Truck Flatbeds & Camper Setups | NJO",
+    "description": "Explore an aluminum flatbed with an open deck, drop sides and storage options. Start with your truck and confirm fit, parts and pricing with Next Jump.",
     "sections": [
       {
         "id": "P02-01",
@@ -394,10 +394,10 @@
     "id": "P12",
     "label": "Our Work",
     "path": "/pages/our-work",
-    "headline": "See what the build can become.",
-    "intro": "Real trucks, real configurations, and the choices behind them. Find a project close to what you have in mind.",
-    "title": "Flatbed & Overland Truck Builds | Next Jump Outfitters",
-    "description": "Explore completed truck and flatbed builds from Next Jump Outfitters. See the installed equipment, the owner’s goals, and ideas for your own configuration.",
+    "headline": "See what we've built. Find your starting point.",
+    "intro": "A lift for a classic truck. A modular flatbed. A camp setup with room for more. Browse the work, then tell us what you'd like to do with your truck.",
+    "title": "Truck Builds & Installation Projects | Next Jump Outfitters",
+    "description": "A lift for a classic truck. A modular flatbed. A camp setup with room for more. Browse the work, then tell us what you'd like to do with your truck.",
     "sections": [
       {
         "id": "projects",
@@ -508,10 +508,10 @@
     "id": "P15",
     "label": "Installation Services",
     "path": "/pages/overland-off-road-installation-services-tacoma-wa",
-    "headline": "Off-road upgrades. Expert installation.",
-    "intro": "Suspension, tires, racks, power, lighting and camp equipment—planned around your vehicle and installed at our Tacoma shop.",
-    "title": "Off-Road Installation Services in Tacoma | Next Jump",
-    "description": "Explore suspension, bumpers, racks, power, lighting, and other vehicle installation services at Next Jump Outfitters in Tacoma. Tell us about your project.",
+    "headline": "Need an upgrade installed? Start here.",
+    "intro": "Suspension, wheels and tires, lighting, bumpers, racks, power and more. Tell us what you drive and what you need. We'll help work through the right setup and installation.",
+    "title": "Off-Road & Overland Installation Services | NJO Tacoma",
+    "description": "Suspension, wheels and tires, lighting, bumpers, racks, power and more. Tell us what you drive and what you need. We'll help work through the right setup and installation.",
     "sections": [
       {
         "id": "P15-01",
@@ -668,11 +668,11 @@
   },
   {
     "id": "P19",
-    "label": "Custom Power",
+    "label": "Power & electrical",
     "path": "/pages/custom-power-solutions-off-road-marine",
     "headline": "Power for what you actually use.",
     "intro": "Start with the equipment you need to run. We’ll discuss a system and installation plan around the vehicle and how you travel.",
-    "title": "Custom Vehicle Power Systems in Tacoma | Next Jump",
+    "title": "Truck Power & Electrical Installation | NJO Tacoma",
     "description": "Discuss custom vehicle power, charging, and electrical installations for your travel setup. Start with your equipment needs and Next Jump’s Tacoma team.",
     "sections": [
       {
@@ -954,10 +954,10 @@
     "id": "P27",
     "label": "Our Story",
     "path": "/pages/about-us",
-    "headline": "The people behind the next build.",
-    "intro": "Next Jump Outfitters is a veteran-owned shop in Tacoma, Washington. We work with customers on aluminum flatbeds and vehicle upgrades for the way they want to use their rigs.",
-    "title": "Our Tacoma Shop & Team | Next Jump Outfitters",
-    "description": "Meet the people behind Next Jump Outfitters, a veteran-owned Tacoma shop for aluminum flatbeds, overland builds, and vehicle installation projects.",
+    "headline": "A shop built for the trucks people actually use.",
+    "intro": "We work on trucks built for daily driving, long trips, tough jobs and weekends away. Some people come to us for one installation. Others want the whole rig planned and built. We make room for both.",
+    "title": "About Our Veteran-Owned Tacoma Shop | Next Jump Outfitters",
+    "description": "We work on trucks built for daily driving, long trips, tough jobs and weekends away. Some people come to us for one installation. Others want the whole rig planned and built. We make room for both.",
     "sections": [
       {
         "id": "P27-01",
@@ -1044,6 +1044,46 @@
     "intro": "A photographed Ford Ranger setup with a Next Jump midsize flatbed.",
     "title": "Ford Ranger Flatbed Setup | Next Jump Outfitters",
     "description": "Explore a real Ford Ranger with a Next Jump midsize aluminum flatbed, dropsides and underbody storage. Plan a setup around your truck.",
+    "sections": []
+  },
+  {
+    "id": "P33",
+    "path": "/pages/complete-expedition-truck-builds",
+    "label": "Complete Builds",
+    "title": "Complete Expedition Truck Builds | Next Jump Outfitters",
+    "headline": "One team to build the truck you've been planning.",
+    "intro": "Tell us what you want your truck to do. We'll help map the vehicle, parts and installation into one plan. Bring the truck you own or ask us about finding the right one.",
+    "description": "Tell us what you want your truck to do. We'll help map the vehicle, parts and installation into one plan. Bring the truck you own or ask us about finding the right one.",
+    "sections": []
+  },
+  {
+    "id": "P34",
+    "path": "/pages/why-njo",
+    "label": "Why NJO",
+    "title": "One Team for Your Truck Build & Trip Care | NJO",
+    "headline": "You bought the truck to use it. We help you spend more time doing that.",
+    "intro": "Choosing parts is one job. Getting them to fit and work together is another. Whether you're starting with a lift, flatbed or camper setup, bring the truck and the problem you're trying to solve.",
+    "description": "Plan a lift, flatbed or camper setup around how you use your truck. Talk with the Tacoma crew about parts, fit and installation.",
+    "sections": []
+  },
+  {
+    "id": "P35",
+    "path": "/pages/trip-prep-and-care",
+    "label": "Trip Prep & Care",
+    "title": "Trip Prep & Vehicle Care | NJO Tacoma",
+    "headline": "Spend more time on the trip. Less time getting the truck ready.",
+    "intro": "Need a hand before you leave or when you get back? Ask about our paid trip preparation, vehicle care and route-planning services.",
+    "description": "Need a hand before you leave or when you get back? Ask about our paid trip preparation, vehicle care and route-planning services.",
+    "sections": []
+  },
+  {
+    "id": "P36",
+    "path": "/pages/trips-and-community",
+    "label": "Trips & Community",
+    "title": "Trips & Community | Next Jump Outfitters",
+    "headline": "Get out there with people who use their trucks.",
+    "intro": "NJO trips are about trying gear, learning from the trail and finding good places to go. We'll share dates and details as trips are confirmed.",
+    "description": "NJO trips are about trying gear, learning from the trail and finding good places to go. We'll share dates and details as trips are confirmed.",
     "sections": []
   }
 ]
