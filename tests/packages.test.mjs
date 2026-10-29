@@ -23,6 +23,35 @@ async function publish(env,p){const r=await call(env,'/api/staff/packages/'+p.id
 const intake={year:2020,suspension:'stock',use:'daily'};
 const quote=(env,p,access=key(),action=key(),extra={})=>call(env,'/api/package-quotes','POST',{packageId:p.id,revision:p.revision,fulfillment:'installed',intake,...extra},null,{'X-Build-Access':access,'Idempotency-Key':action});
 
+test('approved price and replacement-part edits reach the public menu and new quotes, while old quotes and other options stay fixed',async()=>{
+ const env=await fixture();try{
+  let p=await seed(env);const full={id:'front-rear',label:'Front & rear',enabled:true,lines:p.data.lines,labor:p.data.labor},front={id:'front-only',label:'Front only',enabled:true,lines:p.data.lines.map(l=>({...l,quantity:1})),labor:{...p.data.labor,hours:1}};
+  p={...p,data:{...p.data,useLevel:'weekender',variants:[front,full],defaultVariantId:'front-rear'}};p=await publish(env,p);
+  const baseline=(await quote(env,p)).value,readMenu=async()=>(await call(env,'/api/packages','GET',null,null)).value.packages;
+  assert.equal(baseline.customer.totals.totalCents,43000);
+  const path='/api/staff/packages/'+p.id,input=ready(p);input.state='DRAFT';input.data=structuredClone(input.data);input.data.variants[1].lines[0].unitRetailCents=15000;
+  let result=await call(env,path,'PATCH',input);assert.equal(result.status,200,JSON.stringify(result));p=result.value;
+  assert.equal((await readMenu())[0].totals.totalCents,43000);p=await publish(env,p);
+  let menu=await readMenu();assert.equal(menu[0].totals.totalCents,53000);assert.equal(menu[0].variants.find(v=>v.id==='front-only').totals.totalCents,27000);
+  assert.equal((await quote(env,p)).value.customer.totals.totalCents,53000);
+  const imported={...sources(),sourceId:'b'.repeat(64),products:[{sourceKey:'fixture:replacement',title:'Synthetic replacement shock',category:'Suspension',data:{supplier:'Test supplier',supplierSku:'SYN-456',stockType:'STOCKED'}}]};
+  assert.equal((await call(env,'/api/staff/package-imports','POST',imported)).status,200);
+  const product=(await call(env,'/api/staff/products?q=SYN-456')).value.products[0],replacement=ready(p);replacement.state='DRAFT';replacement.data=structuredClone(replacement.data);
+  replacement.data.variants[1].lines=[{productId:product.id,role:'Rear shocks',quantity:null,unitRetailCents:null}];
+  result=await call(env,path,'PATCH',replacement);assert.equal(result.status,200,JSON.stringify(result));p=result.value;
+  assert.equal((await call(env,path,'PATCH',ready(p))).status,422);assert.equal((await readMenu())[0].totals.totalCents,53000);
+  const completed=ready(p);completed.state='DRAFT';completed.data=structuredClone(completed.data);completed.data.variants[1].lines[0]={...completed.data.variants[1].lines[0],quantity:2,unitRetailCents:17500};
+  result=await call(env,path,'PATCH',completed);assert.equal(result.status,200,JSON.stringify(result));p=await publish(env,result.value);
+  menu=await readMenu();assert.equal(menu[0].totals.totalCents,58000);assert.equal(menu[0].lines[0].title,'Synthetic replacement shock');assert.equal(menu[0].variants.find(v=>v.id==='front-only').totals.totalCents,27000);
+  const current=(await quote(env,p)).value;assert.equal(current.customer.lines[0].title,'Synthetic replacement shock');assert.equal(current.customer.lines[0].quantity,2);assert.equal(current.customer.totals.totalCents,58000);
+  assert.equal(current.customer.lines[0].supplierSku,undefined);assert.equal(current.customer.lines[0].unitCostCents,undefined);
+  const previous=(await call(env,'/api/staff/package-quotes/'+baseline.id)).value;assert.equal(previous.customer.totals.totalCents,43000);assert.equal(previous.customer.lines[0].title,'Synthetic shock');
+  const copied=(await call(env,path+'/duplicate','POST',{revision:p.revision,useLevel:'overlander-light'})).value;
+  assert.equal(copied.state,'DRAFT');assert.ok(Object.values(copied.data.approvals).every(v=>!v));assert.equal((await readMenu()).length,1);
+  for(const table of ['inventory_movements','stock_jobs','purchase_orders'])assert.equal(count(env,table),0);
+ }finally{env.database.close();}
+});
+
 test('package math preserves unknown quantities and explicit zero alignment; minutes calculate deterministically',()=>{
  const d=definition().data;assert.equal(packageTotals(d).totalCents,43000);assert.equal(packageTotals({...d,labor:{...d.labor,alignmentCents:0}}).totalCents,38000);assert.equal(packageTotals({...d,labor:{...d.labor,alignmentCents:null}}).totalCents,null);assert.equal(packageTotals({...d,lines:[{...d.lines[0],quantity:null}]}).partsCents,null);assert.equal(packageTotals(d,'diy').totalCents,20000);
  assert.ok(releaseProblems({...d,diyAllowed:true,lines:[{...d.lines[0],installOnly:true}]}).some(v=>v.includes('Install-Only')));

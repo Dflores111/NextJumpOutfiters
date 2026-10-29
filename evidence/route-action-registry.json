@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T16:49:21.769Z",
+  "generatedAt": "2026-10-29T17:44:03.770Z",
   "baseUrl": "http://127.0.0.1:4195/",
   "method": "SSR action inventory plus static JSX handler inventory",
   "contextLimit": "Query fields are recorded from destinations; runtime propagation, storage and submission are not proven by HTTP inspection.",
@@ -28142,7 +28142,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 38,
+      "line": 44,
       "attribute": "onClick",
       "expression": "{onClose}",
       "scope": "shared/content",
@@ -28150,7 +28150,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 38,
+      "line": 44,
       "attribute": "onClick",
       "expression": "{()=>{setForm(clone(saved));setPreview(null);setNotice('Changes discarded. Your saved version is unchanged.');}",
       "scope": "shared/content",
@@ -28158,7 +28158,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 38,
+      "line": 44,
       "attribute": "onClick",
       "expression": "{()=>save('DRAFT')}",
       "scope": "shared/content",
@@ -28166,7 +28166,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 40,
+      "line": 46,
       "attribute": "onClick",
       "expression": "{()=>chooseTask(id)}",
       "scope": "shared/content",
@@ -28174,7 +28174,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 40,
+      "line": 46,
       "attribute": "onClick",
       "expression": "{()=>chooseTask('details')}",
       "scope": "shared/content",
@@ -28182,7 +28182,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 43,
+      "line": 49,
       "attribute": "onChange",
       "expression": "{e=>setCopyUse(e.target.value)}",
       "scope": "shared/content",
@@ -28190,33 +28190,9 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 43,
+      "line": 49,
       "attribute": "onClick",
-      "expression": "{duplicate}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 43,
-      "attribute": "onClick",
-      "expression": "{()=>chooseTask('details')}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 45,
-      "attribute": "onClick",
-      "expression": "{()=>go(id)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 48,
-      "attribute": "onChange",
-      "expression": "{e=>title(e.target.value)}",
+      "expression": "{()=>onPickExisting(copyConflict)}",
       "scope": "shared/content",
       "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
     },
@@ -28224,333 +28200,29 @@
       "sourceFile": "src/catalog/PackageEditor.jsx",
       "line": 49,
       "attribute": "onClick",
-      "expression": "{()=>title(suggestedPackageTitle(root))}",
+      "expression": "{duplicate}",
       "scope": "shared/content",
       "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 50,
-      "attribute": "onChange",
-      "expression": "{e=>update('useLevel',e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 51,
-      "attribute": "onChange",
-      "expression": "{e=>update('vehicle',{...root.vehicle,make:e.target.value}",
+      "line": 49,
+      "attribute": "onClick",
+      "expression": "{()=>chooseTask('details')}",
       "scope": "shared/content",
       "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
       "line": 51,
-      "attribute": "onChange",
-      "expression": "{e=>update('vehicle',{...root.vehicle,model:e.target.value}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 51,
-      "attribute": "onChange",
-      "expression": "{e=>update('vehicle',{...root.vehicle,yearFrom:Number(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 51,
-      "attribute": "onChange",
-      "expression": "{e=>update('vehicle',{...root.vehicle,yearTo:Number(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 51,
-      "attribute": "onChange",
-      "expression": "{e=>update('audience',e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 52,
-      "attribute": "onChange",
-      "expression": "{e=>update('description',e.target.value)}",
+      "attribute": "onClick",
+      "expression": "{()=>id==='review'?reviewChanges():go(id)}",
       "scope": "shared/content",
       "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
       "line": 53,
-      "attribute": "onChange",
-      "expression": "{e=>update('excludes',e.target.value.split('\\n'))}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 55,
-      "attribute": "onChange",
-      "expression": "{e=>update('diyAllowed',e.target.checked)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 57,
-      "attribute": "onChange",
-      "expression": "{e=>update('media',root.media.map((v,n)=>n===i?{...v,url:e.target.value}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 57,
-      "attribute": "onChange",
-      "expression": "{e=>update('media',root.media.map((v,n)=>n===i?{...v,alt:e.target.value}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 57,
-      "attribute": "onChange",
-      "expression": "{e=>update('media',root.media.map((v,n)=>n===i?{...v,kind:e.target.value}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 57,
-      "attribute": "onClick",
-      "expression": "{()=>update('media',root.media.filter((_,n)=>i!==n))}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 57,
-      "attribute": "onClick",
-      "expression": "{()=>update('media',[...(root.media||[]),{url:'',alt:'',kind:'vehicle'}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 60,
-      "attribute": "onClick",
-      "expression": "{()=>{setScope(v.id);onScopeChange?.(v.id);setPreview(null);}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 61,
-      "attribute": "onChange",
-      "expression": "{e=>update('variants',root.variants.map(v=>v.id===variant.id?{...v,enabled:e.target.checked}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 62,
-      "attribute": "onClick",
-      "expression": "{()=>update('lines',data.lines.filter((_,n)=>n!==i))}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 62,
-      "attribute": "onChange",
-      "expression": "{e=>alterLine(i,{quantity:e.target.value===''?null:Number(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 62,
-      "attribute": "onChange",
-      "expression": "{e=>alterLine(i,{unitRetailCents:cents(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 62,
-      "attribute": "onChange",
-      "expression": "{e=>alterLine(i,{role:e.target.value}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 62,
-      "attribute": "onChange",
-      "expression": "{e=>alterLine(i,{unitCostCents:cents(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 63,
-      "attribute": "onChange",
-      "expression": "{e=>setQuery(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 64,
-      "attribute": "onChange",
-      "expression": "{e=>update('labor',{...data.labor,basis:e.target.value}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 64,
-      "attribute": "onChange",
-      "expression": "{e=>update('labor',{...data.labor,hours:e.target.value===''?null:Number(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 64,
-      "attribute": "onChange",
-      "expression": "{e=>update('labor',{...data.labor,rateCents:cents(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 64,
-      "attribute": "onChange",
-      "expression": "{e=>update('labor',{...data.labor,alignmentCents:cents(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 65,
-      "attribute": "onChange",
-      "expression": "{e=>update('labor',{...data.labor,[k]:e.target.value===''?null:Number(e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 65,
-      "attribute": "onChange",
-      "expression": "{e=>update('labor',{...data.labor,rustApplies:e.target.checked}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 65,
-      "attribute": "onChange",
-      "expression": "{e=>update('labor',{...data.labor,useBreakdown:e.target.checked}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 70,
-      "attribute": "onChange",
-      "expression": "{e=>update('specs',{...root.specs,[k]:e.target.value}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 71,
-      "attribute": "onChange",
-      "expression": "{e=>update('fitmentNotes',e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 71,
-      "attribute": "onChange",
-      "expression": "{e=>update('installNotes',e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 71,
-      "attribute": "onChange",
-      "expression": "{e=>update('vehicleQuestions',e.target.value.split('\\n'))}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 75,
-      "attribute": "onChange",
-      "expression": "{e=>update('cloneReview',{...root.cloneReview,[k]:e.target.checked}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 76,
-      "attribute": "onChange",
-      "expression": "{e=>update('issues',root.issues.map(v=>v.id===i.id?{...v,resolved:e.target.checked}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 77,
-      "attribute": "onChange",
-      "expression": "{e=>update('approvals',{...root.approvals,[k]:e.target.checked}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 77,
-      "attribute": "onChange",
-      "expression": "{e=>update('reviewEvidence',e.target.value)}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 79,
-      "attribute": "onClick",
-      "expression": "{()=>save('PUBLISHED')}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 80,
-      "attribute": "onClick",
-      "expression": "{()=>save('ARCHIVED')}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 82,
-      "attribute": "onClick",
-      "expression": "{()=>go('parts')}",
-      "scope": "shared/content",
-      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
-    },
-    {
-      "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 82,
       "attribute": "onClick",
       "expression": "{()=>go('review')}",
       "scope": "shared/content",
@@ -28558,7 +28230,319 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 82,
+      "line": 54,
+      "attribute": "onClick",
+      "expression": "{()=>onPickExisting(conflict)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 57,
+      "attribute": "onChange",
+      "expression": "{e=>title(e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 58,
+      "attribute": "onClick",
+      "expression": "{()=>title(suggestedPackageTitle(root))}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 59,
+      "attribute": "onChange",
+      "expression": "{e=>update('useLevel',e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 60,
+      "attribute": "onChange",
+      "expression": "{e=>update('vehicle',{...root.vehicle,make:e.target.value}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 60,
+      "attribute": "onChange",
+      "expression": "{e=>update('vehicle',{...root.vehicle,model:e.target.value}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 60,
+      "attribute": "onChange",
+      "expression": "{e=>update('vehicle',{...root.vehicle,yearFrom:Number(e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 60,
+      "attribute": "onChange",
+      "expression": "{e=>update('vehicle',{...root.vehicle,yearTo:Number(e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 60,
+      "attribute": "onChange",
+      "expression": "{e=>update('audience',e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 61,
+      "attribute": "onChange",
+      "expression": "{e=>update('description',e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 62,
+      "attribute": "onChange",
+      "expression": "{e=>update('excludes',e.target.value.split('\\n'))}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 64,
+      "attribute": "onChange",
+      "expression": "{e=>update('diyAllowed',e.target.checked)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 66,
+      "attribute": "onChange",
+      "expression": "{e=>update('media',root.media.map((v,n)=>n===i?{...v,url:e.target.value}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 66,
+      "attribute": "onChange",
+      "expression": "{e=>update('media',root.media.map((v,n)=>n===i?{...v,alt:e.target.value}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 66,
+      "attribute": "onChange",
+      "expression": "{e=>update('media',root.media.map((v,n)=>n===i?{...v,kind:e.target.value}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 66,
+      "attribute": "onClick",
+      "expression": "{()=>update('media',root.media.filter((_,n)=>i!==n))}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 66,
+      "attribute": "onClick",
+      "expression": "{()=>update('media',[...(root.media||[]),{url:'',alt:'',kind:'vehicle'}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 69,
+      "attribute": "onClick",
+      "expression": "{()=>{setScope(v.id);onScopeChange?.(v.id);setPreview(null);}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 70,
+      "attribute": "onChange",
+      "expression": "{e=>update('variants',root.variants.map(v=>v.id===variant.id?{...v,enabled:e.target.checked}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 71,
+      "attribute": "onChange",
+      "expression": "{value=>update('lines',value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 72,
+      "attribute": "onChange",
+      "expression": "{e=>update('labor',{...data.labor,basis:e.target.value}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 72,
+      "attribute": "onChange",
+      "expression": "{e=>update('labor',{...data.labor,hours:e.target.value===''?null:Number(e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 72,
+      "attribute": "onChange",
+      "expression": "{e=>update('labor',{...data.labor,rateCents:cents(e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 72,
+      "attribute": "onChange",
+      "expression": "{e=>update('labor',{...data.labor,alignmentCents:cents(e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 73,
+      "attribute": "onChange",
+      "expression": "{e=>update('labor',{...data.labor,[k]:e.target.value===''?null:Number(e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 73,
+      "attribute": "onChange",
+      "expression": "{e=>update('labor',{...data.labor,rustApplies:e.target.checked}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 73,
+      "attribute": "onChange",
+      "expression": "{e=>update('labor',{...data.labor,useBreakdown:e.target.checked}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 78,
+      "attribute": "onChange",
+      "expression": "{e=>update('specs',{...root.specs,[k]:e.target.value}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 79,
+      "attribute": "onChange",
+      "expression": "{e=>update('fitmentNotes',e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 79,
+      "attribute": "onChange",
+      "expression": "{e=>update('installNotes',e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 79,
+      "attribute": "onChange",
+      "expression": "{e=>update('vehicleQuestions',e.target.value.split('\\n'))}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 83,
+      "attribute": "onChange",
+      "expression": "{e=>update('cloneReview',{...root.cloneReview,[k]:e.target.checked}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 84,
+      "attribute": "onChange",
+      "expression": "{e=>update('issues',root.issues.map(v=>v.id===i.id?{...v,resolved:e.target.checked}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 85,
+      "attribute": "onChange",
+      "expression": "{e=>update('approvals',{...root.approvals,[k]:e.target.checked}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 85,
+      "attribute": "onChange",
+      "expression": "{e=>update('reviewEvidence',e.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 87,
+      "attribute": "onClick",
+      "expression": "{()=>save('PUBLISHED')}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 88,
+      "attribute": "onClick",
+      "expression": "{()=>save('ARCHIVED')}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 90,
+      "attribute": "onClick",
+      "expression": "{()=>go('parts')}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 90,
+      "attribute": "onClick",
+      "expression": "{reviewChanges}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackageEditor.jsx",
+      "line": 90,
       "attribute": "onClick",
       "expression": "{()=>go(tabs[tabs.findIndex(([id])=>id===section)-1][0])}",
       "scope": "shared/content",
@@ -28566,15 +28550,15 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 82,
+      "line": 90,
       "attribute": "onClick",
-      "expression": "{()=>go(tabs[tabs.findIndex(([id])=>id===section)+1][0])}",
+      "expression": "{()=>{const next=tabs[tabs.findIndex(([id])=>id===section)+1][0];next==='review'?reviewChanges():go(next);}",
       "scope": "shared/content",
       "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 83,
+      "line": 91,
       "attribute": "onClick",
       "expression": "{()=>openCheck(c.section,c.label)}",
       "scope": "shared/content",
@@ -28582,7 +28566,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 83,
+      "line": 91,
       "attribute": "onClick",
       "expression": "{()=>showPreview(false)}",
       "scope": "shared/content",
@@ -28590,7 +28574,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 83,
+      "line": 91,
       "attribute": "onClick",
       "expression": "{()=>showPreview(true)}",
       "scope": "shared/content",
@@ -28598,7 +28582,7 @@
     },
     {
       "sourceFile": "src/catalog/PackageEditor.jsx",
-      "line": 84,
+      "line": 92,
       "attribute": "onClick",
       "expression": "{()=>setPreview(null)}",
       "scope": "shared/content",
@@ -28665,6 +28649,86 @@
       "line": 7,
       "attribute": "onClick",
       "expression": "{()=>onCreate(rows[0],level)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 34,
+      "attribute": "onClick",
+      "expression": "{undo}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 39,
+      "attribute": "onClick",
+      "expression": "{()=>{setReplacing(line.productId);find('');setNotice('');search.current?.focus();}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 39,
+      "attribute": "onClick",
+      "expression": "{()=>remove(index)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 40,
+      "attribute": "onChange",
+      "expression": "{event=>changeLine(index,{quantity:event.target.value===''?null:Number(event.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 41,
+      "attribute": "onChange",
+      "expression": "{event=>changeLine(index,{unitRetailCents:cents(event.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 42,
+      "attribute": "onChange",
+      "expression": "{event=>changeLine(index,{role:event.target.value}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 42,
+      "attribute": "onChange",
+      "expression": "{event=>changeLine(index,{unitCostCents:cents(event.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 46,
+      "attribute": "onClick",
+      "expression": "{()=>{setReplacing(null);find('');}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 47,
+      "attribute": "onChange",
+      "expression": "{event=>find(event.target.value)}",
+      "scope": "shared/content",
+      "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
+    },
+    {
+      "sourceFile": "src/catalog/PackagePartsPicker.jsx",
+      "line": 51,
+      "attribute": "onClick",
+      "expression": "{()=>choose(product)}",
       "scope": "shared/content",
       "coverage": "runtime pending; static inventory only; expressions may be abbreviated"
     },
