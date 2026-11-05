@@ -1,0 +1,44 @@
+{
+  "regression": {
+    "command": "npm test",
+    "tests": 147,
+    "passed": 147,
+    "failures": 0
+  },
+  "build": {
+    "command": "npm run build",
+    "clientAndServerPassed": true,
+    "mainClientChunk": "dist/client/assets/index-QxRGRfl7.js            513.44 kB \u2502 gzip: 152.98 kB",
+    "advisory": "Main client chunk exceeds 500 kB. Field performance was not measured."
+  },
+  "marketingBuilder": {
+    "checks": 5,
+    "passed": [
+      "marketing flatbed entries override an upfitting draft using the existing journey interface",
+      "flatbed use choices expose complete tab relationships and retain public detail links",
+      "installation marketing keeps the latest upfitting entry and staged embedded request",
+      "new marketing interests reach the native handoff while the test form remains explicit",
+      "unknown interest text is not copied into the native project description"
+    ],
+    "failures": 0
+  },
+  "routes": {
+    "routes": 53,
+    "expectedRoutes": 53,
+    "linkAndControlInstances": 3478,
+    "staticActionExpressions": 557,
+    "uniqueImages": 84,
+    "failures": 0,
+    "warnings": 0,
+    "outputs": [
+      "evidence/route-audit.json",
+      "evidence/route-action-registry.json"
+    ]
+  },
+  "responsive": {
+    "combinations": 24,
+    "failures": 0
+  },
+  "gitDiffCheck": "passed",
+  "rawLogs": "Local *.log files are excluded by the repository ignore rules; this tracked summary records their results."
+}

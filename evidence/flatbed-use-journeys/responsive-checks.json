@@ -1,0 +1,290 @@
+[
+  {
+    "size": {
+      "width": 320,
+      "height": 740
+    },
+    "actionsFit": true,
+    "columns": "270px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "campers"
+  },
+  {
+    "size": {
+      "width": 320,
+      "height": 740
+    },
+    "actionsFit": true,
+    "columns": "270px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "camping"
+  },
+  {
+    "size": {
+      "width": 320,
+      "height": 740
+    },
+    "actionsFit": true,
+    "columns": "270px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "overlanding"
+  },
+  {
+    "size": {
+      "width": 320,
+      "height": 740
+    },
+    "actionsFit": true,
+    "columns": "270px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "work"
+  },
+  {
+    "size": {
+      "width": 375,
+      "height": 812
+    },
+    "actionsFit": true,
+    "columns": "325px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "campers"
+  },
+  {
+    "size": {
+      "width": 375,
+      "height": 812
+    },
+    "actionsFit": true,
+    "columns": "325px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "camping"
+  },
+  {
+    "size": {
+      "width": 375,
+      "height": 812
+    },
+    "actionsFit": true,
+    "columns": "325px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "overlanding"
+  },
+  {
+    "size": {
+      "width": 375,
+      "height": 812
+    },
+    "actionsFit": true,
+    "columns": "325px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "work"
+  },
+  {
+    "size": {
+      "width": 768,
+      "height": 1024
+    },
+    "actionsFit": true,
+    "columns": "710px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "campers"
+  },
+  {
+    "size": {
+      "width": 768,
+      "height": 1024
+    },
+    "actionsFit": true,
+    "columns": "710px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "camping"
+  },
+  {
+    "size": {
+      "width": 768,
+      "height": 1024
+    },
+    "actionsFit": true,
+    "columns": "710px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "overlanding"
+  },
+  {
+    "size": {
+      "width": 768,
+      "height": 1024
+    },
+    "actionsFit": true,
+    "columns": "710px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "work"
+  },
+  {
+    "size": {
+      "width": 812,
+      "height": 375
+    },
+    "actionsFit": true,
+    "columns": "738px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "campers"
+  },
+  {
+    "size": {
+      "width": 812,
+      "height": 375
+    },
+    "actionsFit": true,
+    "columns": "738px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "camping"
+  },
+  {
+    "size": {
+      "width": 812,
+      "height": 375
+    },
+    "actionsFit": true,
+    "columns": "738px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "overlanding"
+  },
+  {
+    "size": {
+      "width": 812,
+      "height": 375
+    },
+    "actionsFit": true,
+    "columns": "738px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "work"
+  },
+  {
+    "size": {
+      "width": 1024,
+      "height": 768
+    },
+    "actionsFit": true,
+    "columns": "508.133px 441.859px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "campers"
+  },
+  {
+    "size": {
+      "width": 1024,
+      "height": 768
+    },
+    "actionsFit": true,
+    "columns": "508.133px 441.859px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "camping"
+  },
+  {
+    "size": {
+      "width": 1024,
+      "height": 768
+    },
+    "actionsFit": true,
+    "columns": "508.133px 441.859px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "overlanding"
+  },
+  {
+    "size": {
+      "width": 1024,
+      "height": 768
+    },
+    "actionsFit": true,
+    "columns": "508.133px 441.859px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "work"
+  },
+  {
+    "size": {
+      "width": 1440,
+      "height": 900
+    },
+    "actionsFit": true,
+    "columns": "668.602px 581.391px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "campers"
+  },
+  {
+    "size": {
+      "width": 1440,
+      "height": 900
+    },
+    "actionsFit": true,
+    "columns": "668.602px 581.391px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "camping"
+  },
+  {
+    "size": {
+      "width": 1440,
+      "height": 900
+    },
+    "actionsFit": true,
+    "columns": "668.602px 581.391px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "overlanding"
+  },
+  {
+    "size": {
+      "width": 1440,
+      "height": 900
+    },
+    "actionsFit": true,
+    "columns": "668.602px 581.391px",
+    "labelsFit": true,
+    "overflow": false,
+    "panels": 1,
+    "selected": "work"
+  }
+]

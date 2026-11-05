@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-05",
+  "preview": "http://127.0.0.1:4187",
+  "checks": [
+    {
+      "name": "Four use choices show one relevant panel at a time",
+      "passed": true
+    },
+    {
+      "name": "Arrow keys wrap; Home and End select endpoints",
+      "passed": true
+    },
+    {
+      "name": "Back and Forward restore selected tab and keyboard focus",
+      "passed": true
+    },
+    {
+      "name": "Mobile menu Camping setups link selects camping and closes menu",
+      "passed": true
+    },
+    {
+      "name": "Saved fragment settles below sticky header",
+      "passed": true
+    },
+    {
+      "name": "Homepage five-stage link opens the optional technical chapter",
+      "passed": true
+    },
+    {
+      "name": "Technical disclosure opens and closes with Enter",
+      "passed": true
+    },
+    {
+      "name": "Manual motion pause disables new photo animation",
+      "passed": true
+    },
+    {
+      "name": "Flatbed CTA selects the latest builder flatbed journey",
+      "passed": true
+    },
+    {
+      "name": "Ford Ranger 6 ft reaches Mid-size Long; kitchen adds required upper boxes",
+      "passed": true
+    },
+    {
+      "name": "Builder review and reload retain the local anonymous draft",
+      "passed": true
+    },
+    {
+      "name": "Console has no warnings or errors",
+      "passed": true
+    },
+    {
+      "name": "Desktop same-page Camping and Overland links close dropdown; Escape returns focus; mobile links still close menu",
+      "passed": true
+    }
+  ],
+  "limits": [
+    "No live inquiry submitted.",
+    "OS reduced-motion CSS present; OS preference was not changed or emulated.",
+    "No live CRM, supplier, pricing, ordering, customer desirability or conversion proof."
+  ]
+}

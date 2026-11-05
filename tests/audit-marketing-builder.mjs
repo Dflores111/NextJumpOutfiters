@@ -12,8 +12,8 @@ const links=html=>[...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a
 
 test('marketing flatbed entries override an upfitting draft using the existing journey interface',async()=>{
   const {html}=await render(P.flatbeds);
-  const entries=links(html).filter(a=>a.text==='Choose my truck'||/Plan (a work flatbed|a camping flatbed|for a flatbed camper)$/.test(a.text));
-  assert.equal(entries.length,6);
+  const entries=links(html).filter(a=>a.text==='Choose my truck'||/Plan my (camping setup|overland flatbed)$/.test(a.text));
+  assert.equal(entries.length,5);
   const saved=restoreJourney({saved:createBuild(vehicleRoutes[0]),query:{kind:'vehicle'}});
   saved.truck.year='2022';saved.plan.packageId='overlander-light';
   for(const {url} of entries){
@@ -21,6 +21,18 @@ test('marketing flatbed entries override an upfitting draft using the existing j
     const next=restoreJourney({saved,query:Object.fromEntries(url.searchParams)});
     assert.equal(next.plan.kind,'flatbed');assert.equal(next.plan.packageId,'');
   }
+});
+
+test('flatbed use choices expose complete tab relationships and retain public detail links',async()=>{
+  const {html}=await render(P.flatbeds);
+  for(const id of ['campers','camping','overlanding','work']){
+    assert.match(html,new RegExp('id="'+id+'"[^>]*role="tab"[^>]*aria-controls="flatbed-panel-'+id+'"'));
+    assert.match(html,new RegExp('id="flatbed-panel-'+id+'"[^>]*role="tabpanel"[^>]*aria-labelledby="'+id+'"'));
+  }
+  const destinations=links(html).map(a=>a.url.pathname+a.url.hash);
+  for(const id of ['camping','overlanding'])assert.ok(destinations.includes(P.flatbeds+'#'+id));
+  assert.match(html,/<details[^>]*id="five-stages"/);
+  assert.ok(html.indexOf('id="flatbed-uses-heading"')<html.indexOf('id="five-stages"'));
 });
 
 test('installation marketing keeps the latest upfitting entry and staged embedded request',async()=>{
